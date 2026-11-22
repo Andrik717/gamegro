@@ -12,6 +12,8 @@ game = root / "scripts/game.gd"
 # Patch the original tropical-cove project in place. Never replace its scene,
 # artwork, item layout, or game UI with a prototype.
 s = project.read_text(encoding="utf-8").replace("window/handheld/orientation=1", "window/handheld/orientation=0")
+# Expand the visible canvas to the device aspect ratio instead of letterboxing.
+s = s.replace('window/stretch/mode="canvas_items"', 'window/stretch/mode="canvas_items"\\nwindow/stretch/aspect="expand"')
 if "window/handheld/orientation=0" not in s:
     s = s.replace("[display]", "[display]\nwindow/handheld/orientation=0", 1)
 project.write_text(s, encoding="utf-8")
