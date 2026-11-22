@@ -31,6 +31,7 @@ def replace_once(old: str, new: str, label: str) -> None:
     source = source.replace(old, new, 1)
 
 replace_once("var sound_enabled := true\n", "var sound_enabled := true\nvar music_enabled := true\n", "music state")
+replace_once("const BAR_HEIGHT := 116.0", "const BAR_HEIGHT := 150.0", "roomier inventory panel")
 replace_once("var audio_surf: AudioStreamPlayer\n", "var audio_surf: AudioStreamPlayer\nvar audio_music: AudioStreamPlayer\n", "music player")
 replace_once(
     '''\taudio_surf = _player("res://assets/audio/surf.wav", true)
@@ -48,9 +49,45 @@ replace_once(
 )
 replace_once('\t_draw_button(Rect2(view.x-158,top,64,56),"♫")', '\t_draw_button(Rect2(view.x-158,top,64,56),"♫" if music_enabled else "×")', "music icon")
 replace_once(
-    '\t\tdraw_string(font, Vector2(x+slot_w*0.5, bar.position.y+94), _short_name(ITEM_DATA[id].name), HORIZONTAL_ALIGNMENT_CENTER, slot_w-8, 12, CREAM)',
-    '\t\tvar label := _fit_label(_short_name(ITEM_DATA[id].name), slot_w-12.0, 12)\n\t\tdraw_string(font, Vector2(x+slot_w*0.5, bar.position.y+94), label, HORIZONTAL_ALIGNMENT_CENTER, slot_w-8, 12, CREAM)',
-    "inventory labels",
+    '''	var bar := Rect2(0, view.y - BAR_HEIGHT, view.x, BAR_HEIGHT)
+	draw_rect(bar, Color(0.035, 0.09, 0.15, 0.78), true)
+	draw_rect(Rect2(0, bar.position.y, view.x, 2), Color(0.82, 0.68, 0.43, 0.78), true)
+	draw_string(font, Vector2(22, bar.position.y+27), "НАЙДИ ПРЕДМЕТЫ", HORIZONTAL_ALIGNMENT_LEFT, -1, 20, CREAM)
+	draw_string(font, Vector2(view.x-190, bar.position.y+27), "%02d / 30" % found.size(), HORIZONTAL_ALIGNMENT_LEFT, -1, 22, CREAM)
+	var slots := mini(5, ITEM_COUNT - found.size())
+	var slot_w := minf(128.0, (view.x-56.0)/5.0)
+	var first_x := (view.x - slot_w*5.0)/2.0
+	for slot in range(slots):
+		var id := _next_visible_item(slot)
+		if id < 0:
+			continue
+		var x := first_x + slot*slot_w
+		var card := Rect2(x+3, bar.position.y+37, slot_w-6, 102)
+		draw_rect(card, Color(0.09, 0.20, 0.29, 0.62), true)
+		draw_rect(card, Color(0.74, 0.58, 0.34, 0.72), false, 1.5)
+		draw_texture_rect(item_textures[id], Rect2(x+slot_w*0.5-27, bar.position.y+42, 54, 52), false)
+		var label := _fit_label(_short_name(ITEM_DATA[id].name), slot_w-14.0, 14)
+		draw_string(font, Vector2(x+slot_w*0.5, bar.position.y+128), label, HORIZONTAL_ALIGNMENT_CENTER, slot_w-12, 14, CREAM)''',
+    '''	var bar := Rect2(0, view.y - BAR_HEIGHT, view.x, BAR_HEIGHT)
+	draw_rect(bar, Color(0.035, 0.09, 0.15, 0.78), true)
+	draw_rect(Rect2(0, bar.position.y, view.x, 2), Color(0.82, 0.68, 0.43, 0.78), true)
+	draw_string(font, Vector2(22, bar.position.y+27), "НАЙДИ ПРЕДМЕТЫ", HORIZONTAL_ALIGNMENT_LEFT, -1, 20, CREAM)
+	draw_string(font, Vector2(view.x-190, bar.position.y+27), "%02d / 30" % found.size(), HORIZONTAL_ALIGNMENT_LEFT, -1, 22, CREAM)
+	var slots := mini(5, ITEM_COUNT - found.size())
+	var slot_w := minf(128.0, (view.x-56.0)/5.0)
+	var first_x := (view.x - slot_w*5.0)/2.0
+	for slot in range(slots):
+		var id := _next_visible_item(slot)
+		if id < 0:
+			continue
+		var x := first_x + slot*slot_w
+		var card := Rect2(x+3, bar.position.y+37, slot_w-6, 102)
+		draw_rect(card, Color(0.09, 0.20, 0.29, 0.62), true)
+		draw_rect(card, Color(0.74, 0.58, 0.34, 0.72), false, 1.5)
+		draw_texture_rect(item_textures[id], Rect2(x+slot_w*0.5-27, bar.position.y+42, 54, 52), false)
+		var label := _fit_label(_short_name(ITEM_DATA[id].name), slot_w-14.0, 14)
+		draw_string(font, Vector2(x+slot_w*0.5, bar.position.y+128), label, HORIZONTAL_ALIGNMENT_CENTER, slot_w-12, 14, CREAM)''',
+    "restyle and enlarge inventory panel",
 )
 replace_once(
     '''func _short_name(value: String) -> String:
