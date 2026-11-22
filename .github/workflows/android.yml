@@ -197,7 +197,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p packaged/build
-          ./godot --headless --verbose --path packaged --export-debug "Android" packaged/build/MagicWorld-debug.apk
+          ./godot --headless --verbose --path packaged --export-debug "Android" build/MagicWorld-debug.apk
           test -s packaged/build/MagicWorld-debug.apk
 
       - name: Upload APK
