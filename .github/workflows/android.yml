@@ -57,19 +57,19 @@ jobs:
           p = Path("packaged/project.godot")
           lines = p.read_text(encoding="utf-8").splitlines()
           lines = [line for line in lines if "import_etc2_astc" not in line]
-          render = next((i for i, line in enumerate(lines) if re.fullmatch(r"\\[rendering\\]\\s*", line.strip())), None)
+          render = next((i for i, line in enumerate(lines) if re.fullmatch(r"\[rendering\]\s*", line.strip())), None)
           if render is None:
               lines.extend(["", "[rendering]", "textures/vram_compression/import_etc2_astc=true"])
           else:
               lines.insert(render + 1, "textures/vram_compression/import_etc2_astc=true")
-          plugins = next((i for i, line in enumerate(lines) if re.fullmatch(r"\\[editor_plugins\\]\\s*", line.strip())), None)
+          plugins = next((i for i, line in enumerate(lines) if re.fullmatch(r"\[editor_plugins\]\s*", line.strip())), None)
           value = 'enabled=PackedStringArray("res://addons/ci_android_settings/plugin.cfg")'
           if plugins is None:
               lines.extend(["", "[editor_plugins]", value])
           else:
               end = next((i for i in range(plugins + 1, len(lines)) if lines[i].startswith("[")), len(lines))
               lines[plugins + 1:end] = [value]
-          p.write_text("\\n".join(lines) + "\\n", encoding="utf-8")
+          p.write_text("\n".join(lines) + "\n", encoding="utf-8")
           PY
 
       - name: Fix explicit GDScript types in uploaded project
@@ -148,7 +148,7 @@ jobs:
           for key, value in values.items():
               import re
               pattern = re.compile(r"(?m)^" + re.escape(key) + r"=.*$")
-              replacement = key + '="' + value.replace("\\", "\\\\").replace('"', '\\"') + '"'
+              replacement = key + '="' + value.replace("\", "\\").replace('"', '\"') + '"'
               if pattern.search(tail):
                   tail = pattern.sub(lambda _: replacement, tail, count=1)
               else:
