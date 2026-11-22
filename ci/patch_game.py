@@ -6,13 +6,15 @@ project = root / "project.godot"
 preset = root / "export_presets.cfg"
 game = root / "scripts/game.gd"
 
-# Include the splash image in the packaged Godot project (no network dependency at runtime).
-source_splash = Path("assets/cat_splash.jpg")
-if source_splash.is_file():
-    (root / "assets").mkdir(parents=True, exist_ok=True)
-    shutil.copy2(source_splash, root / "assets/cat_splash.jpg")
-else:
-    raise SystemExit("Required splash image assets/cat_splash.jpg is missing from repository.")
+# Include both runtime textures in the packaged Godot project. The CI source ZIP
+# does not necessarily contain repository-level assets, so copy them explicitly.
+assets_dir = root / "assets"
+assets_dir.mkdir(parents=True, exist_ok=True)
+for asset_name in ("cat_splash.jpg", "tropical_island.svg"):
+    source_asset = Path("assets") / asset_name
+    if not source_asset.is_file():
+        raise SystemExit(f"Required runtime asset {source_asset} is missing from repository.")
+    shutil.copy2(source_asset, assets_dir / asset_name)
 
 # Android landscape.
 s = project.read_text(encoding="utf-8")
@@ -34,6 +36,8 @@ game_source = r'''extends Node2D
 const DESIGN := Vector2(1672, 941)
 const BG_PATH := "res://assets/tropical_island.svg"
 const SPLASH_PATH := "res://assets/cat_splash.jpg"
+const BACKGROUND_TEXTURE: Texture2D = preload(BG_PATH)
+const SPLASH_TEXTURE: Texture2D = preload(SPLASH_PATH)
 const TARGETS := [
     {"id":"star", "name":"Звезда", "rect":Rect2(180, 710, 180, 170), "patch":Rect2(390, 700, 150, 130)},
     {"id":"shell", "name":"Ракушка", "rect":Rect2(610, 690, 200, 170), "patch":Rect2(800, 680, 150, 130)},
@@ -48,7 +52,7 @@ const MAX_ZOOM := 3.0
 
 var background: Texture2D
 var splash: Texture2D
-var splash_left := 3.0
+var splash_left := 4.0
 var found: Array[String] = []
 var elapsed := 0.0
 var hint_target := -1
@@ -66,8 +70,8 @@ var pause_rect := Rect2(1530, 0, 140, 120)
 var replay_rect := Rect2(665, 545, 340, 78)
 
 func _ready() -> void:
-    background = load(BG_PATH)
-    splash = load(SPLASH_PATH)
+    background = BACKGROUND_TEXTURE
+    splash = SPLASH_TEXTURE
     get_viewport().size_changed.connect(queue_redraw)
     queue_redraw()
 
@@ -87,16 +91,19 @@ func _draw() -> void:
     var scale_factor := minf(view.x / DESIGN.x, view.y / DESIGN.y)
     var origin := (view - DESIGN * scale_factor) * 0.5
 
-    if splash_left > 0.0 and splash != null:
+    if background == null:
         draw_set_transform(origin, 0.0, Vector2.ONE * scale_factor)
-        draw_texture_rect(splash, Rect2(Vector2.ZERO, DESIGN), false)
-        var fade := clampf((3.0 - splash_left) / 0.45, 0.0, 1.0)
-        if fade > 0.0:
-            draw_rect(Rect2(Vector2.ZERO, DESIGN), Color(0.0, 0.0, 0.0, fade), true)
+        draw_rect(Rect2(Vector2.ZERO, DESIGN), Color("#202b35"), true)
+        _center_text("Не удалось загрузить фон игры", DESIGN * 0.5, 30, CREAM)
         draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
         return
 
-    if background == null:
+    if splash_left > 0.0:
+        draw_set_transform(origin, 0.0, Vector2.ONE * scale_factor)
+        draw_texture_rect(background, Rect2(Vector2.ZERO, DESIGN), false)
+        var splash_alpha := clampf(splash_left / 0.35, 0.0, 1.0)
+        draw_texture_rect(splash, Rect2(Vector2.ZERO, DESIGN), false, Color(1.0, 1.0, 1.0, splash_alpha))
+        draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
         return
 
     # Only the scene is zoomed/panned; the HUD remains fixed to the screen.
