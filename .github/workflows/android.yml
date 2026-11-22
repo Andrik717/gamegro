@@ -36,15 +36,18 @@ jobs:
           set -euo pipefail
           python3 - <<'PY'
           from pathlib import Path
+          import re
           p = Path("packaged/project.godot")
-          s = p.read_text(encoding="utf-8")
+          lines = p.read_text(encoding="utf-8").splitlines()
           key = "textures/vram_compression/import_etc2_astc=true"
-          if key not in s:
-              if "[rendering]" in s:
-                  s = s.replace("[rendering]", "[rendering]\n" + key, 1)
-              else:
-                  s += "\n[rendering]\n" + key + "\n"
-          p.write_text(s, encoding="utf-8")
+          lines = [line for line in lines if "import_etc2_astc" not in line]
+          section = next((i for i, line in enumerate(lines) if re.fullmatch(r"\\[rendering\\]\\s*", line.strip())), None)
+          if section is None:
+              lines.extend(["", "[rendering]", key])
+          else:
+              lines.insert(section + 1, key)
+          p.write_text("\\n".join(lines) + "\\n", encoding="utf-8")
+          print("Added ETC2/ASTC under the exact [rendering] section.")
           PY
 
       - name: Fix explicit GDScript types in uploaded project
@@ -167,21 +170,21 @@ jobs:
         shell: bash
         run: ./godot --headless --editor --path packaged --quit
 
-      - name: Force Android ETC2 ASTC setting in project
+      - name: Confirm Godot loaded ETC2 ASTC setting
         shell: bash
         run: |
           set -euo pipefail
-          cat > packaged/set_android_setting.gd <<'GD'
+          cat > packaged/check_android_setting.gd <<'GD'
           extends SceneTree
           func _initialize():
-              ProjectSettings.set_setting("rendering/textures/vram_compression/import_etc2_astc", true)
-              var err = ProjectSettings.save()
-              print("ANDROID_ETC2_ASTC_SETTING=", ProjectSettings.get_setting("rendering/textures/vram_compression/import_etc2_astc", false), " SAVE_ERROR=", err)
-              quit()
+              var enabled = ProjectSettings.get_setting("rendering/textures/vram_compression/import_etc2_astc", false)
+              print("ANDROID_ETC2_ASTC_SETTING=", enabled)
+              if not enabled:
+                  quit(1)
+              else:
+                  quit(0)
           GD
-          ./godot --headless --path packaged --script res://set_android_setting.gd
-          ./godot --headless --editor --path packaged --quit
-          grep -n "import_etc2_astc" packaged/project.godot
+          ./godot --headless --path packaged --script res://check_android_setting.gd
 
       - name: Export Android APK
         shell: bash
