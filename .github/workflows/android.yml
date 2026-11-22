@@ -41,9 +41,9 @@ jobs:
           key = "textures/vram_compression/import_etc2_astc=true"
           if key not in s:
               if "[rendering]" in s:
-                  s = s.replace("[rendering]", "[rendering]\\n" + key, 1)
+                  s = s.replace("[rendering]", "[rendering]\n" + key, 1)
               else:
-                  s += "\\n[rendering]\\n" + key + "\\n"
+                  s += "\n[rendering]\n" + key + "\n"
           p.write_text(s, encoding="utf-8")
           PY
 
@@ -127,7 +127,7 @@ jobs:
               if pattern.search(tail):
                   tail = pattern.sub(lambda _: replacement, tail, count=1)
               else:
-                  tail = "\\n" + replacement + tail
+                  tail = "\n" + replacement + tail
           p.write_text(head + section + tail, encoding="utf-8")
           print(p.read_text(encoding="utf-8"))
           PY
