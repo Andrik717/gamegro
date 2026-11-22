@@ -147,6 +147,22 @@ jobs:
           export/android/java_sdk_path = "$JAVA_HOME"
           EOF
 
+      - name: Verify Android export configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "=== Android project setting ==="
+          grep -n "import_etc2_astc" packaged/project.godot
+          echo "=== Android export preset signing ==="
+          grep -E "package/signed|keystore/debug" packaged/export_presets.cfg
+          echo "=== SDK tools ==="
+          test -x "$ANDROID_HOME/platform-tools/adb"
+          find "$ANDROID_HOME/build-tools" -maxdepth 2 -name apksigner -type f -print
+          test -f "$ANDROID_HOME/platforms/android-35/android.jar"
+          test -f packaged/keystore/debug.keystore
+          echo "=== Editor settings ==="
+          cat "$HOME/.config/godot/editor_settings-4.4.tres"
+
       - name: Import project and validate GDScript
         shell: bash
         run: ./godot --headless --editor --path packaged --quit
