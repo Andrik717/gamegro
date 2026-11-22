@@ -85,6 +85,36 @@ jobs:
             -keyalg RSA -keysize 2048 -validity 10000 \
             -dname "CN=Android Debug,O=Android,C=US"
 
+      - name: Configure Android export preset
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("packaged/export_presets.cfg")
+          s = p.read_text(encoding="utf-8")
+          section = "[preset.0.options]"
+          if section not in s:
+              raise SystemExit("Android export options section not found")
+          head, tail = s.split(section, 1)
+          lines = tail.splitlines()
+          values = {
+              "keystore/debug": str(Path("packaged/keystore/debug.keystore").resolve()),
+              "keystore/debug_user": "androiddebugkey",
+              "keystore/debug_password": "android",
+          }
+          for key, value in values.items():
+              import re
+              pattern = re.compile(r"(?m)^" + re.escape(key) + r"=.*$")
+              replacement = key + '="' + value.replace("\\", "\\\\").replace('"', '\\"') + '"'
+              if pattern.search(tail):
+                  tail = pattern.sub(lambda _: replacement, tail, count=1)
+              else:
+                  tail = "\\n" + replacement + tail
+          p.write_text(head + section + tail, encoding="utf-8")
+          print(p.read_text(encoding="utf-8"))
+          PY
+
       - name: Configure Godot Android settings
         shell: bash
         run: |
