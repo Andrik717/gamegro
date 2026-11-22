@@ -167,17 +167,21 @@ jobs:
         shell: bash
         run: ./godot --headless --editor --path packaged --quit
 
-      - name: Check Godot ETC2 ASTC setting
+      - name: Force Android ETC2 ASTC setting in project
         shell: bash
         run: |
           set -euo pipefail
-          cat > packaged/check_android_setting.gd <<'GD'
+          cat > packaged/set_android_setting.gd <<'GD'
           extends SceneTree
           func _initialize():
-              print("ANDROID_ETC2_ASTC_SETTING=", ProjectSettings.get_setting("rendering/textures/vram_compression/import_etc2_astc", false))
+              ProjectSettings.set_setting("rendering/textures/vram_compression/import_etc2_astc", true)
+              var err = ProjectSettings.save()
+              print("ANDROID_ETC2_ASTC_SETTING=", ProjectSettings.get_setting("rendering/textures/vram_compression/import_etc2_astc", false), " SAVE_ERROR=", err)
               quit()
           GD
-          ./godot --headless --path packaged --script res://check_android_setting.gd
+          ./godot --headless --path packaged --script res://set_android_setting.gd
+          ./godot --headless --editor --path packaged --quit
+          grep -n "import_etc2_astc" packaged/project.godot
 
       - name: Export Android APK
         shell: bash
