@@ -30,6 +30,23 @@ jobs:
           test -f packaged/export_presets.cfg
           test -f packaged/scripts/game.gd
 
+      - name: Enable ETC2 ASTC texture import for Android
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("packaged/project.godot")
+          s = p.read_text(encoding="utf-8")
+          key = "textures/vram_compression/import_etc2_astc=true"
+          if key not in s:
+              if "[rendering]" in s:
+                  s = s.replace("[rendering]", "[rendering]\\n" + key, 1)
+              else:
+                  s += "\\n[rendering]\\n" + key + "\\n"
+          p.write_text(s, encoding="utf-8")
+          PY
+
       - name: Fix explicit GDScript types in uploaded project
         shell: bash
         run: |
