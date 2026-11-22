@@ -148,7 +148,7 @@ jobs:
           for key, value in values.items():
               import re
               pattern = re.compile(r"(?m)^" + re.escape(key) + r"=.*$")
-              replacement = key + '="' + value.replace("\", "\\").replace('"', '\"') + '"'
+              replacement = key + '="' + value + '"'
               if pattern.search(tail):
                   tail = pattern.sub(lambda _: replacement, tail, count=1)
               else:
