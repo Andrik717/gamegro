@@ -41,12 +41,12 @@ jobs:
           lines = p.read_text(encoding="utf-8").splitlines()
           key = "textures/vram_compression/import_etc2_astc=true"
           lines = [line for line in lines if "import_etc2_astc" not in line]
-          section = next((i for i, line in enumerate(lines) if re.fullmatch(r"\\[rendering\\]\\s*", line.strip())), None)
+          section = next((i for i, line in enumerate(lines) if re.fullmatch(r"\[rendering\]\s*", line.strip())), None)
           if section is None:
               lines.extend(["", "[rendering]", key])
           else:
               lines.insert(section + 1, key)
-          p.write_text("\\n".join(lines) + "\\n", encoding="utf-8")
+          p.write_text("\n".join(lines) + "\n", encoding="utf-8")
           print("Added ETC2/ASTC under the exact [rendering] section.")
           PY
 
