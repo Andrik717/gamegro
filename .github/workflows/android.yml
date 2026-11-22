@@ -30,6 +30,24 @@ jobs:
           test -f packaged/export_presets.cfg
           test -f packaged/scripts/game.gd
 
+      - name: Fix explicit GDScript types in uploaded project
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path("packaged/scripts/game.gd")
+          source = path.read_text(encoding="utf-8")
+          replacements = {
+              "var scaled := ": "var scaled: Vector2 = ",
+              "var min_x := ": "var min_x: float = ",
+              "var min_y := ": "var min_y: float = ",
+          }
+          for old, new in replacements.items():
+              source = source.replace(old, new)
+          path.write_text(source, encoding="utf-8")
+          PY
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
