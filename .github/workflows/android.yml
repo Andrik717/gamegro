@@ -33,6 +33,13 @@ jobs:
           test -f packaged/export_presets.cfg
           test -f packaged/scripts/game.gd
 
+      - name: Preserve source script for UI inspection
+        uses: actions/upload-artifact@v4
+        with:
+          name: MagicWorld-source-inspection
+          path: packaged/scripts/game.gd
+          if-no-files-found: error
+
       - name: Apply requested gameplay and Android fixes
         run: python3 ci/patch_game.py packaged
 
