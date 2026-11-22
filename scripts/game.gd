@@ -46,7 +46,6 @@ func _draw() -> void:
     draw_set_transform(origin, 0.0, Vector2.ONE * scale_factor)
     draw_texture_rect(background, Rect2(Vector2.ZERO, DESIGN), false)
 
-    # Cover each found object with a clean patch sampled from nearby terrain.
     for item in TARGETS:
         if found.has(item.id):
             draw_texture_rect_region(background, item.rect, item.patch, Color.WHITE, false)
@@ -80,6 +79,10 @@ func _draw_hud() -> void:
     draw_rect(hint_rect, Color("#bd762d"), true)
     draw_rect(hint_rect, Color("#ffe1a0"), false, 3.0)
     draw_string(font, Vector2(1432, 896), "ПОДСКАЗКА", HORIZONTAL_ALIGNMENT_LEFT, -1, 25, CREAM)
+    draw_circle(Vector2(1600, 58), 47, Color("#8d5228"), true)
+    draw_circle(Vector2(1600, 58), 47, Color("#ffe1a0"), false, 4.0)
+    draw_rect(Rect2(1584, 34, 10, 48), CREAM, true)
+    draw_rect(Rect2(1606, 34, 10, 48), CREAM, true)
 
 func _draw_win() -> void:
     draw_rect(Rect2(Vector2.ZERO, DESIGN), Color(0.01, 0.03, 0.05, 0.72), true)
