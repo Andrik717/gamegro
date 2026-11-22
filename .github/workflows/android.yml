@@ -1,0 +1,27 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  export-android:
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.4.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Prepare output directory
+        run: mkdir -p build
+      - name: Import project assets
+        run: godot --headless --editor --path . --quit
+      - name: Export debug APK
+        run: godot --headless --path . --export-debug "Android" build/MagicWorld-debug.apk
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: MagicWorld-Android-debug
+          path: build/MagicWorld-debug.apk
+          if-no-files-found: error
