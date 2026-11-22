@@ -31,6 +31,9 @@ jobs:
           test -f packaged/export_presets.cfg
           test -f packaged/scripts/game.gd
 
+      - name: Apply requested gameplay and Android fixes
+        run: python3 ci/patch_game.py packaged
+
       - name: Enable ETC2 ASTC texture import for Android
         shell: bash
         run: |
