@@ -26,6 +26,7 @@ jobs:
           test -n "$ZIP_FILE"
           mkdir -p packaged
           unzip -q "$ZIP_FILE" -d packaged
+          rm -rf packaged/.godot
           test -f packaged/project.godot
           test -f packaged/export_presets.cfg
           test -f packaged/scripts/game.gd
