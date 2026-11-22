@@ -35,21 +35,41 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          mkdir -p packaged/addons/ci_android_settings
+          cat > packaged/addons/ci_android_settings/plugin.cfg <<'CFG'
+          [plugin]
+          name="CI Android Settings"
+          description="Android texture import configuration."
+          author="Build"
+          version="1.0"
+          script="plugin.gd"
+          CFG
+          cat > packaged/addons/ci_android_settings/plugin.gd <<'GD'
+          @tool
+          extends EditorPlugin
+          func _enter_tree():
+              ProjectSettings.set_setting("rendering/textures/vram_compression/import_etc2_astc", true)
+              ProjectSettings.save()
+          GD
           python3 - <<'PY'
           from pathlib import Path
           import re
           p = Path("packaged/project.godot")
           lines = p.read_text(encoding="utf-8").splitlines()
-          key = "textures/vram_compression/import_etc2_astc=true"
           lines = [line for line in lines if "import_etc2_astc" not in line]
-          section = next((i for i, line in enumerate(lines) if re.fullmatch(r"\[rendering\]\s*", line.strip())), None)
-          if section is None:
-              lines.extend(["", "[rendering]", key])
+          render = next((i for i, line in enumerate(lines) if re.fullmatch(r"\\[rendering\\]\\s*", line.strip())), None)
+          if render is None:
+              lines.extend(["", "[rendering]", "textures/vram_compression/import_etc2_astc=true"])
           else:
-              lines.insert(section + 1, key)
-          p.write_text("\n".join(lines) + "\n", encoding="utf-8")
-          print("Added ETC2/ASTC under the exact [rendering] section.")
-          print("\\n".join(f"{i+1}: {line}" for i, line in enumerate(lines)))
+              lines.insert(render + 1, "textures/vram_compression/import_etc2_astc=true")
+          plugins = next((i for i, line in enumerate(lines) if re.fullmatch(r"\\[editor_plugins\\]\\s*", line.strip())), None)
+          value = 'enabled=PackedStringArray("res://addons/ci_android_settings/plugin.cfg")'
+          if plugins is None:
+              lines.extend(["", "[editor_plugins]", value])
+          else:
+              end = next((i for i in range(plugins + 1, len(lines)) if lines[i].startswith("[")), len(lines))
+              lines[plugins + 1:end] = [value]
+          p.write_text("\\n".join(lines) + "\\n", encoding="utf-8")
           PY
 
       - name: Fix explicit GDScript types in uploaded project
@@ -171,18 +191,6 @@ jobs:
       - name: Import project and validate GDScript
         shell: bash
         run: ./godot --headless --editor --path packaged --quit
-
-      - name: Inspect ETC2 ASTC in editor context
-        shell: bash
-        run: |
-          set -euo pipefail
-          cat > packaged/check_android_setting.gd <<'GD'
-          extends SceneTree
-          func _initialize():
-              print("EDITOR_ETC2_ASTC_SETTING=", ProjectSettings.get_setting("rendering/textures/vram_compression/import_etc2_astc", false))
-              quit()
-          GD
-          ./godot --headless --editor --path packaged --script res://check_android_setting.gd
 
       - name: Export Android APK
         shell: bash
