@@ -1,3 +1,4 @@
+# Rebuild after runtime asset packaging and splash transition fix.
 # Rebuild after the cat splash and touch-navigation update.
 name: Build Android APK
 
