@@ -48,6 +48,7 @@ jobs:
               lines.insert(section + 1, key)
           p.write_text("\n".join(lines) + "\n", encoding="utf-8")
           print("Added ETC2/ASTC under the exact [rendering] section.")
+          print("\\n".join(f"{i+1}: {line}" for i, line in enumerate(lines)))
           PY
 
       - name: Fix explicit GDScript types in uploaded project
