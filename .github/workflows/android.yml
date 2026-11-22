@@ -171,6 +171,18 @@ jobs:
         shell: bash
         run: ./godot --headless --editor --path packaged --quit
 
+      - name: Inspect ETC2 ASTC in editor context
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > packaged/check_android_setting.gd <<'GD'
+          extends SceneTree
+          func _initialize():
+              print("EDITOR_ETC2_ASTC_SETTING=", ProjectSettings.get_setting("rendering/textures/vram_compression/import_etc2_astc", false))
+              quit()
+          GD
+          ./godot --headless --editor --path packaged --script res://check_android_setting.gd
+
       - name: Export Android APK
         shell: bash
         run: |
