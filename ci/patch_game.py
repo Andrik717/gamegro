@@ -1,319 +1,201 @@
 from pathlib import Path
-import re, shutil, sys
+import math
+import struct
+import sys
+import wave
 
 root = Path(sys.argv[1])
 project = root / "project.godot"
 preset = root / "export_presets.cfg"
 game = root / "scripts/game.gd"
 
-# Include both runtime textures in the packaged Godot project. The CI source ZIP
-# does not necessarily contain repository-level assets, so copy them explicitly.
-assets_dir = root / "assets"
-assets_dir.mkdir(parents=True, exist_ok=True)
-for asset_name in ("cat_splash.jpg", "tropical_island.svg"):
-    source_asset = Path("assets") / asset_name
-    if not source_asset.is_file():
-        raise SystemExit(f"Required runtime asset {source_asset} is missing from repository.")
-    shutil.copy2(source_asset, assets_dir / asset_name)
-
-# Android landscape.
-s = project.read_text(encoding="utf-8")
-if "[display]" not in s:
-    s += "\n[display]\n"
-if re.search(r"(?m)^window/handheld/orientation=", s):
-    s = re.sub(r"(?m)^window/handheld/orientation=.*$", "window/handheld/orientation=0", s)
-else:
+# Patch the original tropical-cove project in place. Never replace its scene,
+# artwork, item layout, or game UI with a prototype.
+s = project.read_text(encoding="utf-8").replace("window/handheld/orientation=1", "window/handheld/orientation=0")
+if "window/handheld/orientation=0" not in s:
     s = s.replace("[display]", "[display]\nwindow/handheld/orientation=0", 1)
 project.write_text(s, encoding="utf-8")
-if preset.exists():
-    s = preset.read_text(encoding="utf-8")
-    if re.search(r"(?m)^screen/orientation=", s):
-        s = re.sub(r"(?m)^screen/orientation=.*$", "screen/orientation=0", s)
-    preset.write_text(s, encoding="utf-8")
+s = preset.read_text(encoding="utf-8").replace("screen/orientation=1", "screen/orientation=0")
+if "screen/orientation=0" not in s:
+    raise SystemExit("Android landscape orientation was not configured")
+preset.write_text(s, encoding="utf-8")
 
-game_source = r'''extends Node2D
+source = game.read_text(encoding="utf-8")
+def replace_once(old: str, new: str, label: str) -> None:
+    global source
+    count = source.count(old)
+    if count != 1:
+        raise SystemExit(f"Expected exactly one match for {label}, got {count}")
+    source = source.replace(old, new, 1)
 
-const DESIGN := Vector2(1672, 941)
-const BG_PATH := "res://assets/tropical_island.svg"
-const SPLASH_PATH := "res://assets/cat_splash.jpg"
-const BACKGROUND_TEXTURE: Texture2D = preload(BG_PATH)
-const SPLASH_TEXTURE: Texture2D = preload(SPLASH_PATH)
-const TARGETS := [
-    {"id":"star", "name":"Звезда", "rect":Rect2(180, 710, 180, 170), "patch":Rect2(390, 700, 150, 130)},
-    {"id":"shell", "name":"Ракушка", "rect":Rect2(610, 690, 200, 170), "patch":Rect2(800, 680, 150, 130)},
-    {"id":"key", "name":"Ключ", "rect":Rect2(900, 690, 180, 150), "patch":Rect2(800, 680, 150, 130)},
-    {"id":"pineapple", "name":"Ананас", "rect":Rect2(1120, 650, 190, 220), "patch":Rect2(800, 680, 150, 130)},
-    {"id":"crab", "name":"Краб", "rect":Rect2(1310, 660, 250, 220), "patch":Rect2(800, 680, 150, 130)}
-]
-const CREAM := Color("#fff2d0")
-const PANEL := Color(0.055, 0.12, 0.16, 0.94)
-const MIN_ZOOM := 1.0
-const MAX_ZOOM := 3.0
+replace_once("var sound_enabled := true\n", "var sound_enabled := true\nvar music_enabled := true\n", "music state")
+replace_once("var audio_surf: AudioStreamPlayer\n", "var audio_surf: AudioStreamPlayer\nvar audio_music: AudioStreamPlayer\n", "music player")
+replace_once(
+    '''\taudio_surf = _player("res://assets/audio/surf.wav", true)
+\taudio_surf.volume_db = -17.0
+\tif sound_enabled:
+\t\taudio_surf.play()''',
+    '''\taudio_surf = _player("res://assets/audio/surf.wav", true)
+\taudio_music = _player("res://assets/audio/music.wav", true)
+\taudio_surf.volume_db = -14.0
+\taudio_music.volume_db = -8.0
+\tif music_enabled:
+\t\taudio_surf.play()
+\t\taudio_music.play()''',
+    "audio setup",
+)
+replace_once('\t_draw_button(Rect2(view.x-158,top,64,56),"♫")', '\t_draw_button(Rect2(view.x-158,top,64,56),"♫" if music_enabled else "×")', "music icon")
+replace_once(
+    '\t\tdraw_string(font, Vector2(x+slot_w*0.5, bar.position.y+94), _short_name(ITEM_DATA[id].name), HORIZONTAL_ALIGNMENT_CENTER, slot_w-8, 12, CREAM)',
+    '\t\tvar label := _fit_label(_short_name(ITEM_DATA[id].name), slot_w-12.0, 12)\n\t\tdraw_string(font, Vector2(x+slot_w*0.5, bar.position.y+94), label, HORIZONTAL_ALIGNMENT_CENTER, slot_w-8, 12, CREAM)',
+    "inventory labels",
+)
+replace_once(
+    '''func _short_name(value: String) -> String:
+\treturn value if value.length() <= 12 else value.substr(0,11)+"…"''',
+    '''func _short_name(value: String) -> String:
+\treturn value if value.length() <= 12 else value.substr(0,11)+"…"
 
-var background: Texture2D
-var splash: Texture2D
-var splash_left := 4.0
-var found: Array[String] = []
-var elapsed := 0.0
-var hint_target := -1
-var hint_left := 0.0
-var paused := false
-var won := false
-var zoom := 1.0
-var camera_offset := Vector2.ZERO
-var touches: Dictionary = {}
-var pinch_distance := 0.0
-var mouse_dragging := false
-var mouse_last := Vector2.ZERO
-var hint_rect := Rect2(1390, 855, 220, 62)
-var pause_rect := Rect2(1530, 0, 140, 120)
-var replay_rect := Rect2(665, 545, 340, 78)
+func _fit_label(value: String, max_width: float, base_size: int) -> String:
+\tvar result := value
+\tvar font := ThemeDB.fallback_font
+\twhile result.length() > 3 and font.get_string_size(result, HORIZONTAL_ALIGNMENT_LEFT, -1, base_size).x > max_width:
+\t\tresult = result.left(result.length() - 2) + "…"
+\treturn result''',
+    "measured label fit",
+)
+replace_once(
+    '\t\t\t_zoom_at(pinch_center, factor, center-pinch_center)',
+    '\t\t\t_zoom_at(pinch_center, factor)',
+    "pinch zoom without gesture panning",
+)
+replace_once(
+    '''\telif touches.size() == 1:
+\t\tif zoom > 1.02:
+\t\t\tcamera_offset += relative
+\t\t\tdragging = true
+\t\tone_finger_last = pos''',
+    '''\telif touches.size() == 1:
+\t\t# A single finger never moves the background; pinch zoom remains available.
+\t\tdragging = false
+\t\tone_finger_last = pos''',
+    "disable background dragging",
+)
+replace_once(
+    '''\tif paused:
+\t\tpaused = false
+\t\treturn
+\tif won:''',
+    '''\tif paused:
+\t\t_handle_settings_tap(point, view)
+\t\treturn
+\tif won:''',
+    "settings touch handling",
+)
+replace_once(
+    '''\t\tif point.x > view.x-166.0:
+\t\t\tsound_enabled = not sound_enabled
+\t\t\tif sound_enabled:
+\t\t\t\taudio_surf.play()
+\t\t\telse:
+\t\t\t\taudio_surf.stop()
+\t\t\treturn''',
+    '''\t\tif point.x > view.x-166.0:
+\t\t\t_toggle_music()
+\t\t\treturn''',
+    "top bar music toggle",
+)
+replace_once(
+    '''\tif paused:
+\t\tdraw_rect(Rect2(Vector2.ZERO, view), Color(0,0,0,0.62), true)
+\t\t_center_text("ПАУЗА  •  КОСНИТЕСЬ, ЧТОБЫ ПРОДОЛЖИТЬ", view * 0.5, 30, CREAM)''',
+    '''\tif paused:
+\t\t_draw_settings(view)''',
+    "settings panel draw",
+)
 
-func _ready() -> void:
-    background = BACKGROUND_TEXTURE
-    splash = SPLASH_TEXTURE
-    get_viewport().size_changed.connect(queue_redraw)
-    queue_redraw()
+# Generate a small original looped tropical marimba cue; the source archive
+# only contains surf ambience, not a music track.
+def make_music(path: Path) -> None:
+    rate, duration = 22050, 16.0
+    chords = [[261.63,329.63,392.00,493.88],[220.00,261.63,329.63,392.00],[174.61,220.00,261.63,329.63],[196.00,246.94,293.66,392.00]]
+    events = []
+    melody = [0,2,1,3,2,1,0,2,3,1,2,0,1,3,2,1]
+    for i, note in enumerate(melody):
+        events.append((i*0.5, chords[i//4][note], 0.19, 1.05, -0.35 if i%2 else 0.35))
+    for bar in range(4):
+        root_note = chords[bar][0]/2.0
+        events.extend([(bar*2.0,root_note,0.12,1.8,0.0),(bar*2.0+1.0,root_note*1.5,0.055,0.8,0.0)])
+    frames = bytearray()
+    for n in range(int(rate*duration)):
+        t = n/rate
+        chord = chords[int(t//4.0)%4]
+        pad = sum(math.sin(2*math.pi*f*0.5*t)*0.012 for f in chord[:3])
+        left = right = pad*(0.82+0.18*math.sin(2*math.pi*0.25*t))
+        for start,freq,amp,decay,pan in events:
+            age=t-start
+            if 0 <= age < decay:
+                env=math.exp(-4.2*age/decay)
+                tone=(math.sin(2*math.pi*freq*age)+0.22*math.sin(2*math.pi*freq*2.01*age))*amp*env
+                left += tone*(1.0-pan*0.35)
+                right += tone*(1.0+pan*0.35)
+        edge=min(1.0,t/0.04,(duration-t)/0.08)
+        left=max(-0.85,min(0.85,left*edge))
+        right=max(-0.85,min(0.85,right*edge))
+        frames += struct.pack("<hh",int(left*32767),int(right*32767))
+    path.parent.mkdir(parents=True,exist_ok=True)
+    with wave.open(str(path),"wb") as out:
+        out.setnchannels(2); out.setsampwidth(2); out.setframerate(rate); out.writeframes(frames)
 
-func _process(delta: float) -> void:
-    if splash_left > 0.0:
-        splash_left = maxf(0.0, splash_left - delta)
-    elif not paused and not won:
-        elapsed += delta
-    if hint_left > 0.0:
-        hint_left = maxf(0.0, hint_left - delta)
-        if hint_left == 0.0:
-            hint_target = -1
-    queue_redraw()
+settings_code = '''
 
-func _draw() -> void:
-    var view := get_viewport_rect().size
-    var scale_factor := minf(view.x / DESIGN.x, view.y / DESIGN.y)
-    var origin := (view - DESIGN * scale_factor) * 0.5
+func _toggle_music() -> void:
+\tmusic_enabled = not music_enabled
+\tif music_enabled:
+\t\tif audio_surf != null and not audio_surf.playing:
+\t\t\taudio_surf.play()
+\t\tif audio_music != null and not audio_music.playing:
+\t\t\taudio_music.play()
+\telse:
+\t\tif audio_surf != null:
+\t\t\taudio_surf.stop()
+\t\tif audio_music != null:
+\t\t\taudio_music.stop()
+\tqueue_redraw()
 
-    if background == null:
-        draw_set_transform(origin, 0.0, Vector2.ONE * scale_factor)
-        draw_rect(Rect2(Vector2.ZERO, DESIGN), Color("#202b35"), true)
-        _center_text("Не удалось загрузить фон игры", DESIGN * 0.5, 30, CREAM)
-        draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
-        return
+func _settings_rects(view: Vector2) -> Dictionary:
+\tvar center := view * 0.5
+\treturn {
+\t\t"panel": Rect2(center.x-230, center.y-165, 460, 330),
+\t\t"music": Rect2(center.x-175, center.y-25, 350, 72),
+\t\t"resume": Rect2(center.x-175, center.y+65, 350, 66)
+\t}
 
-    if splash_left > 0.0:
-        draw_set_transform(origin, 0.0, Vector2.ONE * scale_factor)
-        draw_texture_rect(background, Rect2(Vector2.ZERO, DESIGN), false)
-        var splash_alpha := clampf(splash_left / 0.35, 0.0, 1.0)
-        draw_texture_rect(splash, Rect2(Vector2.ZERO, DESIGN), false, Color(1.0, 1.0, 1.0, splash_alpha))
-        draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
-        return
+func _draw_settings(view: Vector2) -> void:
+\tdraw_rect(Rect2(Vector2.ZERO, view), Color(0.01,0.04,0.08,0.76), true)
+\tvar r := _settings_rects(view)
+\tdraw_rect(r.panel, Color("#102d4d"), true)
+\tdraw_rect(r.panel, GOLD, false, 4.0)
+\t_center_text("НАСТРОЙКИ", Vector2(view.x*0.5, view.y*0.5-95), 34, GOLD)
+\tdraw_rect(r.music, Color("#1d5272"), true)
+\tdraw_rect(r.music, GOLD, false, 2.0)
+\tvar music_text := "МУЗЫКА: ВКЛ" if music_enabled else "МУЗЫКА: ВЫКЛ"
+\t_center_text(music_text, Vector2(view.x*0.5, view.y*0.5+19), 23, CREAM)
+\tdraw_rect(r.resume, Color("#9a692e"), true)
+\tdraw_rect(r.resume, GOLD, false, 2.0)
+\t_center_text("ПРОДОЛЖИТЬ", Vector2(view.x*0.5, view.y*0.5+106), 23, CREAM)
 
-    # Only the scene is zoomed/panned; the HUD remains fixed to the screen.
-    draw_set_transform(origin + camera_offset * scale_factor, 0.0, Vector2.ONE * (scale_factor * zoom))
-    draw_texture_rect(background, Rect2(Vector2.ZERO, DESIGN), false)
-    for item in TARGETS:
-        if found.has(item.id):
-            draw_texture_rect_region(background, item.rect, item.patch, Color.WHITE, false)
-    if hint_target >= 0 and hint_left > 0.0:
-        var target_rect: Rect2 = TARGETS[hint_target].rect
-        var pulse := 0.5 + 0.5 * sin(Time.get_ticks_msec() / 120.0)
-        draw_rect(target_rect.grow(10), Color(1.0, 0.82, 0.25, 0.25 + pulse * 0.3), false, 7.0)
-    draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
-
-    _draw_hud(view, origin, scale_factor)
-    if paused and not won:
-        draw_rect(Rect2(Vector2.ZERO, view), Color(0.01, 0.03, 0.05, 0.68), true)
-        _center_text("ПАУЗА — НАЖМИТЕ, ЧТОБЫ ПРОДОЛЖИТЬ", view * 0.5, 30, CREAM)
-    if won:
-        draw_set_transform(origin, 0.0, Vector2.ONE * scale_factor)
-        _draw_win()
-        draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
-
-func _draw_hud(view: Vector2, origin: Vector2, scale_factor: float) -> void:
-    # HUD coordinates are authored in design space, scaled to fit the actual viewport.
-    draw_set_transform(origin, 0.0, Vector2.ONE * scale_factor)
-    var panel := Rect2(28, 842, 1616, 78)
-    draw_rect(panel, PANEL, true)
-    draw_rect(panel, Color("#edbd60"), false, 3.0)
-    var font := ThemeDB.fallback_font
-    draw_string(font, Vector2(48, 890), "НАЙДЕНО: %d / 5" % found.size(), HORIZONTAL_ALIGNMENT_LEFT, 290, 28, CREAM)
-    draw_string(font, Vector2(340, 890), "ВРЕМЯ: " + _time_text(), HORIZONTAL_ALIGNMENT_LEFT, 190, 28, CREAM)
-
-    # Five equal-width target slots: larger, centered labels with an explicit width limit.
-    var slot_x := 535.0
-    var slot_w := 164.0
-    for i in range(TARGETS.size()):
-        var item: Dictionary = TARGETS[i]
-        var done: bool = found.has(item.id)
-        var slot := Rect2(slot_x + i * slot_w, 852, slot_w - 5, 58)
-        draw_rect(slot, Color(0.10, 0.20, 0.22, 0.92), true)
-        draw_rect(slot, Color("#8ee0a1") if done else Color("#b88b4d"), false, 2.0)
-        var label := ("✓ " if done else "○ ") + str(item.name)
-        draw_string(font, Vector2(slot.position.x + 4, 890), label, HORIZONTAL_ALIGNMENT_CENTER, slot.size.x - 8, 24, Color("#8ee0a1") if done else CREAM)
-
-    draw_rect(hint_rect, Color("#bd762d"), true)
-    draw_rect(hint_rect, Color("#ffe1a0"), false, 3.0)
-    draw_string(font, Vector2(1400, 896), "ПОДСКАЗКА", HORIZONTAL_ALIGNMENT_CENTER, 200, 25, CREAM)
-    draw_circle(Vector2(1600, 58), 47, Color("#8d5228"), true)
-    draw_circle(Vector2(1600, 58), 47, Color("#ffe1a0"), false, 4.0)
-    draw_rect(Rect2(1584, 34, 10, 48), CREAM, true)
-    draw_rect(Rect2(1606, 34, 10, 48), CREAM, true)
-    draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
-
-func _draw_win() -> void:
-    draw_rect(Rect2(Vector2.ZERO, DESIGN), Color(0.01, 0.03, 0.05, 0.72), true)
-    var card := Rect2(470, 300, 732, 370)
-    draw_rect(card, Color("#193b45"), true)
-    draw_rect(card, Color("#f7c96b"), false, 5.0)
-    var font := ThemeDB.fallback_font
-    draw_string(font, Vector2(585, 405), "ОСТРОВ РАСКРЫЛ СВОИ СЕКРЕТЫ!", HORIZONTAL_ALIGNMENT_LEFT, 620, 34, CREAM)
-    draw_string(font, Vector2(650, 465), "Ты нашёл все сокровища!", HORIZONTAL_ALIGNMENT_LEFT, 500, 30, Color("#bcebd0"))
-    draw_string(font, Vector2(760, 510), "Время: " + _time_text(), HORIZONTAL_ALIGNMENT_LEFT, 300, 26, CREAM)
-    draw_rect(replay_rect, Color("#bd762d"), true)
-    draw_rect(replay_rect, Color("#ffe1a0"), false, 3.0)
-    draw_string(font, Vector2(730, 595), "ИГРАТЬ ЕЩЁ", HORIZONTAL_ALIGNMENT_LEFT, 300, 30, CREAM)
-
-func _center_text(value: String, center: Vector2, size: int, color: Color) -> void:
-    var font := ThemeDB.fallback_font
-    var width := font.get_string_size(value, HORIZONTAL_ALIGNMENT_LEFT, -1, size).x
-    draw_string(font, center - Vector2(width * 0.5, -size * 0.35), value, HORIZONTAL_ALIGNMENT_LEFT, -1, size, color)
-
-func _time_text() -> String:
-    var total := int(elapsed)
-    return "%02d:%02d" % [total / 60, total % 60]
-
-func _to_design(screen_pos: Vector2) -> Vector2:
-    var view := get_viewport_rect().size
-    var scale_factor := minf(view.x / DESIGN.x, view.y / DESIGN.y)
-    var origin := (view - DESIGN * scale_factor) * 0.5
-    return (screen_pos - origin) / scale_factor
-
-func _zoom_at(anchor: Vector2, factor: float) -> void:
-    var old_zoom := zoom
-    zoom = clampf(zoom * factor, MIN_ZOOM, MAX_ZOOM)
-    var world_at_anchor := (anchor - camera_offset) / old_zoom
-    camera_offset = anchor - world_at_anchor * zoom
-    if zoom <= 1.001:
-        zoom = 1.0
-        camera_offset = Vector2.ZERO
-    _clamp_camera()
-    queue_redraw()
-
-func _clamp_camera() -> void:
-    var min_offset := DESIGN * (1.0 - zoom)
-    camera_offset.x = clampf(camera_offset.x, min_offset.x, 0.0)
-    camera_offset.y = clampf(camera_offset.y, min_offset.y, 0.0)
-
-func _input(event: InputEvent) -> void:
-    if splash_left > 0.0:
-        return
-
-    if event is InputEventScreenTouch:
-        var touch_pos: Vector2 = _to_design(event.position)
-        if event.pressed:
-            touches[event.index] = touch_pos
-            if touches.size() == 1:
-                mouse_last = touch_pos
-        else:
-            touches.erase(event.index)
-        if touches.size() == 2:
-            var initial_points: Array = touches.values()
-            pinch_distance = initial_points[0].distance_to(initial_points[1])
-        elif touches.size() < 2:
-            pinch_distance = 0.0
-        if event.pressed and touches.size() == 1:
-            _handle_tap(event.position)
-        get_viewport().set_input_as_handled()
-        return
-
-    if event is InputEventScreenDrag:
-        var pos: Vector2 = _to_design(event.position)
-        if touches.has(event.index):
-            touches[event.index] = pos
-        if touches.size() >= 2:
-            var points: Array = touches.values()
-            var midpoint: Vector2 = (points[0] + points[1]) * 0.5
-            var distance: float = points[0].distance_to(points[1])
-            if pinch_distance > 1.0 and distance > 1.0:
-                _zoom_at(midpoint, distance / pinch_distance)
-            pinch_distance = distance
-        elif touches.size() == 1 and zoom > 1.001:
-            camera_offset += pos - mouse_last
-            _clamp_camera()
-        mouse_last = pos
-        queue_redraw()
-        get_viewport().set_input_as_handled()
-        return
-
-    if event is InputEventMouseButton:
-        if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
-            _zoom_at(_to_design(event.position), 1.15)
-            return
-        if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
-            _zoom_at(_to_design(event.position), 1.0 / 1.15)
-            return
-        if event.button_index == MOUSE_BUTTON_LEFT:
-            mouse_dragging = event.pressed
-            mouse_last = _to_design(event.position)
-            if event.pressed:
-                _handle_tap(event.position)
-            return
-
-    if event is InputEventMouseMotion and mouse_dragging and zoom > 1.001:
-        var pos: Vector2 = _to_design(event.position)
-        camera_offset += pos - mouse_last
-        mouse_last = pos
-        _clamp_camera()
-        queue_redraw()
-        return
-
-func _handle_tap(screen_pos: Vector2) -> void:
-    var design_pos := _to_design(screen_pos)
-    var view := get_viewport_rect().size
-    var scale_factor := minf(view.x / DESIGN.x, view.y / DESIGN.y)
-    var origin := (view - DESIGN * scale_factor) * 0.5
-    var hud_pos := (screen_pos - origin) / scale_factor
-    if won:
-        if replay_rect.has_point(design_pos):
-            _restart()
-        return
-    if pause_rect.has_point(hud_pos):
-        paused = not paused
-        return
-    if paused:
-        paused = false
-        return
-    if hint_rect.has_point(hud_pos):
-        _hint()
-        return
-
-    var world_pos := (design_pos - camera_offset) / zoom
-    for i in range(TARGETS.size()):
-        var item: Dictionary = TARGETS[i]
-        if not found.has(item.id) and item.rect.has_point(world_pos):
-            found.append(item.id)
-            hint_target = -1
-            hint_left = 0.0
-            if found.size() == TARGETS.size():
-                won = true
-            queue_redraw()
-            return
-
-func _hint() -> void:
-    for i in range(TARGETS.size()):
-        if not found.has(TARGETS[i].id):
-            hint_target = i
-            hint_left = 3.0
-            return
-
-func _restart() -> void:
-    found.clear()
-    elapsed = 0.0
-    hint_target = -1
-    hint_left = 0.0
-    paused = false
-    won = false
-    zoom = 1.0
-    camera_offset = Vector2.ZERO
-    queue_redraw()
+func _handle_settings_tap(point: Vector2, view: Vector2) -> void:
+\tvar r := _settings_rects(view)
+\tif r.music.has_point(point):
+\t\t_toggle_music()
+\telif r.resume.has_point(point):
+\t\tpaused = false
+\t\tqueue_redraw()
 '''
-game.write_text(game_source, encoding="utf-8")
-print("Added cat splash, larger bounded target labels, pinch zoom and one-finger panning while zoomed.")
+if "func _settings_rects(" in source:
+    raise SystemExit("Settings functions already exist; refusing to patch twice")
+source += settings_code
+game.write_text(source, encoding="utf-8")
+make_music(root / "assets/audio/music.wav")
+print("Original tropical-cove project patched without replacing its art or game scene.")
