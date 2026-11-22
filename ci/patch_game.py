@@ -76,10 +76,14 @@ replace_once(
 \t\t\tdragging = true
 \t\tone_finger_last = pos''',
     '''\telif touches.size() == 1:
-\t\t# A single finger never moves the background; pinch zoom remains available.
-\t\tdragging = false
+\t\t# Pan only after zooming in; at the base scale the scene stays fixed.
+\t\tif zoom > 1.02:
+\t\t\tcamera_offset += relative
+\t\t\tdragging = true
+\t\telse:
+\t\t\tdragging = false
 \t\tone_finger_last = pos''',
-    "disable background dragging",
+    "allow panning only while zoomed",
 )
 replace_once(
     '''\tif paused:
