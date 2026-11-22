@@ -58,6 +58,7 @@ var won := false
 var zoom := 1.0
 var camera_offset := Vector2.ZERO
 var touches: Dictionary = {}
+var pinch_distance := 0.0
 var mouse_dragging := false
 var mouse_last := Vector2.ZERO
 var hint_rect := Rect2(1390, 855, 220, 62)
@@ -206,6 +207,13 @@ func _input(event: InputEvent) -> void:
                 mouse_last = touch_pos
         else:
             touches.erase(event.index)
+        if touches.size() == 2:
+            var initial_points: Array = touches.values()
+            pinch_distance = initial_points[0].distance_to(initial_points[1])
+        elif touches.size() < 2:
+            pinch_distance = 0.0
+        if event.pressed and touches.size() == 1:
+            _handle_tap(event.position)
         get_viewport().set_input_as_handled()
         return
 
@@ -217,13 +225,9 @@ func _input(event: InputEvent) -> void:
             var points: Array = touches.values()
             var midpoint: Vector2 = (points[0] + points[1]) * 0.5
             var distance: float = points[0].distance_to(points[1])
-            if not touches.has("_pinch_distance"):
-                touches["_pinch_distance"] = distance
-            else:
-                var previous: float = float(touches["_pinch_distance"])
-                if previous > 1.0 and distance > 1.0:
-                    _zoom_at(midpoint, distance / previous)
-                touches["_pinch_distance"] = distance
+            if pinch_distance > 1.0 and distance > 1.0:
+                _zoom_at(midpoint, distance / pinch_distance)
+            pinch_distance = distance
         elif touches.size() == 1 and zoom > 1.001:
             camera_offset += pos - mouse_last
             _clamp_camera()
@@ -253,9 +257,6 @@ func _input(event: InputEvent) -> void:
         _clamp_camera()
         queue_redraw()
         return
-
-    if event is InputEventScreenTouch and event.pressed:
-        _handle_tap(event.position)
 
 func _handle_tap(screen_pos: Vector2) -> void:
     var design_pos := _to_design(screen_pos)
