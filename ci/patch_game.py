@@ -514,4 +514,8 @@ make_music(root / "assets/audio/music.wav")
 from level_content import enhance_game
 enhance_game(root)
 
+# Copy the normalized story only after level_content has converted every chapter
+# background reference from SVG to the final PNG paths used by the game.
+story_target.write_text(story_source.read_text(encoding="utf-8"), encoding="utf-8")
+
 print("Original tropical-cove project patched without replacing its art or game scene.")
