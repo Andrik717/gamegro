@@ -86,6 +86,71 @@ replace_once(
     "restyle and enlarge inventory panel",
 )
 replace_once(
+    '''\tfor item in ITEM_DATA:
+\t\tvar id: int = item.id
+\t\tif found.has(id):
+\t\t\tcontinue
+\t\tvar radius := 34.0''',
+    '''\tfor item in ITEM_DATA:
+\t\tvar id: int = item.id
+\t\tif found.has(id):
+\t\t\tcontinue
+\t\tif not _is_current_search_target(id):
+\t\t\tcontinue
+\t\tvar radius := 34.0''',
+    "only accept items in the active five-item search queue",
+)
+replace_once(
+    '''func _use_hint() -> void:
+\tfor id in display_order:
+\t\tif not found.has(id):
+\t\t\thint_id = id
+\t\t\thint_time = 2.5
+\t\t\tif sound_enabled:
+\t\t\t\taudio_hint.play()
+\t\t\treturn''',
+    '''func _use_hint() -> void:
+\t# Hints must point only to one of the five currently requested items.
+\tfor slot in range(5):
+\t\tvar id := _next_visible_item(slot)
+\t\tif id < 0:
+\t\t\treturn
+\t\thint_id = id
+\t\thint_time = 2.5
+\t\tif sound_enabled:
+\t\t\taudio_hint.play()
+\t\treturn''',
+    "restrict hints to the active five-item queue",
+)
+replace_once(
+    '''func _next_visible_item(slot: int) -> int:
+\tvar shown := 0
+\tfor id in display_order:
+\t\tif found.has(id):
+\t\t\tcontinue
+\t\tif shown == slot:
+\t\t\treturn id
+\t\tshown += 1
+\treturn -1''',
+    '''func _next_visible_item(slot: int) -> int:
+\tvar shown := 0
+\tfor id in display_order:
+\t\tif found.has(id):
+\t\t\tcontinue
+\t\tif shown == slot:
+\t\t\treturn id
+\t\tshown += 1
+\treturn -1
+
+func _is_current_search_target(item_id: int) -> bool:
+\tfor slot in range(5):
+\t\tif _next_visible_item(slot) == item_id:
+\t\t\treturn true
+\treturn false''',
+    "identify only the five visible search targets",
+)
+
+replace_once(
     '''func _short_name(value: String) -> String:
 \treturn value if value.length() <= 12 else value.substr(0,11)+"…"''',
     '''func _short_name(value: String) -> String:
