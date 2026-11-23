@@ -40,6 +40,9 @@ jobs:
           path: packaged/scripts/game.gd
           if-no-files-found: error
 
+      - name: Install raster artwork dependency
+        run: python3 -m pip install --disable-pip-version-check Pillow
+
       - name: Apply requested gameplay and Android fixes
         run: python3 ci/patch_game.py packaged
 
