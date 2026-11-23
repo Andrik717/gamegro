@@ -556,6 +556,38 @@ make_music(root / "assets/audio/music.wav")
 from level_content import enhance_game
 enhance_game(root)
 
+# Keep the story card inside short landscape displays.
+source = game.read_text(encoding="utf-8")
+old_intro = """func _draw_story_intro(view: Vector2) -> void:
+	draw_rect(Rect2(Vector2.ZERO, view), Color(0.01,0.04,0.08,0.70), true)
+	var panel := Rect2(view.x*0.5-420, view.y*0.5-190, 840, 380)
+	draw_style_box(_rounded_style(Color("#102d4d"), Color("#f6c66c"), 30, 20), panel)
+	_center_text("ТАЙНА ЗАТЕРЯННОГО АРХИПЕЛАГА", Vector2(view.x*0.5,view.y*0.5-112), 31, GOLD)
+	_center_text("Шторм выбросил тебя на неизвестный остров.", Vector2(view.x*0.5,view.y*0.5-45), 23, CREAM)
+	_center_text("В бутылке найдено письмо смотрителя маяка.", Vector2(view.x*0.5,view.y*0.5-7), 23, CREAM)
+	_center_text("Десять артефактов помогут вернуть свет архипелагу.", Vector2(view.x*0.5,view.y*0.5+31), 22, CREAM)
+	draw_style_box(_rounded_style(Color("#9a692e"), GOLD, 22, 14), Rect2(view.x*0.5-210,view.y*0.5+91,420,62))
+	_center_text("НАЧАТЬ ПУТЕШЕСТВИЕ", Vector2(view.x*0.5,view.y*0.5+130), 22, CREAM)"""
+new_intro = """func _draw_story_intro(view: Vector2) -> void:
+	draw_rect(Rect2(Vector2.ZERO, view), Color(0.01,0.04,0.08,0.70), true)
+	var center := view * 0.5
+	var panel_w := minf(840.0, view.x-32.0)
+	var panel_h := minf(380.0, view.y-32.0)
+	var panel := Rect2(center.x-panel_w*0.5,center.y-panel_h*0.5,panel_w,panel_h)
+	var factor := minf(1.0,minf(panel_w/840.0,panel_h/380.0))
+	draw_style_box(_rounded_style(Color("#102d4d"), Color("#f6c66c"), 24, 12), panel)
+	_center_text("ТАЙНА ЗАТЕРЯННОГО АРХИПЕЛАГА", center+Vector2(0,-panel_h*0.29), maxi(15,int(31*factor)), GOLD)
+	_center_text("Шторм выбросил тебя на неизвестный остров.", center+Vector2(0,-panel_h*0.12), maxi(12,int(23*factor)), CREAM)
+	_center_text("В бутылке найдено письмо смотрителя маяка.", center+Vector2(0,-panel_h*0.01), maxi(12,int(23*factor)), CREAM)
+	_center_text("Десять артефактов помогут вернуть свет архипелагу.", center+Vector2(0,panel_h*0.10), maxi(12,int(22*factor)), CREAM)
+	var button := Rect2(center.x-minf(210.0,panel_w*0.34),center.y+panel_h*0.25,minf(420.0,panel_w*0.68),minf(62.0,panel_h*0.19))
+	draw_style_box(_rounded_style(Color("#9a692e"), GOLD, 18, 8), button)
+	_center_text("НАЧАТЬ ПУТЕШЕСТВИЕ", button.get_center()+Vector2(0,8), maxi(12,int(22*factor)), CREAM)"""
+if source.count(old_intro) != 1:
+    raise SystemExit("Story intro anchor mismatch")
+source = source.replace(old_intro,new_intro,1)
+game.write_text(source,encoding="utf-8")
+
 # Copy the normalized story only after level_content has converted every chapter
 # background reference from SVG to the final PNG paths used by the game.
 story_target.write_text(story_source.read_text(encoding="utf-8"), encoding="utf-8")
