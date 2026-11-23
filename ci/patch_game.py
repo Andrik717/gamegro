@@ -511,4 +511,7 @@ func _handle_map_tap(point: Vector2, view: Vector2) -> void:
 
 game.write_text(source, encoding="utf-8")
 make_music(root / "assets/audio/music.wav")
+from level_content import enhance_game
+enhance_game(root)
+
 print("Original tropical-cove project patched without replacing its art or game scene.")
