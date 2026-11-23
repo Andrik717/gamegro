@@ -151,6 +151,17 @@ func _is_current_search_target(item_id: int) -> bool:
 )
 
 replace_once(
+    '''func _handle_tap(point: Vector2) -> void:
+\tif sound_enabled and audio_tap != null:
+\t\taudio_tap.play()
+\tvar view := get_viewport_rect().size''',
+    '''func _handle_tap(point: Vector2) -> void:
+\t# Ignore generic screen taps; keep only meaningful gameplay audio.
+\tvar view := get_viewport_rect().size''',
+    "remove generic tap sound",
+)
+
+replace_once(
     '''func _short_name(value: String) -> String:
 \treturn value if value.length() <= 12 else value.substr(0,11)+"…"''',
     '''func _short_name(value: String) -> String:
