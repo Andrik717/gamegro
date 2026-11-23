@@ -205,7 +205,14 @@ jobs:
 
       - name: Import project and validate GDScript
         shell: bash
-        run: ./godot --headless --editor --path packaged --quit
+        run: |
+          set -euo pipefail
+          ./godot --headless --editor --path packaged --quit > godot_validation.log 2>&1 || { cat godot_validation.log; exit 1; }
+          cat godot_validation.log
+          if grep -E "SCRIPT ERROR|Parse Error|Failed to load script" godot_validation.log; then
+            echo "Godot reported script errors; refusing to export a broken APK."
+            exit 1
+          fi
 
       - name: Export Android APK
         shell: bash
