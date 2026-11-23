@@ -489,7 +489,7 @@ func _draw_map(view: Vector2) -> void:
 		var edge := GOLD if active else (Color("#78c8a4") if open else Color("#53616d"))
 		draw_style_box(_rounded_style(fill,edge,18,8),r)
 		_center_text("%02d" % (i+1),Vector2(r.get_center().x,r.position.y+42),27,GOLD if open else Color("#89949b"))
-		var title := LEVEL_DATA[i].name
+		var title: String = str(LEVEL_DATA[i].name)
 		_center_text(title,Vector2(r.get_center().x,r.position.y+82),15,CREAM if open else Color("#89949b"))
 		_center_text("ОТКРЫТО" if open else "ЗАКРЫТО",Vector2(r.get_center().x,r.position.y+119),12,Color("#a9edc9") if open else Color("#89949b"))
 	_draw_button(Rect2(panel.position.x+panel.size.x-82,panel.position.y+18,56,48),"×")
