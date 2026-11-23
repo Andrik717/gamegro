@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="864" viewBox="0 0 1536 864">
+<defs>
+ <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#f5a16c"/><stop offset="1" stop-color="#e94e38"/></linearGradient>
+ <linearGradient id="ground" x2="0" y2="1"><stop stop-color="#342a2b"/><stop offset="1" stop-color="#142e35"/></linearGradient>
+ <linearGradient id="water" x2="0" y2="1"><stop stop-color="#542e35"/><stop offset="1" stop-color="#082e48"/></linearGradient>
+ <radialGradient id="sun"><stop stop-color="#fff6c9"/><stop offset="1" stop-color="#ffd37b" stop-opacity="0"/></radialGradient>
+ <filter id="soft"><feGaussianBlur stdDeviation="12"/></filter>
+</defs>
+<rect width="1536" height="864" fill="url(#sky)"/>
+<circle cx="300" cy="160" r="180" fill="url(#sun)" opacity=".8"/>
+
+<path d="M0 500 Q250 330 500 470 T1000 430 T1536 470 V864 H0Z" fill="#342a2b" opacity=".55"/>
+<path d="M0 620 Q260 500 520 610 T1040 580 T1536 620 V864 H0Z" fill="url(#ground)"/>
+
+<path d="M0 480 L250 300 470 430 760 170 1030 410 1300 220 1536 400 V864 H0Z" fill="#59483f"/><path d="M0 550 L250 400 470 510 760 260 1030 490 1300 320 1536 500 V864 H0Z" fill="#302e32"/><path d="M690 360 L760 160 830 360 900 460 620 460Z" fill="#ed7541"/><path d="M760 160 L800 70 850 190 810 240Z" fill="#ffcf75"/><path d="M0 690 Q300 620 600 700 T1200 690 T1536 710 V864 H0Z" fill="#4a3732"/><path d="M0 760 Q280 700 520 760 T1020 760 T1536 740" fill="none" stroke="#f45a29" stroke-width="34"/><path d="M0 790 Q280 730 520 790 T1020 790 T1536 770" fill="none" stroke="#ffb34e" stroke-width="10"/><g fill="#9b5936" stroke="#d08c4c" stroke-width="10"><path d="M1040 700 V500 L1160 420 1280 500 V700Z"/><path d="M1280 700 V550 L1380 480 1480 550 V700Z"/></g><path d="M1070 560 L1160 500 1250 560" fill="none" stroke="#ff9d45" stroke-width="18"/><g fill="#ff7a34"><circle cx="320" cy="650" r="24"/><circle cx="460" cy="740" r="18"/><circle cx="900" cy="680" r="21"/><circle cx="1350" cy="760" r="18"/></g>
+<g fill="#f8d28b" opacity=".75"><circle cx="110" cy="810" r="8"/><circle cx="1380" cy="790" r="7"/><circle cx="990" cy="830" r="6"/></g>
+<rect width="1536" height="864" fill="none" stroke="#0a2634" stroke-opacity=".12" stroke-width="18"/>
+</svg>
