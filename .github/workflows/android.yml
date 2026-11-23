@@ -203,6 +203,15 @@ jobs:
           echo "=== Editor settings ==="
           cat "$HOME/.config/godot/editor_settings-4.4.tres"
 
+      - name: Inspect generated GDScript
+        if: always()
+        shell: bash
+        run: |
+          if test -f packaged/scripts/game.gd; then
+            echo "=== Generated game.gd around reported line ==="
+            nl -ba packaged/scripts/game.gd | sed -n '595,620p'
+          fi
+
       - name: Import project and validate GDScript
         shell: bash
         run: |
