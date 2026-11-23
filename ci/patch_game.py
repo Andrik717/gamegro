@@ -429,6 +429,86 @@ if len(level_assets) != 9:
 for level_asset in level_assets:
     (levels_target / level_asset.name).write_bytes(level_asset.read_bytes())
 
+replace_once("const CREAM :=", "const LEVEL_DATA := [\n\t{\"name\":\"Затерянный остров\",\"background\":\"res://assets/backgrounds/tropical_cove.png\",\"artifact\":\"Фрагмент карты\"},\n\t{\"name\":\"Тайна джунглей\",\"background\":\"res://assets/levels/jungle_ruins.svg\",\"artifact\":\"Камень памяти\"},\n\t{\"name\":\"Пещера водопада\",\"background\":\"res://assets/levels/waterfall_cave.svg\",\"artifact\":\"Жемчужина приливов\"},\n\t{\"name\":\"Бухта пиратов\",\"background\":\"res://assets/levels/pirate_cove.svg\",\"artifact\":\"Печать капитана\"},\n\t{\"name\":\"Затонувшая лагуна\",\"background\":\"res://assets/levels/sunken_lagoon.svg\",\"artifact\":\"Сердце океана\"},\n\t{\"name\":\"Остров огня\",\"background\":\"res://assets/levels/volcano_forge.svg\",\"artifact\":\"Огненный кристалл\"},\n\t{\"name\":\"Небесная обсерватория\",\"background\":\"res://assets/levels/sky_observatory.svg\",\"artifact\":\"Звёздный компас\"},\n\t{\"name\":\"Ледяное королевство\",\"background\":\"res://assets/levels/ice_kingdom.svg\",\"artifact\":\"Кристалл памяти\"},\n\t{\"name\":\"Затерянный город\",\"background\":\"res://assets/levels/lost_city.svg\",\"artifact\":\"Сердце архипелага\"},\n\t{\"name\":\"Последний маяк\",\"background\":\"res://assets/levels/final_lighthouse.svg\",\"artifact\":\"Свет архипелага\"}\n]\nconst CREAM :=", "ten playable chapter definitions")
+replace_once("var story_intro_pending := true", "var story_intro_pending := true\nvar current_level := 0\nvar unlocked_level_count := 1\nvar map_open := false", "chapter progress state")
+replace_once('background = load("res://assets/backgrounds/tropical_cove.png")', "_load_current_level()", "load the selected chapter background")
+replace_once("var p: Vector2 = ITEM_DATA[i].pos", "var p: Vector2 = _item_position(ITEM_DATA[i])", "level-specific object positions in draw")
+replace_once('''\t\tvar radius := 34.0\n\t\tif Rect2(item.pos-Vector2.ONE*radius,Vector2.ONE*radius*2).has_point(world_pos):''', '''\t\tvar radius := 34.0\n\t\tvar item_pos := _item_position(item)\n\t\tif Rect2(item_pos-Vector2.ONE*radius,Vector2.ONE*radius*2).has_point(world_pos):''', "level-specific object hitboxes")
+replace_once('''\tif story_intro_pending:\n\t\t_draw_story_intro(view)\n\tif paused:''', '''\tif story_intro_pending:\n\t\t_draw_story_intro(view)\n\tif map_open:\n\t\t_draw_map(view)\n\tif paused:''', "draw the archipelago map")
+replace_once('''\tif story_intro_pending:\n\t\tstory_intro_pending = false\n\t\tqueue_redraw()\n\t\treturn\n\tif paused:''', '''\tif story_intro_pending:\n\t\tstory_intro_pending = false\n\t\tqueue_redraw()\n\t\treturn\n\tif map_open:\n\t\t_handle_map_tap(point, view)\n\t\treturn\n\tif paused:''', "handle map interactions")
+replace_once('''\t_draw_button(Rect2(view.x-158,top,64,56),"♫" if music_enabled else "×")''', '''\t_draw_button(Rect2(view.x-158,top,64,56),"♫" if music_enabled else "×")\n\t_draw_button(Rect2(view.x-240,top,68,56),"M")''', "add map control")
+replace_once('''\t\tif point.x > view.x-166.0:\n\t\t\t_toggle_music()\n\t\t\treturn''', '''\t\tif point.x > view.x-240.0 and point.x <= view.x-166.0:\n\t\t\tmap_open = true\n\t\t\tqueue_redraw()\n\t\t\treturn\n\t\tif point.x > view.x-166.0:\n\t\t\t_toggle_music()\n\t\t\treturn''', "open map from top bar")
+replace_once('''\tif won:\n\t\tvar win_rects := _win_rects(view)\n\t\tif win_rects.replay.has_point(point):\n\t\t\t_reset_round()\n\t\treturn''', '''\tif won:\n\t\tvar win_rects := _win_rects(view)\n\t\tif win_rects.replay.has_point(point):\n\t\t\t_advance_level()\n\t\treturn''', "advance to the next unlocked chapter")
+source = source.replace("_center_text(\"ПЕРВАЯ ГЛАВА ПРОЙДЕНА!\", Vector2(view.x*0.5,view.y*0.5-112), 38, GOLD)", "_center_text(\"ГЛАВА %02d ПРОЙДЕНА\" % [current_level+1], Vector2(view.x*0.5,view.y*0.5-112), 34, GOLD)")
+source = source.replace("_center_text(\"Найден первый фрагмент карты\", Vector2(view.x*0.5,view.y*0.5-55), 25, CREAM)", "_center_text(\"Артефакт: \" + LEVEL_DATA[current_level].artifact, Vector2(view.x*0.5,view.y*0.5-55), 23, CREAM)")
+source = source.replace("_center_text(\"ИГРАТЬ ЕЩЁ\", r.replay.get_center()+Vector2(0,9), 24, CREAM)", "_center_text(\"СЛЕДУЮЩАЯ ЛОКАЦИЯ\", r.replay.get_center()+Vector2(0,9), 22, CREAM)")
+
+source += """
+func _load_current_level() -> void:
+	background = load(LEVEL_DATA[current_level].background)
+	if background == null:
+		push_error("Missing level background: " + LEVEL_DATA[current_level].background)
+
+func _item_position(item: Dictionary) -> Vector2:
+	var original: Vector2 = item.pos
+	if current_level == 0:
+		return original
+	var center := WORLD_SIZE * 0.5
+	var rotated := (original-center).rotated(float(current_level)*0.39)
+	var drift := Vector2(sin(float(item.id)*1.7+current_level)*18.0, cos(float(item.id)*1.3+current_level)*16.0)
+	var point := center + rotated + drift
+	return Vector2(clampf(point.x, 64.0, WORLD_SIZE.x-64.0), clampf(point.y, 64.0, WORLD_SIZE.y-64.0))
+
+func _advance_level() -> void:
+	if current_level < LEVEL_DATA.size()-1:
+		current_level += 1
+		unlocked_level_count = maxi(unlocked_level_count, current_level+1)
+	else:
+		current_level = 0
+		unlocked_level_count = LEVEL_DATA.size()
+	_load_current_level()
+	_reset_round()
+
+func _map_card_rect(index: int, view: Vector2) -> Rect2:
+	var panel_left := view.x*0.5-575.0
+	var panel_top := view.y*0.5-275.0
+	var col := index % 5
+	var row := int(index / 5)
+	return Rect2(panel_left+28.0+float(col)*218.0, panel_top+112.0+float(row)*166.0, 204.0, 148.0)
+
+func _draw_map(view: Vector2) -> void:
+	draw_rect(Rect2(Vector2.ZERO,view),Color(0.01,0.04,0.08,0.82),true)
+	var panel := Rect2(view.x*0.5-575.0,view.y*0.5-275.0,1150.0,550.0)
+	draw_style_box(_rounded_style(Color("#102d4d"),Color("#f6c66c"),30,20),panel)
+	_center_text("КАРТА ЗАТЕРЯННОГО АРХИПЕЛАГА",Vector2(view.x*0.5,view.y*0.5-220.0),30,GOLD)
+	for i in range(LEVEL_DATA.size()):
+		var r := _map_card_rect(i,view)
+		var open := i < unlocked_level_count
+		var active := i == current_level
+		var fill := Color("#246b70") if active else (Color("#1c4d68") if open else Color("#202e3b"))
+		var edge := GOLD if active else (Color("#78c8a4") if open else Color("#53616d"))
+		draw_style_box(_rounded_style(fill,edge,18,8),r)
+		_center_text("%02d" % (i+1),Vector2(r.get_center().x,r.position.y+42),27,GOLD if open else Color("#89949b"))
+		var title := LEVEL_DATA[i].name
+		_center_text(title,Vector2(r.get_center().x,r.position.y+82),15,CREAM if open else Color("#89949b"))
+		_center_text("ОТКРЫТО" if open else "ЗАКРЫТО",Vector2(r.get_center().x,r.position.y+119),12,Color("#a9edc9") if open else Color("#89949b"))
+	_draw_button(Rect2(panel.position.x+panel.size.x-82,panel.position.y+18,56,48),"×")
+
+func _handle_map_tap(point: Vector2, view: Vector2) -> void:
+	var panel := Rect2(view.x*0.5-575.0,view.y*0.5-275.0,1150.0,550.0)
+	if Rect2(panel.position.x+panel.size.x-92,panel.position.y+12,76,60).has_point(point):
+		map_open = false
+		queue_redraw()
+		return
+	for i in range(unlocked_level_count):
+		if _map_card_rect(i,view).has_point(point):
+			current_level = i
+			map_open = false
+			_load_current_level()
+			_reset_round()
+			return
+"""
+
 game.write_text(source, encoding="utf-8")
 make_music(root / "assets/audio/music.wav")
 print("Original tropical-cove project patched without replacing its art or game scene.")
