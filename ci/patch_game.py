@@ -222,18 +222,17 @@ func _settings_rects(view: Vector2) -> Dictionary:
 \t}
 
 func _draw_settings(view: Vector2) -> void:
-\tdraw_rect(Rect2(Vector2.ZERO, view), Color(0.01,0.04,0.08,0.76), true)
+\tdraw_rect(Rect2(Vector2.ZERO, view), Color(0.01,0.04,0.08,0.70), true)
 \tvar r := _settings_rects(view)
-\tdraw_rect(r.panel, Color("#102d4d"), true)
-\tdraw_rect(r.panel, GOLD, false, 4.0)
-\t_center_text("НАСТРОЙКИ", Vector2(view.x*0.5, view.y*0.5-95), 34, GOLD)
-\tdraw_rect(r.music, Color("#1d5272"), true)
-\tdraw_rect(r.music, GOLD, false, 2.0)
-\tvar music_text := "МУЗЫКА: ВКЛ" if music_enabled else "МУЗЫКА: ВЫКЛ"
-\t_center_text(music_text, Vector2(view.x*0.5, view.y*0.5+19), 23, CREAM)
-\tdraw_rect(r.resume, Color("#9a692e"), true)
-\tdraw_rect(r.resume, GOLD, false, 2.0)
-\t_center_text("ПРОДОЛЖИТЬ", Vector2(view.x*0.5, view.y*0.5+106), 23, CREAM)
+\tvar panel_style := _rounded_style(Color(0.035, 0.105, 0.17, 0.97), Color(0.91, 0.73, 0.43, 0.95), 30, 24)
+\tdraw_style_box(panel_style, r.panel)
+\t_center_text("ПРИОСТАНОВЛЕНО", Vector2(view.x*0.5, view.y*0.5-96), 32, CREAM)
+\t_center_text("Передохни — остров подождёт", Vector2(view.x*0.5, view.y*0.5-57), 17, Color(0.70, 0.84, 0.88))
+\tdraw_style_box(_rounded_style(Color(0.10, 0.28, 0.39, 0.96), Color(0.50, 0.76, 0.79, 0.85), 20, 12), r.music)
+\tvar music_text := "♫  МУЗЫКА: ВКЛ" if music_enabled else "♫  МУЗЫКА: ВЫКЛ"
+\t_center_text(music_text, Vector2(view.x*0.5, view.y*0.5+19), 21, CREAM)
+\tdraw_style_box(_rounded_style(Color(0.66, 0.39, 0.15, 0.98), Color(1.0, 0.83, 0.53, 0.98), 22, 14), r.resume)
+\t_center_text("ПРОДОЛЖИТЬ", Vector2(view.x*0.5, view.y*0.5+106), 22, CREAM)
 
 func _handle_settings_tap(point: Vector2, view: Vector2) -> void:
 \tvar r := _settings_rects(view)
