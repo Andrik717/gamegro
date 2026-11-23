@@ -223,7 +223,10 @@ def enhance_game(root):
     story_path=base/"game_data/story.json"; story=json.loads(story_path.read_text(encoding="utf-8"))
     levels=story["levels"]
     if len(levels)!=10 or sum(len(x.get("items",[])) for x in levels[1:])!=45: raise SystemExit("Expected 45 chapter targets")
-    # Preserve level 1 and its existing PNG background exactly.
+    # Preserve and verify the original first-island PNG before touching other assets.
+    first_path=levels[0]["background_path"].replace("res://","")
+    if not first_path.lower().endswith(".png") or not (root/first_path).is_file():
+        raise SystemExit("Original first-island PNG is missing or was replaced")
     for p in (root/"assets").rglob("*.svg"): p.unlink()
     backgrounds=root/"assets/backgrounds"; backgrounds.mkdir(parents=True,exist_ok=True)
     items_dir=root/"assets/items"; items_dir.mkdir(parents=True,exist_ok=True)
