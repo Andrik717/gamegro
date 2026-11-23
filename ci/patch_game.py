@@ -67,8 +67,7 @@ replace_once(
 		draw_texture_rect(item_textures[id], Rect2(x+slot_w*0.5-22, bar.position.y+35, 44, 42), false)
 		draw_string(font, Vector2(x+slot_w*0.5, bar.position.y+94), _short_name(ITEM_DATA[id].name), HORIZONTAL_ALIGNMENT_CENTER, slot_w-8, 12, CREAM)''',
     '''	var bar := Rect2(0, view.y - BAR_HEIGHT, view.x, BAR_HEIGHT)
-	draw_rect(bar, Color(0.035, 0.09, 0.15, 0.78), true)
-	draw_rect(Rect2(0, bar.position.y, view.x, 2), Color(0.82, 0.68, 0.43, 0.78), true)
+	_draw_round_panel(Rect2(16, bar.position.y+4, view.x-32, BAR_HEIGHT-8), Color(0.035, 0.09, 0.15, 0.86), Color(0.82, 0.68, 0.43, 0.72), 24, 2)
 	draw_string(font, Vector2(22, bar.position.y+27), "НАЙДИ ПРЕДМЕТЫ", HORIZONTAL_ALIGNMENT_LEFT, -1, 20, CREAM)
 	draw_string(font, Vector2(view.x-190, bar.position.y+27), "%02d / 30" % found.size(), HORIZONTAL_ALIGNMENT_LEFT, -1, 22, CREAM)
 	var slots := mini(5, ITEM_COUNT - found.size())
@@ -80,8 +79,7 @@ replace_once(
 			continue
 		var x := first_x + slot*slot_w
 		var card := Rect2(x+3, bar.position.y+37, slot_w-6, 102)
-		draw_rect(card, Color(0.09, 0.20, 0.29, 0.62), true)
-		draw_rect(card, Color(0.74, 0.58, 0.34, 0.72), false, 1.5)
+		_draw_round_panel(card, Color(0.09, 0.20, 0.29, 0.72), Color(0.74, 0.58, 0.34, 0.82), 17, 2)
 		draw_texture_rect(item_textures[id], Rect2(x+slot_w*0.5-27, bar.position.y+42, 54, 52), false)
 		var label := _fit_label(_short_name(ITEM_DATA[id].name), slot_w-14.0, 14)
 		draw_string(font, Vector2(x+slot_w*0.5, bar.position.y+128), label, HORIZONTAL_ALIGNMENT_CENTER, slot_w-12, 14, CREAM)''',
@@ -100,6 +98,29 @@ func _fit_label(value: String, max_width: float, base_size: int) -> String:
 \t\tresult = result.left(result.length() - 2) + "…"
 \treturn result''',
     "measured label fit",
+)
+replace_once(
+    '''func _draw_button(rect: Rect2, label: String) -> void:
+\tdraw_rect(rect, Color("#173d5d"), true)
+\tdraw_rect(rect, GOLD, false, 3.0)
+\tdraw_string(ThemeDB.fallback_font, rect.position+Vector2(rect.size.x*0.5-10,rect.size.y*0.5+10), label, HORIZONTAL_ALIGNMENT_LEFT, -1, 24, CREAM)''',
+    '''func _draw_button(rect: Rect2, label: String) -> void:
+\t_draw_round_panel(rect, Color("#173d5d"), GOLD, 23, 2)
+\tvar font := ThemeDB.fallback_font
+\tvar text_size := font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, 24)
+\tdraw_string(font, rect.position + (rect.size-text_size)*0.5 + Vector2(0, 19), label, HORIZONTAL_ALIGNMENT_LEFT, -1, 24, CREAM)
+
+func _draw_round_panel(rect: Rect2, fill: Color, border: Color = Color(0,0,0,0), radius: int = 18, border_width: int = 1) -> void:
+\tvar style := StyleBoxFlat.new()
+\tstyle.bg_color = fill
+\tstyle.set_corner_radius_all(radius)
+\tstyle.border_color = border
+\tstyle.set_border_width_all(border_width)
+\tstyle.shadow_color = Color(0.0, 0.015, 0.03, 0.28)
+\tstyle.shadow_size = 9
+\tstyle.shadow_offset = Vector2(0, 3)
+\tdraw_style_box(style, rect)''',
+    "rounded buttons and panels",
 )
 replace_once(
     '\t\t\t_zoom_at(pinch_center, factor, center-pinch_center)',
@@ -155,6 +176,27 @@ replace_once(
     "settings panel draw",
 )
 
+replace_once(
+    '''\tif won:
+\t\tdraw_rect(Rect2(Vector2.ZERO, view), Color(0,0,0,0.68), true)
+\t\t_center_text("ВСЕ 30 СОКРОВИЩ НАЙДЕНЫ!", view*0.5-Vector2(0,35), 38, GOLD)
+\t\t_center_text("Коснитесь экрана, чтобы сыграть ещё раз", view*0.5+Vector2(0,22), 24, CREAM)''',
+    '''\tif won:
+\t\t_draw_win(view)''',
+    "modern victory screen",
+)
+replace_once(
+    '''\tif won:
+\t\t_reset_round()
+\t\treturn''',
+    '''\tif won:
+\t\tvar win_rects := _win_rects(view)
+\t\tif win_rects.replay.has_point(point):
+\t\t\t_reset_round()
+\t\treturn''',
+    "victory screen replay button",
+)
+
 # Generate a small original looped tropical marimba cue; the source archive
 # only contains surf ambience, not a music track.
 def make_music(path: Path) -> None:
@@ -190,6 +232,20 @@ def make_music(path: Path) -> None:
 
 settings_code = '''
 
+func _win_rects(view: Vector2) -> Dictionary:
+\tvar center := view * 0.5
+\treturn {"panel":Rect2(center.x-300,center.y-190,600,380),"replay":Rect2(center.x-150,center.y+82,300,68)}
+
+func _draw_win(view: Vector2) -> void:
+\tdraw_rect(Rect2(Vector2.ZERO, view), Color(0.01,0.04,0.08,0.78), true)
+\tvar r := _win_rects(view)
+\t_draw_round_panel(r.panel, Color("#102d4d"), Color("#f6c66c"), 30, 3)
+\t_center_text("ОСТРОВ СПАСЁН!", Vector2(view.x*0.5,view.y*0.5-112), 38, GOLD)
+\t_center_text("Все 30 сокровищ найдены", Vector2(view.x*0.5,view.y*0.5-55), 25, CREAM)
+\t_center_text("Время: " + _time_text(), Vector2(view.x*0.5,view.y*0.5-12), 23, Color("#bcebd0"))
+\t_draw_round_panel(r.replay, Color("#bd762d"), Color("#ffe1a0"), 24, 2)
+\t_center_text("ИГРАТЬ ЕЩЁ", r.replay.get_center()+Vector2(0,9), 24, CREAM)
+
 func _toggle_music() -> void:
 \tmusic_enabled = not music_enabled
 \tif music_enabled:
@@ -207,32 +263,35 @@ func _toggle_music() -> void:
 func _settings_rects(view: Vector2) -> Dictionary:
 \tvar center := view * 0.5
 \treturn {
-\t\t"panel": Rect2(center.x-230, center.y-165, 460, 330),
-\t\t"music": Rect2(center.x-175, center.y-25, 350, 72),
-\t\t"resume": Rect2(center.x-175, center.y+65, 350, 66)
+\t\t"panel": Rect2(center.x-245, center.y-190, 490, 380),
+\t\t"sound": Rect2(center.x-190, center.y-68, 380, 58),
+\t\t"music": Rect2(center.x-190, center.y+2, 380, 58),
+\t\t"resume": Rect2(center.x-190, center.y+82, 380, 66)
 \t}
 
 func _draw_settings(view: Vector2) -> void:
-\tdraw_rect(Rect2(Vector2.ZERO, view), Color(0.01,0.04,0.08,0.76), true)
+\tdraw_rect(Rect2(Vector2.ZERO, view), Color(0.01,0.04,0.08,0.78), true)
 \tvar r := _settings_rects(view)
-\tdraw_rect(r.panel, Color("#102d4d"), true)
-\tdraw_rect(r.panel, GOLD, false, 4.0)
-\t_center_text("НАСТРОЙКИ", Vector2(view.x*0.5, view.y*0.5-95), 34, GOLD)
-\tdraw_rect(r.music, Color("#1d5272"), true)
-\tdraw_rect(r.music, GOLD, false, 2.0)
+\t_draw_round_panel(r.panel, Color("#102d4d"), GOLD, 30, 3)
+\t_center_text("ПАУЗА", Vector2(view.x*0.5, view.y*0.5-125), 36, GOLD)
+\t_draw_round_panel(r.sound, Color("#1d5272"), Color("#79cbb2"), 20, 2)
+\tvar sound_text := "ЗВУК: ВКЛ" if sound_enabled else "ЗВУК: ВЫКЛ"
+\t_center_text(sound_text, r.sound.get_center()+Vector2(0,8), 21, CREAM)
+\t_draw_round_panel(r.music, Color("#1d5272"), Color("#79cbb2"), 20, 2)
 \tvar music_text := "МУЗЫКА: ВКЛ" if music_enabled else "МУЗЫКА: ВЫКЛ"
-\t_center_text(music_text, Vector2(view.x*0.5, view.y*0.5+19), 23, CREAM)
-\tdraw_rect(r.resume, Color("#9a692e"), true)
-\tdraw_rect(r.resume, GOLD, false, 2.0)
-\t_center_text("ПРОДОЛЖИТЬ", Vector2(view.x*0.5, view.y*0.5+106), 23, CREAM)
+\t_center_text(music_text, r.music.get_center()+Vector2(0,8), 21, CREAM)
+\t_draw_round_panel(r.resume, Color("#9a692e"), GOLD, 23, 2)
+\t_center_text("ПРОДОЛЖИТЬ", r.resume.get_center()+Vector2(0,8), 23, CREAM)
 
 func _handle_settings_tap(point: Vector2, view: Vector2) -> void:
 \tvar r := _settings_rects(view)
-\tif r.music.has_point(point):
+\tif r.sound.has_point(point):
+\t\tsound_enabled = not sound_enabled
+\telif r.music.has_point(point):
 \t\t_toggle_music()
 \telif r.resume.has_point(point):
 \t\tpaused = false
-\t\tqueue_redraw()
+\tqueue_redraw()
 '''
 if "func _settings_rects(" in source:
     raise SystemExit("Settings functions already exist; refusing to patch twice")
