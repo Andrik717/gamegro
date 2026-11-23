@@ -591,8 +591,11 @@ game.write_text(source,encoding="utf-8")
 # Make the map and modal panels fit compact landscape viewports.
 def replace_gd_function(text, signature, next_signature, body):
     start = text.index(signature)
-    end = text.index(next_signature, start)
-    return text[:start] + body.rstrip() + "\n\n" + text[end:]
+    try:
+        end = text.index(next_signature, start)
+    except ValueError:
+        end = len(text)
+    return text[:start] + body.rstrip() + ("\n\n" + text[end:] if end < len(text) else "\n")
 
 source = replace_gd_function(source, "func _win_rects(view: Vector2)", "func _draw_win(view: Vector2)", """func _win_rects(view: Vector2) -> Dictionary:
 	var center := view * 0.5
