@@ -374,7 +374,7 @@ if "func _settings_rects(" in source:
 source += settings_code
 
 # Story layer: preserve the existing island scene and introduce the first chapter.
-replace_once("var won := false\n", "var won := false\nvar story_intro_pending := true\n", "story intro state")
+replace_once("var won := false", "var won := false\\nvar story_intro_pending := true", "story intro state")
 replace_once(
     '''\t_draw_hud(view)
 \tif paused:''',
