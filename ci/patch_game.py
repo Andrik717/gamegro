@@ -374,41 +374,41 @@ if "func _settings_rects(" in source:
 source += settings_code
 
 # Story layer: preserve the existing island scene and introduce the first chapter.
-replace_once("var won := false\\n", "var won := false\\nvar story_intro_pending := true\\n", "story intro state")
+replace_once("var won := false\n", "var won := false\nvar story_intro_pending := true\n", "story intro state")
 replace_once(
-    '''\\t_draw_hud(view)
-\\tif paused:''',
-    '''\\t_draw_hud(view)
-\\tif story_intro_pending:
-\\t\\t_draw_story_intro(view)
-\\tif paused:''',
+    '''\t_draw_hud(view)
+\tif paused:''',
+    '''\t_draw_hud(view)
+\tif story_intro_pending:
+\t\t_draw_story_intro(view)
+\tif paused:''',
     "show the opening story card",
 )
 replace_once(
-    '''\\tvar view := get_viewport_rect().size
-\\tif paused:
-\\t\\t_handle_settings_tap(point, view)''',
-    '''\\tvar view := get_viewport_rect().size
-\\tif story_intro_pending:
-\\t\\tstory_intro_pending = false
-\\t\\tqueue_redraw()
-\\t\\treturn
-\\tif paused:
-\\t\\t_handle_settings_tap(point, view)''',
+    '''\tvar view := get_viewport_rect().size
+\tif paused:
+\t\t_handle_settings_tap(point, view)''',
+    '''\tvar view := get_viewport_rect().size
+\tif story_intro_pending:
+\t\tstory_intro_pending = false
+\t\tqueue_redraw()
+\t\treturn
+\tif paused:
+\t\t_handle_settings_tap(point, view)''',
     "dismiss the opening story card",
 )
 source += '''
 
 func _draw_story_intro(view: Vector2) -> void:
-\\tdraw_rect(Rect2(Vector2.ZERO, view), Color(0.01,0.04,0.08,0.70), true)
-\\tvar panel := Rect2(view.x*0.5-420, view.y*0.5-190, 840, 380)
-\\tdraw_style_box(_rounded_style(Color("#102d4d"), Color("#f6c66c"), 30, 20), panel)
-\\t_center_text("ТАЙНА ЗАТЕРЯННОГО АРХИПЕЛАГА", Vector2(view.x*0.5,view.y*0.5-112), 31, GOLD)
-\\t_center_text("Шторм выбросил тебя на неизвестный остров.", Vector2(view.x*0.5,view.y*0.5-45), 23, CREAM)
-\\t_center_text("В бутылке найдено письмо смотрителя маяка.", Vector2(view.x*0.5,view.y*0.5-7), 23, CREAM)
-\\t_center_text("Десять артефактов помогут вернуть свет архипелагу.", Vector2(view.x*0.5,view.y*0.5+31), 22, CREAM)
-\\tdraw_style_box(_rounded_style(Color("#9a692e"), GOLD, 22, 14), Rect2(view.x*0.5-210,view.y*0.5+91,420,62))
-\\t_center_text("НАЧАТЬ ПУТЕШЕСТВИЕ", Vector2(view.x*0.5,view.y*0.5+130), 22, CREAM)
+\tdraw_rect(Rect2(Vector2.ZERO, view), Color(0.01,0.04,0.08,0.70), true)
+\tvar panel := Rect2(view.x*0.5-420, view.y*0.5-190, 840, 380)
+\tdraw_style_box(_rounded_style(Color("#102d4d"), Color("#f6c66c"), 30, 20), panel)
+\t_center_text("ТАЙНА ЗАТЕРЯННОГО АРХИПЕЛАГА", Vector2(view.x*0.5,view.y*0.5-112), 31, GOLD)
+\t_center_text("Шторм выбросил тебя на неизвестный остров.", Vector2(view.x*0.5,view.y*0.5-45), 23, CREAM)
+\t_center_text("В бутылке найдено письмо смотрителя маяка.", Vector2(view.x*0.5,view.y*0.5-7), 23, CREAM)
+\t_center_text("Десять артефактов помогут вернуть свет архипелагу.", Vector2(view.x*0.5,view.y*0.5+31), 22, CREAM)
+\tdraw_style_box(_rounded_style(Color("#9a692e"), GOLD, 22, 14), Rect2(view.x*0.5-210,view.y*0.5+91,420,62))
+\t_center_text("НАЧАТЬ ПУТЕШЕСТВИЕ", Vector2(view.x*0.5,view.y*0.5+130), 22, CREAM)
 '''
 source = source.replace("ОСТРОВ СПАСЁН!", "ПЕРВАЯ ГЛАВА ПРОЙДЕНА!")
 source = source.replace("Все 30 сокровищ найдены", "Найден первый фрагмент карты")
