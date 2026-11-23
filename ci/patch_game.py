@@ -13,7 +13,7 @@ game = root / "scripts/game.gd"
 # artwork, item layout, or game UI with a prototype.
 s = project.read_text(encoding="utf-8").replace("window/handheld/orientation=1", "window/handheld/orientation=0")
 # Expand the visible canvas to the device aspect ratio instead of letterboxing.
-s = s.replace('window/stretch/mode="canvas_items"', 'window/stretch/mode="canvas_items"\\nwindow/stretch/aspect="expand"')
+s = s.replace('window/stretch/mode="canvas_items"', 'window/stretch/mode="canvas_items"\nwindow/stretch/aspect="expand"')
 if "window/handheld/orientation=0" not in s:
     s = s.replace("[display]", "[display]\nwindow/handheld/orientation=0", 1)
 project.write_text(s, encoding="utf-8")
@@ -374,7 +374,7 @@ if "func _settings_rects(" in source:
 source += settings_code
 
 # Story layer: preserve the existing island scene and introduce the first chapter.
-replace_once("var won := false", "var won := false\\nvar story_intro_pending := true", "story intro state")
+replace_once("var won := false", "var won := false\nvar story_intro_pending := true", "story intro state")
 replace_once(
     '''\t_draw_hud(view)
 \tif paused:''',
