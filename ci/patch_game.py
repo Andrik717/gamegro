@@ -390,16 +390,25 @@ func _handle_settings_tap(point: Vector2, view: Vector2) -> void:
 source += '''
 
 func _draw_fit_label(font: Font, value: String, center_x: float, baseline_y: float, max_width: float, base_size: int) -> void:
-	var size := base_size
-	var width := font.get_string_size(value, HORIZONTAL_ALIGNMENT_LEFT, -1, size).x
-	while width > max_width and size > 9:
-		size -= 1
-		width = font.get_string_size(value, HORIZONTAL_ALIGNMENT_LEFT, -1, size).x
-	var label := value
-	while width > max_width and label.length() > 4:
-		label = label.left(label.length()-2) + "…"
-		width = font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, size).x
-	draw_string(font, Vector2(center_x-width*0.5, baseline_y), label, HORIZONTAL_ALIGNMENT_LEFT, -1, size, CREAM)
+	# Keep a consistent readable font size. Wrap the full item name onto two
+	# centered lines instead of shrinking or clipping it to fit a narrow card.
+	var words := value.split(" ", false)
+	var lines: Array[String] = [""]
+	for word in words:
+		var candidate := word if lines[-1].is_empty() else lines[-1] + " " + word
+		if font.get_string_size(candidate, HORIZONTAL_ALIGNMENT_LEFT, -1, base_size).x <= max_width:
+			lines[-1] = candidate
+		elif lines.size() < 2:
+			lines.append(word)
+		else:
+			lines[1] += "…"
+			break
+	var line_height := font.get_height(base_size)
+	var start_y := baseline_y - float(lines.size()-1) * line_height * 0.5
+	for i in range(lines.size()):
+		var line := lines[i]
+		var width := font.get_string_size(line, HORIZONTAL_ALIGNMENT_LEFT, -1, base_size).x
+		draw_string(font, Vector2(center_x-width*0.5, start_y + float(i)*line_height), line, HORIZONTAL_ALIGNMENT_LEFT, -1, base_size, CREAM)
 '''
 
 if "func _settings_rects(" in source:
