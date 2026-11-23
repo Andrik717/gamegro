@@ -588,6 +588,70 @@ if source.count(old_intro) != 1:
 source = source.replace(old_intro,new_intro,1)
 game.write_text(source,encoding="utf-8")
 
+# Make the map and modal panels fit compact landscape viewports.
+def replace_gd_function(text, signature, next_signature, body):
+    start = text.index(signature)
+    end = text.index(next_signature, start)
+    return text[:start] + body.rstrip() + "\n\n" + text[end:]
+
+source = replace_gd_function(source, "func _win_rects(view: Vector2)", "func _draw_win(view: Vector2)", """func _win_rects(view: Vector2) -> Dictionary:
+	var center := view * 0.5
+	var panel_w := minf(600.0, view.x-32.0)
+	var panel_h := minf(380.0, view.y-32.0)
+	var panel := Rect2(center.x-panel_w*0.5,center.y-panel_h*0.5,panel_w,panel_h)
+	var button_w := minf(300.0,panel_w-40.0)
+	return {"panel":panel,"replay":Rect2(center.x-button_w*0.5,panel.position.y+panel.size.y-78.0,button_w,58.0)}""")
+source = replace_gd_function(source, "func _settings_rects(view: Vector2)", "func _draw_settings(view: Vector2)", """func _settings_rects(view: Vector2) -> Dictionary:
+	var center := view * 0.5
+	var panel_w := minf(490.0,view.x-32.0)
+	var panel_h := minf(380.0,view.y-32.0)
+	var panel := Rect2(center.x-panel_w*0.5,center.y-panel_h*0.5,panel_w,panel_h)
+	var button_w := panel_w-56.0
+	var button_h := minf(58.0,(panel_h-112.0)/3.0)
+	var first_y := panel.position.y+68.0
+	return {"panel":panel,"sound":Rect2(center.x-button_w*0.5,first_y,button_w,button_h),"music":Rect2(center.x-button_w*0.5,first_y+button_h+10.0,button_w,button_h),"resume":Rect2(center.x-button_w*0.5,first_y+2.0*(button_h+10.0),button_w,button_h)}""")
+source = replace_gd_function(source, "func _map_card_rect(index: int, view: Vector2)", "func _draw_map(view: Vector2)", """func _map_panel_rect(view: Vector2) -> Rect2:
+	return Rect2(16.0,16.0,maxf(1.0,view.x-32.0),maxf(1.0,view.y-32.0))
+
+func _map_card_rect(index: int, view: Vector2) -> Rect2:
+	var panel := _map_panel_rect(view)
+	var gap := 10.0
+	var card_w := (panel.size.x-50.0)/2.0
+	var card_h := minf(86.0,(panel.size.y-104.0-4.0*gap)/5.0)
+	var col := index % 2
+	var row := int(index / 2)
+	return Rect2(panel.position.x+20.0+float(col)*(card_w+gap),panel.position.y+78.0+float(row)*(card_h+gap),card_w,card_h)""")
+source = replace_gd_function(source, "func _draw_map(view: Vector2)", "func _handle_map_tap(point: Vector2, view: Vector2)", """func _draw_map(view: Vector2) -> void:
+	draw_rect(Rect2(Vector2.ZERO,view),Color(0.01,0.04,0.08,0.84),true)
+	var panel := _map_panel_rect(view)
+	draw_style_box(_rounded_style(Color("#102d4d"),Color("#f6c66c"),24,14),panel)
+	_center_text("КАРТА АРХИПЕЛАГА",Vector2(view.x*0.5,panel.position.y+48.0),minf(26.0,view.y*0.055),GOLD)
+	for i in range(LEVEL_DATA.size()):
+		var r := _map_card_rect(i,view)
+		var open := i < unlocked_level_count
+		var active := i == current_level
+		var fill := Color("#246b70") if active else (Color("#1c4d68") if open else Color("#202e3b"))
+		var edge := GOLD if active else (Color("#78c8a4") if open else Color("#53616d"))
+		draw_style_box(_rounded_style(fill,edge,14,6),r)
+		var fs := clampi(int(r.size.y*0.30),12,22)
+		_center_text("%02d  %s" % [i+1,str(LEVEL_DATA[i].name)],Vector2(r.get_center().x,r.position.y+r.size.y*0.48),fs,CREAM if open else Color("#89949b"))
+		_center_text("ОТКРЫТО" if open else "ЗАКРЫТО",Vector2(r.get_center().x,r.position.y+r.size.y*0.80),clampi(fs-3,10,16),Color("#a9edc9") if open else Color("#89949b"))
+	_draw_button(Rect2(panel.position.x+panel.size.x-58.0,panel.position.y+12.0,44.0,42.0),"×")""")
+source = replace_gd_function(source, "func _handle_map_tap(point: Vector2, view: Vector2)", "func _draw_story_intro(view: Vector2)", """func _handle_map_tap(point: Vector2, view: Vector2) -> void:
+	var panel := _map_panel_rect(view)
+	if Rect2(panel.position.x+panel.size.x-66.0,panel.position.y+6.0,60.0,54.0).has_point(point):
+		map_open = false
+		queue_redraw()
+		return
+	for i in range(unlocked_level_count):
+		if _map_card_rect(i,view).has_point(point):
+			current_level = i
+			map_open = false
+			_load_current_level()
+			_reset_round()
+			return""")
+game.write_text(source,encoding="utf-8")
+
 # Copy the normalized story only after level_content has converted every chapter
 # background reference from SVG to the final PNG paths used by the game.
 story_target.write_text(story_source.read_text(encoding="utf-8"), encoding="utf-8")
