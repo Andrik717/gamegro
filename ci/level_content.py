@@ -1,6 +1,6 @@
 from pathlib import Path
 import json, math, random
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image, ImageDraw, ImageFilter, ImageEnhance
 
 PALETTES=[
 ("#153d38","#4b8760","#b8c98b","#f3c477"),("#122c42","#267a91","#4eb8bd","#e9c78b"),
@@ -18,6 +18,20 @@ def gradient(size,a,b):
         c=blend(a,b,y/(size[1]-1))
         for x in range(size[0]): px[x,y]=c
     return im
+
+def make_background_from_source(source,path):
+    with Image.open(source) as original:
+        im=original.convert("RGB")
+        w,h=im.size
+        scale=max(1920/w,1080/h)
+        im=im.resize((round(w*scale),round(h*scale)),Image.Resampling.LANCZOS)
+        x=(im.width-1920)//2; y=(im.height-1080)//2
+        im=im.crop((x,y,x+1920,y+1080))
+        # Subtle cinematic grade and sharpen after the cover crop.
+        im=ImageEnhance.Color(im).enhance(1.08)
+        im=ImageEnhance.Contrast(im).enhance(1.06)
+        im=im.filter(ImageFilter.UnsharpMask(radius=2,percent=115,threshold=3))
+        im.save(path,"PNG",optimize=True)
 
 def make_background(path,idx):
     W,H=1920,1080; top,mid,land,glow=PALETTES[idx]; random.seed(1800+idx)
@@ -213,9 +227,22 @@ def enhance_game(root):
     for p in (root/"assets").rglob("*.svg"): p.unlink()
     backgrounds=root/"assets/backgrounds"; backgrounds.mkdir(parents=True,exist_ok=True)
     items_dir=root/"assets/items"; items_dir.mkdir(parents=True,exist_ok=True)
+    source_map={
+        "jungle_ruins":"source_meadow.jpg",
+        "pirate_cove":"source_port_hayalang3.png",
+        "sky_observatory":"source_wizardtower.png",
+        "ice_kingdom":"source_coldmountain.png",
+        "lost_city":"source_desert_clouds.png",
+        "final_lighthouse":"source_port_hayalang4.png",
+    }
     for i,level in enumerate(levels[1:]):
         level["background_path"]=f"res://assets/backgrounds/{level['scene']}.png"
-        make_background(backgrounds/f"{level['scene']}.png",i)
+        target=backgrounds/f"{level['scene']}.png"
+        source=base/"assets/backgrounds"/source_map.get(level["scene"],"")
+        if level["scene"] in source_map and source.is_file():
+            make_background_from_source(source,target)
+        else:
+            make_background(target,i)
     story_path.write_text(json.dumps(story,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     palette=[("#b86b3d","#633d32"),("#67d9e8","#276b91"),("#d8a34e","#77502e"),("#3dbfc4","#176f8c"),("#f16d42","#872d2b"),("#d8b36b","#765332"),("#9fd6ed","#4c829f"),("#d4b36c","#785634"),("#bde5ee","#5e91a3")]
     rows=[]; n=0
