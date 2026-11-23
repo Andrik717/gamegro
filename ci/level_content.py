@@ -255,4 +255,6 @@ def enhance_game(root):
     s=s.replace('"Найден первый фрагмент карты"','"Артефакт: " + LEVEL_DATA[current_level].artifact')
     s=s.replace('"Все 30 сокровищ найдены"','"Все предметы этой локации найдены"')
     src.write_text(s,encoding="utf-8")
-    if list((root/"assets").rglob("*.svg")) or ".svg" in s: raise SystemExit("SVG files or paths remain")
+    leftovers=list((root/"assets").rglob("*.svg"))
+    if leftovers: raise SystemExit("SVG files remain: "+", ".join(str(p.relative_to(root)) for p in leftovers))
+    if ".svg" in s: raise SystemExit("SVG runtime path remains in game.gd: "+repr([line for line in s.splitlines() if ".svg" in line]))
