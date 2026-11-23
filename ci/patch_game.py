@@ -66,9 +66,8 @@ replace_once(
 		draw_rect(Rect2(x+3, bar.position.y+32, slot_w-6, 76), Color("#bd8c48"), false, 2)
 		draw_texture_rect(item_textures[id], Rect2(x+slot_w*0.5-22, bar.position.y+35, 44, 42), false)
 		draw_string(font, Vector2(x+slot_w*0.5, bar.position.y+94), _short_name(ITEM_DATA[id].name), HORIZONTAL_ALIGNMENT_CENTER, slot_w-8, 12, CREAM)''',
-    '''	var bar := Rect2(0, view.y - BAR_HEIGHT, view.x, BAR_HEIGHT)
-	draw_rect(bar, Color(0.035, 0.09, 0.15, 0.78), true)
-	draw_rect(Rect2(0, bar.position.y, view.x, 2), Color(0.82, 0.68, 0.43, 0.78), true)
+    '''	var bar := Rect2(24, view.y - BAR_HEIGHT - 14, view.x - 48, BAR_HEIGHT)
+	draw_style_box(_rounded_style(Color(0.035, 0.09, 0.15, 0.88), Color(0.82, 0.68, 0.43, 0.82), 26, 18), bar)
 	draw_string(font, Vector2(22, bar.position.y+27), "НАЙДИ ПРЕДМЕТЫ", HORIZONTAL_ALIGNMENT_LEFT, -1, 20, CREAM)
 	draw_string(font, Vector2(view.x-190, bar.position.y+27), "%02d / 30" % found.size(), HORIZONTAL_ALIGNMENT_LEFT, -1, 22, CREAM)
 	var slots := mini(5, ITEM_COUNT - found.size())
@@ -80,8 +79,7 @@ replace_once(
 			continue
 		var x := first_x + slot*slot_w
 		var card := Rect2(x+3, bar.position.y+37, slot_w-6, 102)
-		draw_rect(card, Color(0.09, 0.20, 0.29, 0.62), true)
-		draw_rect(card, Color(0.74, 0.58, 0.34, 0.72), false, 1.5)
+		draw_style_box(_rounded_style(Color(0.09, 0.20, 0.29, 0.78), Color(0.74, 0.58, 0.34, 0.78), 16, 9), card)
 		draw_texture_rect(item_textures[id], Rect2(x+slot_w*0.5-27, bar.position.y+42, 54, 52), false)
 		var label := _fit_label(_short_name(ITEM_DATA[id].name), slot_w-14.0, 14)
 		draw_string(font, Vector2(x+slot_w*0.5, bar.position.y+128), label, HORIZONTAL_ALIGNMENT_CENTER, slot_w-12, 14, CREAM)''',
@@ -189,6 +187,17 @@ def make_music(path: Path) -> None:
         out.setnchannels(2); out.setsampwidth(2); out.setframerate(rate); out.writeframes(frames)
 
 settings_code = '''
+
+func _rounded_style(fill: Color, border: Color, radius: int = 18, shadow: int = 10) -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = fill
+	style.border_color = border
+	style.set_border_width_all(1)
+	style.set_corner_radius_all(radius)
+	style.shadow_color = Color(0.0, 0.0, 0.0, 0.28)
+	style.shadow_size = shadow
+	style.shadow_offset = Vector2(0, 4)
+	return style
 
 func _toggle_music() -> void:
 \tmusic_enabled = not music_enabled
