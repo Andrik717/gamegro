@@ -226,6 +226,7 @@ def enhance_game(root):
             row.append(f'{{"id":{item["id"]},"slug":"{slug}","name":"{item["name"]}","pos":Vector2({x},{y})}}'); n+=1
         rows.append("\t[\n\t\t"+",\n\t\t".join(row)+"\n\t]")
     src=root/"scripts/game.gd"; s=src.read_text(encoding="utf-8")
+    s=s.replace("res://assets/levels/","res://assets/backgrounds/").replace(".svg",".png")
     if "const CHAPTER_ITEMS :=" not in s:
         if s.count("const CREAM :=")!=1: raise SystemExit("Missing color constant anchor")
         s=s.replace("const CREAM :=","const CHAPTER_ITEMS := [\n"+",\n".join(rows)+"\n]\nconst CREAM :=",1)
