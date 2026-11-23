@@ -30,8 +30,26 @@ def replace_once(old: str, new: str, label: str) -> None:
         raise SystemExit(f"Expected exactly one match for {label}, got {count}")
     source = source.replace(old, new, 1)
 
+replace_once(
+    """func _viewport_layout() -> Dictionary:
+	var view := get_viewport_rect().size
+	var world_area := Rect2(Vector2.ZERO, Vector2(view.x, maxf(1.0, view.y - BAR_HEIGHT)))
+	var base_scale := minf(world_area.size.x / WORLD_SIZE.x, world_area.size.y / WORLD_SIZE.y)
+	var drawn := WORLD_SIZE * base_scale * zoom
+	var origin := (world_area.size - WORLD_SIZE * base_scale) * 0.5 + camera_offset
+	return {"view":view,"area":world_area,"base":base_scale,"scale":base_scale*zoom,"origin":origin}""",
+    """func _viewport_layout() -> Dictionary:
+	var view := get_viewport_rect().size
+	# Fill the complete display with artwork; crop edges rather than showing navy bars.
+	var world_area := Rect2(Vector2.ZERO, view)
+	var base_scale := maxf(world_area.size.x / WORLD_SIZE.x, world_area.size.y / WORLD_SIZE.y)
+	var origin := (world_area.size - WORLD_SIZE * base_scale) * 0.5 + camera_offset
+	return {"view":view,"area":world_area,"base":base_scale,"scale":base_scale*zoom,"origin":origin}""",
+    "fill the viewport with the scene background"
+)
+
 replace_once("var sound_enabled := true\n", "var sound_enabled := true\nvar music_enabled := true\n", "music state")
-replace_once("const BAR_HEIGHT := 116.0", "const BAR_HEIGHT := 150.0", "roomier inventory panel")
+replace_once("const BAR_HEIGHT := 116.0", "const BAR_HEIGHT := 178.0", "roomier inventory panel")
 replace_once("var audio_surf: AudioStreamPlayer\n", "var audio_surf: AudioStreamPlayer\nvar audio_music: AudioStreamPlayer\n", "music player")
 replace_once(
     '''\taudio_surf = _player("res://assets/audio/surf.wav", true)
@@ -67,7 +85,7 @@ replace_once(
 		draw_texture_rect(item_textures[id], Rect2(x+slot_w*0.5-22, bar.position.y+35, 44, 42), false)
 		draw_string(font, Vector2(x+slot_w*0.5, bar.position.y+94), _short_name(ITEM_DATA[id].name), HORIZONTAL_ALIGNMENT_CENTER, slot_w-8, 12, CREAM)''',
     '''	var bar := Rect2(24, view.y - BAR_HEIGHT - 14, view.x - 48, BAR_HEIGHT)
-	draw_style_box(_rounded_style(Color(0.035, 0.09, 0.15, 0.88), Color(0.82, 0.68, 0.43, 0.82), 26, 18), bar)
+	draw_style_box(_rounded_style(Color(0.035, 0.09, 0.15, 0.72), Color(0.82, 0.68, 0.43, 0.82), 26, 18), bar)
 	draw_string(font, Vector2(22, bar.position.y+27), "НАЙДИ ПРЕДМЕТЫ", HORIZONTAL_ALIGNMENT_LEFT, -1, 20, CREAM)
 	draw_string(font, Vector2(view.x-190, bar.position.y+27), "%02d / 30" % found.size(), HORIZONTAL_ALIGNMENT_LEFT, -1, 22, CREAM)
 	var slots := mini(5, ITEM_COUNT - found.size())
@@ -78,11 +96,10 @@ replace_once(
 		if id < 0:
 			continue
 		var x := first_x + slot*slot_w
-		var card := Rect2(x+3, bar.position.y+37, slot_w-6, 102)
-		draw_style_box(_rounded_style(Color(0.09, 0.20, 0.29, 0.78), Color(0.74, 0.58, 0.34, 0.78), 16, 9), card)
-		draw_texture_rect(item_textures[id], Rect2(x+slot_w*0.5-27, bar.position.y+42, 54, 52), false)
-		var label := _fit_label(_short_name(ITEM_DATA[id].name), slot_w-14.0, 14)
-		draw_string(font, Vector2(x+slot_w*0.5, bar.position.y+128), label, HORIZONTAL_ALIGNMENT_CENTER, slot_w-12, 14, CREAM)''',
+		var card := Rect2(x+3, bar.position.y+36, slot_w-6, 130)
+		draw_style_box(_rounded_style(Color(0.09, 0.20, 0.29, 0.70), Color(0.74, 0.58, 0.34, 0.78), 16, 9), card)
+		draw_texture_rect(item_textures[id], Rect2(x+slot_w*0.5-36, bar.position.y+39, 72, 72), false)
+		_draw_fit_label(font, ITEM_DATA[id].name, x+slot_w*0.5, bar.position.y+157, slot_w-14.0, 12)''',
     "restyle and enlarge inventory panel",
 )
 replace_once(
@@ -369,6 +386,22 @@ func _handle_settings_tap(point: Vector2, view: Vector2) -> void:
 \t\tpaused = false
 \tqueue_redraw()
 '''
+
+source += '''
+
+func _draw_fit_label(font: Font, value: String, center_x: float, baseline_y: float, max_width: float, base_size: int) -> void:
+	var size := base_size
+	var width := font.get_string_size(value, HORIZONTAL_ALIGNMENT_LEFT, -1, size).x
+	while width > max_width and size > 9:
+		size -= 1
+		width = font.get_string_size(value, HORIZONTAL_ALIGNMENT_LEFT, -1, size).x
+	var label := value
+	while width > max_width and label.length() > 4:
+		label = label.left(label.length()-2) + "…"
+		width = font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, size).x
+	draw_string(font, Vector2(center_x-width*0.5, baseline_y), label, HORIZONTAL_ALIGNMENT_LEFT, -1, size, CREAM)
+'''
+
 if "func _settings_rects(" in source:
     raise SystemExit("Settings functions already exist; refusing to patch twice")
 source += settings_code
