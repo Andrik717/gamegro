@@ -419,6 +419,15 @@ if not story_source.is_file():
 story_target = root / "data" / "story.json"
 story_target.parent.mkdir(parents=True, exist_ok=True)
 story_target.write_text(story_source.read_text(encoding="utf-8"), encoding="utf-8")
+# Include the nine authored chapter environments in the packaged Godot project.
+levels_source = Path(__file__).resolve().parent.parent / "assets" / "levels"
+levels_target = root / "assets" / "levels"
+levels_target.mkdir(parents=True, exist_ok=True)
+level_assets = list(levels_source.glob("*.svg"))
+if len(level_assets) != 9:
+    raise SystemExit(f"Expected nine chapter backgrounds, found {len(level_assets)}")
+for level_asset in level_assets:
+    (levels_target / level_asset.name).write_bytes(level_asset.read_bytes())
 
 game.write_text(source, encoding="utf-8")
 make_music(root / "assets/audio/music.wav")
