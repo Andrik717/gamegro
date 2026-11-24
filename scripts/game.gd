@@ -1,6 +1,9 @@
 extends Node2D
 
 const WORLD_SIZE := Vector2(1536, 864)
+const BAR_HEIGHT := 116.0
+const MIN_ZOOM := 1.0
+const MAX_ZOOM := 2.6
 var ITEM_COUNT := 0
 var ITEM_DATA: Array[Dictionary] = []
 var levels: Array = []
