@@ -290,15 +290,20 @@ def enhance_game(root):
     story_path.write_text(json.dumps(story,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     palette=[("#b86b3d","#633d32"),("#67d9e8","#276b91"),("#d8a34e","#77502e"),("#3dbfc4","#176f8c"),("#f16d42","#872d2b"),("#d8b36b","#765332"),("#9fd6ed","#4c829f"),("#d4b36c","#785634"),("#bde5ee","#5e91a3")]
     rows=[]; n=0
-    # Generate the 15 added first-island PNGs; preserve the original 30 artwork files.
+    # Keep artwork supplied in assets/items intact. Only create a fallback PNG
+    # when a slug has no corresponding file; never overwrite an existing image.
     for item in levels[0]["items"][30:]:
-        draw_item(items_dir/f"{item['slug']}.png",KINDS[n % len(KINDS)],palette[0][0],palette[0][1],n)
+        target=items_dir/f"{item['slug']}.png"
+        if not target.is_file():
+            draw_item(target,KINDS[n % len(KINDS)],palette[0][0],palette[0][1],n)
         n+=1
     for li,level in enumerate(levels[1:]):
         color,dark=palette[li]; row=[]
         for item in level["items"]:
             slug=item["slug"]; x,y=item["position"]
-            draw_item(items_dir/f"{slug}.png",KINDS[n % len(KINDS)],color,dark,li*100+n)
+            target=items_dir/f"{slug}.png"
+            if not target.is_file():
+                draw_item(target,KINDS[n % len(KINDS)],color,dark,li*100+n)
             row.append(f'{{"id":{item["id"]},"slug":"{slug}","name":"{item["name"]}","pos":Vector2({x},{y})}}'); n+=1
         rows.append("\t[\n\t\t"+",\n\t\t".join(row)+"\n\t]")
     src=root/"scripts/game.gd"; s=src.read_text(encoding="utf-8")
