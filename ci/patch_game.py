@@ -555,6 +555,8 @@ game.write_text(source, encoding="utf-8")
 make_music(root / "assets/audio/music.wav")
 from level_content import enhance_game
 enhance_game(root)
+from chapter_mechanics import apply_chapter_mechanics
+apply_chapter_mechanics(root)
 
 # Keep the story card inside short landscape displays.
 source = game.read_text(encoding="utf-8")
