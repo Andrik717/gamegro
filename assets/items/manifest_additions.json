@@ -1,0 +1,594 @@
+{
+  "directory": "assets/items",
+  "format": "PNG",
+  "background": "transparent",
+  "expected_count": 65,
+  "note": "65 separate assets extracted from the two user-provided sprite sheets. Level 2 = jungle artifacts; Level 3 = beach and garden items.",
+  "items": [
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 0,
+      "slug": "l3_sunglasses",
+      "name": "Солнцезащитные очки",
+      "image": "res://assets/items/l3_sunglasses.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 1,
+      "slug": "l3_straw_hat",
+      "name": "Соломенная шляпа",
+      "image": "res://assets/items/l3_straw_hat.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 2,
+      "slug": "l3_sunscreen",
+      "name": "Солнцезащитный крем",
+      "image": "res://assets/items/l3_sunscreen.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 3,
+      "slug": "l3_beach_ball_colorful",
+      "name": "Пляжный мяч",
+      "image": "res://assets/items/l3_beach_ball_colorful.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 4,
+      "slug": "l3_sandcastle",
+      "name": "Замок из песка",
+      "image": "res://assets/items/l3_sandcastle.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 5,
+      "slug": "l3_starfish_red",
+      "name": "Морская звезда",
+      "image": "res://assets/items/l3_starfish_red.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 6,
+      "slug": "l3_diving_mask",
+      "name": "Маска для плавания",
+      "image": "res://assets/items/l3_diving_mask.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 7,
+      "slug": "l3_surfboard",
+      "name": "Сёрфборд",
+      "image": "res://assets/items/l3_surfboard.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 8,
+      "slug": "l3_flip_flops",
+      "name": "Розовые шлёпанцы",
+      "image": "res://assets/items/l3_flip_flops.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 9,
+      "slug": "l3_coconut_drink",
+      "name": "Коктейль в кокосе",
+      "image": "res://assets/items/l3_coconut_drink.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 10,
+      "slug": "l3_crab_orange",
+      "name": "Оранжевый краб",
+      "image": "res://assets/items/l3_crab_orange.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 11,
+      "slug": "l3_seagull",
+      "name": "Чайка",
+      "image": "res://assets/items/l3_seagull.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 12,
+      "slug": "l3_conch_shell",
+      "name": "Морская раковина",
+      "image": "res://assets/items/l3_conch_shell.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 13,
+      "slug": "l3_anchor_blue",
+      "name": "Синий якорь",
+      "image": "res://assets/items/l3_anchor_blue.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 14,
+      "slug": "l3_dolphin",
+      "name": "Дельфин",
+      "image": "res://assets/items/l3_dolphin.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 15,
+      "slug": "l3_lifebuoy_red",
+      "name": "Спасательный круг",
+      "image": "res://assets/items/l3_lifebuoy_red.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 16,
+      "slug": "l3_binoculars",
+      "name": "Бинокль",
+      "image": "res://assets/items/l3_binoculars.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 17,
+      "slug": "l3_lighthouse",
+      "name": "Маяк",
+      "image": "res://assets/items/l3_lighthouse.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 18,
+      "slug": "l3_palm_tree",
+      "name": "Пальма",
+      "image": "res://assets/items/l3_palm_tree.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 19,
+      "slug": "l3_beach_chair",
+      "name": "Пляжный шезлонг",
+      "image": "res://assets/items/l3_beach_chair.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 20,
+      "slug": "l3_beach_umbrella",
+      "name": "Пляжный зонт",
+      "image": "res://assets/items/l3_beach_umbrella.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 21,
+      "slug": "l3_watering_can_blue",
+      "name": "Синяя лейка",
+      "image": "res://assets/items/l3_watering_can_blue.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 22,
+      "slug": "l3_garden_gloves",
+      "name": "Садовые перчатки",
+      "image": "res://assets/items/l3_garden_gloves.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 23,
+      "slug": "l3_wheelbarrow",
+      "name": "Тачка с землёй",
+      "image": "res://assets/items/l3_wheelbarrow.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 24,
+      "slug": "l3_carrots",
+      "name": "Морковь",
+      "image": "res://assets/items/l3_carrots.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 25,
+      "slug": "l3_tomato",
+      "name": "Помидор",
+      "image": "res://assets/items/l3_tomato.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 26,
+      "slug": "l3_sunflower",
+      "name": "Подсолнух",
+      "image": "res://assets/items/l3_sunflower.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 27,
+      "slug": "l3_tomato_crate",
+      "name": "Ящик помидоров",
+      "image": "res://assets/items/l3_tomato_crate.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 28,
+      "slug": "l3_garden_fence",
+      "name": "Деревянный забор",
+      "image": "res://assets/items/l3_garden_fence.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 29,
+      "slug": "l3_hen",
+      "name": "Курица",
+      "image": "res://assets/items/l3_hen.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 30,
+      "slug": "l3_egg_basket",
+      "name": "Корзина яиц",
+      "image": "res://assets/items/l3_egg_basket.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 31,
+      "slug": "l3_garden_shovel",
+      "name": "Садовая лопата",
+      "image": "res://assets/items/l3_garden_shovel.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 32,
+      "slug": "l3_water_bucket",
+      "name": "Ведро с водой",
+      "image": "res://assets/items/l3_water_bucket.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 33,
+      "slug": "l3_watering_can_yellow",
+      "name": "Жёлтая лейка",
+      "image": "res://assets/items/l3_watering_can_yellow.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 3,
+      "level_name": "Пляж и сад",
+      "id": 34,
+      "slug": "l3_scarecrow",
+      "name": "Пугало",
+      "image": "res://assets/items/l3_scarecrow.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 0,
+      "slug": "l2_tiki_totem",
+      "name": "Резной тотем",
+      "image": "res://assets/items/l2_tiki_totem.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 1,
+      "slug": "l2_expedition_book",
+      "name": "Дневник исследователя",
+      "image": "res://assets/items/l2_expedition_book.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 2,
+      "slug": "l2_sun_key",
+      "name": "Солнечный ключ",
+      "image": "res://assets/items/l2_sun_key.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 3,
+      "slug": "l2_golden_jungle_idol",
+      "name": "Золотой идол",
+      "image": "res://assets/items/l2_golden_jungle_idol.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 4,
+      "slug": "l2_ancient_compass",
+      "name": "Древний компас",
+      "image": "res://assets/items/l2_ancient_compass.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 5,
+      "slug": "l2_carved_stone_tablet",
+      "name": "Каменная плита с символами",
+      "image": "res://assets/items/l2_carved_stone_tablet.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 6,
+      "slug": "l2_ceremonial_mask",
+      "name": "Ритуальная маска",
+      "image": "res://assets/items/l2_ceremonial_mask.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 7,
+      "slug": "l2_overgrown_relic",
+      "name": "Заросший артефакт",
+      "image": "res://assets/items/l2_overgrown_relic.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 8,
+      "slug": "l2_tribal_dagger",
+      "name": "Ритуальный кинжал",
+      "image": "res://assets/items/l2_tribal_dagger.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 9,
+      "slug": "l2_emerald_scarab",
+      "name": "Изумрудный скарабей",
+      "image": "res://assets/items/l2_emerald_scarab.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 10,
+      "slug": "l2_golden_beetle",
+      "name": "Золотой жук",
+      "image": "res://assets/items/l2_golden_beetle.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 11,
+      "slug": "l2_hibiscus_flower",
+      "name": "Гибискус",
+      "image": "res://assets/items/l2_hibiscus_flower.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 12,
+      "slug": "l2_jungle_fern",
+      "name": "Папоротник",
+      "image": "res://assets/items/l2_jungle_fern.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 13,
+      "slug": "l2_tropical_fruit",
+      "name": "Тропический фрукт",
+      "image": "res://assets/items/l2_tropical_fruit.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 14,
+      "slug": "l2_wooden_flute",
+      "name": "Деревянная флейта",
+      "image": "res://assets/items/l2_wooden_flute.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 15,
+      "slug": "l2_clay_vase",
+      "name": "Глиняная ваза",
+      "image": "res://assets/items/l2_clay_vase.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 16,
+      "slug": "l2_coiled_rope",
+      "name": "Верёвка",
+      "image": "res://assets/items/l2_coiled_rope.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 17,
+      "slug": "l2_adventurer_backpack",
+      "name": "Рюкзак исследователя",
+      "image": "res://assets/items/l2_adventurer_backpack.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 18,
+      "slug": "l2_magnifying_glass",
+      "name": "Лупа",
+      "image": "res://assets/items/l2_magnifying_glass.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 19,
+      "slug": "l2_ancient_scroll",
+      "name": "Древний свиток",
+      "image": "res://assets/items/l2_ancient_scroll.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 20,
+      "slug": "l2_ammonite_fossil",
+      "name": "Окаменелость аммонита",
+      "image": "res://assets/items/l2_ammonite_fossil.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 21,
+      "slug": "l2_stone_well_lantern",
+      "name": "Каменный фонарь",
+      "image": "res://assets/items/l2_stone_well_lantern.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 22,
+      "slug": "l2_green_crystal",
+      "name": "Зелёный кристалл",
+      "image": "res://assets/items/l2_green_crystal.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 23,
+      "slug": "l2_jungle_treasure_chest",
+      "name": "Сундук с сокровищами",
+      "image": "res://assets/items/l2_jungle_treasure_chest.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 24,
+      "slug": "l2_feather_headdress",
+      "name": "Головной убор из перьев",
+      "image": "res://assets/items/l2_feather_headdress.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 25,
+      "slug": "l2_bird_skull",
+      "name": "Череп птицы",
+      "image": "res://assets/items/l2_bird_skull.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 26,
+      "slug": "l2_sun_medallion",
+      "name": "Солнечный медальон",
+      "image": "res://assets/items/l2_sun_medallion.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 27,
+      "slug": "l2_monkey_statue",
+      "name": "Статуэтка обезьяны",
+      "image": "res://assets/items/l2_monkey_statue.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 28,
+      "slug": "l2_golden_fruit",
+      "name": "Золотой плод",
+      "image": "res://assets/items/l2_golden_fruit.png",
+      "source": "user_sprite_sheet"
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 29,
+      "slug": "l2_stone_sundial",
+      "name": "Каменные солнечные часы",
+      "image": "res://assets/items/l2_stone_sundial.png",
+      "source": "user_sprite_sheet"
+    }
+  ]
+}
