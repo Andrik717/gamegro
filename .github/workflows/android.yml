@@ -157,13 +157,13 @@ jobs:
               story_path_value = level["background_path"].replace("res://", "")
               if not (root / story_path_value).is_file():
                   raise SystemExit(f"Missing story background for {level['name']}: {story_path_value}")
-              if len(level.get("targets", [])) != 5 or (level["id"] != 1 and len(level.get("items", [])) != 5):
-                  raise SystemExit(f"Level does not define five search targets: {level['name']}")
+              if len(level.get("targets", [])) != 5 or len(level.get("items", [])) != 45:
+                  raise SystemExit(f"Level must define five queued targets and 45 total items: {level['name']}")
           for runtime_path in runtime_paths:
               relative = runtime_path.replace("res://", "")
               if not (root / relative).is_file():
                   raise SystemExit(f"Missing runtime background: {relative}")
-          print("Validated packaged story, 10 runtime backgrounds and five search targets per level.")
+          print("Validated packaged story, 10 runtime backgrounds and 45 collectible items per level.")
           PY
 
       - name: Create debug keystore
