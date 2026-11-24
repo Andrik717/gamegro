@@ -25,11 +25,11 @@
         "Карта острова"
       ],
       "transition": "Открывается тропа вглубь джунглей.",
-      "background_path": "res://assets/backgrounds/tropical_cove.png"
+      "background_path": "res://assets/backgrounds/level1_tropical_bay.png"
     },
     {
       "id": 2,
-      "name": "Тайна джунглей",
+      "name": "Древние джунгли",
       "biome": "Древние джунгли",
       "status": "content_ready",
       "artifact": "Камень памяти",
@@ -159,7 +159,7 @@
     },
     {
       "id": 4,
-      "name": "Бухта пиратов",
+      "name": "Пиратская бухта",
       "biome": "Корабельное кладбище",
       "status": "content_ready",
       "artifact": "Печать капитана",
@@ -224,7 +224,7 @@
     },
     {
       "id": 5,
-      "name": "Затонувшая лагуна",
+      "name": "Подводная лагуна",
       "biome": "Подводный храм",
       "status": "content_ready",
       "artifact": "Сердце океана",
@@ -484,7 +484,7 @@
     },
     {
       "id": 9,
-      "name": "Затерянный город",
+      "name": "Древний город",
       "biome": "Древняя столица",
       "status": "content_ready",
       "artifact": "Сердце архипелага",
