@@ -25,6 +25,13 @@ def apply_chapter_mechanics(root: Path) -> None:
 ]
 '''.replace("    ", "\t")
     once("var background: Texture2D", challenge_data + "\nvar background: Texture2D", "challenge definitions")
+    for old_name, new_name in [
+        ("Тайна джунглей", "Древние джунгли"),
+        ("Бухта пиратов", "Пиратская бухта"),
+        ("Затонувшая лагуна", "Подводная лагуна"),
+        ("Затерянный город", "Древний город"),
+    ]:
+        once('"' + old_name + '"', '"' + new_name + '"', "canonical chapter name " + old_name)
     once("var map_open := false\n", "var map_open := false\nvar puzzle_active := false\nvar puzzle_step := 0\nvar puzzle_feedback := \"\"\nvar puzzle_dials := [0, 0, 0]\nvar puzzle_first_pick := -1\nvar puzzle_matched := []\n", "challenge state")
     once("\twon = false\n\tqueue_redraw()", "\twon = false\n\tpuzzle_active = false\n\tpuzzle_step = 0\n\tpuzzle_feedback = \"\"\n\tpuzzle_dials = [0, 0, 0]\n\tpuzzle_first_pick = -1\n\tpuzzle_matched.clear()\n\tqueue_redraw()", "reset challenge state")
     once("\tif map_open:\n\t\t_draw_map(view)\n\tif paused:", "\tif puzzle_active:\n\t\t_draw_challenge(view)\n\tif map_open:\n\t\t_draw_map(view)\n\tif paused:", "draw challenge overlay")
@@ -59,7 +66,7 @@ func _challenge_button_rect(index: int, view: Vector2) -> Rect2:
 
 func _challenge_confirm_rect(view: Vector2) -> Rect2:
     var panel := _challenge_panel_rect(view)
-    return Rect2(panel.get_center().x-130.0, panel.position.y+panel.size.y-82.0, 260.0, 54.0)
+    return Rect2(panel.get_center().x-130.0, panel.position.y+panel.size.y-100.0, 260.0, 54.0)
 
 func _draw_challenge(view: Vector2) -> void:
     var data: Dictionary = CHALLENGE_DATA[current_level]
@@ -99,13 +106,17 @@ func _draw_challenge(view: Vector2) -> void:
     else:
         for i in range(data.buttons.size()):
             var r := _challenge_button_rect(i, view)
-            var active := mode == "sequence" and i == puzzle_step
+            var active := mode == "sequence" and puzzle_step < data.solution.size() and i == int(data.solution[puzzle_step])
             draw_style_box(_rounded_style(Color("#246b70") if active else Color("#1c4d68"), GOLD if active else Color("#bd8c48"), 16, 8), r)
             _center_text(str(data.buttons[i]), r.get_center()+Vector2(0,8), 17, CREAM)
     if not puzzle_feedback.is_empty():
         _center_text(puzzle_feedback, Vector2(view.x*0.5, panel.position.y+panel.size.y-28.0), 15, Color("#ffe1a0"))
 
 func _handle_challenge_tap(point: Vector2, view: Vector2) -> void:
+    if point.y < 76.0 and point.x < 86.0:
+        paused = true
+        queue_redraw()
+        return
     var data: Dictionary = CHALLENGE_DATA[current_level]
     var mode := str(data.mode)
     if mode == "pairs":
