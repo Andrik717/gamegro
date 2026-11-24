@@ -495,7 +495,7 @@
         "Бабочка"
       ],
       "transition": "За храмом открывается проход к водопаду.",
-      "background_path": "res://assets/levels/jungle_ruins.svg",
+      "background_path": "res://assets/backgrounds/bg_02.jpg",
       "items": [
         {
           "id": 0,
@@ -1435,7 +1435,7 @@
         "Фонарь"
       ],
       "transition": "Координаты ведут к затонувшей лагуне.",
-      "background_path": "res://assets/levels/pirate_cove.svg",
+      "background_path": "res://assets/backgrounds/bg_04.jpg",
       "items": [
         {
           "id": 0,
