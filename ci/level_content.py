@@ -241,7 +241,7 @@ def enhance_game(root):
     normalize_png_assets(root / "assets")
     story_path=base/"game_data/story.json"; story=json.loads(story_path.read_text(encoding="utf-8"))
     levels=story["levels"]
-    if len(levels)!=10 or sum(len(x.get("items",[])) for x in levels[1:])!=45: raise SystemExit("Expected 45 chapter targets")
+    if len(levels)!=10 or any(len(x.get("items",[]))!=45 for x in levels): raise SystemExit("Expected 45 items in every one of the 10 locations")
     # Preserve and verify the original first-island PNG before touching other assets.
     first_path=levels[0]["background_path"].replace("res://","")
     if not first_path.lower().endswith(".png"):
@@ -290,14 +290,29 @@ def enhance_game(root):
     story_path.write_text(json.dumps(story,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     palette=[("#b86b3d","#633d32"),("#67d9e8","#276b91"),("#d8a34e","#77502e"),("#3dbfc4","#176f8c"),("#f16d42","#872d2b"),("#d8b36b","#765332"),("#9fd6ed","#4c829f"),("#d4b36c","#785634"),("#bde5ee","#5e91a3")]
     rows=[]; n=0
+    # Generate the 15 added first-island PNGs; preserve the original 30 artwork files.
+    for item in levels[0]["items"][30:]:
+        draw_item(items_dir/f"{item['slug']}.png",KINDS[n % len(KINDS)],palette[0][0],palette[0][1],n)
+        n+=1
     for li,level in enumerate(levels[1:]):
         color,dark=palette[li]; row=[]
         for item in level["items"]:
-            slug=item["slug"]; x,y=item["position"]; draw_item(items_dir/f"{slug}.png",KINDS[n],color,dark,li*10+n)
+            slug=item["slug"]; x,y=item["position"]
+            draw_item(items_dir/f"{slug}.png",KINDS[n % len(KINDS)],color,dark,li*100+n)
             row.append(f'{{"id":{item["id"]},"slug":"{slug}","name":"{item["name"]}","pos":Vector2({x},{y})}}'); n+=1
         rows.append("\t[\n\t\t"+",\n\t\t".join(row)+"\n\t]")
     src=root/"scripts/game.gd"; s=src.read_text(encoding="utf-8")
     s=s.replace("res://assets/levels/","res://assets/backgrounds/").replace(".svg",".png")
+    first_rows=[]
+    for item in levels[0]["items"]:
+        x,y=item["position"]
+        first_rows.append(f'{{"id":{item["id"]},"slug":"{item["slug"]}","name":"{item["name"]}","pos":Vector2({x},{y})}}')
+    first_block="const ITEM_DATA := [\\n\\t"+",\\n\\t".join(first_rows)+"\\n]"
+    import re
+    s,count=re.subn(r"const ITEM_COUNT := \\d+", "const ITEM_COUNT := 45", s, count=1)
+    if count!=1: raise SystemExit("Could not set first island item count to 45")
+    s,count=re.subn(r"const ITEM_DATA := \\[.*?\\n\\]\\nconst CREAM :=", first_block+"\\nconst CREAM :=", s, count=1, flags=re.S)
+    if count!=1: raise SystemExit("Could not replace first island item table with 45 story items")
     if "const CHAPTER_ITEMS :=" not in s:
         if s.count("const CREAM :=")!=1: raise SystemExit("Missing color constant anchor")
         s=s.replace("const CREAM :=","const CHAPTER_ITEMS := [\n"+",\n".join(rows)+"\n]\nconst CREAM :=",1)
