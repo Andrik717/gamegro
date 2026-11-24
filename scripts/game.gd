@@ -238,6 +238,22 @@ func _make_audio() -> void:
 	if sound_enabled:
 		audio_surf.play()
 
+func _set_sound_enabled(enabled: bool) -> void:
+	sound_enabled = enabled
+	if audio_surf != null:
+		if sound_enabled:
+			if not audio_surf.playing:
+				audio_surf.play()
+		else:
+			audio_surf.stop()
+	# Muting is immediate: stop one-shot effects that may already be playing too.
+	if not sound_enabled:
+		if audio_found != null:
+			audio_found.stop()
+		if audio_hint != null:
+			audio_hint.stop()
+	queue_redraw()
+
 func _player(path: String, looped: bool) -> AudioStreamPlayer:
 	var p := AudioStreamPlayer.new()
 	var stream: AudioStream = load(path)
@@ -637,6 +653,10 @@ func _handle_tap(point: Vector2) -> void:
 	if map_open:
 		_handle_map_tap(point, view)
 		return
+	# The sound control stays available while pause/win overlays are open.
+	if _sound_rect(view).has_point(point):
+		_set_sound_enabled(not sound_enabled)
+		return
 	if paused:
 		if _pause_resume_rect(view).has_point(point):
 			paused = false
@@ -662,14 +682,6 @@ func _handle_tap(point: Vector2) -> void:
 		return
 	if _hint_rect(view).has_point(point):
 		_use_hint()
-		return
-	if _sound_rect(view).has_point(point):
-		sound_enabled = not sound_enabled
-		if sound_enabled:
-			audio_surf.play()
-		else:
-			audio_surf.stop()
-		queue_redraw()
 		return
 	if point.y > view.y - BAR_HEIGHT:
 		return
