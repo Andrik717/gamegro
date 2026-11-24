@@ -109,16 +109,16 @@ func _create_ui_font() -> void:
 	ui_font = system_font
 
 func _load_minigame_art_pack() -> void:
-	mini_dirt_texture = load("res://assets/minigames/dirt_splatter.svg") as Texture2D
-	mini_sponge_texture = load("res://assets/minigames/sponge.svg") as Texture2D
-	mini_puzzle_texture = load("res://assets/minigames/puzzle_overlay.svg") as Texture2D
-	mini_paint_emblem_texture = load("res://assets/minigames/paint_emblem.svg") as Texture2D
-	mini_paintbrush_texture = load("res://assets/minigames/paintbrush.svg") as Texture2D
-	mini_wrench_texture = load("res://assets/minigames/tool_wrench.svg") as Texture2D
-	mini_hammer_texture = load("res://assets/minigames/tool_hammer.svg") as Texture2D
-	mini_gear_texture = load("res://assets/minigames/tool_gear.svg") as Texture2D
-	mini_crack_texture = load("res://assets/minigames/repair_crack.svg") as Texture2D
-	mini_halo_texture = load("res://assets/minigames/artifact_halo.svg") as Texture2D
+	mini_dirt_texture = load("res://assets/minigames/dirt_splatter.png") as Texture2D
+	mini_sponge_texture = load("res://assets/minigames/sponge.png") as Texture2D
+	mini_puzzle_texture = load("res://assets/minigames/puzzle_overlay.png") as Texture2D
+	mini_paint_emblem_texture = load("res://assets/minigames/paint_emblem.png") as Texture2D
+	mini_paintbrush_texture = load("res://assets/minigames/paintbrush.png") as Texture2D
+	mini_wrench_texture = load("res://assets/minigames/tool_wrench.png") as Texture2D
+	mini_hammer_texture = load("res://assets/minigames/tool_hammer.png") as Texture2D
+	mini_gear_texture = load("res://assets/minigames/tool_gear.png") as Texture2D
+	mini_crack_texture = load("res://assets/minigames/repair_crack.png") as Texture2D
+	mini_halo_texture = load("res://assets/minigames/artifact_halo.png") as Texture2D
 
 func _draw_minigame_sprite(texture: Texture2D, center: Vector2, size: Vector2, angle := 0.0) -> void:
 	if texture == null:
