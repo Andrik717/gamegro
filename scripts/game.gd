@@ -648,8 +648,11 @@ func _handle_tap(point: Vector2) -> void:
 		return
 	var layout := _viewport_layout()
 	var world_pos: Vector2 = (point - layout.origin) / layout.scale
-	for item in ITEM_DATA:
-		var id: int = item.id
+	# Check from the last drawn item to the first. If sprites overlap,
+	# the visible topmost sprite must receive the tap, not an item underneath.
+	for item_index in range(ITEM_COUNT - 1, -1, -1):
+		var item: Dictionary = ITEM_DATA[item_index]
+		var id: int = int(item.id)
 		if found.has(id):
 			continue
 		var local_hit: Vector2 = (world_pos - item.pos).rotated(-float(item.rotation))
