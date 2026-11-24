@@ -25,7 +25,7 @@
         "Ананас"
       ],
       "transition": "Открывается тропа вглубь джунглей.",
-      "background_path": "res://assets/backgrounds/level1_tropical_bay.png",
+      "background_path": "res://assets/backgrounds/level1_tropical_bay.jpg",
       "items": [
         {
           "id": 0,
