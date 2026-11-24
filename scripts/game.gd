@@ -15,7 +15,7 @@ const LEVELS := [
     },
     {
         "title": "Древние джунгли",
-        "background": "res://assets/levels/jungle_ruins.svg",
+        "background": "res://assets/backgrounds/bg_02.png",
         "targets": [
             {"id":"резной_тотем", "name":"Резной тотем", "rect":Rect2(160,245,140,110)},
             {"id":"дневник_исследователя", "name":"Дневник исследователя", "rect":Rect2(1080,605,140,110)},
@@ -37,7 +37,7 @@ const LEVELS := [
     },
     {
         "title": "Пиратская бухта",
-        "background": "res://assets/levels/pirate_cove.svg",
+        "background": "res://assets/backgrounds/bg_04.png",
         "targets": [
             {"id":"капитанский_журнал", "name":"Капитанский журнал", "rect":Rect2(180,475,140,110)},
             {"id":"подзорная_труба", "name":"Подзорная труба", "rect":Rect2(1210,195,140,110)},
@@ -48,7 +48,7 @@ const LEVELS := [
     },
     {
         "title": "Подводная лагуна",
-        "background": "res://assets/levels/sunken_lagoon.svg",
+        "background": "res://assets/backgrounds/bg_05.png",
         "targets": [
             {"id":"трезубец", "name":"Трезубец", "rect":Rect2(190,245,140,110)},
             {"id":"морская_корона", "name":"Морская корона", "rect":Rect2(1190,225,140,110)},
