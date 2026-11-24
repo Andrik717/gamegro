@@ -369,7 +369,16 @@ func _draw_button(rect: Rect2, label: String, font_size := 16) -> void:
 	_draw_text(label, rect.position + Vector2(rect.size.x * 0.5, rect.size.y * 0.5 + float(font_size) * 0.34), font_size, CREAM, HORIZONTAL_ALIGNMENT_CENTER, rect.size.x - 8.0)
 
 func _draw_text(value: String, baseline: Vector2, font_size: int, color: Color, alignment := HORIZONTAL_ALIGNMENT_LEFT, width := -1.0) -> void:
-	draw_string(ui_font, baseline, value, alignment, width, font_size, color)
+	# baseline is the visual anchor used by every HUD, button and overlay label.
+	# draw_string() expects the LEFT edge of its layout box, even for centered/right text.
+	# Convert our center/right anchors to the box origin to prevent a global right shift.
+	var draw_position := baseline
+	if width > 0.0:
+		if alignment == HORIZONTAL_ALIGNMENT_CENTER:
+			draw_position.x -= width * 0.5
+		elif alignment == HORIZONTAL_ALIGNMENT_RIGHT:
+			draw_position.x -= width
+	draw_string(ui_font, draw_position, value, alignment, width, font_size, color)
 
 func _wrap_two_lines(value: String, max_width: float, font_size: int) -> Array[String]:
 	var words := value.split(" ", false)
