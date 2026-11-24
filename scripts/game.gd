@@ -14,14 +14,102 @@ const LEVELS := [
         ]
     },
     {
-        "title": "Тайна джунглей",
+        "title": "Древние джунгли",
         "background": "res://assets/levels/jungle_ruins.svg",
         "targets": [
-            {"id":"jungle_totem", "name":"Резной тотем", "rect":Rect2(170,245,120,115)},
-            {"id":"expedition_journal", "name":"Дневник исследователя", "rect":Rect2(1080,605,145,115)},
-            {"id":"stone_key", "name":"Каменный ключ", "rect":Rect2(1290,205,130,110)},
-            {"id":"golden_idol", "name":"Золотой идол", "rect":Rect2(735,465,130,120)},
-            {"id":"broken_compass", "name":"Сломанный компас", "rect":Rect2(455,645,130,110)}
+            {"id":"резной_тотем", "name":"Резной тотем", "rect":Rect2(160,245,140,110)},
+            {"id":"дневник_исследователя", "name":"Дневник исследователя", "rect":Rect2(1080,605,140,110)},
+            {"id":"каменный_ключ", "name":"Каменный ключ", "rect":Rect2(1290,205,140,110)},
+            {"id":"золотой_идол", "name":"Золотой идол", "rect":Rect2(730,465,140,110)},
+            {"id":"сломанный_компас", "name":"Сломанный компас", "rect":Rect2(450,645,140,110)}
+        ]
+    },
+    {
+        "title": "Пещера водопада",
+        "background": "res://assets/levels/waterfall_cave.svg",
+        "targets": [
+            {"id":"светящийся_кристалл", "name":"Светящийся кристалл", "rect":Rect2(180,185,140,110)},
+            {"id":"старинный_фонарь", "name":"Старинный фонарь", "rect":Rect2(1120,195,140,110)},
+            {"id":"кристальная_чаша", "name":"Кристальная чаша", "rect":Rect2(690,595,140,110)},
+            {"id":"серебряный_ключ", "name":"Серебряный ключ", "rect":Rect2(1270,545,140,110)},
+            {"id":"жемчужина", "name":"Жемчужина", "rect":Rect2(440,415,140,110)}
+        ]
+    },
+    {
+        "title": "Пиратская бухта",
+        "background": "res://assets/levels/pirate_cove.svg",
+        "targets": [
+            {"id":"капитанский_журнал", "name":"Капитанский журнал", "rect":Rect2(180,475,140,110)},
+            {"id":"подзорная_труба", "name":"Подзорная труба", "rect":Rect2(1210,195,140,110)},
+            {"id":"пиратская_печать", "name":"Пиратская печать", "rect":Rect2(680,325,140,110)},
+            {"id":"судовой_колокол", "name":"Судовой колокол", "rect":Rect2(1010,635,140,110)},
+            {"id":"сундук_с_картой", "name":"Сундук с картой", "rect":Rect2(350,675,140,110)}
+        ]
+    },
+    {
+        "title": "Подводная лагуна",
+        "background": "res://assets/levels/sunken_lagoon.svg",
+        "targets": [
+            {"id":"трезубец", "name":"Трезубец", "rect":Rect2(190,245,140,110)},
+            {"id":"морская_корона", "name":"Морская корона", "rect":Rect2(1190,225,140,110)},
+            {"id":"древняя_амфора", "name":"Древняя амфора", "rect":Rect2(690,445,140,110)},
+            {"id":"золотая_раковина", "name":"Золотая раковина", "rect":Rect2(350,645,140,110)},
+            {"id":"сердце_океана", "name":"Сердце океана", "rect":Rect2(1250,635,140,110)}
+        ]
+    },
+    {
+        "title": "Остров огня",
+        "background": "res://assets/levels/volcano_forge.svg",
+        "targets": [
+            {"id":"молот_кузнеца", "name":"Молот кузнеца", "rect":Rect2(180,565,140,110)},
+            {"id":"лавовый_кристалл", "name":"Лавовый кристалл", "rect":Rect2(700,185,140,110)},
+            {"id":"огненная_руна", "name":"Огненная руна", "rect":Rect2(1220,245,140,110)},
+            {"id":"клещи", "name":"Клещи", "rect":Rect2(1040,635,140,110)},
+            {"id":"пылающий_медальон", "name":"Пылающий медальон", "rect":Rect2(440,395,140,110)}
+        ]
+    },
+    {
+        "title": "Небесная обсерватория",
+        "background": "res://assets/levels/sky_observatory.svg",
+        "targets": [
+            {"id":"астролябия", "name":"Астролябия", "rect":Rect2(210,585,140,110)},
+            {"id":"звёздная_карта", "name":"Звёздная карта", "rect":Rect2(1120,605,140,110)},
+            {"id":"лунный_камень", "name":"Лунный камень", "rect":Rect2(680,215,140,110)},
+            {"id":"телескоп", "name":"Телескоп", "rect":Rect2(1260,305,140,110)},
+            {"id":"звёздный_компас", "name":"Звёздный компас", "rect":Rect2(450,375,140,110)}
+        ]
+    },
+    {
+        "title": "Ледяное королевство",
+        "background": "res://assets/levels/ice_kingdom.svg",
+        "targets": [
+            {"id":"ледяная_корона", "name":"Ледяная корона", "rect":Rect2(180,245,140,110)},
+            {"id":"замёрзшее_письмо", "name":"Замёрзшее письмо", "rect":Rect2(1200,225,140,110)},
+            {"id":"синий_кристалл", "name":"Синий кристалл", "rect":Rect2(690,485,140,110)},
+            {"id":"старинный_ключ", "name":"Старинный ключ", "rect":Rect2(340,645,140,110)},
+            {"id":"кристалл_памяти", "name":"Кристалл памяти", "rect":Rect2(1260,635,140,110)}
+        ]
+    },
+    {
+        "title": "Древний город",
+        "background": "res://assets/levels/lost_city.svg",
+        "targets": [
+            {"id":"печать_хранителей", "name":"Печать хранителей", "rect":Rect2(180,565,140,110)},
+            {"id":"книга_летописей", "name":"Книга летописей", "rect":Rect2(1180,225,140,110)},
+            {"id":"золотая_маска", "name":"Золотая маска", "rect":Rect2(690,365,140,110)},
+            {"id":"солнечный_диск", "name":"Солнечный диск", "rect":Rect2(350,235,140,110)},
+            {"id":"сердце_архипелага", "name":"Сердце архипелага", "rect":Rect2(1260,645,140,110)}
+        ]
+    },
+    {
+        "title": "Последний маяк",
+        "background": "res://assets/levels/final_lighthouse.svg",
+        "targets": [
+            {"id":"линза_маяка", "name":"Линза маяка", "rect":Rect2(690,205,140,110)},
+            {"id":"серебряный_рычаг", "name":"Серебряный рычаг", "rect":Rect2(180,615,140,110)},
+            {"id":"последний_фрагмент_карты", "name":"Последний фрагмент карты", "rect":Rect2(1180,595,140,110)},
+            {"id":"ключ_хранителя", "name":"Ключ хранителя", "rect":Rect2(360,365,140,110)},
+            {"id":"свет_архипелага", "name":"Свет архипелага", "rect":Rect2(1250,215,140,110)}
         ]
     }
 ]
@@ -116,13 +204,13 @@ func _draw_win() -> void:
     draw_rect(card, Color("#193b45"), true)
     draw_rect(card, Color("#f7c96b"), false, 5.0)
     var font := ThemeDB.fallback_font
-    var heading := "ЛОКАЦИЯ ПРОЙДЕНА!" if level_index == 0 else "ДЖУНГЛИ РАСКРЫЛИ СЕКРЕТ!"
+    var heading := "ЛОКАЦИЯ ПРОЙДЕНА!"
     draw_string(font, Vector2(585, 405), heading, HORIZONTAL_ALIGNMENT_LEFT, -1, 34, CREAM)
     draw_string(font, Vector2(650, 465), "Ты нашёл все предметы!", HORIZONTAL_ALIGNMENT_LEFT, -1, 30, Color("#bcebd0"))
     draw_string(font, Vector2(760, 510), "Время: " + _time_text(), HORIZONTAL_ALIGNMENT_LEFT, -1, 26, CREAM)
     draw_rect(action_rect, Color("#bd762d"), true)
     draw_rect(action_rect, Color("#ffe1a0"), false, 3.0)
-    var action_text := "СЛЕДУЮЩИЙ УРОВЕНЬ" if level_index == 0 else "ИГРАТЬ ЕЩЁ"
+    var action_text := "СЛЕДУЮЩИЙ УРОВЕНЬ" if level_index + 1 < LEVELS.size() else "ПОВТОРИТЬ ИГРУ"
     draw_string(font, Vector2(700, 595), action_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 27, CREAM)
 
 func _time_text() -> String:
