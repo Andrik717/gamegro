@@ -319,9 +319,9 @@ func _zoom_at(point: Vector2, factor: float, pan_delta := Vector2.ZERO) -> void:
 func _clamp_camera() -> void:
 	var layout := _viewport_layout()
 	var area: Rect2 = layout.area
-	var scaled := WORLD_SIZE * layout.scale
-	var min_x := area.size.x-scaled.x
-	var min_y := area.size.y-scaled.y
+	var scaled: Vector2 = WORLD_SIZE * layout.scale
+	var min_x: float = area.size.x-scaled.x
+	var min_y: float = area.size.y-scaled.y
 	camera_offset.x = clampf(camera_offset.x, min_x, 0.0) if min_x < 0 else 0.0
 	camera_offset.y = clampf(camera_offset.y, min_y, 0.0) if min_y < 0 else 0.0
 
