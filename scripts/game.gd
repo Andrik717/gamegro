@@ -869,7 +869,7 @@ func _draw_minigame(view: Vector2) -> void:
 					continue
 				var spot := art.position + minigame_clean_spots[i] * art.size
 				var splat_size := Vector2(34.0 + float(i % 4) * 5.0, 30.0 + float(i % 3) * 6.0)
-				_draw_minigame_sprite(mini_dirt_texture, spot, splat_size, float(i) * 0.71)
+				_draw_minigame_sprite(mini_dirt_texture, spot, splat_size, float(i) * 0.71 + sin(minigame_animation_time * 0.8 + float(i)) * 0.08)
 				for grain in range(3):
 					var grain_angle := float(i * 3 + grain) * 2.1
 					var grain_pos := spot + Vector2(cos(grain_angle), sin(grain_angle)) * (splat_size.x * 0.43)
@@ -928,7 +928,8 @@ func _draw_minigame(view: Vector2) -> void:
 			for i in range(3):
 				var tool := _minigame_tool_rect(i, view)
 				var fill := Color("#24546a") if i != minigame_selected_tool else Color("#6c542e")
-				_draw_button(tool, tool_names[i], 14)
+				_draw_rounded_panel(tool, fill, GOLD, 2.0, 16.0)
+				_draw_text(tool_names[i], Vector2(tool.position.x + 58.0, tool.get_center().y + 5.0), 14, CREAM, HORIZONTAL_ALIGNMENT_CENTER, tool.size.x - 68.0)
 				_draw_minigame_sprite(tool_textures[i], Vector2(tool.position.x + 28.0, tool.get_center().y), Vector2(42.0, 42.0))
 				if i == minigame_selected_tool:
 					_draw_rounded_panel(tool.grow(3.0), Color(0.0, 0.0, 0.0, 0.0), GOLD, 2.0, 14.0)
