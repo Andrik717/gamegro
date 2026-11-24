@@ -82,7 +82,7 @@ func _load_level(level_index: int) -> void:
 	else:
 		# Missing or unreadable chapter art must not leave the scene with a null texture.
 		push_warning("Фон локации недоступен, используется резервный: " + background_path)
-		background = load("res://assets/backgrounds/tropical_cove.jpg") as Texture2D
+		background = load("res://assets/backgrounds/tropical_cove.png") as Texture2D
 	if background == null:
 		push_error("Не удалось загрузить основной или резервный фон локации")
 	ITEM_DATA.clear()
