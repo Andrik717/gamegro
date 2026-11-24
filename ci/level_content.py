@@ -306,6 +306,21 @@ def enhance_game(root):
                 draw_item(target,KINDS[n % len(KINDS)],color,dark,li*100+n)
             row.append(f'{{"id":{item["id"]},"slug":"{slug}","name":"{item["name"]}","pos":Vector2({x},{y})}}'); n+=1
         rows.append("\t[\n\t\t"+",\n\t\t".join(row)+"\n\t]")
+    # Every collectible in every chapter must resolve to a real PNG in assets/items.
+    for level in levels:
+        for item in level["items"]:
+            asset=items_dir/f"{item['slug']}.png"
+            if not asset.is_file():
+                raise SystemExit(f"Missing item artwork for {level['name']}: {asset}")
+            try:
+                with Image.open(asset) as artwork:
+                    artwork.verify()
+                with Image.open(asset) as artwork:
+                    if artwork.format != "PNG" or artwork.mode not in ("RGBA","LA"):
+                        raise ValueError(f"expected transparent PNG, got {artwork.format}/{artwork.mode}")
+            except Exception as exc:
+                raise SystemExit(f"Invalid item artwork {asset}: {exc}") from exc
+
     src=root/"scripts/game.gd"; s=src.read_text(encoding="utf-8")
     s=s.replace("res://assets/levels/","res://assets/backgrounds/").replace(".svg",".png")
     first_rows=[]
