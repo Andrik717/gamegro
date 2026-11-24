@@ -25,16 +25,6 @@ def apply_chapter_mechanics(root: Path) -> None:
 ]
 '''.replace("    ", "\t")
     once("var background: Texture2D", challenge_data + "\nvar background: Texture2D", "challenge definitions")
-    for old_name, new_name in [
-        ("Тайна джунглей", "Древние джунгли"),
-        ("Бухта пиратов", "Пиратская бухта"),
-        ("Затонувшая лагуна", "Подводная лагуна"),
-        ("Затерянный город", "Древний город"),
-    ]:
-        if '"' + old_name + '"' in source:
-            once('"' + old_name + '"', '"' + new_name + '"', "canonical chapter name " + old_name)
-        elif '"' + new_name + '"' not in source:
-            raise SystemExit("Missing chapter name in generated level data: " + new_name)
     once("var map_open := false\n", "var map_open := false\nvar puzzle_active := false\nvar puzzle_step := 0\nvar puzzle_feedback := \"\"\nvar puzzle_dials := [0, 0, 0]\nvar puzzle_first_pick := -1\nvar puzzle_matched := []\n", "challenge state")
     once("\twon = false\n\tqueue_redraw()", "\twon = false\n\tpuzzle_active = false\n\tpuzzle_step = 0\n\tpuzzle_feedback = \"\"\n\tpuzzle_dials = [0, 0, 0]\n\tpuzzle_first_pick = -1\n\tpuzzle_matched.clear()\n\tqueue_redraw()", "reset challenge state")
     once("\tif map_open:\n\t\t_draw_map(view)\n\tif paused:", "\tif puzzle_active:\n\t\t_draw_challenge(view)\n\tif map_open:\n\t\t_draw_map(view)\n\tif paused:", "draw challenge overlay")
