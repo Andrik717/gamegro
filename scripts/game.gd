@@ -74,11 +74,17 @@ func _load_level(level_index: int) -> void:
 	var level: Dictionary = levels[current_level_index]
 	current_level_name = str(level.get("name", "Локация %d" % (current_level_index + 1)))
 	var background_path := str(level.get("background_path", ""))
+	var loaded_background: Resource = null
 	if background_path.begins_with("res://") and ResourceLoader.exists(background_path):
-		background = load(background_path)
+		loaded_background = load(background_path)
+	if loaded_background is Texture2D:
+		background = loaded_background as Texture2D
 	else:
-		# Некоторые главы пока не имеют отдельного фона: используем доступный фон игры.
-		background = load("res://assets/backgrounds/tropical_cove.png")
+		# Missing or unreadable chapter art must not leave the scene with a null texture.
+		push_warning("Фон локации недоступен, используется резервный: " + background_path)
+		background = load("res://assets/backgrounds/tropical_cove.jpg") as Texture2D
+	if background == null:
+		push_error("Не удалось загрузить основной или резервный фон локации")
 	ITEM_DATA.clear()
 	item_textures.clear()
 	for entry in level.get("items", []):
@@ -130,7 +136,7 @@ func _apply_level_layout(level: Dictionary) -> void:
 	if saved is Array and saved.size() == ITEM_COUNT:
 		var valid := true
 		for i in range(ITEM_COUNT):
-			if not saved[i] is Dictionary or not saved[i].has("x") or not saved[i].has("w"):
+			if not saved[i] is Dictionary or not saved[i].has("x") or not saved[i].has("y") or not saved[i].has("w") or not saved[i].has("h") or not saved[i].has("r"):
 				valid = false
 				break
 		if valid:
@@ -139,7 +145,11 @@ func _apply_level_layout(level: Dictionary) -> void:
 				ITEM_DATA[i].pos = Vector2(float(data.get("x", 0.0)), float(data.get("y", 0.0)))
 				ITEM_DATA[i].size = Vector2(float(data.get("w", 48.0)), float(data.get("h", 48.0)))
 				ITEM_DATA[i].rotation = float(data.get("r", 0.0))
-			return
+				if not Rect2(Vector2.ZERO, WORLD_SIZE).has_point(ITEM_DATA[i].pos):
+					valid = false
+					break
+			if valid:
+				return
 	_generate_level_layout()
 	var result: Array = []
 	for item in ITEM_DATA:
@@ -267,7 +277,10 @@ func _draw() -> void:
 	var origin: Vector2 = layout.origin
 	var s: float = layout.scale
 	draw_set_transform(origin, 0.0, Vector2.ONE * s)
-	draw_texture_rect(background, Rect2(Vector2.ZERO, WORLD_SIZE), false)
+	if background != null:
+		draw_texture_rect(background, Rect2(Vector2.ZERO, WORLD_SIZE), false)
+	else:
+		draw_rect(Rect2(Vector2.ZERO, WORLD_SIZE), Color("#31566a"), true)
 	for i in range(ITEM_COUNT):
 		if found.has(i):
 			continue
@@ -386,7 +399,6 @@ func _touch_event(index: int, pos: Vector2, pressed: bool) -> void:
 	else:
 		if touches.has(index):
 			var was_single := touches.size() == 1
-			var start := one_finger_start
 			touches.erase(index)
 			if was_single and not dragging and not multi_touch_gesture:
 				var tap_pos := one_finger_start if touch_started_on_hud and one_finger_start.distance_to(pos) <= 36.0 else pos
