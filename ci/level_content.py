@@ -311,7 +311,7 @@ def enhance_game(root):
     import re
     s,count=re.subn(r"const ITEM_COUNT := \d+", "const ITEM_COUNT := 45", s, count=1)
     if count!=1: raise SystemExit("Could not set first island item count to 45")
-    s,count=re.subn(r"const ITEM_DATA := \[.*?\n\]\nconst CREAM :=", first_block+"\nconst CREAM :=", s, count=1, flags=re.S)
+    s,count=re.subn(r"const ITEM_DATA := \[.*?\n\]\nconst LEVEL_DATA :=", first_block+"\nconst LEVEL_DATA :=", s, count=1, flags=re.S)
     if count!=1: raise SystemExit("Could not replace first island item table with 45 story items")
     if "const CHAPTER_ITEMS :=" not in s:
         if s.count("const CREAM :=")!=1: raise SystemExit("Missing color constant anchor")
