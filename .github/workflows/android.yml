@@ -26,17 +26,15 @@ jobs:
           set -euo pipefail
           mkdir -p packaged
           cp project.godot main.tscn export_presets.cfg packaged/
-          cp -a scripts assets packaged/
+          cp -a scripts assets game_data packaged/
           test -f packaged/project.godot
           test -f packaged/export_presets.cfg
           test -f packaged/main.tscn
           test -f packaged/scripts/game.gd
 
-      - name: Install raster artwork dependency
-        run: python3 -m pip install --disable-pip-version-check Pillow
-
-      - name: Apply requested gameplay and Android fixes
-        run: python3 ci/patch_game.py packaged
+      # The live game now reads game_data/story.json directly. The old
+      # patch_game.py transformer targeted a retired 30-item prototype and
+      # must not rewrite the current runtime script.
 
       - name: Preserve source script for UI inspection
         uses: actions/upload-artifact@v5
@@ -132,7 +130,7 @@ jobs:
           mkdir -p "$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.${GODOT_RELEASE}"
           cp -a templates/templates/. "$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.${GODOT_RELEASE}/"
 
-      - name: Validate packaged game and all 10 playable levels
+      - name: Validate packaged game data and all item assets
         shell: bash
         run: |
           set -euo pipefail
@@ -141,29 +139,42 @@ jobs:
           import re
           from pathlib import Path
           root = Path("packaged")
-          story_path = root / "data/story.json"
-          script_path = root / "scripts/game.gd"
-          if not story_path.is_file() or not script_path.is_file():
+          story_file = root / "game_data/story.json"
+          script_file = root / "scripts/game.gd"
+          if not story_file.is_file() or not script_file.is_file():
               raise SystemExit("Packaged story or gameplay script is missing")
-          story = json.loads(story_path.read_text(encoding="utf-8"))
+          story = json.loads(story_file.read_text(encoding="utf-8"))
           levels = story.get("levels", [])
           if len(levels) != 10:
               raise SystemExit(f"Expected 10 story levels, found {len(levels)}")
-          script = script_path.read_text(encoding="utf-8")
-          runtime_paths = re.findall(r'"background"\s*:\s*"(res://[^"]+)"', script)
-          if len(runtime_paths) != 10:
-              raise SystemExit(f"Expected 10 runtime level backgrounds, found {len(runtime_paths)}")
+          script = script_file.read_text(encoding="utf-8")
+          for token in ("JSON.parse_string", "_load_level", "ITEM_COUNT = ITEM_DATA.size()", "_load_level(current_level_index + 1)"):
+              if token not in script:
+                  raise SystemExit(f"Runtime level integration is missing: {token}")
           for level in levels:
-              story_path_value = level["background_path"].replace("res://", "")
-              if not (root / story_path_value).is_file():
-                  raise SystemExit(f"Missing story background for {level['name']}: {story_path_value}")
-              if len(level.get("targets", [])) != 5 or len(level.get("items", [])) != 45:
-                  raise SystemExit(f"Level must define five queued targets and 45 total items: {level['name']}")
-          for runtime_path in runtime_paths:
-              relative = runtime_path.replace("res://", "")
-              if not (root / relative).is_file():
-                  raise SystemExit(f"Missing runtime background: {relative}")
-          print("Validated packaged story, 10 runtime backgrounds and 45 collectible items per level.")
+              items = level.get("items", [])
+              if len(items) != 45:
+                  raise SystemExit(f"{level.get('name')}: expected 45 items, found {len(items)}")
+              seen = set()
+              for item in items:
+                  slug = item.get("slug")
+                  if not slug or slug in seen:
+                      raise SystemExit(f"{level.get('name')}: missing or duplicate item slug {slug}")
+                  seen.add(slug)
+                  image = item.get("image", "").replace("res://", "")
+                  if not image or not (root / image).is_file():
+                      raise SystemExit(f"Missing item image for {level.get('name')}: {image}")
+                  pos = item.get("position")
+                  if not isinstance(pos, list) or len(pos) != 2:
+                      raise SystemExit(f"Invalid item position in {level.get('name')}: {slug}")
+          fallback = root / "assets/backgrounds/tropical_cove.png"
+          if not fallback.is_file() or 'load("res://assets/backgrounds/tropical_cove.png")' not in script:
+              raise SystemExit("Missing valid fallback background")
+          audio_paths = re.findall(r'_player\("(res://assets/audio/[^"]+)"', script)
+          for audio in audio_paths:
+              if not (root / audio.replace("res://", "")).is_file():
+                  raise SystemExit(f"Missing audio asset: {audio}")
+          print("Validated 10 levels, 450 item placements, image paths, positions, fallback background and audio.")
           PY
 
       - name: Create debug keystore
