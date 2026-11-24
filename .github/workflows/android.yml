@@ -172,6 +172,11 @@ jobs:
           if story_slugs != manifest_slugs or len(story_slugs) != 95:
               raise SystemExit("Story and manifest item slugs do not match the expected 95 unique assets")
           script = script_file.read_text(encoding="utf-8")
+          for token in ("_draw_map(view)", "_draw_pause(view)", "_handle_map_tap", "_pause_resume_rect", "SystemFont.new()"):
+              if token not in script:
+                  raise SystemExit(f"Required map/pause/font UI feature is missing: {token}")
+          if "audio_tap" in script or "tap.wav" in script or (root / "assets/audio/tap.wav").exists():
+              raise SystemExit("Screen tap sound must be completely removed")
           for token in ("JSON.parse_string", "_load_level", "ITEM_COUNT = ITEM_DATA.size()", "_load_level(current_level_index + 1)"):
               if token not in script:
                   raise SystemExit(f"Runtime level integration is missing: {token}")
