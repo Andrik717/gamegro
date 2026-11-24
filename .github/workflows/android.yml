@@ -153,10 +153,12 @@ jobs:
           from pathlib import Path
           root = Path("packaged")
           story_file = root / "game_data/story.json"
+          minigame_file = root / "game_data/minigames.json"
           script_file = root / "scripts/game.gd"
-          if not story_file.is_file() or not script_file.is_file():
-              raise SystemExit("Packaged story or gameplay script is missing")
+          if not story_file.is_file() or not minigame_file.is_file() or not script_file.is_file():
+              raise SystemExit("Packaged story, minigame definitions or gameplay script is missing")
           story = json.loads(story_file.read_text(encoding="utf-8"))
+          minigames = json.loads(minigame_file.read_text(encoding="utf-8"))
           manifest_file = root / "assets/items/manifest.json"
           if not manifest_file.is_file():
               raise SystemExit("Item manifest is missing")
@@ -172,9 +174,19 @@ jobs:
           if story_slugs != manifest_slugs or len(story_slugs) != 95:
               raise SystemExit("Story and manifest item slugs do not match the expected 95 unique assets")
           script = script_file.read_text(encoding="utf-8")
-          for token in ("_draw_map(view)", "_draw_pause(view)", "_handle_map_tap", "_pause_resume_rect", "SystemFont.new()"):
+          for token in ("_draw_map(view)", "_draw_pause(view)", "_handle_map_tap", "_pause_resume_rect", "SystemFont.new()", "_start_minigame()", "_draw_minigame(view)", "_minigame_pointer_down", "_minigame_pointer_move", "_minigame_pointer_up", "_save_progress()"):
               if token not in script:
-                  raise SystemExit(f"Required map/pause/font UI feature is missing: {token}")
+                  raise SystemExit(f"Required map/pause/minigame/progress feature is missing: {token}")
+          minigame_levels = minigames.get("levels", [])
+          if len(minigame_levels) != 10:
+              raise SystemExit(f"Expected 10 mandatory minigames, found {len(minigame_levels)}")
+          valid_minigame_types = {"cleaning", "assembly", "painting", "repair"}
+          for index, minigame in enumerate(minigame_levels):
+              if minigame.get("level") != index + 1 or minigame.get("type") not in valid_minigame_types:
+                  raise SystemExit(f"Invalid minigame mapping for level {index + 1}")
+              artifact = minigame.get("artifact", "").replace("res://", "")
+              if not artifact or not (root / artifact).is_file():
+                  raise SystemExit(f"Missing minigame artifact for level {index + 1}: {artifact}")
           if "audio_tap" in script or "tap.wav" in script or (root / "assets/audio/tap.wav").exists():
               raise SystemExit("Screen tap sound must be completely removed")
           for token in ("JSON.parse_string", "_load_level", "ITEM_COUNT = ITEM_DATA.size()", "_load_level(current_level_index + 1)"):
