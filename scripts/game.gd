@@ -1,19 +1,22 @@
 extends Node2D
 
-const WORLD_SIZE := Vector2(1536, 864)
-const BAR_HEIGHT := 116.0
+const WORLD_SIZE := Vector2(1536.0, 864.0)
+const BAR_HEIGHT := 144.0
 const MIN_ZOOM := 1.0
 const MAX_ZOOM := 2.6
 const TOUCH_TAP_SLOP := 18.0
+const CREAM := Color("#fff1ce")
+const GOLD := Color("#f6c66c")
+const NAVY := Color("#102d4d")
+const BLUE := Color("#173d5d")
+const PANEL := Color("#09213a")
+const GREEN := Color("#397d68")
+
 var ITEM_COUNT := 0
 var ITEM_DATA: Array[Dictionary] = []
 var levels: Array = []
 var current_level_index := 0
 var current_level_name := ""
-const CREAM := Color("#fff1ce")
-const GOLD := Color("#f6c66c")
-const NAVY := Color("#102d4d")
-
 var background: Texture2D
 var item_textures: Array[Texture2D] = []
 var layout_store: Dictionary = {}
@@ -22,12 +25,12 @@ const LAYOUT_MARGIN := 54.0
 const LAYOUT_GAP := 9.0
 var found := {}
 var display_order: Array[int] = []
+var completed_levels: Dictionary = {}
 var elapsed := 0.0
 var zoom := 1.0
 var camera_offset := Vector2.ZERO
 var touches := {}
 var pinch_distance := 0.0
-var pinch_zoom := 1.0
 var pinch_center := Vector2.ZERO
 var one_finger_start := Vector2.ZERO
 var one_finger_last := Vector2.ZERO
@@ -40,13 +43,16 @@ var hint_time := 0.0
 var celebration_time := 0.0
 var found_effect_position := Vector2.ZERO
 var paused := false
+var map_open := false
 var won := false
+var ui_font: Font
 var audio_found: AudioStreamPlayer
-var audio_tap: AudioStreamPlayer
 var audio_hint: AudioStreamPlayer
 var audio_surf: AudioStreamPlayer
 
 func _ready() -> void:
+	randomize()
+	_create_ui_font()
 	_load_story()
 	_load_layout_store()
 	_load_level(0)
@@ -56,14 +62,20 @@ func _ready() -> void:
 	get_viewport().size_changed.connect(queue_redraw)
 	queue_redraw()
 
+func _create_ui_font() -> void:
+	# Explicit system-font fallbacks include Cyrillic glyphs on Android and desktop.
+	var system_font := SystemFont.new()
+	system_font.font_names = PackedStringArray(["Noto Sans", "Roboto", "Arial"])
+	ui_font = system_font
+
 func _load_story() -> void:
 	var file := FileAccess.open("res://game_data/story.json", FileAccess.READ)
 	if file == null:
 		push_error("Не удалось открыть game_data/story.json")
 		return
 	var parsed: Variant = JSON.parse_string(file.get_as_text())
-	if parsed is Dictionary and parsed.has("levels") and parsed.levels is Array:
-		levels = parsed.levels
+	if parsed is Dictionary and parsed.get("levels") is Array:
+		levels = parsed.get("levels", [])
 	else:
 		push_error("Некорректный формат game_data/story.json")
 
@@ -80,7 +92,6 @@ func _load_level(level_index: int) -> void:
 	if loaded_background is Texture2D:
 		background = loaded_background as Texture2D
 	else:
-		# Missing or unreadable chapter art must not leave the scene with a null texture.
 		push_warning("Фон локации недоступен, используется резервный: " + background_path)
 		background = load("res://assets/backgrounds/tropical_cove.png") as Texture2D
 	if background == null:
@@ -90,27 +101,25 @@ func _load_level(level_index: int) -> void:
 	for entry in level.get("items", []):
 		if not entry is Dictionary:
 			continue
-		var item := {
+		var image_path := str(entry.get("image", ""))
+		var texture: Texture2D = load(image_path) if ResourceLoader.exists(image_path) else null
+		if texture == null:
+			push_warning("Не найдена картинка предмета: " + image_path)
+			continue
+		ITEM_DATA.append({
 			"id": ITEM_DATA.size(),
 			"slug": str(entry.get("slug", "")),
 			"name": str(entry.get("name", "Предмет")),
 			"pos": Vector2.ZERO,
 			"size": Vector2(48.0, 48.0),
 			"rotation": 0.0
-		}
-		var image_path := str(entry.get("image", ""))
-		var texture: Texture2D = load(image_path) if ResourceLoader.exists(image_path) else null
-		if texture == null:
-			push_warning("Не найдена картинка предмета: " + image_path)
-			continue
-		ITEM_DATA.append(item)
+		})
 		item_textures.append(texture)
 	ITEM_COUNT = ITEM_DATA.size()
 	if ITEM_COUNT > 0:
 		_apply_level_layout(level)
 	else:
 		push_error("В локации нет загружаемых предметов: " + current_level_name)
-
 
 func _load_layout_store() -> void:
 	if not FileAccess.file_exists(LAYOUT_SAVE_PATH):
@@ -136,15 +145,21 @@ func _apply_level_layout(level: Dictionary) -> void:
 	if saved is Array and saved.size() == ITEM_COUNT:
 		var valid := true
 		for i in range(ITEM_COUNT):
-			if not saved[i] is Dictionary or not saved[i].has("x") or not saved[i].has("y") or not saved[i].has("w") or not saved[i].has("h") or not saved[i].has("r"):
+			if not saved[i] is Dictionary:
 				valid = false
+				break
+			for key in ["x", "y", "w", "h", "r"]:
+				if not saved[i].has(key):
+					valid = false
+					break
+			if not valid:
 				break
 		if valid:
 			for i in range(ITEM_COUNT):
 				var data: Dictionary = saved[i]
-				ITEM_DATA[i].pos = Vector2(float(data.get("x", 0.0)), float(data.get("y", 0.0)))
-				ITEM_DATA[i].size = Vector2(float(data.get("w", 48.0)), float(data.get("h", 48.0)))
-				ITEM_DATA[i].rotation = float(data.get("r", 0.0))
+				ITEM_DATA[i].pos = Vector2(float(data.x), float(data.y))
+				ITEM_DATA[i].size = Vector2(float(data.w), float(data.h))
+				ITEM_DATA[i].rotation = float(data.r)
 				if not Rect2(Vector2.ZERO, WORLD_SIZE).has_point(ITEM_DATA[i].pos):
 					valid = false
 					break
@@ -215,8 +230,8 @@ func _layout_rect(center: Vector2, item_size: Vector2, angle: float) -> Rect2:
 	return Rect2(center - bounds * 0.5 - Vector2.ONE * (LAYOUT_GAP * 0.5), bounds + Vector2.ONE * LAYOUT_GAP)
 
 func _make_audio() -> void:
+	# There is deliberately no tap/click player: touching the screen is silent.
 	audio_found = _player("res://assets/audio/found.wav", false)
-	audio_tap = _player("res://assets/audio/tap.wav", false)
 	audio_hint = _player("res://assets/audio/hint.wav", false)
 	audio_surf = _player("res://assets/audio/surf.wav", true)
 	audio_surf.volume_db = -17.0
@@ -226,6 +241,9 @@ func _make_audio() -> void:
 func _player(path: String, looped: bool) -> AudioStreamPlayer:
 	var p := AudioStreamPlayer.new()
 	var stream: AudioStream = load(path)
+	if stream == null:
+		push_warning("Не удалось загрузить аудио: " + path)
+		return p
 	if looped and stream is AudioStreamWAV:
 		var wav_stream := stream as AudioStreamWAV
 		wav_stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
@@ -239,7 +257,6 @@ func _reset_round() -> void:
 	display_order.clear()
 	for i in range(ITEM_COUNT):
 		display_order.append(i)
-	# Stable shuffle makes each new game feel different without losing reproducibility.
 	display_order.shuffle()
 	elapsed = 0.0
 	zoom = 1.0
@@ -248,11 +265,12 @@ func _reset_round() -> void:
 	hint_time = 0.0
 	celebration_time = 0.0
 	paused = false
+	map_open = false
 	won = false
 	queue_redraw()
 
 func _process(delta: float) -> void:
-	if not paused and not won:
+	if not paused and not map_open and not won:
 		elapsed += delta
 	if hint_time > 0.0:
 		hint_time = maxf(0.0, hint_time - delta)
@@ -266,17 +284,16 @@ func _viewport_layout() -> Dictionary:
 	var view := get_viewport_rect().size
 	var world_area := Rect2(Vector2.ZERO, Vector2(view.x, maxf(1.0, view.y - BAR_HEIGHT)))
 	var base_scale := minf(world_area.size.x / WORLD_SIZE.x, world_area.size.y / WORLD_SIZE.y)
-	var drawn := WORLD_SIZE * base_scale * zoom
 	var origin := (world_area.size - WORLD_SIZE * base_scale) * 0.5 + camera_offset
-	return {"view":view,"area":world_area,"base":base_scale,"scale":base_scale*zoom,"origin":origin}
+	return {"view": view, "area": world_area, "base": base_scale, "scale": base_scale * zoom, "origin": origin}
 
 func _draw() -> void:
 	var layout := _viewport_layout()
 	var view: Vector2 = layout.view
 	draw_rect(Rect2(Vector2.ZERO, view), Color("#09253a"), true)
 	var origin: Vector2 = layout.origin
-	var s: float = layout.scale
-	draw_set_transform(origin, 0.0, Vector2.ONE * s)
+	var scale_factor: float = layout.scale
+	draw_set_transform(origin, 0.0, Vector2.ONE * scale_factor)
 	if background != null:
 		draw_texture_rect(background, Rect2(Vector2.ZERO, WORLD_SIZE), false)
 	else:
@@ -285,75 +302,186 @@ func _draw() -> void:
 		if found.has(i):
 			continue
 		var item: Dictionary = ITEM_DATA[i]
-		var p: Vector2 = item.pos
-		var size: Vector2 = item.size
+		var item_size: Vector2 = item.size
 		if hint_id == i and hint_time > 0.0:
 			var pulse := 1.0 + 0.12 * sin(Time.get_ticks_msec() * 0.012)
-			draw_circle(p, maxf(size.x, size.y) * 0.72, Color(1.0,0.82,0.2,0.22))
-			size *= pulse
-		draw_set_transform(origin + p * s, float(item.rotation), Vector2.ONE * s)
-		draw_texture_rect(item_textures[i], Rect2(-size * 0.5, size), false)
-		draw_set_transform(origin, 0.0, Vector2.ONE * s)
+			draw_circle(item.pos, maxf(item_size.x, item_size.y) * 0.72, Color(1.0, 0.82, 0.2, 0.22))
+			item_size *= pulse
+		draw_set_transform(origin + item.pos * scale_factor, float(item.rotation), Vector2.ONE * scale_factor)
+		draw_texture_rect(item_textures[i], Rect2(-item_size * 0.5, item_size), false)
+		draw_set_transform(origin, 0.0, Vector2.ONE * scale_factor)
 	if celebration_time > 0.0:
 		var progress := 1.0 - celebration_time / 0.55
 		var radius := 18.0 + progress * 78.0
 		var alpha := 1.0 - progress
-		draw_arc(found_effect_position, radius, 0.0, TAU, 48, Color(1.0,0.88,0.38,alpha), 6.0*(1.0-progress)+1.0)
+		draw_arc(found_effect_position, radius, 0.0, TAU, 48, Color(1.0, 0.88, 0.38, alpha), 6.0 * (1.0 - progress) + 1.0)
 		for particle in range(10):
 			var angle := TAU * float(particle) / 10.0 + progress * 1.8
 			var distance := 18.0 + progress * 62.0
-			var sparkle := found_effect_position + Vector2(cos(angle),sin(angle))*distance
-			draw_circle(sparkle, 4.0*(1.0-progress)+1.0, Color(1.0,0.94,0.64,alpha))
+			var sparkle := found_effect_position + Vector2(cos(angle), sin(angle)) * distance
+			draw_circle(sparkle, 4.0 * (1.0 - progress) + 1.0, Color(1.0, 0.94, 0.64, alpha))
 	draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 	_draw_hud(view)
-	if paused:
-		draw_rect(Rect2(Vector2.ZERO, view), Color(0,0,0,0.62), true)
-		_center_text("ПАУЗА  •  КОСНИТЕСЬ, ЧТОБЫ ПРОДОЛЖИТЬ", view * 0.5, 30, CREAM)
-	if won:
-		draw_rect(Rect2(Vector2.ZERO, view), Color(0,0,0,0.68), true)
-		_center_text("ВСЕ %d ПРЕДМЕТОВ НАЙДЕНЫ!" % ITEM_COUNT, view*0.5-Vector2(0,58), 36, GOLD)
-		_center_text(current_level_name, view*0.5-Vector2(0,12), 27, CREAM)
-		var next_text := "Коснитесь, чтобы открыть следующую локацию" if current_level_index < levels.size() - 1 else "Архипелаг восстановлен! Коснитесь, чтобы начать заново"
-		_center_text(next_text, view*0.5+Vector2(0,38), 21, CREAM)
+	if map_open:
+		_draw_map(view)
+	elif paused:
+		_draw_pause(view)
+	elif won:
+		_draw_win(view)
 
 func _draw_hud(view: Vector2) -> void:
-	var font := ThemeDB.fallback_font
-	var bar := Rect2(0, view.y - BAR_HEIGHT, view.x, BAR_HEIGHT)
-	draw_rect(bar, Color("#09213a"), true)
-	draw_rect(Rect2(0, bar.position.y, view.x, 5), GOLD, true)
-	draw_string(font, Vector2(22, bar.position.y+25), current_level_name.to_upper(), HORIZONTAL_ALIGNMENT_LEFT, minf(view.x * 0.48, 420.0), 18, GOLD)
-	draw_string(font, Vector2(view.x-190, bar.position.y+25), "%02d / %02d" % [found.size(), ITEM_COUNT], HORIZONTAL_ALIGNMENT_LEFT, -1, 22, CREAM)
-	var slots := mini(5, ITEM_COUNT - found.size())
-	var slot_w := minf(112.0, (view.x-48.0)/5.0)
-	var first_x := (view.x - slot_w*5.0)/2.0
-	for slot in range(slots):
+	var bar := Rect2(0.0, view.y - BAR_HEIGHT, view.x, BAR_HEIGHT)
+	draw_rect(bar, PANEL, true)
+	draw_rect(Rect2(0.0, bar.position.y, view.x, 4.0), GOLD, true)
+
+	# Bottom inventory cards use wrapped labels instead of one clipped text line.
+	_draw_text(current_level_name.to_upper(), Vector2(20.0, bar.position.y + 25.0), 17, GOLD, HORIZONTAL_ALIGNMENT_LEFT, minf(view.x * 0.48, 480.0))
+	_draw_text("%02d / %02d НАЙДЕНО" % [found.size(), ITEM_COUNT], Vector2(view.x - 220.0, bar.position.y + 25.0), 16, CREAM, HORIZONTAL_ALIGNMENT_RIGHT, 200.0)
+
+	var slot_width := (view.x - 40.0) / 5.0
+	for slot in range(mini(5, ITEM_COUNT - found.size())):
 		var id := _next_visible_item(slot)
 		if id < 0:
 			continue
-		var x := first_x + slot*slot_w
-		draw_rect(Rect2(x+3, bar.position.y+32, slot_w-6, 76), Color("#173d5d"), true)
-		draw_rect(Rect2(x+3, bar.position.y+32, slot_w-6, 76), Color("#bd8c48"), false, 2)
-		draw_texture_rect(item_textures[id], Rect2(x+slot_w*0.5-22, bar.position.y+35, 44, 42), false)
-		draw_string(font, Vector2(x+slot_w*0.5, bar.position.y+94), _short_name(ITEM_DATA[id].name), HORIZONTAL_ALIGNMENT_CENTER, slot_w-8, 12, CREAM)
+		var x := 20.0 + slot * slot_width
+		var card := Rect2(x + 3.0, bar.position.y + 34.0, slot_width - 6.0, 100.0)
+		draw_rect(card, Color("#173d5d"), true)
+		draw_rect(card, Color("#bd8c48"), false, 2.0)
+		draw_texture_rect(item_textures[id], Rect2(x + slot_width * 0.5 - 22.0, bar.position.y + 39.0, 44.0, 42.0), false)
+		var lines := _wrap_two_lines(str(ITEM_DATA[id].name), slot_width - 12.0, 13)
+		if lines.size() == 1:
+			_draw_text(lines[0], Vector2(x + slot_width * 0.5, bar.position.y + 104.0), 13, CREAM, HORIZONTAL_ALIGNMENT_CENTER, slot_width - 12.0)
+		elif lines.size() >= 2:
+			_draw_text(lines[0], Vector2(x + slot_width * 0.5, bar.position.y + 94.0), 12, CREAM, HORIZONTAL_ALIGNMENT_CENTER, slot_width - 12.0)
+			_draw_text(lines[1], Vector2(x + slot_width * 0.5, bar.position.y + 110.0), 12, CREAM, HORIZONTAL_ALIGNMENT_CENTER, slot_width - 12.0)
+
 	var top := 12.0
-	_draw_button(Rect2(14,top,64,56),"Ⅱ")
-	_draw_button(Rect2(view.x-82,top,68,56),"💡")
-	_draw_button(Rect2(view.x-158,top,64,56),"♫")
-	draw_string(font, Vector2(92,top+38), _time_text(), HORIZONTAL_ALIGNMENT_LEFT, -1, 26, CREAM)
-	draw_string(font, Vector2(view.x*0.5-82,top+36), "МАСШТАБ  %d%%" % int(zoom*100.0), HORIZONTAL_ALIGNMENT_LEFT, -1, 17, CREAM)
+	_draw_button(_pause_rect(), "ПАУЗА", 13)
+	_draw_button(_map_button_rect(), "КАРТА", 14)
+	_draw_button(_hint_rect(view), "ПОДСКАЗКА", 12)
+	_draw_button(_sound_rect(view), "ЗВУК " + ("ВКЛ" if sound_enabled else "ВЫКЛ"), 11)
+	_draw_text(_time_text(), Vector2(210.0, top + 38.0), 22, CREAM, HORIZONTAL_ALIGNMENT_LEFT, 100.0)
+	_draw_text("%d%%" % int(zoom * 100.0), Vector2(view.x * 0.5, top + 36.0), 16, CREAM, HORIZONTAL_ALIGNMENT_CENTER, 90.0)
 
-func _draw_button(rect: Rect2, label: String) -> void:
-	draw_rect(rect, Color("#173d5d"), true)
-	draw_rect(rect, GOLD, false, 3.0)
-	draw_string(ThemeDB.fallback_font, rect.position+Vector2(rect.size.x*0.5-10,rect.size.y*0.5+10), label, HORIZONTAL_ALIGNMENT_LEFT, -1, 24, CREAM)
+func _draw_button(rect: Rect2, label: String, font_size := 16) -> void:
+	draw_rect(rect, BLUE, true)
+	draw_rect(rect, GOLD, false, 2.0)
+	_draw_text(label, rect.position + Vector2(rect.size.x * 0.5, rect.size.y * 0.5 + float(font_size) * 0.34), font_size, CREAM, HORIZONTAL_ALIGNMENT_CENTER, rect.size.x - 8.0)
 
-func _center_text(value: String, point: Vector2, size: int, color: Color) -> void:
-	var font := ThemeDB.fallback_font
-	var width := font.get_string_size(value, HORIZONTAL_ALIGNMENT_LEFT, -1, size).x
-	draw_string(font, point-Vector2(width*0.5,0), value, HORIZONTAL_ALIGNMENT_LEFT, -1, size, color)
+func _draw_text(value: String, baseline: Vector2, font_size: int, color: Color, alignment := HORIZONTAL_ALIGNMENT_LEFT, width := -1.0) -> void:
+	draw_string(ui_font, baseline, value, alignment, width, font_size, color)
 
-func _short_name(value: String) -> String:
-	return value if value.length() <= 12 else value.substr(0,11)+"…"
+func _wrap_two_lines(value: String, max_width: float, font_size: int) -> Array[String]:
+	var words := value.split(" ", false)
+	var lines: Array[String] = []
+	var current := ""
+	for word in words:
+		var candidate := word if current.is_empty() else current + " " + word
+		if ui_font.get_string_size(candidate, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x <= max_width:
+			current = candidate
+		elif current.is_empty():
+			current = word
+		else:
+			lines.append(current)
+			current = word
+	if not current.is_empty():
+		lines.append(current)
+	if lines.size() > 2:
+		lines.resize(2)
+		lines[1] = _fit_ellipsis(lines[1], max_width, font_size)
+	return lines
+
+func _fit_ellipsis(value: String, max_width: float, font_size: int) -> String:
+	var result := value
+	while not result.is_empty() and ui_font.get_string_size(result + "…", HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x > max_width:
+		result = result.substr(0, result.length() - 1)
+	return result + "…"
+
+func _pause_rect() -> Rect2:
+	return Rect2(14.0, 12.0, 72.0, 56.0)
+
+func _map_button_rect() -> Rect2:
+	return Rect2(94.0, 12.0, 94.0, 56.0)
+
+func _hint_rect(view: Vector2) -> Rect2:
+	return Rect2(view.x - 164.0, 12.0, 72.0, 56.0)
+
+func _sound_rect(view: Vector2) -> Rect2:
+	return Rect2(view.x - 82.0, 12.0, 68.0, 56.0)
+
+func _pause_resume_rect(view: Vector2) -> Rect2:
+	return Rect2(view.x * 0.5 - 218.0, view.y * 0.5 + 24.0, 204.0, 66.0)
+
+func _pause_map_rect(view: Vector2) -> Rect2:
+	return Rect2(view.x * 0.5 + 14.0, view.y * 0.5 + 24.0, 204.0, 66.0)
+
+func _draw_pause(view: Vector2) -> void:
+	draw_rect(Rect2(Vector2.ZERO, view), Color(0.0, 0.0, 0.0, 0.72), true)
+	var panel := Rect2(view.x * 0.5 - 250.0, view.y * 0.5 - 105.0, 500.0, 220.0)
+	draw_rect(panel, PANEL, true)
+	draw_rect(panel, GOLD, false, 3.0)
+	_draw_text("ИГРА ПРИОСТАНОВЛЕНА", Vector2(view.x * 0.5, view.y * 0.5 - 38.0), 27, GOLD, HORIZONTAL_ALIGNMENT_CENTER, 460.0)
+	_draw_button(_pause_resume_rect(view), "ПРОДОЛЖИТЬ", 15)
+	_draw_button(_pause_map_rect(view), "КАРТА УРОВНЕЙ", 14)
+
+func _map_card_rect(index: int, view: Vector2) -> Rect2:
+	var gap := 12.0
+	var margin := 24.0
+	var width := (view.x - margin * 2.0 - gap) * 0.5
+	var available_height := view.y - 170.0
+	var height := minf(104.0, (available_height - gap * 4.0) / 5.0)
+	var col := index % 2
+	var row := int(index / 2)
+	return Rect2(margin + col * (width + gap), 94.0 + row * (height + gap), width, height)
+
+func _draw_map(view: Vector2) -> void:
+	draw_rect(Rect2(Vector2.ZERO, view), Color(0.015, 0.055, 0.09, 0.96), true)
+	_draw_text("КАРТА МИРА", Vector2(view.x * 0.5, 48.0), 30, GOLD, HORIZONTAL_ALIGNMENT_CENTER, view.x - 180.0)
+	_draw_text("Выберите локацию для продолжения приключения", Vector2(view.x * 0.5, 76.0), 15, CREAM, HORIZONTAL_ALIGNMENT_CENTER, view.x - 80.0)
+	_draw_button(Rect2(view.x - 104.0, 16.0, 84.0, 48.0), "НАЗАД", 13)
+
+	for i in range(levels.size()):
+		var card := _map_card_rect(i, view)
+		var is_current := i == current_level_index
+		var is_completed := completed_levels.has(i)
+		var fill := Color("#174b63")
+		var border := Color("#6597a8")
+		var status := "ОТКРЫТА"
+		if is_completed:
+			fill = Color("#245d50")
+			border = Color("#8ed0a7")
+			status = "ПРОЙДЕНА"
+		if is_current:
+			fill = Color("#604b2a")
+			border = GOLD
+			status = "ТЕКУЩАЯ"
+		draw_rect(card, fill, true)
+		draw_rect(card, border, false, 3.0 if is_current else 2.0)
+		var number_center := Vector2(card.position.x + 42.0, card.position.y + card.size.y * 0.5)
+		draw_circle(number_center, minf(27.0, card.size.y * 0.28), Color("#092d43"))
+		_draw_text("%02d" % (i + 1), number_center + Vector2(0.0, 7.0), 20, GOLD, HORIZONTAL_ALIGNMENT_CENTER, 54.0)
+		var text_x := card.position.x + 82.0
+		var text_width := card.size.x - 98.0
+		_draw_text(str(levels[i].get("name", "Локация %d" % (i + 1))), Vector2(text_x, card.position.y + card.size.y * 0.5 - 3.0), 17, CREAM, HORIZONTAL_ALIGNMENT_LEFT, text_width)
+		_draw_text(status, Vector2(text_x, card.position.y + card.size.y * 0.5 + 23.0), 11, border, HORIZONTAL_ALIGNMENT_LEFT, text_width)
+
+	_draw_text("Нажмите на карточку, чтобы открыть уровень", Vector2(view.x * 0.5, view.y - 18.0), 13, CREAM, HORIZONTAL_ALIGNMENT_CENTER, view.x - 40.0)
+
+func _draw_win(view: Vector2) -> void:
+	draw_rect(Rect2(Vector2.ZERO, view), Color(0.0, 0.0, 0.0, 0.76), true)
+	var panel := Rect2(view.x * 0.5 - 270.0, view.y * 0.5 - 150.0, 540.0, 300.0)
+	draw_rect(panel, PANEL, true)
+	draw_rect(panel, GOLD, false, 3.0)
+	_draw_text("УРОВЕНЬ ПРОЙДЕН!", Vector2(view.x * 0.5, view.y * 0.5 - 82.0), 30, GOLD, HORIZONTAL_ALIGNMENT_CENTER, 500.0)
+	_draw_text("Найдены все %d предметов" % ITEM_COUNT, Vector2(view.x * 0.5, view.y * 0.5 - 38.0), 20, CREAM, HORIZONTAL_ALIGNMENT_CENTER, 500.0)
+	_draw_button(_win_map_rect(view), "КАРТА УРОВНЕЙ", 14)
+	_draw_button(_win_next_rect(view), "СЛЕДУЮЩИЙ УРОВЕНЬ", 13)
+
+func _win_map_rect(view: Vector2) -> Rect2:
+	return Rect2(view.x * 0.5 - 218.0, view.y * 0.5 + 22.0, 204.0, 66.0)
+
+func _win_next_rect(view: Vector2) -> Rect2:
+	return Rect2(view.x * 0.5 + 14.0, view.y * 0.5 + 22.0, 204.0, 66.0)
 
 func _next_visible_item(slot: int) -> int:
 	var shown := 0
@@ -367,13 +495,28 @@ func _next_visible_item(slot: int) -> int:
 
 func _time_text() -> String:
 	var total := int(elapsed)
-	return "%02d:%02d" % [total/60,total%60]
+	return "%02d:%02d" % [total / 60, total % 60]
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_ESCAPE:
+			if map_open:
+				map_open = false
+			else:
+				paused = not paused
+			queue_redraw()
+			get_viewport().set_input_as_handled()
+			return
+		if event.keycode == KEY_M:
+			map_open = not map_open
+			paused = false
+			queue_redraw()
+			get_viewport().set_input_as_handled()
+			return
 	if event is InputEventScreenTouch:
 		_touch_event(event.index, event.position, event.pressed)
 	elif event is InputEventScreenDrag:
-		_drag_event(event.index, event.position, event.screen_relative)
+		_drag_event(event.index, event.position)
 	elif event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			_zoom_at(event.position, 1.12)
@@ -389,13 +532,12 @@ func _touch_event(index: int, pos: Vector2, pressed: bool) -> void:
 			one_finger_start = pos
 			one_finger_last = pos
 			dragging = false
-			touch_started_on_hud = _is_hud_button(pos, get_viewport_rect().size)
+			touch_started_on_hud = _is_hud_button(pos, get_viewport_rect().size) or map_open or paused or won
 		elif touches.size() == 2:
 			multi_touch_gesture = true
 			var points: Array = touches.values()
 			pinch_distance = points[0].distance_to(points[1])
-			pinch_zoom = zoom
-			pinch_center = (points[0]+points[1])*0.5
+			pinch_center = (points[0] + points[1]) * 0.5
 	else:
 		if touches.has(index):
 			var was_single := touches.size() == 1
@@ -411,14 +553,15 @@ func _touch_event(index: int, pos: Vector2, pressed: bool) -> void:
 			one_finger_start = remaining
 			one_finger_last = remaining
 			dragging = false
-			touch_started_on_hud = _is_hud_button(remaining, get_viewport_rect().size)
+			touch_started_on_hud = _is_hud_button(remaining, get_viewport_rect().size) or map_open or paused or won
 
 func _is_hud_button(point: Vector2, view: Vector2) -> bool:
-	return Rect2(14, 12, 64, 56).has_point(point) \
-		or Rect2(view.x - 82, 12, 68, 56).has_point(point) \
-		or Rect2(view.x - 158, 12, 64, 56).has_point(point)
+	return _pause_rect().has_point(point) \
+		or _map_button_rect().has_point(point) \
+		or _hint_rect(view).has_point(point) \
+		or _sound_rect(view).has_point(point)
 
-func _drag_event(index: int, pos: Vector2, relative: Vector2) -> void:
+func _drag_event(index: int, pos: Vector2) -> void:
 	if not touches.has(index):
 		return
 	touches[index] = pos
@@ -426,13 +569,12 @@ func _drag_event(index: int, pos: Vector2, relative: Vector2) -> void:
 		var points: Array = touches.values()
 		var new_distance: float = points[0].distance_to(points[1])
 		if pinch_distance > 1.0:
-			var center: Vector2 = (points[0]+points[1])*0.5
+			var center: Vector2 = (points[0] + points[1]) * 0.5
 			var factor := new_distance / pinch_distance
-			_zoom_at(pinch_center, factor, center-pinch_center)
+			_zoom_at(pinch_center, factor, center - pinch_center)
 			pinch_distance = new_distance
 			pinch_center = center
 	elif touches.size() == 1:
-		# Ignore tiny finger drift so an ordinary tap is not mistaken for a pan.
 		if zoom > 1.02 and not touch_started_on_hud and one_finger_start.distance_to(pos) > TOUCH_TAP_SLOP:
 			if not dragging:
 				dragging = true
@@ -446,11 +588,11 @@ func _drag_event(index: int, pos: Vector2, relative: Vector2) -> void:
 func _zoom_at(point: Vector2, factor: float, pan_delta := Vector2.ZERO) -> void:
 	var layout := _viewport_layout()
 	var old_scale: float = layout.scale
-	var new_zoom := clampf(zoom*factor, MIN_ZOOM, MAX_ZOOM)
-	var world_anchor: Vector2 = (point-layout.origin)/old_scale
-	var base_origin: Vector2 = (layout.area.size-WORLD_SIZE*layout.base)*0.5
+	var new_zoom := clampf(zoom * factor, MIN_ZOOM, MAX_ZOOM)
+	var world_anchor: Vector2 = (point - layout.origin) / old_scale
+	var base_origin: Vector2 = (layout.area.size - WORLD_SIZE * layout.base) * 0.5
 	zoom = new_zoom
-	camera_offset = point - base_origin - world_anchor*(layout.base*zoom) + pan_delta
+	camera_offset = point - base_origin - world_anchor * (layout.base * zoom) + pan_delta
 	_clamp_camera()
 	queue_redraw()
 
@@ -458,69 +600,98 @@ func _clamp_camera() -> void:
 	var layout := _viewport_layout()
 	var area: Rect2 = layout.area
 	var scaled: Vector2 = WORLD_SIZE * layout.scale
-	var min_x: float = area.size.x-scaled.x
-	var min_y: float = area.size.y-scaled.y
-	camera_offset.x = clampf(camera_offset.x, min_x, 0.0) if min_x < 0 else 0.0
-	camera_offset.y = clampf(camera_offset.y, min_y, 0.0) if min_y < 0 else 0.0
+	var min_x: float = area.size.x - scaled.x
+	var min_y: float = area.size.y - scaled.y
+	camera_offset.x = clampf(camera_offset.x, min_x, 0.0) if min_x < 0.0 else 0.0
+	camera_offset.y = clampf(camera_offset.y, min_y, 0.0) if min_y < 0.0 else 0.0
 
 func _handle_tap(point: Vector2) -> void:
-	if sound_enabled and audio_tap != null:
-		audio_tap.play()
 	var view := get_viewport_rect().size
+	if map_open:
+		_handle_map_tap(point, view)
+		return
 	if paused:
-		paused = false
+		if _pause_resume_rect(view).has_point(point):
+			paused = false
+		elif _pause_map_rect(view).has_point(point):
+			paused = false
+			map_open = true
+		queue_redraw()
 		return
 	if won:
-		if current_level_index < levels.size() - 1:
-			_load_level(current_level_index + 1)
-		else:
-			_load_level(0)
-		_reset_round()
+		if _win_map_rect(view).has_point(point):
+			map_open = true
+		elif _win_next_rect(view).has_point(point):
+			_open_next_level()
+		queue_redraw()
 		return
-	if point.y > view.y-BAR_HEIGHT:
-		return
-	if Rect2(14, 12, 64, 56).has_point(point):
+	if _pause_rect().has_point(point):
 		paused = true
+		queue_redraw()
 		return
-	if Rect2(view.x - 82, 12, 68, 56).has_point(point):
+	if _map_button_rect().has_point(point):
+		map_open = true
+		queue_redraw()
+		return
+	if _hint_rect(view).has_point(point):
 		_use_hint()
 		return
-	if Rect2(view.x - 158, 12, 64, 56).has_point(point):
+	if _sound_rect(view).has_point(point):
 		sound_enabled = not sound_enabled
 		if sound_enabled:
 			audio_surf.play()
 		else:
 			audio_surf.stop()
+		queue_redraw()
+		return
+	if point.y > view.y - BAR_HEIGHT:
 		return
 	var layout := _viewport_layout()
-	var world_pos: Vector2 = (point-layout.origin)/layout.scale
+	var world_pos: Vector2 = (point - layout.origin) / layout.scale
 	for item in ITEM_DATA:
 		var id: int = item.id
 		if found.has(id):
 			continue
 		var local_hit: Vector2 = (world_pos - item.pos).rotated(-float(item.rotation))
-		var hit_rect := Rect2(-item.size * 0.5, item.size)
-		if hit_rect.has_point(local_hit):
+		if Rect2(-item.size * 0.5, item.size).has_point(local_hit):
 			found[id] = true
 			hint_id = id
 			hint_time = 0.0
 			found_effect_position = item.pos
 			celebration_time = 0.55
-			if sound_enabled:
+			if sound_enabled and audio_found != null:
 				audio_found.play()
 			if found.size() == ITEM_COUNT:
 				won = true
+				completed_levels[current_level_index] = true
 			queue_redraw()
 			return
+
+func _handle_map_tap(point: Vector2, view: Vector2) -> void:
+	if Rect2(view.x - 104.0, 16.0, 84.0, 48.0).has_point(point):
+		map_open = false
+		queue_redraw()
+		return
+	for i in range(levels.size()):
+		if _map_card_rect(i, view).has_point(point):
+			map_open = false
+			paused = false
+			_load_level(i)
+			_reset_round()
+			return
+
+func _open_next_level() -> void:
+	if current_level_index < levels.size() - 1:
+		_load_level(current_level_index + 1)
+	else:
+		_load_level(0)
+	_reset_round()
 
 func _use_hint() -> void:
 	for id in display_order:
 		if not found.has(id):
 			hint_id = id
 			hint_time = 2.5
-			if sound_enabled:
+			if sound_enabled and audio_hint != null:
 				audio_hint.play()
 			return
-
-# Inventory is always the next five unfound objects from the shuffled current-level queue.
-# Finding one removes it from the scene and immediately pulls the next queued item into the bar.
