@@ -965,7 +965,7 @@
         "Пиратская повязка"
       ],
       "transition": "Подземная река выводит к пиратской бухте.",
-      "background_path": "res://assets/backgrounds/bg_03.jpg",
+      "background_path": "res://assets/backgrounds/bg_03.png",
       "items": [
         {
           "id": 0,
