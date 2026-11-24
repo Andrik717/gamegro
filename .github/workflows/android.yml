@@ -39,6 +39,12 @@ jobs:
           grep -q '^window/handheld/orientation=0$' packaged/project.godot
           grep -q '^screen/orientation=0$' packaged/export_presets.cfg
 
+      - name: Compile repository helper scripts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile ci/*.py
+
       # The live game now reads game_data/story.json directly. The old
       # patch_game.py transformer targeted a retired 30-item prototype and
       # must not rewrite the current runtime script.
@@ -151,9 +157,20 @@ jobs:
           if not story_file.is_file() or not script_file.is_file():
               raise SystemExit("Packaged story or gameplay script is missing")
           story = json.loads(story_file.read_text(encoding="utf-8"))
+          manifest_file = root / "assets/items/manifest.json"
+          if not manifest_file.is_file():
+              raise SystemExit("Item manifest is missing")
+          manifest = json.loads(manifest_file.read_text(encoding="utf-8"))
+          manifest_items = manifest.get("items", [])
+          if len(manifest_items) != 450 or manifest.get("expected_count") != 450:
+              raise SystemExit("Item manifest must contain exactly 450 placements")
           levels = story.get("levels", [])
           if len(levels) != 10:
               raise SystemExit(f"Expected 10 story levels, found {len(levels)}")
+          story_slugs = {item.get("slug") for level in levels for item in level.get("items", [])}
+          manifest_slugs = {item.get("slug") for item in manifest_items}
+          if story_slugs != manifest_slugs or len(story_slugs) != 95:
+              raise SystemExit("Story and manifest item slugs do not match the expected 95 unique assets")
           script = script_file.read_text(encoding="utf-8")
           for token in ("JSON.parse_string", "_load_level", "ITEM_COUNT = ITEM_DATA.size()", "_load_level(current_level_index + 1)"):
               if token not in script:
