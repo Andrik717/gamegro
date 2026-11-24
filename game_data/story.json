@@ -18,14 +18,421 @@
       "story": "Шторм выбрасывает героя на берег. В бутылке он находит письмо смотрителя маяка и первую часть карты.",
       "scene": "tropical_cove",
       "targets": [
-        "Бутылка с посланием",
-        "Компас",
-        "Ключ от старого сундука",
         "Морская звезда",
-        "Карта острова"
+        "Ракушка",
+        "Золотой ключ",
+        "Краб",
+        "Ананас"
       ],
       "transition": "Открывается тропа вглубь джунглей.",
-      "background_path": "res://assets/backgrounds/level1_tropical_bay.png"
+      "background_path": "res://assets/backgrounds/level1_tropical_bay.png",
+      "items": [
+        {
+          "id": 0,
+          "slug": "starfish",
+          "name": "Морская звезда",
+          "position": [
+            100,
+            100
+          ]
+        },
+        {
+          "id": 1,
+          "slug": "conch",
+          "name": "Ракушка",
+          "position": [
+            265,
+            100
+          ]
+        },
+        {
+          "id": 2,
+          "slug": "key",
+          "name": "Золотой ключ",
+          "position": [
+            430,
+            100
+          ]
+        },
+        {
+          "id": 3,
+          "slug": "crab",
+          "name": "Краб",
+          "position": [
+            595,
+            100
+          ]
+        },
+        {
+          "id": 4,
+          "slug": "pineapple",
+          "name": "Ананас",
+          "position": [
+            760,
+            100
+          ]
+        },
+        {
+          "id": 5,
+          "slug": "message_bottle",
+          "name": "Бутылка с посланием",
+          "position": [
+            925,
+            100
+          ]
+        },
+        {
+          "id": 6,
+          "slug": "apple",
+          "name": "Яблоко",
+          "position": [
+            1090,
+            100
+          ]
+        },
+        {
+          "id": 7,
+          "slug": "parrot",
+          "name": "Попугай",
+          "position": [
+            1255,
+            100
+          ]
+        },
+        {
+          "id": 8,
+          "slug": "lifebuoy",
+          "name": "Спасательный круг",
+          "position": [
+            1420,
+            100
+          ]
+        },
+        {
+          "id": 9,
+          "slug": "treasure_map",
+          "name": "Карта сокровищ",
+          "position": [
+            100,
+            250
+          ]
+        },
+        {
+          "id": 10,
+          "slug": "compass",
+          "name": "Компас",
+          "position": [
+            265,
+            250
+          ]
+        },
+        {
+          "id": 11,
+          "slug": "butterfly",
+          "name": "Бабочка",
+          "position": [
+            430,
+            250
+          ]
+        },
+        {
+          "id": 12,
+          "slug": "fish",
+          "name": "Рыбка",
+          "position": [
+            595,
+            250
+          ]
+        },
+        {
+          "id": 13,
+          "slug": "anchor",
+          "name": "Якорь",
+          "position": [
+            760,
+            250
+          ]
+        },
+        {
+          "id": 14,
+          "slug": "coconut",
+          "name": "Кокос",
+          "position": [
+            925,
+            250
+          ]
+        },
+        {
+          "id": 15,
+          "slug": "duck",
+          "name": "Уточка",
+          "position": [
+            1090,
+            250
+          ]
+        },
+        {
+          "id": 16,
+          "slug": "turtle",
+          "name": "Черепаха",
+          "position": [
+            1255,
+            250
+          ]
+        },
+        {
+          "id": 17,
+          "slug": "pearl",
+          "name": "Жемчужина",
+          "position": [
+            1420,
+            250
+          ]
+        },
+        {
+          "id": 18,
+          "slug": "eyepatch",
+          "name": "Пиратская повязка",
+          "position": [
+            100,
+            400
+          ]
+        },
+        {
+          "id": 19,
+          "slug": "telescope",
+          "name": "Подзорная труба",
+          "position": [
+            265,
+            400
+          ]
+        },
+        {
+          "id": 20,
+          "slug": "hibiscus",
+          "name": "Гибискус",
+          "position": [
+            430,
+            400
+          ]
+        },
+        {
+          "id": 21,
+          "slug": "flipflop",
+          "name": "Шлёпанец",
+          "position": [
+            595,
+            400
+          ]
+        },
+        {
+          "id": 22,
+          "slug": "sailboat",
+          "name": "Парусник",
+          "position": [
+            760,
+            400
+          ]
+        },
+        {
+          "id": 23,
+          "slug": "coin",
+          "name": "Золотая монета",
+          "position": [
+            925,
+            400
+          ]
+        },
+        {
+          "id": 24,
+          "slug": "bucket",
+          "name": "Ведёрко",
+          "position": [
+            1090,
+            400
+          ]
+        },
+        {
+          "id": 25,
+          "slug": "shovel",
+          "name": "Лопатка",
+          "position": [
+            1255,
+            400
+          ]
+        },
+        {
+          "id": 26,
+          "slug": "scallop",
+          "name": "Морской гребешок",
+          "position": [
+            1420,
+            400
+          ]
+        },
+        {
+          "id": 27,
+          "slug": "beachball",
+          "name": "Мяч",
+          "position": [
+            100,
+            550
+          ]
+        },
+        {
+          "id": 28,
+          "slug": "lantern",
+          "name": "Фонарь",
+          "position": [
+            265,
+            550
+          ]
+        },
+        {
+          "id": 29,
+          "slug": "crown",
+          "name": "Корона",
+          "position": [
+            430,
+            550
+          ]
+        },
+        {
+          "id": 30,
+          "slug": "beach_ball_colorful_l1",
+          "name": "Пёстрый пляжный мяч",
+          "position": [
+            595,
+            550
+          ]
+        },
+        {
+          "id": 31,
+          "slug": "beach_chair_l1",
+          "name": "Пляжный шезлонг",
+          "position": [
+            760,
+            550
+          ]
+        },
+        {
+          "id": 32,
+          "slug": "beach_umbrella_l1",
+          "name": "Пляжный зонт",
+          "position": [
+            925,
+            550
+          ]
+        },
+        {
+          "id": 33,
+          "slug": "coconut_drink_l1",
+          "name": "Кокосовый напиток",
+          "position": [
+            1090,
+            550
+          ]
+        },
+        {
+          "id": 34,
+          "slug": "flip_flops_l1",
+          "name": "Шлёпанцы",
+          "position": [
+            1255,
+            550
+          ]
+        },
+        {
+          "id": 35,
+          "slug": "lifebuoy_red_l1",
+          "name": "Красный спасательный круг",
+          "position": [
+            1420,
+            550
+          ]
+        },
+        {
+          "id": 36,
+          "slug": "sandcastle_l1",
+          "name": "Замок из песка",
+          "position": [
+            100,
+            700
+          ]
+        },
+        {
+          "id": 37,
+          "slug": "seagull_l1",
+          "name": "Чайка",
+          "position": [
+            265,
+            700
+          ]
+        },
+        {
+          "id": 38,
+          "slug": "starfish_red_l1",
+          "name": "Красная морская звезда",
+          "position": [
+            430,
+            700
+          ]
+        },
+        {
+          "id": 39,
+          "slug": "straw_hat_l1",
+          "name": "Соломенная шляпа",
+          "position": [
+            595,
+            700
+          ]
+        },
+        {
+          "id": 40,
+          "slug": "sunglasses_l1",
+          "name": "Солнцезащитные очки",
+          "position": [
+            760,
+            700
+          ]
+        },
+        {
+          "id": 41,
+          "slug": "sunscreen_l1",
+          "name": "Солнцезащитный крем",
+          "position": [
+            925,
+            700
+          ]
+        },
+        {
+          "id": 42,
+          "slug": "surfboard_l1",
+          "name": "Сёрфборд",
+          "position": [
+            1090,
+            700
+          ]
+        },
+        {
+          "id": 43,
+          "slug": "palm_tree_l1",
+          "name": "Пальма",
+          "position": [
+            1255,
+            700
+          ]
+        },
+        {
+          "id": 44,
+          "slug": "hibiscus_flower_l1",
+          "name": "Цветок гибискуса",
+          "position": [
+            1420,
+            700
+          ]
+        }
+      ]
     },
     {
       "id": 2,
@@ -36,57 +443,417 @@
       "story": "За заросшими воротами герой обнаруживает храм и следы экспедиции, которая искала источник силы маяка.",
       "scene": "jungle_ruins",
       "targets": [
-        "Резной тотем",
-        "Дневник исследователя",
-        "Каменный ключ",
-        "Золотой идол",
-        "Сломанный компас"
+        "Тотем",
+        "Золотой идол джунглей",
+        "Изумрудный скарабей",
+        "Золотой жук",
+        "Статуя обезьяны"
       ],
       "transition": "За храмом открывается проход к водопаду.",
       "background_path": "res://assets/levels/jungle_ruins.svg",
       "items": [
         {
           "id": 0,
-          "slug": "jungle_totem",
-          "name": "Резной тотем",
+          "slug": "tiki_totem_l2",
+          "name": "Тотем",
           "position": [
-            230,
-            300
+            100,
+            100
           ]
         },
         {
           "id": 1,
-          "slug": "expedition_journal",
-          "name": "Дневник исследователя",
+          "slug": "golden_jungle_idol_l2",
+          "name": "Золотой идол джунглей",
           "position": [
-            1150,
-            660
+            265,
+            100
           ]
         },
         {
           "id": 2,
-          "slug": "stone_key",
-          "name": "Каменный ключ",
+          "slug": "emerald_scarab_l2",
+          "name": "Изумрудный скарабей",
           "position": [
-            1360,
-            260
+            430,
+            100
           ]
         },
         {
           "id": 3,
-          "slug": "golden_idol",
-          "name": "Золотой идол",
+          "slug": "golden_beetle_l2",
+          "name": "Золотой жук",
           "position": [
-            800,
-            520
+            595,
+            100
           ]
         },
         {
           "id": 4,
-          "slug": "broken_compass",
-          "name": "Сломанный компас",
+          "slug": "monkey_statue_l2",
+          "name": "Статуя обезьяны",
           "position": [
-            520,
+            760,
+            100
+          ]
+        },
+        {
+          "id": 5,
+          "slug": "feather_headdress_l2",
+          "name": "Головной убор из перьев",
+          "position": [
+            925,
+            100
+          ]
+        },
+        {
+          "id": 6,
+          "slug": "ceremonial_mask_l2",
+          "name": "Ритуальная маска",
+          "position": [
+            1090,
+            100
+          ]
+        },
+        {
+          "id": 7,
+          "slug": "tribal_dagger_l2",
+          "name": "Племенной кинжал",
+          "position": [
+            1255,
+            100
+          ]
+        },
+        {
+          "id": 8,
+          "slug": "overgrown_relic_l2",
+          "name": "Заросшая реликвия",
+          "position": [
+            1420,
+            100
+          ]
+        },
+        {
+          "id": 9,
+          "slug": "jungle_fern_l2",
+          "name": "Папоротник джунглей",
+          "position": [
+            100,
+            250
+          ]
+        },
+        {
+          "id": 10,
+          "slug": "carved_stone_tablet_l2",
+          "name": "Каменная табличка",
+          "position": [
+            265,
+            250
+          ]
+        },
+        {
+          "id": 11,
+          "slug": "ancient_scroll_l2",
+          "name": "Древний свиток",
+          "position": [
+            430,
+            250
+          ]
+        },
+        {
+          "id": 12,
+          "slug": "expedition_book_l2",
+          "name": "Дневник экспедиции",
+          "position": [
+            595,
+            250
+          ]
+        },
+        {
+          "id": 13,
+          "slug": "adventurer_backpack_l2",
+          "name": "Рюкзак исследователя",
+          "position": [
+            760,
+            250
+          ]
+        },
+        {
+          "id": 14,
+          "slug": "sun_key_l2",
+          "name": "Солнечный ключ",
+          "position": [
+            925,
+            250
+          ]
+        },
+        {
+          "id": 15,
+          "slug": "sun_medallion_l2",
+          "name": "Солнечный медальон",
+          "position": [
+            1090,
+            250
+          ]
+        },
+        {
+          "id": 16,
+          "slug": "golden_fruit_l2",
+          "name": "Золотой плод",
+          "position": [
+            1255,
+            250
+          ]
+        },
+        {
+          "id": 17,
+          "slug": "tropical_fruit_l2",
+          "name": "Тропический фрукт",
+          "position": [
+            1420,
+            250
+          ]
+        },
+        {
+          "id": 18,
+          "slug": "ammonite_fossil_l2",
+          "name": "Окаменелость аммонита",
+          "position": [
+            100,
+            400
+          ]
+        },
+        {
+          "id": 19,
+          "slug": "anchor_blue_l2",
+          "name": "Синий якорь",
+          "position": [
+            265,
+            400
+          ]
+        },
+        {
+          "id": 20,
+          "slug": "ancient_compass_l2",
+          "name": "Древний компас",
+          "position": [
+            430,
+            400
+          ]
+        },
+        {
+          "id": 21,
+          "slug": "beach_ball_colorful_l2",
+          "name": "Пёстрый пляжный мяч",
+          "position": [
+            595,
+            400
+          ]
+        },
+        {
+          "id": 22,
+          "slug": "beach_chair_l2",
+          "name": "Пляжный шезлонг",
+          "position": [
+            760,
+            400
+          ]
+        },
+        {
+          "id": 23,
+          "slug": "beach_umbrella_l2",
+          "name": "Пляжный зонт",
+          "position": [
+            925,
+            400
+          ]
+        },
+        {
+          "id": 24,
+          "slug": "binoculars_l2",
+          "name": "Бинокль",
+          "position": [
+            1090,
+            400
+          ]
+        },
+        {
+          "id": 25,
+          "slug": "bird_skull_l2",
+          "name": "Череп птицы",
+          "position": [
+            1255,
+            400
+          ]
+        },
+        {
+          "id": 26,
+          "slug": "carrots_l2",
+          "name": "Морковь",
+          "position": [
+            1420,
+            400
+          ]
+        },
+        {
+          "id": 27,
+          "slug": "clay_vase_l2",
+          "name": "Глиняная ваза",
+          "position": [
+            100,
+            550
+          ]
+        },
+        {
+          "id": 28,
+          "slug": "coconut_drink_l2",
+          "name": "Кокосовый напиток",
+          "position": [
+            265,
+            550
+          ]
+        },
+        {
+          "id": 29,
+          "slug": "coiled_rope_l2",
+          "name": "Свернутая верёвка",
+          "position": [
+            430,
+            550
+          ]
+        },
+        {
+          "id": 30,
+          "slug": "conch_shell_l2",
+          "name": "Морская раковина",
+          "position": [
+            595,
+            550
+          ]
+        },
+        {
+          "id": 31,
+          "slug": "crab_orange_l2",
+          "name": "Оранжевый краб",
+          "position": [
+            760,
+            550
+          ]
+        },
+        {
+          "id": 32,
+          "slug": "diving_mask_l2",
+          "name": "Маска для ныряния",
+          "position": [
+            925,
+            550
+          ]
+        },
+        {
+          "id": 33,
+          "slug": "dolphin_l2",
+          "name": "Дельфин",
+          "position": [
+            1090,
+            550
+          ]
+        },
+        {
+          "id": 34,
+          "slug": "egg_basket_l2",
+          "name": "Корзина с яйцами",
+          "position": [
+            1255,
+            550
+          ]
+        },
+        {
+          "id": 35,
+          "slug": "flip_flops_l2",
+          "name": "Шлёпанцы",
+          "position": [
+            1420,
+            550
+          ]
+        },
+        {
+          "id": 36,
+          "slug": "garden_fence_l2",
+          "name": "Садовый забор",
+          "position": [
+            100,
+            700
+          ]
+        },
+        {
+          "id": 37,
+          "slug": "garden_gloves_l2",
+          "name": "Садовые перчатки",
+          "position": [
+            265,
+            700
+          ]
+        },
+        {
+          "id": 38,
+          "slug": "garden_shovel_l2",
+          "name": "Садовая лопата",
+          "position": [
+            430,
+            700
+          ]
+        },
+        {
+          "id": 39,
+          "slug": "green_crystal_l2",
+          "name": "Зелёный кристалл",
+          "position": [
+            595,
+            700
+          ]
+        },
+        {
+          "id": 40,
+          "slug": "hen_l2",
+          "name": "Курица",
+          "position": [
+            760,
+            700
+          ]
+        },
+        {
+          "id": 41,
+          "slug": "hibiscus_flower_l2",
+          "name": "Цветок гибискуса",
+          "position": [
+            925,
+            700
+          ]
+        },
+        {
+          "id": 42,
+          "slug": "jungle_treasure_chest_l2",
+          "name": "Сундук джунглей",
+          "position": [
+            1090,
+            700
+          ]
+        },
+        {
+          "id": 43,
+          "slug": "lifebuoy_red_l2",
+          "name": "Красный спасательный круг",
+          "position": [
+            1255,
+            700
+          ]
+        },
+        {
+          "id": 44,
+          "slug": "lighthouse_l2",
+          "name": "Маяк",
+          "position": [
+            1420,
             700
           ]
         }
@@ -101,58 +868,418 @@
       "story": "Внутри скалы спрятан механизм, управляющий морскими течениями. Его сердце — древняя жемчужина.",
       "scene": "waterfall_cave",
       "targets": [
-        "Светящийся кристалл",
-        "Старинный фонарь",
-        "Кристальная чаша",
-        "Серебряный ключ",
-        "Жемчужина"
+        "Зелёный кристалл",
+        "Окаменелость аммонита",
+        "Каменный фонарь",
+        "Морская раковина",
+        "Маска для ныряния"
       ],
       "transition": "Подземная река выводит к пиратской бухте.",
       "background_path": "res://assets/levels/waterfall_cave.svg",
       "items": [
         {
           "id": 0,
-          "slug": "glow_crystal",
-          "name": "Светящийся кристалл",
+          "slug": "green_crystal_l3",
+          "name": "Зелёный кристалл",
           "position": [
-            250,
-            240
+            100,
+            100
           ]
         },
         {
           "id": 1,
-          "slug": "old_lantern",
-          "name": "Старинный фонарь",
+          "slug": "ammonite_fossil_l3",
+          "name": "Окаменелость аммонита",
           "position": [
-            1190,
-            250
+            265,
+            100
           ]
         },
         {
           "id": 2,
-          "slug": "crystal_bowl",
-          "name": "Кристальная чаша",
+          "slug": "stone_well_lantern_l3",
+          "name": "Каменный фонарь",
           "position": [
-            760,
-            650
+            430,
+            100
           ]
         },
         {
           "id": 3,
-          "slug": "silver_key",
-          "name": "Серебряный ключ",
+          "slug": "conch_shell_l3",
+          "name": "Морская раковина",
           "position": [
-            1340,
-            600
+            595,
+            100
           ]
         },
         {
           "id": 4,
-          "slug": "tide_pearl",
-          "name": "Жемчужина",
+          "slug": "diving_mask_l3",
+          "name": "Маска для ныряния",
           "position": [
-            510,
-            470
+            760,
+            100
+          ]
+        },
+        {
+          "id": 5,
+          "slug": "clay_vase_l3",
+          "name": "Глиняная ваза",
+          "position": [
+            925,
+            100
+          ]
+        },
+        {
+          "id": 6,
+          "slug": "ancient_scroll_l3",
+          "name": "Древний свиток",
+          "position": [
+            1090,
+            100
+          ]
+        },
+        {
+          "id": 7,
+          "slug": "bird_skull_l3",
+          "name": "Череп птицы",
+          "position": [
+            1255,
+            100
+          ]
+        },
+        {
+          "id": 8,
+          "slug": "magnifying_glass_l3",
+          "name": "Лупа",
+          "position": [
+            1420,
+            100
+          ]
+        },
+        {
+          "id": 9,
+          "slug": "overgrown_relic_l3",
+          "name": "Заросшая реликвия",
+          "position": [
+            100,
+            250
+          ]
+        },
+        {
+          "id": 10,
+          "slug": "coiled_rope_l3",
+          "name": "Свернутая верёвка",
+          "position": [
+            265,
+            250
+          ]
+        },
+        {
+          "id": 11,
+          "slug": "water_bucket_l3",
+          "name": "Ведро с водой",
+          "position": [
+            430,
+            250
+          ]
+        },
+        {
+          "id": 12,
+          "slug": "dolphin_l3",
+          "name": "Дельфин",
+          "position": [
+            595,
+            250
+          ]
+        },
+        {
+          "id": 13,
+          "slug": "starfish_red_l3",
+          "name": "Красная морская звезда",
+          "position": [
+            760,
+            250
+          ]
+        },
+        {
+          "id": 14,
+          "slug": "lifebuoy_red_l3",
+          "name": "Красный спасательный круг",
+          "position": [
+            925,
+            250
+          ]
+        },
+        {
+          "id": 15,
+          "slug": "adventurer_backpack_l3",
+          "name": "Рюкзак исследователя",
+          "position": [
+            1090,
+            250
+          ]
+        },
+        {
+          "id": 16,
+          "slug": "anchor_blue_l3",
+          "name": "Синий якорь",
+          "position": [
+            1255,
+            250
+          ]
+        },
+        {
+          "id": 17,
+          "slug": "ancient_compass_l3",
+          "name": "Древний компас",
+          "position": [
+            1420,
+            250
+          ]
+        },
+        {
+          "id": 18,
+          "slug": "beach_ball_colorful_l3",
+          "name": "Пёстрый пляжный мяч",
+          "position": [
+            100,
+            400
+          ]
+        },
+        {
+          "id": 19,
+          "slug": "beach_chair_l3",
+          "name": "Пляжный шезлонг",
+          "position": [
+            265,
+            400
+          ]
+        },
+        {
+          "id": 20,
+          "slug": "beach_umbrella_l3",
+          "name": "Пляжный зонт",
+          "position": [
+            430,
+            400
+          ]
+        },
+        {
+          "id": 21,
+          "slug": "binoculars_l3",
+          "name": "Бинокль",
+          "position": [
+            595,
+            400
+          ]
+        },
+        {
+          "id": 22,
+          "slug": "carrots_l3",
+          "name": "Морковь",
+          "position": [
+            760,
+            400
+          ]
+        },
+        {
+          "id": 23,
+          "slug": "carved_stone_tablet_l3",
+          "name": "Каменная табличка",
+          "position": [
+            925,
+            400
+          ]
+        },
+        {
+          "id": 24,
+          "slug": "ceremonial_mask_l3",
+          "name": "Ритуальная маска",
+          "position": [
+            1090,
+            400
+          ]
+        },
+        {
+          "id": 25,
+          "slug": "coconut_drink_l3",
+          "name": "Кокосовый напиток",
+          "position": [
+            1255,
+            400
+          ]
+        },
+        {
+          "id": 26,
+          "slug": "crab_orange_l3",
+          "name": "Оранжевый краб",
+          "position": [
+            1420,
+            400
+          ]
+        },
+        {
+          "id": 27,
+          "slug": "egg_basket_l3",
+          "name": "Корзина с яйцами",
+          "position": [
+            100,
+            550
+          ]
+        },
+        {
+          "id": 28,
+          "slug": "emerald_scarab_l3",
+          "name": "Изумрудный скарабей",
+          "position": [
+            265,
+            550
+          ]
+        },
+        {
+          "id": 29,
+          "slug": "expedition_book_l3",
+          "name": "Дневник экспедиции",
+          "position": [
+            430,
+            550
+          ]
+        },
+        {
+          "id": 30,
+          "slug": "feather_headdress_l3",
+          "name": "Головной убор из перьев",
+          "position": [
+            595,
+            550
+          ]
+        },
+        {
+          "id": 31,
+          "slug": "flip_flops_l3",
+          "name": "Шлёпанцы",
+          "position": [
+            760,
+            550
+          ]
+        },
+        {
+          "id": 32,
+          "slug": "garden_fence_l3",
+          "name": "Садовый забор",
+          "position": [
+            925,
+            550
+          ]
+        },
+        {
+          "id": 33,
+          "slug": "garden_gloves_l3",
+          "name": "Садовые перчатки",
+          "position": [
+            1090,
+            550
+          ]
+        },
+        {
+          "id": 34,
+          "slug": "garden_shovel_l3",
+          "name": "Садовая лопата",
+          "position": [
+            1255,
+            550
+          ]
+        },
+        {
+          "id": 35,
+          "slug": "golden_beetle_l3",
+          "name": "Золотой жук",
+          "position": [
+            1420,
+            550
+          ]
+        },
+        {
+          "id": 36,
+          "slug": "golden_fruit_l3",
+          "name": "Золотой плод",
+          "position": [
+            100,
+            700
+          ]
+        },
+        {
+          "id": 37,
+          "slug": "golden_jungle_idol_l3",
+          "name": "Золотой идол джунглей",
+          "position": [
+            265,
+            700
+          ]
+        },
+        {
+          "id": 38,
+          "slug": "hen_l3",
+          "name": "Курица",
+          "position": [
+            430,
+            700
+          ]
+        },
+        {
+          "id": 39,
+          "slug": "hibiscus_flower_l3",
+          "name": "Цветок гибискуса",
+          "position": [
+            595,
+            700
+          ]
+        },
+        {
+          "id": 40,
+          "slug": "jungle_fern_l3",
+          "name": "Папоротник джунглей",
+          "position": [
+            760,
+            700
+          ]
+        },
+        {
+          "id": 41,
+          "slug": "jungle_treasure_chest_l3",
+          "name": "Сундук джунглей",
+          "position": [
+            925,
+            700
+          ]
+        },
+        {
+          "id": 42,
+          "slug": "lighthouse_l3",
+          "name": "Маяк",
+          "position": [
+            1090,
+            700
+          ]
+        },
+        {
+          "id": 43,
+          "slug": "monkey_statue_l3",
+          "name": "Статуя обезьяны",
+          "position": [
+            1255,
+            700
+          ]
+        },
+        {
+          "id": 44,
+          "slug": "palm_tree_l3",
+          "name": "Пальма",
+          "position": [
+            1420,
+            700
           ]
         }
       ]
@@ -166,58 +1293,418 @@
       "story": "В трюме разбитого корабля герой находит журнал капитана, который когда-то пытался добраться до маяка.",
       "scene": "pirate_cove",
       "targets": [
-        "Капитанский журнал",
-        "Подзорная труба",
-        "Пиратская печать",
-        "Судовой колокол",
-        "Сундук с картой"
+        "Синий якорь",
+        "Свернутая верёвка",
+        "Бинокль",
+        "Дневник экспедиции",
+        "Рюкзак исследователя"
       ],
       "transition": "Координаты ведут к затонувшей лагуне.",
       "background_path": "res://assets/levels/pirate_cove.svg",
       "items": [
         {
           "id": 0,
-          "slug": "captains_log",
-          "name": "Капитанский журнал",
+          "slug": "anchor_blue_l4",
+          "name": "Синий якорь",
           "position": [
-            250,
-            530
+            100,
+            100
           ]
         },
         {
           "id": 1,
-          "slug": "brass_spyglass",
-          "name": "Подзорная труба",
+          "slug": "coiled_rope_l4",
+          "name": "Свернутая верёвка",
           "position": [
-            1280,
-            250
+            265,
+            100
           ]
         },
         {
           "id": 2,
-          "slug": "captain_seal",
-          "name": "Пиратская печать",
+          "slug": "binoculars_l4",
+          "name": "Бинокль",
           "position": [
-            750,
-            380
+            430,
+            100
           ]
         },
         {
           "id": 3,
-          "slug": "ship_bell",
-          "name": "Судовой колокол",
+          "slug": "expedition_book_l4",
+          "name": "Дневник экспедиции",
           "position": [
-            1080,
-            690
+            595,
+            100
           ]
         },
         {
           "id": 4,
-          "slug": "chart_chest",
-          "name": "Сундук с картой",
+          "slug": "adventurer_backpack_l4",
+          "name": "Рюкзак исследователя",
           "position": [
-            420,
-            730
+            760,
+            100
+          ]
+        },
+        {
+          "id": 5,
+          "slug": "jungle_treasure_chest_l4",
+          "name": "Сундук джунглей",
+          "position": [
+            925,
+            100
+          ]
+        },
+        {
+          "id": 6,
+          "slug": "sun_key_l4",
+          "name": "Солнечный ключ",
+          "position": [
+            1090,
+            100
+          ]
+        },
+        {
+          "id": 7,
+          "slug": "ancient_compass_l4",
+          "name": "Древний компас",
+          "position": [
+            1255,
+            100
+          ]
+        },
+        {
+          "id": 8,
+          "slug": "bird_skull_l4",
+          "name": "Череп птицы",
+          "position": [
+            1420,
+            100
+          ]
+        },
+        {
+          "id": 9,
+          "slug": "tribal_dagger_l4",
+          "name": "Племенной кинжал",
+          "position": [
+            100,
+            250
+          ]
+        },
+        {
+          "id": 10,
+          "slug": "clay_vase_l4",
+          "name": "Глиняная ваза",
+          "position": [
+            265,
+            250
+          ]
+        },
+        {
+          "id": 11,
+          "slug": "wooden_flute_l4",
+          "name": "Деревянная флейта",
+          "position": [
+            430,
+            250
+          ]
+        },
+        {
+          "id": 12,
+          "slug": "lifebuoy_red_l4",
+          "name": "Красный спасательный круг",
+          "position": [
+            595,
+            250
+          ]
+        },
+        {
+          "id": 13,
+          "slug": "lighthouse_l4",
+          "name": "Маяк",
+          "position": [
+            760,
+            250
+          ]
+        },
+        {
+          "id": 14,
+          "slug": "sunglasses_l4",
+          "name": "Солнцезащитные очки",
+          "position": [
+            925,
+            250
+          ]
+        },
+        {
+          "id": 15,
+          "slug": "ammonite_fossil_l4",
+          "name": "Окаменелость аммонита",
+          "position": [
+            1090,
+            250
+          ]
+        },
+        {
+          "id": 16,
+          "slug": "ancient_scroll_l4",
+          "name": "Древний свиток",
+          "position": [
+            1255,
+            250
+          ]
+        },
+        {
+          "id": 17,
+          "slug": "beach_ball_colorful_l4",
+          "name": "Пёстрый пляжный мяч",
+          "position": [
+            1420,
+            250
+          ]
+        },
+        {
+          "id": 18,
+          "slug": "beach_chair_l4",
+          "name": "Пляжный шезлонг",
+          "position": [
+            100,
+            400
+          ]
+        },
+        {
+          "id": 19,
+          "slug": "beach_umbrella_l4",
+          "name": "Пляжный зонт",
+          "position": [
+            265,
+            400
+          ]
+        },
+        {
+          "id": 20,
+          "slug": "carrots_l4",
+          "name": "Морковь",
+          "position": [
+            430,
+            400
+          ]
+        },
+        {
+          "id": 21,
+          "slug": "carved_stone_tablet_l4",
+          "name": "Каменная табличка",
+          "position": [
+            595,
+            400
+          ]
+        },
+        {
+          "id": 22,
+          "slug": "ceremonial_mask_l4",
+          "name": "Ритуальная маска",
+          "position": [
+            760,
+            400
+          ]
+        },
+        {
+          "id": 23,
+          "slug": "coconut_drink_l4",
+          "name": "Кокосовый напиток",
+          "position": [
+            925,
+            400
+          ]
+        },
+        {
+          "id": 24,
+          "slug": "conch_shell_l4",
+          "name": "Морская раковина",
+          "position": [
+            1090,
+            400
+          ]
+        },
+        {
+          "id": 25,
+          "slug": "crab_orange_l4",
+          "name": "Оранжевый краб",
+          "position": [
+            1255,
+            400
+          ]
+        },
+        {
+          "id": 26,
+          "slug": "diving_mask_l4",
+          "name": "Маска для ныряния",
+          "position": [
+            1420,
+            400
+          ]
+        },
+        {
+          "id": 27,
+          "slug": "dolphin_l4",
+          "name": "Дельфин",
+          "position": [
+            100,
+            550
+          ]
+        },
+        {
+          "id": 28,
+          "slug": "egg_basket_l4",
+          "name": "Корзина с яйцами",
+          "position": [
+            265,
+            550
+          ]
+        },
+        {
+          "id": 29,
+          "slug": "emerald_scarab_l4",
+          "name": "Изумрудный скарабей",
+          "position": [
+            430,
+            550
+          ]
+        },
+        {
+          "id": 30,
+          "slug": "feather_headdress_l4",
+          "name": "Головной убор из перьев",
+          "position": [
+            595,
+            550
+          ]
+        },
+        {
+          "id": 31,
+          "slug": "flip_flops_l4",
+          "name": "Шлёпанцы",
+          "position": [
+            760,
+            550
+          ]
+        },
+        {
+          "id": 32,
+          "slug": "garden_fence_l4",
+          "name": "Садовый забор",
+          "position": [
+            925,
+            550
+          ]
+        },
+        {
+          "id": 33,
+          "slug": "garden_gloves_l4",
+          "name": "Садовые перчатки",
+          "position": [
+            1090,
+            550
+          ]
+        },
+        {
+          "id": 34,
+          "slug": "garden_shovel_l4",
+          "name": "Садовая лопата",
+          "position": [
+            1255,
+            550
+          ]
+        },
+        {
+          "id": 35,
+          "slug": "golden_beetle_l4",
+          "name": "Золотой жук",
+          "position": [
+            1420,
+            550
+          ]
+        },
+        {
+          "id": 36,
+          "slug": "golden_fruit_l4",
+          "name": "Золотой плод",
+          "position": [
+            100,
+            700
+          ]
+        },
+        {
+          "id": 37,
+          "slug": "golden_jungle_idol_l4",
+          "name": "Золотой идол джунглей",
+          "position": [
+            265,
+            700
+          ]
+        },
+        {
+          "id": 38,
+          "slug": "green_crystal_l4",
+          "name": "Зелёный кристалл",
+          "position": [
+            430,
+            700
+          ]
+        },
+        {
+          "id": 39,
+          "slug": "hen_l4",
+          "name": "Курица",
+          "position": [
+            595,
+            700
+          ]
+        },
+        {
+          "id": 40,
+          "slug": "hibiscus_flower_l4",
+          "name": "Цветок гибискуса",
+          "position": [
+            760,
+            700
+          ]
+        },
+        {
+          "id": 41,
+          "slug": "jungle_fern_l4",
+          "name": "Папоротник джунглей",
+          "position": [
+            925,
+            700
+          ]
+        },
+        {
+          "id": 42,
+          "slug": "magnifying_glass_l4",
+          "name": "Лупа",
+          "position": [
+            1090,
+            700
+          ]
+        },
+        {
+          "id": 43,
+          "slug": "monkey_statue_l4",
+          "name": "Статуя обезьяны",
+          "position": [
+            1255,
+            700
+          ]
+        },
+        {
+          "id": 44,
+          "slug": "overgrown_relic_l4",
+          "name": "Заросшая реликвия",
+          "position": [
+            1420,
+            700
           ]
         }
       ]
@@ -231,58 +1718,417 @@
       "story": "Под водой скрывается храм, где хранители оставили сердце океана — источник жизни морских островов.",
       "scene": "sunken_lagoon",
       "targets": [
-        "Трезубец",
-        "Морская корона",
-        "Древняя амфора",
-        "Золотая раковина",
-        "Сердце океана"
+        "Дельфин",
+        "Морская раковина",
+        "Оранжевый краб",
+        "Красная морская звезда",
+        "Красный спасательный круг"
       ],
       "transition": "Сердце океана указывает на вулканический остров.",
       "background_path": "res://assets/levels/sunken_lagoon.svg",
       "items": [
         {
           "id": 0,
-          "slug": "coral_trident",
-          "name": "Трезубец",
+          "slug": "dolphin_l5",
+          "name": "Дельфин",
           "position": [
-            260,
-            300
+            100,
+            100
           ]
         },
         {
           "id": 1,
-          "slug": "ocean_crown",
-          "name": "Морская корона",
+          "slug": "conch_shell_l5",
+          "name": "Морская раковина",
           "position": [
-            1260,
-            280
+            265,
+            100
           ]
         },
         {
           "id": 2,
-          "slug": "ancient_amphora",
-          "name": "Древняя амфора",
+          "slug": "crab_orange_l5",
+          "name": "Оранжевый краб",
           "position": [
-            760,
-            500
+            430,
+            100
           ]
         },
         {
           "id": 3,
-          "slug": "golden_shell",
-          "name": "Золотая раковина",
+          "slug": "starfish_red_l5",
+          "name": "Красная морская звезда",
           "position": [
-            420,
-            700
+            595,
+            100
           ]
         },
         {
           "id": 4,
-          "slug": "ocean_heart",
-          "name": "Сердце океана",
+          "slug": "lifebuoy_red_l5",
+          "name": "Красный спасательный круг",
           "position": [
-            1320,
-            690
+            760,
+            100
+          ]
+        },
+        {
+          "id": 5,
+          "slug": "diving_mask_l5",
+          "name": "Маска для ныряния",
+          "position": [
+            925,
+            100
+          ]
+        },
+        {
+          "id": 6,
+          "slug": "green_crystal_l5",
+          "name": "Зелёный кристалл",
+          "position": [
+            1090,
+            100
+          ]
+        },
+        {
+          "id": 7,
+          "slug": "ammonite_fossil_l5",
+          "name": "Окаменелость аммонита",
+          "position": [
+            1255,
+            100
+          ]
+        },
+        {
+          "id": 8,
+          "slug": "water_bucket_l5",
+          "name": "Ведро с водой",
+          "position": [
+            1420,
+            100
+          ]
+        },
+        {
+          "id": 9,
+          "slug": "coconut_drink_l5",
+          "name": "Кокосовый напиток",
+          "position": [
+            100,
+            250
+          ]
+        },
+        {
+          "id": 10,
+          "slug": "beach_ball_colorful_l5",
+          "name": "Пёстрый пляжный мяч",
+          "position": [
+            265,
+            250
+          ]
+        },
+        {
+          "id": 11,
+          "slug": "anchor_blue_l5",
+          "name": "Синий якорь",
+          "position": [
+            430,
+            250
+          ]
+        },
+        {
+          "id": 12,
+          "slug": "palm_tree_l5",
+          "name": "Пальма",
+          "position": [
+            595,
+            250
+          ]
+        },
+        {
+          "id": 13,
+          "slug": "seagull_l5",
+          "name": "Чайка",
+          "position": [
+            760,
+            250
+          ]
+        },
+        {
+          "id": 14,
+          "slug": "pearl_l5",
+          "position": [
+            925,
+            250
+          ]
+        },
+        {
+          "id": 15,
+          "slug": "adventurer_backpack_l5",
+          "name": "Рюкзак исследователя",
+          "position": [
+            1090,
+            250
+          ]
+        },
+        {
+          "id": 16,
+          "slug": "ancient_compass_l5",
+          "name": "Древний компас",
+          "position": [
+            1255,
+            250
+          ]
+        },
+        {
+          "id": 17,
+          "slug": "ancient_scroll_l5",
+          "name": "Древний свиток",
+          "position": [
+            1420,
+            250
+          ]
+        },
+        {
+          "id": 18,
+          "slug": "beach_chair_l5",
+          "name": "Пляжный шезлонг",
+          "position": [
+            100,
+            400
+          ]
+        },
+        {
+          "id": 19,
+          "slug": "beach_umbrella_l5",
+          "name": "Пляжный зонт",
+          "position": [
+            265,
+            400
+          ]
+        },
+        {
+          "id": 20,
+          "slug": "binoculars_l5",
+          "name": "Бинокль",
+          "position": [
+            430,
+            400
+          ]
+        },
+        {
+          "id": 21,
+          "slug": "bird_skull_l5",
+          "name": "Череп птицы",
+          "position": [
+            595,
+            400
+          ]
+        },
+        {
+          "id": 22,
+          "slug": "carrots_l5",
+          "name": "Морковь",
+          "position": [
+            760,
+            400
+          ]
+        },
+        {
+          "id": 23,
+          "slug": "carved_stone_tablet_l5",
+          "name": "Каменная табличка",
+          "position": [
+            925,
+            400
+          ]
+        },
+        {
+          "id": 24,
+          "slug": "ceremonial_mask_l5",
+          "name": "Ритуальная маска",
+          "position": [
+            1090,
+            400
+          ]
+        },
+        {
+          "id": 25,
+          "slug": "clay_vase_l5",
+          "name": "Глиняная ваза",
+          "position": [
+            1255,
+            400
+          ]
+        },
+        {
+          "id": 26,
+          "slug": "coiled_rope_l5",
+          "name": "Свернутая верёвка",
+          "position": [
+            1420,
+            400
+          ]
+        },
+        {
+          "id": 27,
+          "slug": "egg_basket_l5",
+          "name": "Корзина с яйцами",
+          "position": [
+            100,
+            550
+          ]
+        },
+        {
+          "id": 28,
+          "slug": "emerald_scarab_l5",
+          "name": "Изумрудный скарабей",
+          "position": [
+            265,
+            550
+          ]
+        },
+        {
+          "id": 29,
+          "slug": "expedition_book_l5",
+          "name": "Дневник экспедиции",
+          "position": [
+            430,
+            550
+          ]
+        },
+        {
+          "id": 30,
+          "slug": "feather_headdress_l5",
+          "name": "Головной убор из перьев",
+          "position": [
+            595,
+            550
+          ]
+        },
+        {
+          "id": 31,
+          "slug": "flip_flops_l5",
+          "name": "Шлёпанцы",
+          "position": [
+            760,
+            550
+          ]
+        },
+        {
+          "id": 32,
+          "slug": "garden_fence_l5",
+          "name": "Садовый забор",
+          "position": [
+            925,
+            550
+          ]
+        },
+        {
+          "id": 33,
+          "slug": "garden_gloves_l5",
+          "name": "Садовые перчатки",
+          "position": [
+            1090,
+            550
+          ]
+        },
+        {
+          "id": 34,
+          "slug": "garden_shovel_l5",
+          "name": "Садовая лопата",
+          "position": [
+            1255,
+            550
+          ]
+        },
+        {
+          "id": 35,
+          "slug": "golden_beetle_l5",
+          "name": "Золотой жук",
+          "position": [
+            1420,
+            550
+          ]
+        },
+        {
+          "id": 36,
+          "slug": "golden_fruit_l5",
+          "name": "Золотой плод",
+          "position": [
+            100,
+            700
+          ]
+        },
+        {
+          "id": 37,
+          "slug": "golden_jungle_idol_l5",
+          "name": "Золотой идол джунглей",
+          "position": [
+            265,
+            700
+          ]
+        },
+        {
+          "id": 38,
+          "slug": "hen_l5",
+          "name": "Курица",
+          "position": [
+            430,
+            700
+          ]
+        },
+        {
+          "id": 39,
+          "slug": "hibiscus_flower_l5",
+          "name": "Цветок гибискуса",
+          "position": [
+            595,
+            700
+          ]
+        },
+        {
+          "id": 40,
+          "slug": "jungle_fern_l5",
+          "name": "Папоротник джунглей",
+          "position": [
+            760,
+            700
+          ]
+        },
+        {
+          "id": 41,
+          "slug": "jungle_treasure_chest_l5",
+          "name": "Сундук джунглей",
+          "position": [
+            925,
+            700
+          ]
+        },
+        {
+          "id": 42,
+          "slug": "lighthouse_l5",
+          "name": "Маяк",
+          "position": [
+            1090,
+            700
+          ]
+        },
+        {
+          "id": 43,
+          "slug": "magnifying_glass_l5",
+          "name": "Лупа",
+          "position": [
+            1255,
+            700
+          ]
+        },
+        {
+          "id": 44,
+          "slug": "monkey_statue_l5",
+          "name": "Статуя обезьяны",
+          "position": [
+            1420,
+            700
           ]
         }
       ]
@@ -296,58 +2142,418 @@
       "story": "Внутри потухшего вулкана находится кузница. Здесь становится ясно, что артефакты были созданы как единая система.",
       "scene": "volcano_forge",
       "targets": [
-        "Молот кузнеца",
-        "Лавовый кристалл",
-        "Огненная руна",
-        "Клещи",
-        "Пылающий медальон"
+        "Золотой жук",
+        "Зелёный кристалл",
+        "Солнечный медальон",
+        "Каменные солнечные часы",
+        "Глиняная ваза"
       ],
       "transition": "Свет кристалла открывает путь к горной обсерватории.",
       "background_path": "res://assets/levels/volcano_forge.svg",
       "items": [
         {
           "id": 0,
-          "slug": "blacksmith_hammer",
-          "name": "Молот кузнеца",
+          "slug": "golden_beetle_l6",
+          "name": "Золотой жук",
           "position": [
-            250,
-            620
+            100,
+            100
           ]
         },
         {
           "id": 1,
-          "slug": "lava_crystal",
-          "name": "Лавовый кристалл",
+          "slug": "green_crystal_l6",
+          "name": "Зелёный кристалл",
           "position": [
-            770,
-            240
+            265,
+            100
           ]
         },
         {
           "id": 2,
-          "slug": "fire_rune",
-          "name": "Огненная руна",
+          "slug": "sun_medallion_l6",
+          "name": "Солнечный медальон",
           "position": [
-            1290,
-            300
+            430,
+            100
           ]
         },
         {
           "id": 3,
-          "slug": "forge_tongs",
-          "name": "Клещи",
+          "slug": "stone_sundial_l6",
+          "name": "Каменные солнечные часы",
           "position": [
-            1110,
-            690
+            595,
+            100
           ]
         },
         {
           "id": 4,
-          "slug": "flame_medallion",
-          "name": "Пылающий медальон",
+          "slug": "clay_vase_l6",
+          "name": "Глиняная ваза",
           "position": [
-            510,
-            450
+            760,
+            100
+          ]
+        },
+        {
+          "id": 5,
+          "slug": "tribal_dagger_l6",
+          "name": "Племенной кинжал",
+          "position": [
+            925,
+            100
+          ]
+        },
+        {
+          "id": 6,
+          "slug": "golden_jungle_idol_l6",
+          "name": "Золотой идол джунглей",
+          "position": [
+            1090,
+            100
+          ]
+        },
+        {
+          "id": 7,
+          "slug": "ceremonial_mask_l6",
+          "name": "Ритуальная маска",
+          "position": [
+            1255,
+            100
+          ]
+        },
+        {
+          "id": 8,
+          "slug": "tiki_totem_l6",
+          "name": "Тотем",
+          "position": [
+            1420,
+            100
+          ]
+        },
+        {
+          "id": 9,
+          "slug": "carved_stone_tablet_l6",
+          "name": "Каменная табличка",
+          "position": [
+            100,
+            250
+          ]
+        },
+        {
+          "id": 10,
+          "slug": "ancient_scroll_l6",
+          "name": "Древний свиток",
+          "position": [
+            265,
+            250
+          ]
+        },
+        {
+          "id": 11,
+          "slug": "bird_skull_l6",
+          "name": "Череп птицы",
+          "position": [
+            430,
+            250
+          ]
+        },
+        {
+          "id": 12,
+          "slug": "wheelbarrow_l6",
+          "name": "Тачка",
+          "position": [
+            595,
+            250
+          ]
+        },
+        {
+          "id": 13,
+          "slug": "sun_key_l6",
+          "name": "Солнечный ключ",
+          "position": [
+            760,
+            250
+          ]
+        },
+        {
+          "id": 14,
+          "slug": "adventurer_backpack_l6",
+          "name": "Рюкзак исследователя",
+          "position": [
+            925,
+            250
+          ]
+        },
+        {
+          "id": 15,
+          "slug": "ammonite_fossil_l6",
+          "name": "Окаменелость аммонита",
+          "position": [
+            1090,
+            250
+          ]
+        },
+        {
+          "id": 16,
+          "slug": "anchor_blue_l6",
+          "name": "Синий якорь",
+          "position": [
+            1255,
+            250
+          ]
+        },
+        {
+          "id": 17,
+          "slug": "ancient_compass_l6",
+          "name": "Древний компас",
+          "position": [
+            1420,
+            250
+          ]
+        },
+        {
+          "id": 18,
+          "slug": "beach_ball_colorful_l6",
+          "name": "Пёстрый пляжный мяч",
+          "position": [
+            100,
+            400
+          ]
+        },
+        {
+          "id": 19,
+          "slug": "beach_chair_l6",
+          "name": "Пляжный шезлонг",
+          "position": [
+            265,
+            400
+          ]
+        },
+        {
+          "id": 20,
+          "slug": "beach_umbrella_l6",
+          "name": "Пляжный зонт",
+          "position": [
+            430,
+            400
+          ]
+        },
+        {
+          "id": 21,
+          "slug": "binoculars_l6",
+          "name": "Бинокль",
+          "position": [
+            595,
+            400
+          ]
+        },
+        {
+          "id": 22,
+          "slug": "carrots_l6",
+          "name": "Морковь",
+          "position": [
+            760,
+            400
+          ]
+        },
+        {
+          "id": 23,
+          "slug": "coconut_drink_l6",
+          "name": "Кокосовый напиток",
+          "position": [
+            925,
+            400
+          ]
+        },
+        {
+          "id": 24,
+          "slug": "coiled_rope_l6",
+          "name": "Свернутая верёвка",
+          "position": [
+            1090,
+            400
+          ]
+        },
+        {
+          "id": 25,
+          "slug": "conch_shell_l6",
+          "name": "Морская раковина",
+          "position": [
+            1255,
+            400
+          ]
+        },
+        {
+          "id": 26,
+          "slug": "crab_orange_l6",
+          "name": "Оранжевый краб",
+          "position": [
+            1420,
+            400
+          ]
+        },
+        {
+          "id": 27,
+          "slug": "diving_mask_l6",
+          "name": "Маска для ныряния",
+          "position": [
+            100,
+            550
+          ]
+        },
+        {
+          "id": 28,
+          "slug": "dolphin_l6",
+          "name": "Дельфин",
+          "position": [
+            265,
+            550
+          ]
+        },
+        {
+          "id": 29,
+          "slug": "egg_basket_l6",
+          "name": "Корзина с яйцами",
+          "position": [
+            430,
+            550
+          ]
+        },
+        {
+          "id": 30,
+          "slug": "emerald_scarab_l6",
+          "name": "Изумрудный скарабей",
+          "position": [
+            595,
+            550
+          ]
+        },
+        {
+          "id": 31,
+          "slug": "expedition_book_l6",
+          "name": "Дневник экспедиции",
+          "position": [
+            760,
+            550
+          ]
+        },
+        {
+          "id": 32,
+          "slug": "feather_headdress_l6",
+          "name": "Головной убор из перьев",
+          "position": [
+            925,
+            550
+          ]
+        },
+        {
+          "id": 33,
+          "slug": "flip_flops_l6",
+          "name": "Шлёпанцы",
+          "position": [
+            1090,
+            550
+          ]
+        },
+        {
+          "id": 34,
+          "slug": "garden_fence_l6",
+          "name": "Садовый забор",
+          "position": [
+            1255,
+            550
+          ]
+        },
+        {
+          "id": 35,
+          "slug": "garden_gloves_l6",
+          "name": "Садовые перчатки",
+          "position": [
+            1420,
+            550
+          ]
+        },
+        {
+          "id": 36,
+          "slug": "garden_shovel_l6",
+          "name": "Садовая лопата",
+          "position": [
+            100,
+            700
+          ]
+        },
+        {
+          "id": 37,
+          "slug": "golden_fruit_l6",
+          "name": "Золотой плод",
+          "position": [
+            265,
+            700
+          ]
+        },
+        {
+          "id": 38,
+          "slug": "hen_l6",
+          "name": "Курица",
+          "position": [
+            430,
+            700
+          ]
+        },
+        {
+          "id": 39,
+          "slug": "hibiscus_flower_l6",
+          "name": "Цветок гибискуса",
+          "position": [
+            595,
+            700
+          ]
+        },
+        {
+          "id": 40,
+          "slug": "jungle_fern_l6",
+          "name": "Папоротник джунглей",
+          "position": [
+            760,
+            700
+          ]
+        },
+        {
+          "id": 41,
+          "slug": "jungle_treasure_chest_l6",
+          "name": "Сундук джунглей",
+          "position": [
+            925,
+            700
+          ]
+        },
+        {
+          "id": 42,
+          "slug": "lifebuoy_red_l6",
+          "name": "Красный спасательный круг",
+          "position": [
+            1090,
+            700
+          ]
+        },
+        {
+          "id": 43,
+          "slug": "lighthouse_l6",
+          "name": "Маяк",
+          "position": [
+            1255,
+            700
+          ]
+        },
+        {
+          "id": 44,
+          "slug": "magnifying_glass_l6",
+          "name": "Лупа",
+          "position": [
+            1420,
+            700
           ]
         }
       ]
@@ -361,58 +2567,418 @@
       "story": "Звёздные карты раскрывают расположение последнего острова и показывают, что маяк погас не случайно.",
       "scene": "sky_observatory",
       "targets": [
-        "Астролябия",
-        "Звёздная карта",
-        "Лунный камень",
-        "Телескоп",
-        "Звёздный компас"
+        "Древний компас",
+        "Бинокль",
+        "Лупа",
+        "Деревянная флейта",
+        "Головной убор из перьев"
       ],
       "transition": "Координаты ведут на север, в ледяные земли.",
       "background_path": "res://assets/levels/sky_observatory.svg",
       "items": [
         {
           "id": 0,
-          "slug": "astrolabe",
-          "name": "Астролябия",
+          "slug": "ancient_compass_l7",
+          "name": "Древний компас",
           "position": [
-            280,
-            640
+            100,
+            100
           ]
         },
         {
           "id": 1,
-          "slug": "star_chart",
-          "name": "Звёздная карта",
+          "slug": "binoculars_l7",
+          "name": "Бинокль",
           "position": [
-            1190,
-            660
+            265,
+            100
           ]
         },
         {
           "id": 2,
-          "slug": "moonstone",
-          "name": "Лунный камень",
+          "slug": "magnifying_glass_l7",
+          "name": "Лупа",
           "position": [
-            750,
-            270
+            430,
+            100
           ]
         },
         {
           "id": 3,
-          "slug": "telescope",
-          "name": "Телескоп",
+          "slug": "wooden_flute_l7",
+          "name": "Деревянная флейта",
           "position": [
-            1330,
-            360
+            595,
+            100
           ]
         },
         {
           "id": 4,
-          "slug": "star_compass",
-          "name": "Звёздный компас",
+          "slug": "feather_headdress_l7",
+          "name": "Головной убор из перьев",
           "position": [
-            520,
-            430
+            760,
+            100
+          ]
+        },
+        {
+          "id": 5,
+          "slug": "bird_skull_l7",
+          "name": "Череп птицы",
+          "position": [
+            925,
+            100
+          ]
+        },
+        {
+          "id": 6,
+          "slug": "sun_medallion_l7",
+          "name": "Солнечный медальон",
+          "position": [
+            1090,
+            100
+          ]
+        },
+        {
+          "id": 7,
+          "slug": "green_crystal_l7",
+          "name": "Зелёный кристалл",
+          "position": [
+            1255,
+            100
+          ]
+        },
+        {
+          "id": 8,
+          "slug": "lighthouse_l7",
+          "name": "Маяк",
+          "position": [
+            1420,
+            100
+          ]
+        },
+        {
+          "id": 9,
+          "slug": "straw_hat_l7",
+          "name": "Соломенная шляпа",
+          "position": [
+            100,
+            250
+          ]
+        },
+        {
+          "id": 10,
+          "slug": "adventurer_backpack_l7",
+          "name": "Рюкзак исследователя",
+          "position": [
+            265,
+            250
+          ]
+        },
+        {
+          "id": 11,
+          "slug": "expedition_book_l7",
+          "name": "Дневник экспедиции",
+          "position": [
+            430,
+            250
+          ]
+        },
+        {
+          "id": 12,
+          "slug": "sun_key_l7",
+          "name": "Солнечный ключ",
+          "position": [
+            595,
+            250
+          ]
+        },
+        {
+          "id": 13,
+          "slug": "golden_beetle_l7",
+          "name": "Золотой жук",
+          "position": [
+            760,
+            250
+          ]
+        },
+        {
+          "id": 14,
+          "slug": "overgrown_relic_l7",
+          "name": "Заросшая реликвия",
+          "position": [
+            925,
+            250
+          ]
+        },
+        {
+          "id": 15,
+          "slug": "ammonite_fossil_l7",
+          "name": "Окаменелость аммонита",
+          "position": [
+            1090,
+            250
+          ]
+        },
+        {
+          "id": 16,
+          "slug": "anchor_blue_l7",
+          "name": "Синий якорь",
+          "position": [
+            1255,
+            250
+          ]
+        },
+        {
+          "id": 17,
+          "slug": "ancient_scroll_l7",
+          "name": "Древний свиток",
+          "position": [
+            1420,
+            250
+          ]
+        },
+        {
+          "id": 18,
+          "slug": "beach_ball_colorful_l7",
+          "name": "Пёстрый пляжный мяч",
+          "position": [
+            100,
+            400
+          ]
+        },
+        {
+          "id": 19,
+          "slug": "beach_chair_l7",
+          "name": "Пляжный шезлонг",
+          "position": [
+            265,
+            400
+          ]
+        },
+        {
+          "id": 20,
+          "slug": "beach_umbrella_l7",
+          "name": "Пляжный зонт",
+          "position": [
+            430,
+            400
+          ]
+        },
+        {
+          "id": 21,
+          "slug": "carrots_l7",
+          "name": "Морковь",
+          "position": [
+            595,
+            400
+          ]
+        },
+        {
+          "id": 22,
+          "slug": "carved_stone_tablet_l7",
+          "name": "Каменная табличка",
+          "position": [
+            760,
+            400
+          ]
+        },
+        {
+          "id": 23,
+          "slug": "ceremonial_mask_l7",
+          "name": "Ритуальная маска",
+          "position": [
+            925,
+            400
+          ]
+        },
+        {
+          "id": 24,
+          "slug": "clay_vase_l7",
+          "name": "Глиняная ваза",
+          "position": [
+            1090,
+            400
+          ]
+        },
+        {
+          "id": 25,
+          "slug": "coconut_drink_l7",
+          "name": "Кокосовый напиток",
+          "position": [
+            1255,
+            400
+          ]
+        },
+        {
+          "id": 26,
+          "slug": "coiled_rope_l7",
+          "name": "Свернутая верёвка",
+          "position": [
+            1420,
+            400
+          ]
+        },
+        {
+          "id": 27,
+          "slug": "conch_shell_l7",
+          "name": "Морская раковина",
+          "position": [
+            100,
+            550
+          ]
+        },
+        {
+          "id": 28,
+          "slug": "crab_orange_l7",
+          "name": "Оранжевый краб",
+          "position": [
+            265,
+            550
+          ]
+        },
+        {
+          "id": 29,
+          "slug": "diving_mask_l7",
+          "name": "Маска для ныряния",
+          "position": [
+            430,
+            550
+          ]
+        },
+        {
+          "id": 30,
+          "slug": "dolphin_l7",
+          "name": "Дельфин",
+          "position": [
+            595,
+            550
+          ]
+        },
+        {
+          "id": 31,
+          "slug": "egg_basket_l7",
+          "name": "Корзина с яйцами",
+          "position": [
+            760,
+            550
+          ]
+        },
+        {
+          "id": 32,
+          "slug": "emerald_scarab_l7",
+          "name": "Изумрудный скарабей",
+          "position": [
+            925,
+            550
+          ]
+        },
+        {
+          "id": 33,
+          "slug": "flip_flops_l7",
+          "name": "Шлёпанцы",
+          "position": [
+            1090,
+            550
+          ]
+        },
+        {
+          "id": 34,
+          "slug": "garden_fence_l7",
+          "name": "Садовый забор",
+          "position": [
+            1255,
+            550
+          ]
+        },
+        {
+          "id": 35,
+          "slug": "garden_gloves_l7",
+          "name": "Садовые перчатки",
+          "position": [
+            1420,
+            550
+          ]
+        },
+        {
+          "id": 36,
+          "slug": "garden_shovel_l7",
+          "name": "Садовая лопата",
+          "position": [
+            100,
+            700
+          ]
+        },
+        {
+          "id": 37,
+          "slug": "golden_fruit_l7",
+          "name": "Золотой плод",
+          "position": [
+            265,
+            700
+          ]
+        },
+        {
+          "id": 38,
+          "slug": "golden_jungle_idol_l7",
+          "name": "Золотой идол джунглей",
+          "position": [
+            430,
+            700
+          ]
+        },
+        {
+          "id": 39,
+          "slug": "hen_l7",
+          "name": "Курица",
+          "position": [
+            595,
+            700
+          ]
+        },
+        {
+          "id": 40,
+          "slug": "hibiscus_flower_l7",
+          "name": "Цветок гибискуса",
+          "position": [
+            760,
+            700
+          ]
+        },
+        {
+          "id": 41,
+          "slug": "jungle_fern_l7",
+          "name": "Папоротник джунглей",
+          "position": [
+            925,
+            700
+          ]
+        },
+        {
+          "id": 42,
+          "slug": "jungle_treasure_chest_l7",
+          "name": "Сундук джунглей",
+          "position": [
+            1090,
+            700
+          ]
+        },
+        {
+          "id": 43,
+          "slug": "lifebuoy_red_l7",
+          "name": "Красный спасательный круг",
+          "position": [
+            1255,
+            700
+          ]
+        },
+        {
+          "id": 44,
+          "slug": "monkey_statue_l7",
+          "name": "Статуя обезьяны",
+          "position": [
+            1420,
+            700
           ]
         }
       ]
@@ -426,58 +2992,417 @@
       "story": "В замёрзшей башне герой находит записи: смотрители сами отключили маяк, чтобы остановить опасную силу внутри него.",
       "scene": "ice_kingdom",
       "targets": [
-        "Ледяная корона",
-        "Замёрзшее письмо",
-        "Синий кристалл",
-        "Старинный ключ",
-        "Кристалл памяти"
+        "Зелёный кристалл",
+        "Окаменелость аммонита",
+        "Каменный фонарь",
+        "Глиняная ваза",
+        "Древний свиток"
       ],
       "transition": "Открывается дорога к столице древнего народа.",
       "background_path": "res://assets/levels/ice_kingdom.svg",
       "items": [
         {
           "id": 0,
-          "slug": "ice_crown",
-          "name": "Ледяная корона",
+          "slug": "green_crystal_l8",
+          "name": "Зелёный кристалл",
           "position": [
-            250,
-            300
+            100,
+            100
           ]
         },
         {
           "id": 1,
-          "slug": "frozen_letter",
-          "name": "Замёрзшее письмо",
+          "slug": "ammonite_fossil_l8",
+          "name": "Окаменелость аммонита",
           "position": [
-            1270,
-            280
+            265,
+            100
           ]
         },
         {
           "id": 2,
-          "slug": "blue_crystal",
-          "name": "Синий кристалл",
+          "slug": "stone_well_lantern_l8",
+          "name": "Каменный фонарь",
           "position": [
-            760,
-            540
+            430,
+            100
           ]
         },
         {
           "id": 3,
-          "slug": "ancient_ice_key",
-          "name": "Старинный ключ",
+          "slug": "clay_vase_l8",
+          "name": "Глиняная ваза",
           "position": [
-            410,
-            700
+            595,
+            100
           ]
         },
         {
           "id": 4,
-          "slug": "memory_crystal",
-          "name": "Кристалл памяти",
+          "slug": "ancient_scroll_l8",
+          "name": "Древний свиток",
           "position": [
-            1330,
-            690
+            760,
+            100
+          ]
+        },
+        {
+          "id": 5,
+          "slug": "carved_stone_tablet_l8",
+          "name": "Каменная табличка",
+          "position": [
+            925,
+            100
+          ]
+        },
+        {
+          "id": 6,
+          "slug": "bird_skull_l8",
+          "name": "Череп птицы",
+          "position": [
+            1090,
+            100
+          ]
+        },
+        {
+          "id": 7,
+          "slug": "ceremonial_mask_l8",
+          "name": "Ритуальная маска",
+          "position": [
+            1255,
+            100
+          ]
+        },
+        {
+          "id": 8,
+          "slug": "golden_beetle_l8",
+          "name": "Золотой жук",
+          "position": [
+            1420,
+            100
+          ]
+        },
+        {
+          "id": 9,
+          "slug": "water_bucket_l8",
+          "name": "Ведро с водой",
+          "position": [
+            100,
+            250
+          ]
+        },
+        {
+          "id": 10,
+          "slug": "coiled_rope_l8",
+          "name": "Свернутая верёвка",
+          "position": [
+            265,
+            250
+          ]
+        },
+        {
+          "id": 11,
+          "slug": "hibiscus_flower_l8",
+          "name": "Цветок гибискуса",
+          "position": [
+            430,
+            250
+          ]
+        },
+        {
+          "id": 12,
+          "slug": "tiki_totem_l8",
+          "name": "Тотем",
+          "position": [
+            595,
+            250
+          ]
+        },
+        {
+          "id": 13,
+          "slug": "sun_medallion_l8",
+          "name": "Солнечный медальон",
+          "position": [
+            760,
+            250
+          ]
+        },
+        {
+          "id": 14,
+          "slug": "pearl_l8",
+          "position": [
+            925,
+            250
+          ]
+        },
+        {
+          "id": 15,
+          "slug": "adventurer_backpack_l8",
+          "name": "Рюкзак исследователя",
+          "position": [
+            1090,
+            250
+          ]
+        },
+        {
+          "id": 16,
+          "slug": "anchor_blue_l8",
+          "name": "Синий якорь",
+          "position": [
+            1255,
+            250
+          ]
+        },
+        {
+          "id": 17,
+          "slug": "ancient_compass_l8",
+          "name": "Древний компас",
+          "position": [
+            1420,
+            250
+          ]
+        },
+        {
+          "id": 18,
+          "slug": "beach_ball_colorful_l8",
+          "name": "Пёстрый пляжный мяч",
+          "position": [
+            100,
+            400
+          ]
+        },
+        {
+          "id": 19,
+          "slug": "beach_chair_l8",
+          "name": "Пляжный шезлонг",
+          "position": [
+            265,
+            400
+          ]
+        },
+        {
+          "id": 20,
+          "slug": "beach_umbrella_l8",
+          "name": "Пляжный зонт",
+          "position": [
+            430,
+            400
+          ]
+        },
+        {
+          "id": 21,
+          "slug": "binoculars_l8",
+          "name": "Бинокль",
+          "position": [
+            595,
+            400
+          ]
+        },
+        {
+          "id": 22,
+          "slug": "carrots_l8",
+          "name": "Морковь",
+          "position": [
+            760,
+            400
+          ]
+        },
+        {
+          "id": 23,
+          "slug": "coconut_drink_l8",
+          "name": "Кокосовый напиток",
+          "position": [
+            925,
+            400
+          ]
+        },
+        {
+          "id": 24,
+          "slug": "conch_shell_l8",
+          "name": "Морская раковина",
+          "position": [
+            1090,
+            400
+          ]
+        },
+        {
+          "id": 25,
+          "slug": "crab_orange_l8",
+          "name": "Оранжевый краб",
+          "position": [
+            1255,
+            400
+          ]
+        },
+        {
+          "id": 26,
+          "slug": "diving_mask_l8",
+          "name": "Маска для ныряния",
+          "position": [
+            1420,
+            400
+          ]
+        },
+        {
+          "id": 27,
+          "slug": "dolphin_l8",
+          "name": "Дельфин",
+          "position": [
+            100,
+            550
+          ]
+        },
+        {
+          "id": 28,
+          "slug": "egg_basket_l8",
+          "name": "Корзина с яйцами",
+          "position": [
+            265,
+            550
+          ]
+        },
+        {
+          "id": 29,
+          "slug": "emerald_scarab_l8",
+          "name": "Изумрудный скарабей",
+          "position": [
+            430,
+            550
+          ]
+        },
+        {
+          "id": 30,
+          "slug": "expedition_book_l8",
+          "name": "Дневник экспедиции",
+          "position": [
+            595,
+            550
+          ]
+        },
+        {
+          "id": 31,
+          "slug": "feather_headdress_l8",
+          "name": "Головной убор из перьев",
+          "position": [
+            760,
+            550
+          ]
+        },
+        {
+          "id": 32,
+          "slug": "flip_flops_l8",
+          "name": "Шлёпанцы",
+          "position": [
+            925,
+            550
+          ]
+        },
+        {
+          "id": 33,
+          "slug": "garden_fence_l8",
+          "name": "Садовый забор",
+          "position": [
+            1090,
+            550
+          ]
+        },
+        {
+          "id": 34,
+          "slug": "garden_gloves_l8",
+          "name": "Садовые перчатки",
+          "position": [
+            1255,
+            550
+          ]
+        },
+        {
+          "id": 35,
+          "slug": "garden_shovel_l8",
+          "name": "Садовая лопата",
+          "position": [
+            1420,
+            550
+          ]
+        },
+        {
+          "id": 36,
+          "slug": "golden_fruit_l8",
+          "name": "Золотой плод",
+          "position": [
+            100,
+            700
+          ]
+        },
+        {
+          "id": 37,
+          "slug": "golden_jungle_idol_l8",
+          "name": "Золотой идол джунглей",
+          "position": [
+            265,
+            700
+          ]
+        },
+        {
+          "id": 38,
+          "slug": "hen_l8",
+          "name": "Курица",
+          "position": [
+            430,
+            700
+          ]
+        },
+        {
+          "id": 39,
+          "slug": "jungle_fern_l8",
+          "name": "Папоротник джунглей",
+          "position": [
+            595,
+            700
+          ]
+        },
+        {
+          "id": 40,
+          "slug": "jungle_treasure_chest_l8",
+          "name": "Сундук джунглей",
+          "position": [
+            760,
+            700
+          ]
+        },
+        {
+          "id": 41,
+          "slug": "lifebuoy_red_l8",
+          "name": "Красный спасательный круг",
+          "position": [
+            925,
+            700
+          ]
+        },
+        {
+          "id": 42,
+          "slug": "lighthouse_l8",
+          "name": "Маяк",
+          "position": [
+            1090,
+            700
+          ]
+        },
+        {
+          "id": 43,
+          "slug": "magnifying_glass_l8",
+          "name": "Лупа",
+          "position": [
+            1255,
+            700
+          ]
+        },
+        {
+          "id": 44,
+          "slug": "monkey_statue_l8",
+          "name": "Статуя обезьяны",
+          "position": [
+            1420,
+            700
           ]
         }
       ]
@@ -491,57 +3416,417 @@
       "story": "В архивах города герой узнаёт правду: маяк скрыли, чтобы защитить мир от разрушительной силы, и теперь его можно включить только после восстановления баланса.",
       "scene": "lost_city",
       "targets": [
-        "Печать хранителей",
-        "Книга летописей",
-        "Золотая маска",
-        "Солнечный диск",
-        "Сердце архипелага"
+        "Ритуальная маска",
+        "Каменная табличка",
+        "Каменные солнечные часы",
+        "Тотем",
+        "Статуя обезьяны"
       ],
       "transition": "Все пути сходятся у последнего маяка.",
       "background_path": "res://assets/levels/lost_city.svg",
       "items": [
         {
           "id": 0,
-          "slug": "guardian_seal",
-          "name": "Печать хранителей",
+          "slug": "ceremonial_mask_l9",
+          "name": "Ритуальная маска",
           "position": [
-            250,
-            620
+            100,
+            100
           ]
         },
         {
           "id": 1,
-          "slug": "chronicle_book",
-          "name": "Книга летописей",
+          "slug": "carved_stone_tablet_l9",
+          "name": "Каменная табличка",
           "position": [
-            1250,
-            280
+            265,
+            100
           ]
         },
         {
           "id": 2,
-          "slug": "golden_mask",
-          "name": "Золотая маска",
+          "slug": "stone_sundial_l9",
+          "name": "Каменные солнечные часы",
           "position": [
-            760,
-            420
+            430,
+            100
           ]
         },
         {
           "id": 3,
-          "slug": "sun_disk",
-          "name": "Солнечный диск",
+          "slug": "tiki_totem_l9",
+          "name": "Тотем",
           "position": [
-            420,
-            290
+            595,
+            100
           ]
         },
         {
           "id": 4,
-          "slug": "archipelago_heart",
-          "name": "Сердце архипелага",
+          "slug": "monkey_statue_l9",
+          "name": "Статуя обезьяны",
           "position": [
-            1330,
+            760,
+            100
+          ]
+        },
+        {
+          "id": 5,
+          "slug": "clay_vase_l9",
+          "name": "Глиняная ваза",
+          "position": [
+            925,
+            100
+          ]
+        },
+        {
+          "id": 6,
+          "slug": "golden_jungle_idol_l9",
+          "name": "Золотой идол джунглей",
+          "position": [
+            1090,
+            100
+          ]
+        },
+        {
+          "id": 7,
+          "slug": "emerald_scarab_l9",
+          "name": "Изумрудный скарабей",
+          "position": [
+            1255,
+            100
+          ]
+        },
+        {
+          "id": 8,
+          "slug": "ancient_scroll_l9",
+          "name": "Древний свиток",
+          "position": [
+            1420,
+            100
+          ]
+        },
+        {
+          "id": 9,
+          "slug": "tribal_dagger_l9",
+          "name": "Племенной кинжал",
+          "position": [
+            100,
+            250
+          ]
+        },
+        {
+          "id": 10,
+          "slug": "feather_headdress_l9",
+          "name": "Головной убор из перьев",
+          "position": [
+            265,
+            250
+          ]
+        },
+        {
+          "id": 11,
+          "slug": "sun_key_l9",
+          "name": "Солнечный ключ",
+          "position": [
+            430,
+            250
+          ]
+        },
+        {
+          "id": 12,
+          "slug": "golden_fruit_l9",
+          "name": "Золотой плод",
+          "position": [
+            595,
+            250
+          ]
+        },
+        {
+          "id": 13,
+          "slug": "bird_skull_l9",
+          "name": "Череп птицы",
+          "position": [
+            760,
+            250
+          ]
+        },
+        {
+          "id": 14,
+          "slug": "overgrown_relic_l9",
+          "name": "Заросшая реликвия",
+          "position": [
+            925,
+            250
+          ]
+        },
+        {
+          "id": 15,
+          "slug": "adventurer_backpack_l9",
+          "name": "Рюкзак исследователя",
+          "position": [
+            1090,
+            250
+          ]
+        },
+        {
+          "id": 16,
+          "slug": "ammonite_fossil_l9",
+          "name": "Окаменелость аммонита",
+          "position": [
+            1255,
+            250
+          ]
+        },
+        {
+          "id": 17,
+          "slug": "anchor_blue_l9",
+          "name": "Синий якорь",
+          "position": [
+            1420,
+            250
+          ]
+        },
+        {
+          "id": 18,
+          "slug": "ancient_compass_l9",
+          "name": "Древний компас",
+          "position": [
+            100,
+            400
+          ]
+        },
+        {
+          "id": 19,
+          "slug": "beach_ball_colorful_l9",
+          "name": "Пёстрый пляжный мяч",
+          "position": [
+            265,
+            400
+          ]
+        },
+        {
+          "id": 20,
+          "slug": "beach_chair_l9",
+          "name": "Пляжный шезлонг",
+          "position": [
+            430,
+            400
+          ]
+        },
+        {
+          "id": 21,
+          "slug": "beach_umbrella_l9",
+          "name": "Пляжный зонт",
+          "position": [
+            595,
+            400
+          ]
+        },
+        {
+          "id": 22,
+          "slug": "binoculars_l9",
+          "name": "Бинокль",
+          "position": [
+            760,
+            400
+          ]
+        },
+        {
+          "id": 23,
+          "slug": "carrots_l9",
+          "name": "Морковь",
+          "position": [
+            925,
+            400
+          ]
+        },
+        {
+          "id": 24,
+          "slug": "coconut_drink_l9",
+          "name": "Кокосовый напиток",
+          "position": [
+            1090,
+            400
+          ]
+        },
+        {
+          "id": 25,
+          "slug": "coiled_rope_l9",
+          "name": "Свернутая верёвка",
+          "position": [
+            1255,
+            400
+          ]
+        },
+        {
+          "id": 26,
+          "slug": "conch_shell_l9",
+          "name": "Морская раковина",
+          "position": [
+            1420,
+            400
+          ]
+        },
+        {
+          "id": 27,
+          "slug": "crab_orange_l9",
+          "name": "Оранжевый краб",
+          "position": [
+            100,
+            550
+          ]
+        },
+        {
+          "id": 28,
+          "slug": "diving_mask_l9",
+          "name": "Маска для ныряния",
+          "position": [
+            265,
+            550
+          ]
+        },
+        {
+          "id": 29,
+          "slug": "dolphin_l9",
+          "name": "Дельфин",
+          "position": [
+            430,
+            550
+          ]
+        },
+        {
+          "id": 30,
+          "slug": "egg_basket_l9",
+          "name": "Корзина с яйцами",
+          "position": [
+            595,
+            550
+          ]
+        },
+        {
+          "id": 31,
+          "slug": "expedition_book_l9",
+          "name": "Дневник экспедиции",
+          "position": [
+            760,
+            550
+          ]
+        },
+        {
+          "id": 32,
+          "slug": "flip_flops_l9",
+          "name": "Шлёпанцы",
+          "position": [
+            925,
+            550
+          ]
+        },
+        {
+          "id": 33,
+          "slug": "garden_fence_l9",
+          "name": "Садовый забор",
+          "position": [
+            1090,
+            550
+          ]
+        },
+        {
+          "id": 34,
+          "slug": "garden_gloves_l9",
+          "name": "Садовые перчатки",
+          "position": [
+            1255,
+            550
+          ]
+        },
+        {
+          "id": 35,
+          "slug": "garden_shovel_l9",
+          "name": "Садовая лопата",
+          "position": [
+            1420,
+            550
+          ]
+        },
+        {
+          "id": 36,
+          "slug": "golden_beetle_l9",
+          "name": "Золотой жук",
+          "position": [
+            100,
+            700
+          ]
+        },
+        {
+          "id": 37,
+          "slug": "green_crystal_l9",
+          "name": "Зелёный кристалл",
+          "position": [
+            265,
+            700
+          ]
+        },
+        {
+          "id": 38,
+          "slug": "hen_l9",
+          "name": "Курица",
+          "position": [
+            430,
+            700
+          ]
+        },
+        {
+          "id": 39,
+          "slug": "hibiscus_flower_l9",
+          "name": "Цветок гибискуса",
+          "position": [
+            595,
+            700
+          ]
+        },
+        {
+          "id": 40,
+          "slug": "jungle_fern_l9",
+          "name": "Папоротник джунглей",
+          "position": [
+            760,
+            700
+          ]
+        },
+        {
+          "id": 41,
+          "slug": "jungle_treasure_chest_l9",
+          "name": "Сундук джунглей",
+          "position": [
+            925,
+            700
+          ]
+        },
+        {
+          "id": 42,
+          "slug": "lifebuoy_red_l9",
+          "name": "Красный спасательный круг",
+          "position": [
+            1090,
+            700
+          ]
+        },
+        {
+          "id": 43,
+          "slug": "lighthouse_l9",
+          "name": "Маяк",
+          "position": [
+            1255,
+            700
+          ]
+        },
+        {
+          "id": 44,
+          "slug": "magnifying_glass_l9",
+          "name": "Лупа",
+          "position": [
+            1420,
             700
           ]
         }
@@ -556,58 +3841,418 @@
       "story": "Герой собирает артефакты и запускает маяк. Острова возвращаются на карты, а свет указывает путь новым путешественникам.",
       "scene": "final_lighthouse",
       "targets": [
-        "Линза маяка",
-        "Серебряный рычаг",
-        "Последний фрагмент карты",
-        "Ключ хранителя",
-        "Свет архипелага"
+        "Маяк",
+        "Свернутая верёвка",
+        "Синий якорь",
+        "Бинокль",
+        "Древний компас"
       ],
       "transition": "Финал истории: архипелаг снова открыт миру.",
       "background_path": "res://assets/levels/final_lighthouse.svg",
       "items": [
         {
           "id": 0,
-          "slug": "lighthouse_lens",
-          "name": "Линза маяка",
+          "slug": "lighthouse_l10",
+          "name": "Маяк",
           "position": [
-            760,
-            260
+            100,
+            100
           ]
         },
         {
           "id": 1,
-          "slug": "silver_lever",
-          "name": "Серебряный рычаг",
+          "slug": "coiled_rope_l10",
+          "name": "Свернутая верёвка",
           "position": [
-            250,
-            670
+            265,
+            100
           ]
         },
         {
           "id": 2,
-          "slug": "final_map_piece",
-          "name": "Последний фрагмент карты",
+          "slug": "anchor_blue_l10",
+          "name": "Синий якорь",
           "position": [
-            1250,
-            650
+            430,
+            100
           ]
         },
         {
           "id": 3,
-          "slug": "keeper_key",
-          "name": "Ключ хранителя",
+          "slug": "binoculars_l10",
+          "name": "Бинокль",
           "position": [
-            430,
-            420
+            595,
+            100
           ]
         },
         {
           "id": 4,
-          "slug": "archipelago_light",
-          "name": "Свет архипелага",
+          "slug": "ancient_compass_l10",
+          "name": "Древний компас",
           "position": [
-            1320,
-            270
+            760,
+            100
+          ]
+        },
+        {
+          "id": 5,
+          "slug": "stone_well_lantern_l10",
+          "name": "Каменный фонарь",
+          "position": [
+            925,
+            100
+          ]
+        },
+        {
+          "id": 6,
+          "slug": "lifebuoy_red_l10",
+          "name": "Красный спасательный круг",
+          "position": [
+            1090,
+            100
+          ]
+        },
+        {
+          "id": 7,
+          "slug": "seagull_l10",
+          "name": "Чайка",
+          "position": [
+            1255,
+            100
+          ]
+        },
+        {
+          "id": 8,
+          "slug": "wooden_flute_l10",
+          "name": "Деревянная флейта",
+          "position": [
+            1420,
+            100
+          ]
+        },
+        {
+          "id": 9,
+          "slug": "sun_medallion_l10",
+          "name": "Солнечный медальон",
+          "position": [
+            100,
+            250
+          ]
+        },
+        {
+          "id": 10,
+          "slug": "adventurer_backpack_l10",
+          "name": "Рюкзак исследователя",
+          "position": [
+            265,
+            250
+          ]
+        },
+        {
+          "id": 11,
+          "slug": "expedition_book_l10",
+          "name": "Дневник экспедиции",
+          "position": [
+            430,
+            250
+          ]
+        },
+        {
+          "id": 12,
+          "slug": "green_crystal_l10",
+          "name": "Зелёный кристалл",
+          "position": [
+            595,
+            250
+          ]
+        },
+        {
+          "id": 13,
+          "slug": "water_bucket_l10",
+          "name": "Ведро с водой",
+          "position": [
+            760,
+            250
+          ]
+        },
+        {
+          "id": 14,
+          "slug": "starfish_red_l10",
+          "name": "Красная морская звезда",
+          "position": [
+            925,
+            250
+          ]
+        },
+        {
+          "id": 15,
+          "slug": "ammonite_fossil_l10",
+          "name": "Окаменелость аммонита",
+          "position": [
+            1090,
+            250
+          ]
+        },
+        {
+          "id": 16,
+          "slug": "ancient_scroll_l10",
+          "name": "Древний свиток",
+          "position": [
+            1255,
+            250
+          ]
+        },
+        {
+          "id": 17,
+          "slug": "beach_ball_colorful_l10",
+          "name": "Пёстрый пляжный мяч",
+          "position": [
+            1420,
+            250
+          ]
+        },
+        {
+          "id": 18,
+          "slug": "beach_chair_l10",
+          "name": "Пляжный шезлонг",
+          "position": [
+            100,
+            400
+          ]
+        },
+        {
+          "id": 19,
+          "slug": "beach_umbrella_l10",
+          "name": "Пляжный зонт",
+          "position": [
+            265,
+            400
+          ]
+        },
+        {
+          "id": 20,
+          "slug": "bird_skull_l10",
+          "name": "Череп птицы",
+          "position": [
+            430,
+            400
+          ]
+        },
+        {
+          "id": 21,
+          "slug": "carrots_l10",
+          "name": "Морковь",
+          "position": [
+            595,
+            400
+          ]
+        },
+        {
+          "id": 22,
+          "slug": "carved_stone_tablet_l10",
+          "name": "Каменная табличка",
+          "position": [
+            760,
+            400
+          ]
+        },
+        {
+          "id": 23,
+          "slug": "ceremonial_mask_l10",
+          "name": "Ритуальная маска",
+          "position": [
+            925,
+            400
+          ]
+        },
+        {
+          "id": 24,
+          "slug": "clay_vase_l10",
+          "name": "Глиняная ваза",
+          "position": [
+            1090,
+            400
+          ]
+        },
+        {
+          "id": 25,
+          "slug": "coconut_drink_l10",
+          "name": "Кокосовый напиток",
+          "position": [
+            1255,
+            400
+          ]
+        },
+        {
+          "id": 26,
+          "slug": "conch_shell_l10",
+          "name": "Морская раковина",
+          "position": [
+            1420,
+            400
+          ]
+        },
+        {
+          "id": 27,
+          "slug": "crab_orange_l10",
+          "name": "Оранжевый краб",
+          "position": [
+            100,
+            550
+          ]
+        },
+        {
+          "id": 28,
+          "slug": "diving_mask_l10",
+          "name": "Маска для ныряния",
+          "position": [
+            265,
+            550
+          ]
+        },
+        {
+          "id": 29,
+          "slug": "dolphin_l10",
+          "name": "Дельфин",
+          "position": [
+            430,
+            550
+          ]
+        },
+        {
+          "id": 30,
+          "slug": "egg_basket_l10",
+          "name": "Корзина с яйцами",
+          "position": [
+            595,
+            550
+          ]
+        },
+        {
+          "id": 31,
+          "slug": "emerald_scarab_l10",
+          "name": "Изумрудный скарабей",
+          "position": [
+            760,
+            550
+          ]
+        },
+        {
+          "id": 32,
+          "slug": "feather_headdress_l10",
+          "name": "Головной убор из перьев",
+          "position": [
+            925,
+            550
+          ]
+        },
+        {
+          "id": 33,
+          "slug": "flip_flops_l10",
+          "name": "Шлёпанцы",
+          "position": [
+            1090,
+            550
+          ]
+        },
+        {
+          "id": 34,
+          "slug": "garden_fence_l10",
+          "name": "Садовый забор",
+          "position": [
+            1255,
+            550
+          ]
+        },
+        {
+          "id": 35,
+          "slug": "garden_gloves_l10",
+          "name": "Садовые перчатки",
+          "position": [
+            1420,
+            550
+          ]
+        },
+        {
+          "id": 36,
+          "slug": "garden_shovel_l10",
+          "name": "Садовая лопата",
+          "position": [
+            100,
+            700
+          ]
+        },
+        {
+          "id": 37,
+          "slug": "golden_beetle_l10",
+          "name": "Золотой жук",
+          "position": [
+            265,
+            700
+          ]
+        },
+        {
+          "id": 38,
+          "slug": "golden_fruit_l10",
+          "name": "Золотой плод",
+          "position": [
+            430,
+            700
+          ]
+        },
+        {
+          "id": 39,
+          "slug": "golden_jungle_idol_l10",
+          "name": "Золотой идол джунглей",
+          "position": [
+            595,
+            700
+          ]
+        },
+        {
+          "id": 40,
+          "slug": "hen_l10",
+          "name": "Курица",
+          "position": [
+            760,
+            700
+          ]
+        },
+        {
+          "id": 41,
+          "slug": "hibiscus_flower_l10",
+          "name": "Цветок гибискуса",
+          "position": [
+            925,
+            700
+          ]
+        },
+        {
+          "id": 42,
+          "slug": "jungle_fern_l10",
+          "name": "Папоротник джунглей",
+          "position": [
+            1090,
+            700
+          ]
+        },
+        {
+          "id": 43,
+          "slug": "jungle_treasure_chest_l10",
+          "name": "Сундук джунглей",
+          "position": [
+            1255,
+            700
+          ]
+        },
+        {
+          "id": 44,
+          "slug": "magnifying_glass_l10",
+          "name": "Лупа",
+          "position": [
+            1420,
+            700
           ]
         }
       ]
