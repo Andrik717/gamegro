@@ -50,10 +50,34 @@ var audio_found: AudioStreamPlayer
 var audio_hint: AudioStreamPlayer
 var audio_surf: AudioStreamPlayer
 
+# Mandatory story mini-game state.
+var minigame_definitions: Array = []
+var minigame_active := false
+var minigame_success := false
+var minigame_type := ""
+var minigame_title := ""
+var minigame_subtitle := ""
+var minigame_goal := ""
+var minigame_artifact: Texture2D
+var minigame_clean_spots: Array[Vector2] = []
+var minigame_cleaned: Dictionary = {}
+var minigame_assembled: Dictionary = {}
+var minigame_drag_piece := -1
+var minigame_drag_position := Vector2.ZERO
+var minigame_painted: Dictionary = {}
+var minigame_selected_color := 0
+var minigame_selected_tool := -1
+var minigame_repair_step := 0
+var unlocked_level := 0
+const PROGRESS_SAVE_PATH := "user://magicworld_progress.json"
+const MINI_PALETTE: Array[Color] = [Color("#e85d4a"), Color("#f3c64e"), Color("#35b9a5"), Color("#4d86d8"), Color("#a77ad6")]
+
 func _ready() -> void:
 	randomize()
 	_create_ui_font()
 	_load_story()
+	_load_minigame_definitions()
+	_load_progress()
 	_load_layout_store()
 	_load_level(0)
 	_make_audio()
@@ -67,6 +91,41 @@ func _create_ui_font() -> void:
 	var system_font := SystemFont.new()
 	system_font.font_names = PackedStringArray(["Noto Sans", "Roboto", "Arial"])
 	ui_font = system_font
+
+func _load_minigame_definitions() -> void:
+	var file := FileAccess.open("res://game_data/minigames.json", FileAccess.READ)
+	if file == null:
+		push_error("Не удалось открыть game_data/minigames.json")
+		return
+	var parsed: Variant = JSON.parse_string(file.get_as_text())
+	if parsed is Dictionary and parsed.get("levels") is Array and parsed.levels.size() == 10:
+		minigame_definitions = parsed.levels
+	else:
+		push_error("Некорректная конфигурация мини-игр: требуется 10 заданий")
+
+func _load_progress() -> void:
+	completed_levels.clear()
+	unlocked_level = 0
+	if not FileAccess.file_exists(PROGRESS_SAVE_PATH):
+		return
+	var file := FileAccess.open(PROGRESS_SAVE_PATH, FileAccess.READ)
+	if file == null:
+		return
+	var parsed: Variant = JSON.parse_string(file.get_as_text())
+	if parsed is Dictionary:
+		unlocked_level = clampi(int(parsed.get("unlocked_level", 0)), 0, max(0, levels.size() - 1))
+		var completed: Variant = parsed.get("completed_levels", [])
+		if completed is Array:
+			for level_id in completed:
+				completed_levels[int(level_id)] = true
+
+func _save_progress() -> void:
+	var completed: Array[int] = []
+	for level_id in completed_levels.keys():
+		completed.append(int(level_id))
+	var file := FileAccess.open(PROGRESS_SAVE_PATH, FileAccess.WRITE)
+	if file != null:
+		file.store_string(JSON.stringify({"unlocked_level": unlocked_level, "completed_levels": completed}))
 
 func _load_story() -> void:
 	var file := FileAccess.open("res://game_data/story.json", FileAccess.READ)
@@ -283,6 +342,9 @@ func _reset_round() -> void:
 	paused = false
 	map_open = false
 	won = false
+	minigame_active = false
+	minigame_success = false
+	minigame_drag_piece = -1
 	queue_redraw()
 
 func _process(delta: float) -> void:
@@ -338,7 +400,9 @@ func _draw() -> void:
 			draw_circle(sparkle, 4.0 * (1.0 - progress) + 1.0, Color(1.0, 0.94, 0.64, alpha))
 	draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 	_draw_hud(view)
-	if map_open:
+	if minigame_active:
+		_draw_minigame(view)
+	elif map_open:
 		_draw_map(view)
 	elif paused:
 		_draw_pause(view)
@@ -488,14 +552,19 @@ func _draw_map(view: Vector2) -> void:
 		var card := _map_card_rect(i, view)
 		var is_current := i == current_level_index
 		var is_completed := completed_levels.has(i)
+		var is_locked := i > unlocked_level
 		var fill := Color("#174b63")
 		var border := Color("#6597a8")
 		var status := "ОТКРЫТА"
+		if is_locked:
+			fill = Color("#142a3b")
+			border = Color("#52616b")
+			status = "ЗАКРЫТА — ПРОЙДИТЕ ПРЕДЫДУЩУЮ"
 		if is_completed:
 			fill = Color("#245d50")
 			border = Color("#8ed0a7")
 			status = "ПРОЙДЕНА"
-		if is_current:
+		if is_current and not is_locked:
 			fill = Color("#604b2a")
 			border = GOLD
 			status = "ТЕКУЩАЯ"
@@ -540,8 +609,280 @@ func _time_text() -> String:
 	var total := int(elapsed)
 	return "%02d:%02d" % [total / 60, total % 60]
 
+
+func _minigame_panel_rect(view: Vector2) -> Rect2:
+	return Rect2(view.x * 0.035, view.y * 0.045, view.x * 0.93, view.y * 0.91)
+
+func _minigame_artifact_rect(view: Vector2) -> Rect2:
+	var side := minf(250.0, minf(view.x * 0.30, view.y * 0.43))
+	return Rect2(view.x * 0.18, view.y * 0.31, side, side)
+
+func _minigame_continue_rect(view: Vector2) -> Rect2:
+	return Rect2(view.x * 0.5 - 132.0, view.y * 0.82 - 26.0, 264.0, 54.0)
+
+func _minigame_palette_rect(index: int, view: Vector2) -> Rect2:
+	return Rect2(view.x * 0.68, view.y * 0.34 + index * 52.0, 150.0, 42.0)
+
+func _minigame_tool_rect(index: int, view: Vector2) -> Rect2:
+	return Rect2(view.x * 0.67, view.y * 0.36 + index * 70.0, 190.0, 54.0)
+
+func _minigame_piece_rect(index: int, view: Vector2) -> Rect2:
+	var col := index % 2
+	var row := int(index / 2)
+	return Rect2(view.x * 0.66 + col * 88.0, view.y * 0.37 + row * 88.0, 76.0, 76.0)
+
+func _minigame_piece_target(index: int, artifact_rect: Rect2) -> Rect2:
+	var half := artifact_rect.size * 0.5
+	return Rect2(artifact_rect.position + Vector2((index % 2) * half.x, int(index / 2) * half.y), half)
+
+func _minigame_zone_position(index: int, artifact_rect: Rect2) -> Vector2:
+	var positions: Array[Vector2] = [
+		Vector2(0.28, 0.28), Vector2(0.72, 0.28), Vector2(0.50, 0.50),
+		Vector2(0.28, 0.72), Vector2(0.72, 0.72)
+	]
+	return artifact_rect.position + positions[index] * artifact_rect.size
+
+func _minigame_repair_node(index: int, artifact_rect: Rect2) -> Rect2:
+	var positions: Array[Vector2] = [Vector2(0.22, 0.25), Vector2(0.78, 0.50), Vector2(0.50, 0.82)]
+	var center := artifact_rect.position + positions[index] * artifact_rect.size
+	return Rect2(center - Vector2(23.0, 23.0), Vector2(46.0, 46.0))
+
+func _start_minigame() -> void:
+	if current_level_index >= minigame_definitions.size():
+		push_error("Для уровня отсутствует обязательная мини-игра")
+		return
+	var definition: Dictionary = minigame_definitions[current_level_index]
+	minigame_type = str(definition.get("type", "cleaning"))
+	minigame_title = str(definition.get("title", "Восстановление артефакта"))
+	minigame_subtitle = str(definition.get("subtitle", "Восстановите найденный предмет."))
+	minigame_goal = str(definition.get("goal", "Выполните задание."))
+	var artifact_path := str(definition.get("artifact", ""))
+	minigame_artifact = load(artifact_path) as Texture2D if ResourceLoader.exists(artifact_path) else null
+	if minigame_artifact == null:
+		push_error("Не найден арт мини-игры: " + artifact_path)
+		return
+	minigame_clean_spots.clear()
+	minigame_cleaned.clear()
+	minigame_assembled.clear()
+	minigame_painted.clear()
+	minigame_selected_color = 0
+	minigame_selected_tool = -1
+	minigame_repair_step = 0
+	minigame_drag_piece = -1
+	# Fixed positions make the dirt pattern consistent between attempts and devices.
+	for i in range(28):
+		var x := 0.12 + fposmod(float(i) * 0.371, 0.76)
+		var y := 0.12 + fposmod(float(i) * 0.617, 0.76)
+		minigame_clean_spots.append(Vector2(x, y))
+	minigame_active = true
+	minigame_success = false
+	paused = false
+	map_open = false
+	won = false
+	queue_redraw()
+
+func _minigame_progress() -> float:
+	match minigame_type:
+		"cleaning":
+			return float(minigame_cleaned.size()) / float(maxi(1, minigame_clean_spots.size()))
+		"assembly":
+			return float(minigame_assembled.size()) / 4.0
+		"painting":
+			return float(minigame_painted.size()) / 5.0
+		"repair":
+			return float(minigame_repair_step) / 3.0
+	return 0.0
+
+func _finish_minigame() -> void:
+	if minigame_success:
+		return
+	minigame_success = true
+	completed_levels[current_level_index] = true
+	unlocked_level = maxi(unlocked_level, mini(current_level_index + 1, levels.size() - 1))
+	_save_progress()
+	if sound_enabled and audio_found != null:
+		audio_found.play()
+	queue_redraw()
+
+func _clean_minigame_at(point: Vector2) -> void:
+	if minigame_success:
+		return
+	var art := _minigame_artifact_rect(get_viewport_rect().size)
+	if not art.grow(24.0).has_point(point):
+		return
+	for i in range(minigame_clean_spots.size()):
+		if minigame_cleaned.has(i):
+			continue
+		var spot := art.position + minigame_clean_spots[i] * art.size
+		if point.distance_to(spot) <= 34.0:
+			minigame_cleaned[i] = true
+			if minigame_cleaned.size() == minigame_clean_spots.size():
+				_finish_minigame()
+			queue_redraw()
+			return
+
+func _minigame_pointer_down(point: Vector2) -> void:
+	var view := get_viewport_rect().size
+	if minigame_success:
+		if _minigame_continue_rect(view).has_point(point):
+			minigame_active = false
+			won = true
+			queue_redraw()
+		return
+	if _sound_rect(view).has_point(point):
+		_set_sound_enabled(not sound_enabled)
+		return
+	var art := _minigame_artifact_rect(view)
+	match minigame_type:
+		"cleaning":
+			_clean_minigame_at(point)
+		"assembly":
+			for i in range(4):
+				if minigame_assembled.has(i):
+					continue
+				var piece := _minigame_piece_rect(i, view)
+				if minigame_drag_piece == i:
+					piece.position = minigame_drag_position - piece.size * 0.5
+				if piece.has_point(point):
+					minigame_drag_piece = i
+					minigame_drag_position = point
+					break
+		"painting":
+			for i in range(MINI_PALETTE.size()):
+				if _minigame_palette_rect(i, view).has_point(point):
+					minigame_selected_color = i
+					queue_redraw()
+					return
+			for i in range(5):
+				if minigame_painted.has(i):
+					continue
+				if point.distance_to(_minigame_zone_position(i, art)) <= 28.0:
+					minigame_painted[i] = minigame_selected_color
+					if minigame_painted.size() == 5:
+						_finish_minigame()
+					queue_redraw()
+					return
+		"repair":
+			for i in range(3):
+				if _minigame_tool_rect(i, view).has_point(point):
+					minigame_selected_tool = i
+					queue_redraw()
+					return
+			for i in range(3):
+				if _minigame_repair_node(i, art).has_point(point):
+					if i == minigame_repair_step and minigame_selected_tool == minigame_repair_step:
+						minigame_repair_step += 1
+						minigame_selected_tool = -1
+						if minigame_repair_step == 3:
+							_finish_minigame()
+					queue_redraw()
+					return
+	queue_redraw()
+
+func _minigame_pointer_move(point: Vector2) -> void:
+	if not minigame_active or minigame_success:
+		return
+	if minigame_type == "cleaning":
+		_clean_minigame_at(point)
+	elif minigame_type == "assembly" and minigame_drag_piece >= 0:
+		minigame_drag_position = point
+		queue_redraw()
+
+func _minigame_pointer_up(point: Vector2) -> void:
+	if not minigame_active or minigame_success:
+		return
+	if minigame_type == "assembly" and minigame_drag_piece >= 0:
+		var piece_id := minigame_drag_piece
+		var target := _minigame_piece_target(piece_id, _minigame_artifact_rect(get_viewport_rect().size))
+		if target.grow(22.0).has_point(point):
+			minigame_assembled[piece_id] = true
+			if minigame_assembled.size() == 4:
+				_finish_minigame()
+		minigame_drag_piece = -1
+		queue_redraw()
+
+func _draw_minigame(view: Vector2) -> void:
+	draw_rect(Rect2(Vector2.ZERO, view), Color(0.015, 0.035, 0.055, 0.94), true)
+	var panel := _minigame_panel_rect(view)
+	_draw_rounded_panel(panel, Color("#09243a"), GOLD, 3.0, 30.0)
+	_draw_text("МАСТЕРСКАЯ АРТЕФАКТОВ", Vector2(view.x * 0.5, panel.position.y + 42.0), 14, Color("#9bc6d0"), HORIZONTAL_ALIGNMENT_CENTER, panel.size.x - 80.0)
+	_draw_text(minigame_title.to_upper(), Vector2(view.x * 0.5, panel.position.y + 82.0), 27, GOLD, HORIZONTAL_ALIGNMENT_CENTER, panel.size.x - 100.0)
+	_draw_text(minigame_subtitle, Vector2(view.x * 0.5, panel.position.y + 111.0), 14, CREAM, HORIZONTAL_ALIGNMENT_CENTER, panel.size.x - 100.0)
+	_draw_button(_sound_rect(view), "ЗВУК " + ("ВКЛ" if sound_enabled else "ВЫКЛ"), 11)
+	var art := _minigame_artifact_rect(view)
+	_draw_rounded_panel(art.grow(18.0), Color("#123b50"), Color("#bd8c48"), 2.0, 24.0)
+	if minigame_artifact != null:
+		draw_texture_rect(minigame_artifact, art, false)
+	match minigame_type:
+		"cleaning":
+			for i in range(minigame_clean_spots.size()):
+				if minigame_cleaned.has(i):
+					continue
+				var spot := art.position + minigame_clean_spots[i] * art.size
+				draw_circle(spot, 12.0 + float(i % 4) * 2.0, Color(0.28, 0.20, 0.12, 0.84))
+				draw_arc(spot, 12.0 + float(i % 4) * 2.0, 0.0, TAU, 20, Color("#d0a46a"), 2.0)
+			_draw_text("ВОДИТЕ ПАЛЬЦЕМ ПО ГРЯЗИ", view * Vector2(0.68, 0.38), 15, CREAM, HORIZONTAL_ALIGNMENT_CENTER, view.x * 0.28)
+		"assembly":
+			for i in range(4):
+				var target := _minigame_piece_target(i, art)
+				_draw_rounded_panel(target, Color(0.12, 0.31, 0.38, 0.24), Color("#e8c27a"), 1.5, 8.0)
+				if minigame_assembled.has(i):
+					var tex_size := Vector2(minigame_artifact.get_size())
+					draw_texture_rect_region(minigame_artifact, target, Rect2(Vector2((i % 2) * tex_size.x * 0.5, int(i / 2) * tex_size.y * 0.5), tex_size * 0.5))
+			for i in range(4):
+				if minigame_assembled.has(i):
+					continue
+				var piece := _minigame_piece_rect(i, view)
+				if minigame_drag_piece == i:
+					piece.position = minigame_drag_position - piece.size * 0.5
+				var tex_size := Vector2(minigame_artifact.get_size())
+				var source := Rect2(Vector2((i % 2) * tex_size.x * 0.5, int(i / 2) * tex_size.y * 0.5), tex_size * 0.5)
+				_draw_rounded_panel(piece.grow(3.0), Color("#173d5d"), GOLD, 2.0, 10.0)
+				draw_texture_rect_region(minigame_artifact, piece, source)
+			_draw_text("ПЕРЕТАЩИТЕ 4 ФРАГМЕНТА", view * Vector2(0.76, 0.31), 14, CREAM, HORIZONTAL_ALIGNMENT_CENTER, view.x * 0.32)
+		"painting":
+			for i in range(5):
+				var zone := _minigame_zone_position(i, art)
+				var fill := MINI_PALETTE[int(minigame_painted[i])] if minigame_painted.has(i) else Color(0.95, 0.88, 0.65, 0.20)
+				draw_circle(zone, 19.0, fill)
+				draw_arc(zone, 19.0, 0.0, TAU, 28, GOLD, 3.0)
+			for i in range(MINI_PALETTE.size()):
+				var swatch := _minigame_palette_rect(i, view)
+				_draw_rounded_panel(swatch, MINI_PALETTE[i], GOLD if i == minigame_selected_color else Color("#7394a4"), 3.0 if i == minigame_selected_color else 1.0, 12.0)
+				_draw_text(["КОРАЛЛ", "ЗОЛОТО", "МОРЕ", "НЕБО", "АМИСТ" ][i], Vector2(swatch.position.x + swatch.size.x + 12.0, swatch.position.y + 27.0), 12, CREAM, HORIZONTAL_ALIGNMENT_LEFT, 90.0)
+		"repair":
+			for i in range(3):
+				var node := _minigame_repair_node(i, art)
+				var repaired := i < minigame_repair_step
+				draw_circle(node.get_center(), 22.0, Color("#4b9b72") if repaired else Color("#8b4a3e"))
+				draw_arc(node.get_center(), 22.0, 0.0, TAU, 28, GOLD, 3.0)
+				_draw_text("✓" if repaired else str(i + 1), node.get_center() + Vector2(0.0, 7.0), 18, CREAM, HORIZONTAL_ALIGNMENT_CENTER, 42.0)
+			var tool_names: Array[String] = ["КЛЮЧ", "МОЛОТОК", "ШЕСТЕРНЯ"]
+			for i in range(3):
+				var tool := _minigame_tool_rect(i, view)
+				var fill := Color("#24546a") if i != minigame_selected_tool else Color("#6c542e")
+				_draw_button(tool, tool_names[i], 14)
+				if i == minigame_selected_tool:
+					_draw_rounded_panel(tool.grow(3.0), Color(0.0, 0.0, 0.0, 0.0), GOLD, 2.0, 14.0)
+			_draw_text("ВЫБЕРИТЕ ИНСТРУМЕНТ ПО ПОРЯДКУ", view * Vector2(0.76, 0.31), 13, CREAM, HORIZONTAL_ALIGNMENT_CENTER, view.x * 0.34)
+	var progress := _minigame_progress()
+	var progress_rect := Rect2(panel.position.x + 54.0, panel.position.y + panel.size.y - 82.0, panel.size.x - 108.0, 12.0)
+	_draw_rounded_panel(progress_rect, Color("#1b4052"), Color("#537b8a"), 1.0, 6.0)
+	if progress > 0.0:
+		_draw_rounded_panel(Rect2(progress_rect.position, Vector2(progress_rect.size.x * progress, progress_rect.size.y)), GOLD, Color.TRANSPARENT, 0.0, 6.0)
+	_draw_text(minigame_goal, Vector2(view.x * 0.5, panel.position.y + panel.size.y - 104.0), 13, CREAM, HORIZONTAL_ALIGNMENT_CENTER, panel.size.x - 90.0)
+	if minigame_success:
+		_draw_rounded_panel(Rect2(Vector2.ZERO, view), Color(0.0, 0.0, 0.0, 0.72), Color.TRANSPARENT, 0.0, 0.0)
+		_draw_rounded_panel(Rect2(view.x * 0.5 - 270.0, view.y * 0.5 - 130.0, 540.0, 260.0), PANEL, GOLD, 3.0, 28.0)
+		_draw_text("АРТЕФАКТ ВОССТАНОВЛЕН!", Vector2(view.x * 0.5, view.y * 0.5 - 48.0), 27, GOLD, HORIZONTAL_ALIGNMENT_CENTER, 500.0)
+		_draw_text("Вы открыли путь к следующей локации", Vector2(view.x * 0.5, view.y * 0.5 - 8.0), 17, CREAM, HORIZONTAL_ALIGNMENT_CENTER, 500.0)
+		_draw_button(_minigame_continue_rect(view), "ПРОДОЛЖИТЬ", 16)
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
+		if minigame_active:
+			get_viewport().set_input_as_handled()
+			return
 		if event.keycode == KEY_ESCAPE:
 			if map_open:
 				map_open = false
@@ -560,17 +901,29 @@ func _input(event: InputEvent) -> void:
 		_touch_event(event.index, event.position, event.pressed)
 	elif event is InputEventScreenDrag:
 		_drag_event(event.index, event.position)
-	elif event is InputEventMouseButton and event.pressed:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+	elif event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				if minigame_active:
+					_minigame_pointer_down(event.position)
+				else:
+					_handle_tap(event.position)
+			elif minigame_active:
+				_minigame_pointer_up(event.position)
+		elif event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_UP and not minigame_active:
 			_zoom_at(event.position, 1.12)
-		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+		elif event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_DOWN and not minigame_active:
 			_zoom_at(event.position, 0.89)
-		elif event.button_index == MOUSE_BUTTON_LEFT:
-			_handle_tap(event.position)
+	elif event is InputEventMouseMotion and minigame_active and (event.button_mask & MOUSE_BUTTON_MASK_LEFT) != 0:
+		_minigame_pointer_move(event.position)
 
 func _touch_event(index: int, pos: Vector2, pressed: bool) -> void:
 	if pressed:
 		touches[index] = pos
+		if minigame_active and touches.size() == 1:
+			touch_started_on_hud = true
+			_minigame_pointer_down(pos)
+			return
 		if touches.size() == 1:
 			one_finger_start = pos
 			one_finger_last = pos
@@ -585,7 +938,9 @@ func _touch_event(index: int, pos: Vector2, pressed: bool) -> void:
 		if touches.has(index):
 			var was_single := touches.size() == 1
 			touches.erase(index)
-			if was_single and not dragging and not multi_touch_gesture:
+			if was_single and minigame_active:
+				_minigame_pointer_up(pos)
+			elif was_single and not dragging and not multi_touch_gesture:
 				var tap_pos := one_finger_start if touch_started_on_hud and one_finger_start.distance_to(pos) <= 36.0 else pos
 				_handle_tap(tap_pos)
 		if touches.is_empty():
@@ -608,6 +963,9 @@ func _drag_event(index: int, pos: Vector2) -> void:
 	if not touches.has(index):
 		return
 	touches[index] = pos
+	if minigame_active:
+		_minigame_pointer_move(pos)
+		return
 	if touches.size() >= 2:
 		var points: Array = touches.values()
 		var new_distance: float = points[0].distance_to(points[1])
@@ -705,8 +1063,7 @@ func _handle_tap(point: Vector2) -> void:
 			if sound_enabled and audio_found != null:
 				audio_found.play()
 			if found.size() == ITEM_COUNT:
-				won = true
-				completed_levels[current_level_index] = true
+				_start_minigame()
 			queue_redraw()
 			return
 
@@ -717,6 +1074,8 @@ func _handle_map_tap(point: Vector2, view: Vector2) -> void:
 		return
 	for i in range(levels.size()):
 		if _map_card_rect(i, view).has_point(point):
+			if i > unlocked_level:
+				return
 			map_open = false
 			paused = false
 			_load_level(i)
