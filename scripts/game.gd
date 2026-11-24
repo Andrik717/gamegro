@@ -648,12 +648,13 @@ func _handle_tap(point: Vector2) -> void:
 		return
 	var layout := _viewport_layout()
 	var world_pos: Vector2 = (point - layout.origin) / layout.scale
-	# Check from the last drawn item to the first. If sprites overlap,
-	# the visible topmost sprite must receive the tap, not an item underneath.
+	# Only the five items currently listed in the bottom task bar are searchable.
+	# All other sprites remain visible in the scene but cannot be collected yet.
+	# Check eligible items from the last drawn to the first to respect visual overlap.
 	for item_index in range(ITEM_COUNT - 1, -1, -1):
 		var item: Dictionary = ITEM_DATA[item_index]
 		var id: int = int(item.id)
-		if found.has(id):
+		if found.has(id) or not _is_active_target(id):
 			continue
 		var local_hit: Vector2 = (world_pos - item.pos).rotated(-float(item.rotation))
 		if Rect2(-item.size * 0.5, item.size).has_point(local_hit):
@@ -690,11 +691,17 @@ func _open_next_level() -> void:
 		_load_level(0)
 	_reset_round()
 
+func _is_active_target(item_id: int) -> bool:
+	for slot in range(mini(5, ITEM_COUNT - found.size())):
+		if _next_visible_item(slot) == item_id:
+			return true
+	return false
+
 func _use_hint() -> void:
-	for id in display_order:
-		if not found.has(id):
-			hint_id = id
-			hint_time = 2.5
-			if sound_enabled and audio_hint != null:
-				audio_hint.play()
-			return
+	var id := _next_visible_item(0)
+	if id >= 0:
+		hint_id = id
+		hint_time = 2.5
+		if sound_enabled and audio_hint != null:
+			audio_hint.play()
+		queue_redraw()
