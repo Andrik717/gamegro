@@ -1,265 +1,365 @@
 extends Node2D
 
-const DESIGN := Vector2(1672, 941)
-const LEVELS := [
-    {
-        "title": "Затерянный остров",
-        "background": "res://assets/backgrounds/level1_tropical_bay.png",
-        "targets": [
-            {"id":"star", "name":"Звезда", "rect":Rect2(180,710,180,170)},
-            {"id":"shell", "name":"Ракушка", "rect":Rect2(610,690,200,170)},
-            {"id":"key", "name":"Ключ", "rect":Rect2(900,690,180,150)},
-            {"id":"pineapple", "name":"Ананас", "rect":Rect2(1120,650,190,220)},
-            {"id":"crab", "name":"Краб", "rect":Rect2(1310,660,250,220)}
-        ]
-    },
-    {
-        "title": "Древние джунгли",
-        "background": "res://assets/backgrounds/bg_02.png",
-        "targets": [
-            {"id":"резной_тотем", "name":"Резной тотем", "rect":Rect2(160,245,140,110)},
-            {"id":"дневник_исследователя", "name":"Дневник исследователя", "rect":Rect2(1080,605,140,110)},
-            {"id":"каменный_ключ", "name":"Каменный ключ", "rect":Rect2(1290,205,140,110)},
-            {"id":"золотой_идол", "name":"Золотой идол", "rect":Rect2(730,465,140,110)},
-            {"id":"сломанный_компас", "name":"Сломанный компас", "rect":Rect2(450,645,140,110)}
-        ]
-    },
-    {
-        "title": "Пещера водопада",
-        "background": "res://assets/backgrounds/bg_03.png",
-        "targets": [
-            {"id":"светящийся_кристалл", "name":"Светящийся кристалл", "rect":Rect2(180,185,140,110)},
-            {"id":"старинный_фонарь", "name":"Старинный фонарь", "rect":Rect2(1120,195,140,110)},
-            {"id":"кристальная_чаша", "name":"Кристальная чаша", "rect":Rect2(690,595,140,110)},
-            {"id":"серебряный_ключ", "name":"Серебряный ключ", "rect":Rect2(1270,545,140,110)},
-            {"id":"жемчужина", "name":"Жемчужина", "rect":Rect2(440,415,140,110)}
-        ]
-    },
-    {
-        "title": "Пиратская бухта",
-        "background": "res://assets/backgrounds/bg_04.png",
-        "targets": [
-            {"id":"капитанский_журнал", "name":"Капитанский журнал", "rect":Rect2(180,475,140,110)},
-            {"id":"подзорная_труба", "name":"Подзорная труба", "rect":Rect2(1210,195,140,110)},
-            {"id":"пиратская_печать", "name":"Пиратская печать", "rect":Rect2(680,325,140,110)},
-            {"id":"судовой_колокол", "name":"Судовой колокол", "rect":Rect2(1010,635,140,110)},
-            {"id":"сундук_с_картой", "name":"Сундук с картой", "rect":Rect2(350,675,140,110)}
-        ]
-    },
-    {
-        "title": "Подводная лагуна",
-        "background": "res://assets/backgrounds/bg_05.png",
-        "targets": [
-            {"id":"трезубец", "name":"Трезубец", "rect":Rect2(190,245,140,110)},
-            {"id":"морская_корона", "name":"Морская корона", "rect":Rect2(1190,225,140,110)},
-            {"id":"древняя_амфора", "name":"Древняя амфора", "rect":Rect2(690,445,140,110)},
-            {"id":"золотая_раковина", "name":"Золотая раковина", "rect":Rect2(350,645,140,110)},
-            {"id":"сердце_океана", "name":"Сердце океана", "rect":Rect2(1250,635,140,110)}
-        ]
-    },
-    {
-        "title": "Остров огня",
-        "background": "res://assets/levels/volcano_forge.svg",
-        "targets": [
-            {"id":"молот_кузнеца", "name":"Молот кузнеца", "rect":Rect2(180,565,140,110)},
-            {"id":"лавовый_кристалл", "name":"Лавовый кристалл", "rect":Rect2(700,185,140,110)},
-            {"id":"огненная_руна", "name":"Огненная руна", "rect":Rect2(1220,245,140,110)},
-            {"id":"клещи", "name":"Клещи", "rect":Rect2(1040,635,140,110)},
-            {"id":"пылающий_медальон", "name":"Пылающий медальон", "rect":Rect2(440,395,140,110)}
-        ]
-    },
-    {
-        "title": "Небесная обсерватория",
-        "background": "res://assets/levels/sky_observatory.svg",
-        "targets": [
-            {"id":"астролябия", "name":"Астролябия", "rect":Rect2(210,585,140,110)},
-            {"id":"звёздная_карта", "name":"Звёздная карта", "rect":Rect2(1120,605,140,110)},
-            {"id":"лунный_камень", "name":"Лунный камень", "rect":Rect2(680,215,140,110)},
-            {"id":"телескоп", "name":"Телескоп", "rect":Rect2(1260,305,140,110)},
-            {"id":"звёздный_компас", "name":"Звёздный компас", "rect":Rect2(450,375,140,110)}
-        ]
-    },
-    {
-        "title": "Ледяное королевство",
-        "background": "res://assets/levels/ice_kingdom.svg",
-        "targets": [
-            {"id":"ледяная_корона", "name":"Ледяная корона", "rect":Rect2(180,245,140,110)},
-            {"id":"замёрзшее_письмо", "name":"Замёрзшее письмо", "rect":Rect2(1200,225,140,110)},
-            {"id":"синий_кристалл", "name":"Синий кристалл", "rect":Rect2(690,485,140,110)},
-            {"id":"старинный_ключ", "name":"Старинный ключ", "rect":Rect2(340,645,140,110)},
-            {"id":"кристалл_памяти", "name":"Кристалл памяти", "rect":Rect2(1260,635,140,110)}
-        ]
-    },
-    {
-        "title": "Древний город",
-        "background": "res://assets/levels/lost_city.svg",
-        "targets": [
-            {"id":"печать_хранителей", "name":"Печать хранителей", "rect":Rect2(180,565,140,110)},
-            {"id":"книга_летописей", "name":"Книга летописей", "rect":Rect2(1180,225,140,110)},
-            {"id":"золотая_маска", "name":"Золотая маска", "rect":Rect2(690,365,140,110)},
-            {"id":"солнечный_диск", "name":"Солнечный диск", "rect":Rect2(350,235,140,110)},
-            {"id":"сердце_архипелага", "name":"Сердце архипелага", "rect":Rect2(1260,645,140,110)}
-        ]
-    },
-    {
-        "title": "Последний маяк",
-        "background": "res://assets/levels/final_lighthouse.svg",
-        "targets": [
-            {"id":"линза_маяка", "name":"Линза маяка", "rect":Rect2(690,205,140,110)},
-            {"id":"серебряный_рычаг", "name":"Серебряный рычаг", "rect":Rect2(180,615,140,110)},
-            {"id":"последний_фрагмент_карты", "name":"Последний фрагмент карты", "rect":Rect2(1180,595,140,110)},
-            {"id":"ключ_хранителя", "name":"Ключ хранителя", "rect":Rect2(360,365,140,110)},
-            {"id":"свет_архипелага", "name":"Свет архипелага", "rect":Rect2(1250,215,140,110)}
-        ]
-    }
+const WORLD_SIZE := Vector2(1536, 864)
+const ITEM_COUNT := 30
+const BAR_HEIGHT := 116.0
+const MIN_ZOOM := 1.0
+const MAX_ZOOM := 2.6
+const ITEM_DATA := [
+	{"id":0,"slug":"starfish","name":"Морская звезда","pos":Vector2(95,190)},
+	{"id":1,"slug":"conch","name":"Ракушка","pos":Vector2(470,430)},
+	{"id":2,"slug":"key","name":"Золотой ключ","pos":Vector2(890,635)},
+	{"id":3,"slug":"crab","name":"Краб","pos":Vector2(735,725)},
+	{"id":4,"slug":"pineapple","name":"Ананас","pos":Vector2(1185,205)},
+	{"id":5,"slug":"message_bottle","name":"Бутылка с посланием","pos":Vector2(1360,430)},
+	{"id":6,"slug":"apple","name":"Яблоко","pos":Vector2(330,580)},
+	{"id":7,"slug":"parrot","name":"Попугай","pos":Vector2(270,320)},
+	{"id":8,"slug":"lifebuoy","name":"Спасательный круг","pos":Vector2(600,440)},
+	{"id":9,"slug":"treasure_map","name":"Карта сокровищ","pos":Vector2(1050,365)},
+	{"id":10,"slug":"compass","name":"Компас","pos":Vector2(980,580)},
+	{"id":11,"slug":"butterfly","name":"Бабочка","pos":Vector2(75,520)},
+	{"id":12,"slug":"fish","name":"Рыбка","pos":Vector2(820,500)},
+	{"id":13,"slug":"anchor","name":"Якорь","pos":Vector2(1260,580)},
+	{"id":14,"slug":"coconut","name":"Кокос","pos":Vector2(190,700)},
+	{"id":15,"slug":"duck","name":"Уточка","pos":Vector2(1100,690)},
+	{"id":16,"slug":"turtle","name":"Черепаха","pos":Vector2(1420,720)},
+	{"id":17,"slug":"pearl","name":"Жемчужина","pos":Vector2(930,780)},
+	{"id":18,"slug":"eyepatch","name":"Пиратская повязка","pos":Vector2(530,250)},
+	{"id":19,"slug":"telescope","name":"Подзорная труба","pos":Vector2(1240,300)},
+	{"id":20,"slug":"hibiscus","name":"Гибискус","pos":Vector2(130,740)},
+	{"id":21,"slug":"flipflop","name":"Шлёпанец","pos":Vector2(700,560)},
+	{"id":22,"slug":"sailboat","name":"Парусник","pos":Vector2(1450,520)},
+	{"id":23,"slug":"coin","name":"Золотая монета","pos":Vector2(1010,250)},
+	{"id":24,"slug":"bucket","name":"Ведёрко","pos":Vector2(370,660)},
+	{"id":25,"slug":"shovel","name":"Лопатка","pos":Vector2(560,760)},
+	{"id":26,"slug":"scallop","name":"Морской гребешок","pos":Vector2(860,810)},
+	{"id":27,"slug":"beachball","name":"Мяч","pos":Vector2(1140,760)},
+	{"id":28,"slug":"lantern","name":"Фонарь","pos":Vector2(1280,240)},
+	{"id":29,"slug":"crown","name":"Корона","pos":Vector2(970,300)},
 ]
-const CREAM := Color("#fff2d0")
-const PANEL := Color(0.055, 0.12, 0.16, 0.92)
+const CREAM := Color("#fff1ce")
+const GOLD := Color("#f6c66c")
+const NAVY := Color("#102d4d")
 
-var level_index := 0
 var background: Texture2D
-var targets: Array[Dictionary] = []
-var found: Array[String] = []
+var item_textures: Array[Texture2D] = []
+var found := {}
+var display_order: Array[int] = []
 var elapsed := 0.0
-var hint_target := -1
-var hint_left := 0.0
+var zoom := 1.0
+var camera_offset := Vector2.ZERO
+var touches := {}
+var pinch_distance := 0.0
+var pinch_zoom := 1.0
+var pinch_center := Vector2.ZERO
+var one_finger_start := Vector2.ZERO
+var one_finger_last := Vector2.ZERO
+var dragging := false
+var multi_touch_gesture := false
+var sound_enabled := true
+var hint_id := -1
+var hint_time := 0.0
+var celebration_time := 0.0
+var found_effect_position := Vector2.ZERO
 var paused := false
 var won := false
-var hint_rect := Rect2(1390, 855, 220, 62)
-var pause_rect := Rect2(1530, 0, 140, 120)
-var action_rect := Rect2(665, 545, 340, 78)
+var audio_found: AudioStreamPlayer
+var audio_tap: AudioStreamPlayer
+var audio_hint: AudioStreamPlayer
+var audio_surf: AudioStreamPlayer
 
 func _ready() -> void:
-    _load_level(0)
-    get_viewport().size_changed.connect(queue_redraw)
+	background = load("res://assets/backgrounds/tropical_cove.png")
+	for item in ITEM_DATA:
+		item_textures.append(load("res://assets/items/%s.png" % item.slug))
+	_make_audio()
+	_reset_round()
+	set_process(true)
+	get_viewport().size_changed.connect(queue_redraw)
+	queue_redraw()
 
-func _load_level(index: int) -> void:
-    level_index = clampi(index, 0, LEVELS.size() - 1)
-    background = load(LEVELS[level_index].background)
-    targets = LEVELS[level_index].targets
-    found.clear()
-    elapsed = 0.0
-    hint_target = -1
-    hint_left = 0.0
-    paused = false
-    won = false
-    queue_redraw()
+func _make_audio() -> void:
+	audio_found = _player("res://assets/audio/found.wav", false)
+	audio_tap = _player("res://assets/audio/tap.wav", false)
+	audio_hint = _player("res://assets/audio/hint.wav", false)
+	audio_surf = _player("res://assets/audio/surf.wav", true)
+	audio_surf.volume_db = -17.0
+	if sound_enabled:
+		audio_surf.play()
+
+func _player(path: String, looped: bool) -> AudioStreamPlayer:
+	var p := AudioStreamPlayer.new()
+	var stream: AudioStream = load(path)
+	if looped and stream is AudioStreamWAV:
+		var wav_stream := stream as AudioStreamWAV
+		wav_stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
+	p.stream = stream
+	p.volume_db = -5.0
+	add_child(p)
+	return p
+
+func _reset_round() -> void:
+	found.clear()
+	display_order.clear()
+	for i in range(ITEM_COUNT):
+		display_order.append(i)
+	# Stable shuffle makes each new game feel different without losing reproducibility.
+	display_order.shuffle()
+	elapsed = 0.0
+	zoom = 1.0
+	camera_offset = Vector2.ZERO
+	hint_id = -1
+	hint_time = 0.0
+	celebration_time = 0.0
+	paused = false
+	won = false
+	queue_redraw()
 
 func _process(delta: float) -> void:
-    if not paused and not won:
-        elapsed += delta
-    if hint_left > 0.0:
-        hint_left = maxf(0.0, hint_left - delta)
-        if hint_left == 0.0:
-            hint_target = -1
-    queue_redraw()
+	if not paused and not won:
+		elapsed += delta
+	if hint_time > 0.0:
+		hint_time = maxf(0.0, hint_time - delta)
+		if hint_time == 0.0:
+			hint_id = -1
+	if celebration_time > 0.0:
+		celebration_time = maxf(0.0, celebration_time - delta)
+	queue_redraw()
+
+func _viewport_layout() -> Dictionary:
+	var view := get_viewport_rect().size
+	var world_area := Rect2(Vector2.ZERO, Vector2(view.x, maxf(1.0, view.y - BAR_HEIGHT)))
+	var base_scale := minf(world_area.size.x / WORLD_SIZE.x, world_area.size.y / WORLD_SIZE.y)
+	var drawn := WORLD_SIZE * base_scale * zoom
+	var origin := (world_area.size - WORLD_SIZE * base_scale) * 0.5 + camera_offset
+	return {"view":view,"area":world_area,"base":base_scale,"scale":base_scale*zoom,"origin":origin}
 
 func _draw() -> void:
-    if background == null:
-        return
-    var view := get_viewport_rect().size
-    var scale_factor := minf(view.x / DESIGN.x, view.y / DESIGN.y)
-    var origin := (view - DESIGN * scale_factor) * 0.5
-    draw_set_transform(origin, 0.0, Vector2.ONE * scale_factor)
-    draw_texture_rect(background, Rect2(Vector2.ZERO, DESIGN), false)
-    _draw_hud()
-    if hint_target >= 0 and hint_left > 0.0:
-        var target_rect: Rect2 = targets[hint_target].rect
-        var pulse := 0.5 + 0.5 * sin(Time.get_ticks_msec() / 120.0)
-        draw_rect(target_rect.grow(10), Color(1.0, 0.82, 0.25, 0.25 + pulse * 0.3), false, 7.0)
-    if paused and not won:
-        draw_rect(Rect2(Vector2.ZERO, DESIGN), Color(0.01, 0.03, 0.05, 0.68), true)
-        draw_string(ThemeDB.fallback_font, Vector2(590, 480), "ПАУЗА — НАЖМИТЕ, ЧТОБЫ ПРОДОЛЖИТЬ", HORIZONTAL_ALIGNMENT_LEFT, -1, 30, CREAM)
-    if won:
-        _draw_win()
-    draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
+	var layout := _viewport_layout()
+	var view: Vector2 = layout.view
+	draw_rect(Rect2(Vector2.ZERO, view), Color("#09253a"), true)
+	var origin: Vector2 = layout.origin
+	var s: float = layout.scale
+	draw_set_transform(origin, 0.0, Vector2.ONE * s)
+	draw_texture_rect(background, Rect2(Vector2.ZERO, WORLD_SIZE), false)
+	for i in range(ITEM_COUNT):
+		if found.has(i):
+			continue
+		var p: Vector2 = ITEM_DATA[i].pos
+		var texture: Texture2D = item_textures[i]
+		var size := Vector2(48, 48)
+		if hint_id == i and hint_time > 0.0:
+			var pulse := 1.0 + 0.12 * sin(Time.get_ticks_msec() * 0.012)
+			size *= pulse
+			draw_circle(p, 36.0, Color(1.0,0.82,0.2,0.22))
+		draw_texture_rect(texture, Rect2(p - size*0.5, size), false)
+	if celebration_time > 0.0:
+		var progress := 1.0 - celebration_time / 0.55
+		var radius := 18.0 + progress * 78.0
+		var alpha := 1.0 - progress
+		draw_arc(found_effect_position, radius, 0.0, TAU, 48, Color(1.0,0.88,0.38,alpha), 6.0*(1.0-progress)+1.0)
+		for particle in range(10):
+			var angle := TAU * float(particle) / 10.0 + progress * 1.8
+			var distance := 18.0 + progress * 62.0
+			var sparkle := found_effect_position + Vector2(cos(angle),sin(angle))*distance
+			draw_circle(sparkle, 4.0*(1.0-progress)+1.0, Color(1.0,0.94,0.64,alpha))
+	draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
+	_draw_hud(view)
+	if paused:
+		draw_rect(Rect2(Vector2.ZERO, view), Color(0,0,0,0.62), true)
+		_center_text("ПАУЗА  •  КОСНИТЕСЬ, ЧТОБЫ ПРОДОЛЖИТЬ", view * 0.5, 30, CREAM)
+	if won:
+		draw_rect(Rect2(Vector2.ZERO, view), Color(0,0,0,0.68), true)
+		_center_text("ВСЕ 30 СОКРОВИЩ НАЙДЕНЫ!", view*0.5-Vector2(0,35), 38, GOLD)
+		_center_text("Коснитесь экрана, чтобы сыграть ещё раз", view*0.5+Vector2(0,22), 24, CREAM)
 
-func _draw_hud() -> void:
-    draw_string(ThemeDB.fallback_font, Vector2(48, 55), "УРОВЕНЬ %d: %s" % [level_index + 1, LEVELS[level_index].title], HORIZONTAL_ALIGNMENT_LEFT, -1, 28, CREAM)
-    var panel := Rect2(28, 842, 1616, 78)
-    draw_rect(panel, PANEL, true)
-    draw_rect(panel, Color("#edbd60"), false, 3.0)
-    var font := ThemeDB.fallback_font
-    draw_string(font, Vector2(58, 890), "НАЙДЕНО: %d / %d" % [found.size(), targets.size()], HORIZONTAL_ALIGNMENT_LEFT, -1, 25, CREAM)
-    draw_string(font, Vector2(330, 890), "ВРЕМЯ: " + _time_text(), HORIZONTAL_ALIGNMENT_LEFT, -1, 25, CREAM)
-    var x := 565.0
-    var slot := 155.0
-    for item in targets:
-        var done: bool = found.has(item.id)
-        var color := Color("#8ee0a1") if done else CREAM
-        var mark := "✓ " if done else "○ "
-        draw_string(font, Vector2(x, 890), mark + item.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 17, color)
-        x += slot
-    draw_rect(hint_rect, Color("#bd762d"), true)
-    draw_rect(hint_rect, Color("#ffe1a0"), false, 3.0)
-    draw_string(font, Vector2(1432, 896), "ПОДСКАЗКА", HORIZONTAL_ALIGNMENT_LEFT, -1, 23, CREAM)
-    draw_circle(Vector2(1600, 58), 47, Color("#8d5228"), true)
-    draw_circle(Vector2(1600, 58), 47, Color("#ffe1a0"), false, 4.0)
-    draw_rect(Rect2(1584, 34, 10, 48), CREAM, true)
-    draw_rect(Rect2(1606, 34, 10, 48), CREAM, true)
+func _draw_hud(view: Vector2) -> void:
+	var font := ThemeDB.fallback_font
+	var bar := Rect2(0, view.y - BAR_HEIGHT, view.x, BAR_HEIGHT)
+	draw_rect(bar, Color("#09213a"), true)
+	draw_rect(Rect2(0, bar.position.y, view.x, 5), GOLD, true)
+	draw_string(font, Vector2(22, bar.position.y+25), "НАЙДИ ПРЕДМЕТЫ", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, GOLD)
+	draw_string(font, Vector2(view.x-190, bar.position.y+25), "%02d / 30" % found.size(), HORIZONTAL_ALIGNMENT_LEFT, -1, 22, CREAM)
+	var slots := mini(5, ITEM_COUNT - found.size())
+	var slot_w := minf(112.0, (view.x-48.0)/5.0)
+	var first_x := (view.x - slot_w*5.0)/2.0
+	for slot in range(slots):
+		var id := _next_visible_item(slot)
+		if id < 0:
+			continue
+		var x := first_x + slot*slot_w
+		draw_rect(Rect2(x+3, bar.position.y+32, slot_w-6, 76), Color("#173d5d"), true)
+		draw_rect(Rect2(x+3, bar.position.y+32, slot_w-6, 76), Color("#bd8c48"), false, 2)
+		draw_texture_rect(item_textures[id], Rect2(x+slot_w*0.5-22, bar.position.y+35, 44, 42), false)
+		draw_string(font, Vector2(x+slot_w*0.5, bar.position.y+94), _short_name(ITEM_DATA[id].name), HORIZONTAL_ALIGNMENT_CENTER, slot_w-8, 12, CREAM)
+	var top := 12.0
+	_draw_button(Rect2(14,top,64,56),"Ⅱ")
+	_draw_button(Rect2(view.x-82,top,68,56),"💡")
+	_draw_button(Rect2(view.x-158,top,64,56),"♫")
+	draw_string(font, Vector2(92,top+38), _time_text(), HORIZONTAL_ALIGNMENT_LEFT, -1, 26, CREAM)
+	draw_string(font, Vector2(view.x*0.5-82,top+36), "МАСШТАБ  %d%%" % int(zoom*100.0), HORIZONTAL_ALIGNMENT_LEFT, -1, 17, CREAM)
 
-func _draw_win() -> void:
-    draw_rect(Rect2(Vector2.ZERO, DESIGN), Color(0.01, 0.03, 0.05, 0.72), true)
-    var card := Rect2(470, 300, 732, 370)
-    draw_rect(card, Color("#193b45"), true)
-    draw_rect(card, Color("#f7c96b"), false, 5.0)
-    var font := ThemeDB.fallback_font
-    var heading := "ЛОКАЦИЯ ПРОЙДЕНА!"
-    draw_string(font, Vector2(585, 405), heading, HORIZONTAL_ALIGNMENT_LEFT, -1, 34, CREAM)
-    draw_string(font, Vector2(650, 465), "Ты нашёл все предметы!", HORIZONTAL_ALIGNMENT_LEFT, -1, 30, Color("#bcebd0"))
-    draw_string(font, Vector2(760, 510), "Время: " + _time_text(), HORIZONTAL_ALIGNMENT_LEFT, -1, 26, CREAM)
-    draw_rect(action_rect, Color("#bd762d"), true)
-    draw_rect(action_rect, Color("#ffe1a0"), false, 3.0)
-    var action_text := "СЛЕДУЮЩИЙ УРОВЕНЬ" if level_index + 1 < LEVELS.size() else "ПОВТОРИТЬ ИГРУ"
-    draw_string(font, Vector2(700, 595), action_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 27, CREAM)
+func _draw_button(rect: Rect2, label: String) -> void:
+	draw_rect(rect, Color("#173d5d"), true)
+	draw_rect(rect, GOLD, false, 3.0)
+	draw_string(ThemeDB.fallback_font, rect.position+Vector2(rect.size.x*0.5-10,rect.size.y*0.5+10), label, HORIZONTAL_ALIGNMENT_LEFT, -1, 24, CREAM)
+
+func _center_text(value: String, point: Vector2, size: int, color: Color) -> void:
+	var font := ThemeDB.fallback_font
+	var width := font.get_string_size(value, HORIZONTAL_ALIGNMENT_LEFT, -1, size).x
+	draw_string(font, point-Vector2(width*0.5,0), value, HORIZONTAL_ALIGNMENT_LEFT, -1, size, color)
+
+func _short_name(value: String) -> String:
+	return value if value.length() <= 12 else value.substr(0,11)+"…"
+
+func _next_visible_item(slot: int) -> int:
+	var shown := 0
+	for id in display_order:
+		if found.has(id):
+			continue
+		if shown == slot:
+			return id
+		shown += 1
+	return -1
 
 func _time_text() -> String:
-    var total := int(elapsed)
-    return "%02d:%02d" % [total / 60, total % 60]
+	var total := int(elapsed)
+	return "%02d:%02d" % [total/60,total%60]
 
 func _input(event: InputEvent) -> void:
-    var point := Vector2.ZERO
-    if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-        point = event.position
-    elif event is InputEventScreenTouch and event.pressed:
-        point = event.position
-    else:
-        return
-    var view := get_viewport_rect().size
-    var scale_factor := minf(view.x / DESIGN.x, view.y / DESIGN.y)
-    var origin := (view - DESIGN * scale_factor) * 0.5
-    var click_pos := (point - origin) / scale_factor
-    if won:
-        if action_rect.has_point(click_pos):
-            if level_index + 1 < LEVELS.size():
-                _load_level(level_index + 1)
-            else:
-                _load_level(0)
-        return
-    if pause_rect.has_point(click_pos):
-        paused = not paused
-        return
-    if paused:
-        paused = false
-        return
-    if hint_rect.has_point(click_pos):
-        _hint()
-        return
-    for i in range(targets.size()):
-        var item: Dictionary = targets[i]
-        if not found.has(item.id) and item.rect.has_point(click_pos):
-            found.append(item.id)
-            hint_target = -1
-            hint_left = 0.0
-            if found.size() == targets.size():
-                won = true
-            get_viewport().set_input_as_handled()
-            queue_redraw()
-            return
+	if event is InputEventScreenTouch:
+		_touch_event(event.index, event.position, event.pressed)
+	elif event is InputEventScreenDrag:
+		_drag_event(event.index, event.position, event.screen_relative)
+	elif event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			_zoom_at(event.position, 1.12)
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			_zoom_at(event.position, 0.89)
+		elif event.button_index == MOUSE_BUTTON_LEFT:
+			_handle_tap(event.position)
 
-func _hint() -> void:
-    for i in range(targets.size()):
-        if not found.has(targets[i].id):
-            hint_target = i
-            hint_left = 3.0
-            return
+func _touch_event(index: int, pos: Vector2, pressed: bool) -> void:
+	if pressed:
+		touches[index] = pos
+		if touches.size() == 1:
+			one_finger_start = pos
+			one_finger_last = pos
+			dragging = false
+		elif touches.size() == 2:
+			multi_touch_gesture = true
+			var points: Array = touches.values()
+			pinch_distance = points[0].distance_to(points[1])
+			pinch_zoom = zoom
+			pinch_center = (points[0]+points[1])*0.5
+	else:
+		if touches.has(index):
+			var was_single := touches.size() == 1
+			var start := one_finger_start
+			touches.erase(index)
+			if was_single and not dragging and not multi_touch_gesture:
+				_handle_tap(pos)
+		if touches.is_empty():
+			multi_touch_gesture = false
+		if touches.size() == 1:
+			var remaining: Vector2 = touches.values()[0]
+			one_finger_start = remaining
+			one_finger_last = remaining
+			dragging = false
+
+func _drag_event(index: int, pos: Vector2, relative: Vector2) -> void:
+	if not touches.has(index):
+		return
+	touches[index] = pos
+	if touches.size() >= 2:
+		var points: Array = touches.values()
+		var new_distance: float = points[0].distance_to(points[1])
+		if pinch_distance > 1.0:
+			var center: Vector2 = (points[0]+points[1])*0.5
+			var factor := new_distance / pinch_distance
+			_zoom_at(pinch_center, factor, center-pinch_center)
+			pinch_distance = new_distance
+			pinch_center = center
+	elif touches.size() == 1:
+		if zoom > 1.02:
+			camera_offset += relative
+			dragging = true
+		one_finger_last = pos
+
+func _zoom_at(point: Vector2, factor: float, pan_delta := Vector2.ZERO) -> void:
+	var layout := _viewport_layout()
+	var old_scale: float = layout.scale
+	var new_zoom := clampf(zoom*factor, MIN_ZOOM, MAX_ZOOM)
+	var world_anchor: Vector2 = (point-layout.origin)/old_scale
+	var base_origin: Vector2 = (layout.area.size-WORLD_SIZE*layout.base)*0.5
+	zoom = new_zoom
+	camera_offset = point - base_origin - world_anchor*(layout.base*zoom) + pan_delta
+	_clamp_camera()
+	queue_redraw()
+
+func _clamp_camera() -> void:
+	var layout := _viewport_layout()
+	var area: Rect2 = layout.area
+	var scaled := WORLD_SIZE * layout.scale
+	var min_x := area.size.x-scaled.x
+	var min_y := area.size.y-scaled.y
+	camera_offset.x = clampf(camera_offset.x, min_x, 0.0) if min_x < 0 else 0.0
+	camera_offset.y = clampf(camera_offset.y, min_y, 0.0) if min_y < 0 else 0.0
+
+func _handle_tap(point: Vector2) -> void:
+	if sound_enabled and audio_tap != null:
+		audio_tap.play()
+	var view := get_viewport_rect().size
+	if paused:
+		paused = false
+		return
+	if won:
+		_reset_round()
+		return
+	if point.y > view.y-BAR_HEIGHT:
+		return
+	if point.y < 76.0:
+		if point.x < 86.0:
+			paused = true
+			return
+		if point.x > view.x-86.0:
+			_use_hint()
+			return
+		if point.x > view.x-166.0:
+			sound_enabled = not sound_enabled
+			if sound_enabled:
+				audio_surf.play()
+			else:
+				audio_surf.stop()
+			return
+	var layout := _viewport_layout()
+	var world_pos: Vector2 = (point-layout.origin)/layout.scale
+	for item in ITEM_DATA:
+		var id: int = item.id
+		if found.has(id):
+			continue
+		var radius := 34.0
+		if Rect2(item.pos-Vector2.ONE*radius,Vector2.ONE*radius*2).has_point(world_pos):
+			found[id] = true
+			hint_id = id
+			hint_time = 0.0
+			found_effect_position = item.pos
+			celebration_time = 0.55
+			if sound_enabled:
+				audio_found.play()
+			if found.size() == ITEM_COUNT:
+				won = true
+			queue_redraw()
+			return
+
+func _use_hint() -> void:
+	for id in display_order:
+		if not found.has(id):
+			hint_id = id
+			hint_time = 2.5
+			if sound_enabled:
+				audio_hint.play()
+			return
+
+# Inventory is always the next five unfound objects from the shuffled 30-item queue.
+# Finding one removes it from the scene and immediately pulls the next queued item into the bar.

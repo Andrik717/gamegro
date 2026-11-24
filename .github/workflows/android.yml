@@ -20,17 +20,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Unpack uploaded Godot project
+      - name: Stage unified Godot project
         shell: bash
         run: |
           set -euo pipefail
-          ZIP_FILE="$(find . -maxdepth 1 -type f -name 'gamegro_tropical_cove_level1*.zip' -print -quit)"
-          test -n "$ZIP_FILE"
           mkdir -p packaged
-          unzip -q "$ZIP_FILE" -d packaged
-          rm -rf packaged/.godot
+          cp project.godot main.tscn export_presets.cfg packaged/
+          cp -a scripts assets packaged/
           test -f packaged/project.godot
           test -f packaged/export_presets.cfg
+          test -f packaged/main.tscn
           test -f packaged/scripts/game.gd
 
       - name: Install raster artwork dependency
