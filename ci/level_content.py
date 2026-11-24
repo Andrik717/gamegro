@@ -225,8 +225,17 @@ def enhance_game(root):
     if len(levels)!=10 or sum(len(x.get("items",[])) for x in levels[1:])!=45: raise SystemExit("Expected 45 chapter targets")
     # Preserve and verify the original first-island PNG before touching other assets.
     first_path=levels[0]["background_path"].replace("res://","")
-    if not first_path.lower().endswith(".png") or not (root/first_path).is_file():
-        raise SystemExit("Original first-island PNG is missing or was replaced")
+    if not first_path.lower().endswith(".png"):
+        raise SystemExit("Original first-island background must remain a PNG")
+    if not (root/first_path).is_file():
+        # The packaged original scene uses tropical_cove.png, while the
+        # repository preview asset has a different filename. Keep the
+        # existing packaged artwork and point story data to that exact file.
+        fallback="assets/backgrounds/tropical_cove.png"
+        if (root/fallback).is_file():
+            levels[0]["background_path"]="res://"+fallback
+        else:
+            raise SystemExit("Original first-island PNG is missing from the packaged project")
     for p in (root/"assets").rglob("*.svg"): p.unlink()
     backgrounds=root/"assets/backgrounds"; backgrounds.mkdir(parents=True,exist_ok=True)
     items_dir=root/"assets/items"; items_dir.mkdir(parents=True,exist_ok=True)
