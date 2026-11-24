@@ -194,16 +194,19 @@ jobs:
           fallback = root / "assets/backgrounds/tropical_cove.jpg"
           if not fallback.is_file() or 'load("res://assets/backgrounds/tropical_cove.jpg")' not in script:
               raise SystemExit("Missing valid fallback background")
-          # Validate image signatures, not just filenames.
+          # Validate image signatures, not just filenames, and report every mismatch.
+          invalid_images = []
           for image in (root / "assets").rglob("*"):
               if not image.is_file():
                   continue
               with image.open("rb") as stream:
                   header = stream.read(8)
               if image.suffix.lower() == ".png" and header != bytes([137, 80, 78, 71, 13, 10, 26, 10]):
-                  raise SystemExit(f"File has a .png extension but is not PNG: {image}")
+                  invalid_images.append(f"{image} header={header.hex()}")
               if image.suffix.lower() in (".jpg", ".jpeg") and not header.startswith(bytes([255, 216, 255])):
-                  raise SystemExit(f"File has a JPEG extension but is not JPEG: {image}")
+                  invalid_images.append(f"{image} header={header.hex()}")
+          if invalid_images:
+              raise SystemExit("Image extension/signature mismatches: " + "; ".join(invalid_images))
           missing_backgrounds = []
           for level in levels:
               path = str(level.get("background_path", "")).replace("res://", "")
