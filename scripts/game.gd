@@ -559,7 +559,7 @@ func _draw_map(view: Vector2) -> void:
 		if is_locked:
 			fill = Color("#142a3b")
 			border = Color("#52616b")
-			status = "ЗАКРЫТА — ПРОЙДИТЕ ПРЕДЫДУЩУЮ"
+			status = "ЗАКРЫТА"
 		if is_completed:
 			fill = Color("#245d50")
 			border = Color("#8ed0a7")
@@ -582,12 +582,14 @@ func _draw_map(view: Vector2) -> void:
 func _draw_win(view: Vector2) -> void:
 	draw_rect(Rect2(Vector2.ZERO, view), Color(0.0, 0.0, 0.0, 0.76), true)
 	var panel := Rect2(view.x * 0.5 - 270.0, view.y * 0.5 - 150.0, 540.0, 300.0)
-	draw_rect(panel, PANEL, true)
-	draw_rect(panel, GOLD, false, 3.0)
-	_draw_text("УРОВЕНЬ ПРОЙДЕН!", Vector2(view.x * 0.5, view.y * 0.5 - 82.0), 30, GOLD, HORIZONTAL_ALIGNMENT_CENTER, 500.0)
-	_draw_text("Найдены все %d предметов" % ITEM_COUNT, Vector2(view.x * 0.5, view.y * 0.5 - 38.0), 20, CREAM, HORIZONTAL_ALIGNMENT_CENTER, 500.0)
+	_draw_rounded_panel(panel, PANEL, GOLD, 3.0, 28.0)
+	var final_level := current_level_index == levels.size() - 1
+	var heading := "ПРИКЛЮЧЕНИЕ ЗАВЕРШЕНО!" if final_level else "УРОВЕНЬ ПРОЙДЕН!"
+	var transition := "Все артефакты восстановлены. Маяк снова освещает архипелаг!" if final_level else str(levels[current_level_index].get("transition", "Открыт путь к следующей локации."))
+	_draw_text(heading, Vector2(view.x * 0.5, view.y * 0.5 - 82.0), 27, GOLD, HORIZONTAL_ALIGNMENT_CENTER, 500.0)
+	_draw_text(transition, Vector2(view.x * 0.5, view.y * 0.5 - 38.0), 17, CREAM, HORIZONTAL_ALIGNMENT_CENTER, 480.0)
 	_draw_button(_win_map_rect(view), "КАРТА УРОВНЕЙ", 14)
-	_draw_button(_win_next_rect(view), "СЛЕДУЮЩИЙ УРОВЕНЬ", 13)
+	_draw_button(_win_next_rect(view), "НАЧАТЬ СНАЧАЛА" if final_level else "СЛЕДУЮЩИЙ УРОВЕНЬ", 13)
 
 func _win_map_rect(view: Vector2) -> Rect2:
 	return Rect2(view.x * 0.5 - 218.0, view.y * 0.5 + 22.0, 204.0, 66.0)
