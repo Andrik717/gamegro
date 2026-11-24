@@ -174,7 +174,7 @@ jobs:
           fallback = root / "assets/backgrounds/tropical_cove.jpg"
           if not fallback.is_file() or 'load("res://assets/backgrounds/tropical_cove.jpg")' not in script:
               raise SystemExit("Missing valid fallback background")
-          # Catch mislabeled image files before Godot silently skips their import.
+          # Validate image signatures, not just filenames.
           for image in (root / "assets").rglob("*"):
               if not image.is_file():
                   continue
