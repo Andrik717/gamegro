@@ -555,8 +555,6 @@ game.write_text(source, encoding="utf-8")
 make_music(root / "assets/audio/music.wav")
 from level_content import enhance_game
 enhance_game(root)
-from chapter_mechanics import apply_chapter_mechanics
-apply_chapter_mechanics(root)
 
 # Keep the story card inside short landscape displays.
 source = game.read_text(encoding="utf-8")
@@ -656,6 +654,10 @@ source = replace_gd_function(source, "func _handle_map_tap(point: Vector2, view:
 			_reset_round()
 			return""")
 game.write_text(source,encoding="utf-8")
+
+# Apply interactive chapter puzzles after every other generated-script rewrite.
+from chapter_mechanics import apply_chapter_mechanics
+apply_chapter_mechanics(root)
 
 # Copy the normalized story only after level_content has converted every chapter
 # background reference from SVG to the final PNG paths used by the game.
