@@ -40,7 +40,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          grep -q '^window/handheld/orientation=0        uses: actions/upload-artifact@v5
+          grep -q '^window/handheld/orientation=0$' packaged/project.godot
+          grep -q '^screen/orientation=0$' packaged/export_presets.cfg
+
+      - name: Preserve source script for UI inspection
+        uses: actions/upload-artifact@v5
         with:
           name: MagicWorld-source-inspection
           path: packaged/scripts/game.gd
