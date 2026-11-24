@@ -50,6 +50,21 @@ var audio_found: AudioStreamPlayer
 var audio_hint: AudioStreamPlayer
 var audio_surf: AudioStreamPlayer
 
+var mini_dirt_texture: Texture2D
+var mini_sponge_texture: Texture2D
+var mini_puzzle_texture: Texture2D
+var mini_paint_emblem_texture: Texture2D
+var mini_paintbrush_texture: Texture2D
+var mini_wrench_texture: Texture2D
+var mini_hammer_texture: Texture2D
+var mini_gear_texture: Texture2D
+var mini_crack_texture: Texture2D
+var mini_halo_texture: Texture2D
+var minigame_animation_time := 0.0
+var minigame_pointer_position := Vector2.ZERO
+var minigame_burst_position := Vector2.ZERO
+var minigame_burst_time := 0.0
+
 # Mandatory story mini-game state.
 var minigame_definitions: Array = []
 var minigame_active := false
@@ -75,6 +90,7 @@ const MINI_PALETTE: Array[Color] = [Color("#e85d4a"), Color("#f3c64e"), Color("#
 func _ready() -> void:
 	randomize()
 	_create_ui_font()
+	_load_minigame_art_pack()
 	_load_story()
 	_load_minigame_definitions()
 	_load_progress()
@@ -91,6 +107,25 @@ func _create_ui_font() -> void:
 	var system_font := SystemFont.new()
 	system_font.font_names = PackedStringArray(["Noto Sans", "Roboto", "Arial"])
 	ui_font = system_font
+
+func _load_minigame_art_pack() -> void:
+	mini_dirt_texture = load("res://assets/minigames/dirt_splatter.svg") as Texture2D
+	mini_sponge_texture = load("res://assets/minigames/sponge.svg") as Texture2D
+	mini_puzzle_texture = load("res://assets/minigames/puzzle_overlay.svg") as Texture2D
+	mini_paint_emblem_texture = load("res://assets/minigames/paint_emblem.svg") as Texture2D
+	mini_paintbrush_texture = load("res://assets/minigames/paintbrush.svg") as Texture2D
+	mini_wrench_texture = load("res://assets/minigames/tool_wrench.svg") as Texture2D
+	mini_hammer_texture = load("res://assets/minigames/tool_hammer.svg") as Texture2D
+	mini_gear_texture = load("res://assets/minigames/tool_gear.svg") as Texture2D
+	mini_crack_texture = load("res://assets/minigames/repair_crack.svg") as Texture2D
+	mini_halo_texture = load("res://assets/minigames/artifact_halo.svg") as Texture2D
+
+func _draw_minigame_sprite(texture: Texture2D, center: Vector2, size: Vector2, angle := 0.0) -> void:
+	if texture == null:
+		return
+	draw_set_transform(center, angle, Vector2.ONE)
+	draw_texture_rect(texture, Rect2(-size * 0.5, size), false)
+	draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 
 func _load_minigame_definitions() -> void:
 	var file := FileAccess.open("res://game_data/minigames.json", FileAccess.READ)
@@ -356,6 +391,10 @@ func _process(delta: float) -> void:
 			hint_id = -1
 	if celebration_time > 0.0:
 		celebration_time = maxf(0.0, celebration_time - delta)
+	if minigame_active:
+		minigame_animation_time += delta
+	if minigame_burst_time > 0.0:
+		minigame_burst_time = maxf(0.0, minigame_burst_time - delta)
 	queue_redraw()
 
 func _viewport_layout() -> Dictionary:
@@ -699,6 +738,8 @@ func _finish_minigame() -> void:
 	if minigame_success:
 		return
 	minigame_success = true
+	minigame_burst_position = get_viewport_rect().size * 0.5
+	minigame_burst_time = 0.9
 	completed_levels[current_level_index] = true
 	unlocked_level = maxi(unlocked_level, mini(current_level_index + 1, levels.size() - 1))
 	_save_progress()
@@ -718,12 +759,15 @@ func _clean_minigame_at(point: Vector2) -> void:
 		var spot := art.position + minigame_clean_spots[i] * art.size
 		if point.distance_to(spot) <= 34.0:
 			minigame_cleaned[i] = true
+			minigame_burst_position = point
+			minigame_burst_time = 0.28
 			if minigame_cleaned.size() == minigame_clean_spots.size():
 				_finish_minigame()
 			queue_redraw()
 			return
 
 func _minigame_pointer_down(point: Vector2) -> void:
+	minigame_pointer_position = point
 	var view := get_viewport_rect().size
 	if minigame_success:
 		if _minigame_continue_rect(view).has_point(point):
@@ -782,6 +826,7 @@ func _minigame_pointer_down(point: Vector2) -> void:
 	queue_redraw()
 
 func _minigame_pointer_move(point: Vector2) -> void:
+	minigame_pointer_position = point
 	if not minigame_active or minigame_success:
 		return
 	if minigame_type == "cleaning":
@@ -812,6 +857,8 @@ func _draw_minigame(view: Vector2) -> void:
 	_draw_text(minigame_subtitle, Vector2(view.x * 0.5, panel.position.y + 111.0), 14, CREAM, HORIZONTAL_ALIGNMENT_CENTER, panel.size.x - 100.0)
 	_draw_button(_sound_rect(view), "ЗВУК " + ("ВКЛ" if sound_enabled else "ВЫКЛ"), 11)
 	var art := _minigame_artifact_rect(view)
+	if mini_halo_texture != null:
+		draw_texture_rect(mini_halo_texture, art.grow(38.0), false)
 	_draw_rounded_panel(art.grow(18.0), Color("#123b50"), Color("#bd8c48"), 2.0, 24.0)
 	if minigame_artifact != null:
 		draw_texture_rect(minigame_artifact, art, false)
@@ -821,13 +868,19 @@ func _draw_minigame(view: Vector2) -> void:
 				if minigame_cleaned.has(i):
 					continue
 				var spot := art.position + minigame_clean_spots[i] * art.size
-				draw_circle(spot, 12.0 + float(i % 4) * 2.0, Color(0.28, 0.20, 0.12, 0.84))
-				draw_arc(spot, 12.0 + float(i % 4) * 2.0, 0.0, TAU, 20, Color("#d0a46a"), 2.0)
-			_draw_text("ВОДИТЕ ПАЛЬЦЕМ ПО ГРЯЗИ", view * Vector2(0.68, 0.38), 15, CREAM, HORIZONTAL_ALIGNMENT_CENTER, view.x * 0.28)
+				var splat_size := Vector2(34.0 + float(i % 4) * 5.0, 30.0 + float(i % 3) * 6.0)
+				_draw_minigame_sprite(mini_dirt_texture, spot, splat_size, float(i) * 0.71)
+				for grain in range(3):
+					var grain_angle := float(i * 3 + grain) * 2.1
+					var grain_pos := spot + Vector2(cos(grain_angle), sin(grain_angle)) * (splat_size.x * 0.43)
+					draw_circle(grain_pos, 2.0, Color("#6b482d"))
+			_draw_text("ПРОВЕДИТЕ ГУБКОЙ ПО ЗАГРЯЗНЕНИЯМ", view * Vector2(0.68, 0.38), 14, CREAM, HORIZONTAL_ALIGNMENT_CENTER, view.x * 0.28)
 		"assembly":
 			for i in range(4):
 				var target := _minigame_piece_target(i, art)
 				_draw_rounded_panel(target, Color(0.12, 0.31, 0.38, 0.24), Color("#e8c27a"), 1.5, 8.0)
+				if mini_puzzle_texture != null:
+					draw_texture_rect(mini_puzzle_texture, target, false)
 				if minigame_assembled.has(i):
 					var tex_size := Vector2(minigame_artifact.get_size())
 					draw_texture_rect_region(minigame_artifact, target, Rect2(Vector2((i % 2) * tex_size.x * 0.5, int(i / 2) * tex_size.y * 0.5), tex_size * 0.5))
@@ -839,34 +892,61 @@ func _draw_minigame(view: Vector2) -> void:
 					piece.position = minigame_drag_position - piece.size * 0.5
 				var tex_size := Vector2(minigame_artifact.get_size())
 				var source := Rect2(Vector2((i % 2) * tex_size.x * 0.5, int(i / 2) * tex_size.y * 0.5), tex_size * 0.5)
-				_draw_rounded_panel(piece.grow(3.0), Color("#173d5d"), GOLD, 2.0, 10.0)
+				_draw_rounded_panel(piece.grow(5.0), Color("#173d5d"), GOLD, 2.0, 14.0)
 				draw_texture_rect_region(minigame_artifact, piece, source)
-			_draw_text("ПЕРЕТАЩИТЕ 4 ФРАГМЕНТА", view * Vector2(0.76, 0.31), 14, CREAM, HORIZONTAL_ALIGNMENT_CENTER, view.x * 0.32)
+				if mini_puzzle_texture != null:
+					draw_texture_rect(mini_puzzle_texture, piece, false)
+				var pulse := 1.0 + 0.035 * sin(minigame_animation_time * 4.0 + float(i))
+				draw_arc(piece.get_center(), 38.0 * pulse, 0.0, TAU, 36, Color(1.0, 0.86, 0.52, 0.42), 1.5)
+			_draw_text("СОЕДИНИТЕ ФРАГМЕНТЫ ПО УЗОРУ", view * Vector2(0.76, 0.31), 14, CREAM, HORIZONTAL_ALIGNMENT_CENTER, view.x * 0.32)
 		"painting":
 			for i in range(5):
 				var zone := _minigame_zone_position(i, art)
 				var fill := MINI_PALETTE[int(minigame_painted[i])] if minigame_painted.has(i) else Color(0.95, 0.88, 0.65, 0.20)
 				draw_circle(zone, 19.0, fill)
-				draw_arc(zone, 19.0, 0.0, TAU, 28, GOLD, 3.0)
+				if mini_paint_emblem_texture != null:
+					_draw_minigame_sprite(mini_paint_emblem_texture, zone, Vector2(58.0, 58.0), minigame_animation_time * 0.08)
+				draw_arc(zone, 23.0 + 2.0 * sin(minigame_animation_time * 3.0 + float(i)), 0.0, TAU, 32, GOLD, 2.0)
 			for i in range(MINI_PALETTE.size()):
 				var swatch := _minigame_palette_rect(i, view)
 				_draw_rounded_panel(swatch, MINI_PALETTE[i], GOLD if i == minigame_selected_color else Color("#7394a4"), 3.0 if i == minigame_selected_color else 1.0, 12.0)
+				if i == minigame_selected_color:
+					draw_arc(swatch.get_center(), 26.0 + 2.0 * sin(minigame_animation_time * 5.0), 0.0, TAU, 32, Color("#fff1c7"), 2.0)
 				_draw_text(["КОРАЛЛ", "ЗОЛОТО", "МОРЕ", "НЕБО", "АМИСТ" ][i], Vector2(swatch.position.x + swatch.size.x + 12.0, swatch.position.y + 27.0), 12, CREAM, HORIZONTAL_ALIGNMENT_LEFT, 90.0)
 		"repair":
 			for i in range(3):
 				var node := _minigame_repair_node(i, art)
 				var repaired := i < minigame_repair_step
-				draw_circle(node.get_center(), 22.0, Color("#4b9b72") if repaired else Color("#8b4a3e"))
-				draw_arc(node.get_center(), 22.0, 0.0, TAU, 28, GOLD, 3.0)
-				_draw_text("✓" if repaired else str(i + 1), node.get_center() + Vector2(0.0, 7.0), 18, CREAM, HORIZONTAL_ALIGNMENT_CENTER, 42.0)
+				draw_circle(node.get_center(), 24.0, Color("#285f50") if repaired else Color("#593c39"))
+				draw_arc(node.get_center(), 25.0 + 2.0 * sin(minigame_animation_time * 4.0 + float(i)), 0.0, TAU, 32, GOLD, 3.0)
+				var node_texture: Texture2D = [mini_wrench_texture, mini_hammer_texture, mini_gear_texture][i] if not repaired else mini_gear_texture
+				_draw_minigame_sprite(node_texture, node.get_center(), Vector2(34.0, 34.0))
+				if not repaired and mini_crack_texture != null:
+					_draw_minigame_sprite(mini_crack_texture, node.get_center(), Vector2(48.0, 48.0), float(i) * 0.6)
 			var tool_names: Array[String] = ["КЛЮЧ", "МОЛОТОК", "ШЕСТЕРНЯ"]
+			var tool_textures: Array[Texture2D] = [mini_wrench_texture, mini_hammer_texture, mini_gear_texture]
 			for i in range(3):
 				var tool := _minigame_tool_rect(i, view)
 				var fill := Color("#24546a") if i != minigame_selected_tool else Color("#6c542e")
 				_draw_button(tool, tool_names[i], 14)
+				_draw_minigame_sprite(tool_textures[i], Vector2(tool.position.x + 28.0, tool.get_center().y), Vector2(42.0, 42.0))
 				if i == minigame_selected_tool:
 					_draw_rounded_panel(tool.grow(3.0), Color(0.0, 0.0, 0.0, 0.0), GOLD, 2.0, 14.0)
 			_draw_text("ВЫБЕРИТЕ ИНСТРУМЕНТ ПО ПОРЯДКУ", view * Vector2(0.76, 0.31), 13, CREAM, HORIZONTAL_ALIGNMENT_CENTER, view.x * 0.34)
+	if minigame_pointer_position != Vector2.ZERO and not minigame_success:
+		if minigame_type == "cleaning":
+			_draw_minigame_sprite(mini_sponge_texture, minigame_pointer_position, Vector2(62.0, 62.0), sin(minigame_animation_time * 8.0) * 0.08)
+		elif minigame_type == "painting":
+			_draw_minigame_sprite(mini_paintbrush_texture, minigame_pointer_position + Vector2(12.0, -10.0), Vector2(54.0, 54.0), -0.45)
+	if minigame_burst_time > 0.0:
+		var burst_progress := 1.0 - minigame_burst_time / 0.9
+		var burst_radius := 14.0 + burst_progress * 74.0
+		var burst_alpha := minigame_burst_time / 0.9
+		draw_arc(minigame_burst_position, burst_radius, 0.0, TAU, 40, Color(1.0, 0.86, 0.48, burst_alpha), 4.0)
+		for spark in range(8):
+			var spark_angle := TAU * float(spark) / 8.0 + minigame_animation_time
+			var spark_point := minigame_burst_position + Vector2(cos(spark_angle), sin(spark_angle)) * burst_radius
+			draw_circle(spark_point, 3.5 * burst_alpha, Color(1.0, 0.94, 0.68, burst_alpha))
 	var progress := _minigame_progress()
 	var progress_rect := Rect2(panel.position.x + 54.0, panel.position.y + panel.size.y - 82.0, panel.size.x - 108.0, 12.0)
 	_draw_rounded_panel(progress_rect, Color("#1b4052"), Color("#537b8a"), 1.0, 6.0)
