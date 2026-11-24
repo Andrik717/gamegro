@@ -16,6 +16,10 @@ const NAVY := Color("#102d4d")
 
 var background: Texture2D
 var item_textures: Array[Texture2D] = []
+var layout_store: Dictionary = {}
+const LAYOUT_SAVE_PATH := "user://level_layouts.json"
+const LAYOUT_MARGIN := 54.0
+const LAYOUT_GAP := 9.0
 var found := {}
 var display_order: Array[int] = []
 var elapsed := 0.0
@@ -44,6 +48,7 @@ var audio_surf: AudioStreamPlayer
 
 func _ready() -> void:
 	_load_story()
+	_load_layout_store()
 	_load_level(0)
 	_make_audio()
 	_reset_round()
@@ -79,12 +84,13 @@ func _load_level(level_index: int) -> void:
 	for entry in level.get("items", []):
 		if not entry is Dictionary:
 			continue
-		var coords: Array = entry.get("position", [768, 432])
 		var item := {
 			"id": ITEM_DATA.size(),
 			"slug": str(entry.get("slug", "")),
 			"name": str(entry.get("name", "Предмет")),
-			"pos": Vector2(float(coords[0]), float(coords[1]))
+			"pos": Vector2.ZERO,
+			"size": Vector2(48.0, 48.0),
+			"rotation": 0.0
 		}
 		var image_path := str(entry.get("image", ""))
 		var texture: Texture2D = load(image_path) if ResourceLoader.exists(image_path) else null
@@ -94,8 +100,109 @@ func _load_level(level_index: int) -> void:
 		ITEM_DATA.append(item)
 		item_textures.append(texture)
 	ITEM_COUNT = ITEM_DATA.size()
-	if ITEM_COUNT == 0:
+	if ITEM_COUNT > 0:
+		_apply_level_layout(level)
+	else:
 		push_error("В локации нет загружаемых предметов: " + current_level_name)
+
+
+func _load_layout_store() -> void:
+	if not FileAccess.file_exists(LAYOUT_SAVE_PATH):
+		layout_store = {}
+		return
+	var file := FileAccess.open(LAYOUT_SAVE_PATH, FileAccess.READ)
+	if file == null:
+		layout_store = {}
+		return
+	var parsed: Variant = JSON.parse_string(file.get_as_text())
+	layout_store = parsed if parsed is Dictionary else {}
+
+func _save_layout_store() -> void:
+	var file := FileAccess.open(LAYOUT_SAVE_PATH, FileAccess.WRITE)
+	if file == null:
+		push_warning("Не удалось сохранить расположение предметов")
+		return
+	file.store_string(JSON.stringify(layout_store))
+
+func _apply_level_layout(level: Dictionary) -> void:
+	var level_key := str(level.get("id", current_level_index + 1))
+	var saved: Variant = layout_store.get(level_key, [])
+	if saved is Array and saved.size() == ITEM_COUNT:
+		var valid := true
+		for i in range(ITEM_COUNT):
+			if not saved[i] is Dictionary or not saved[i].has("x") or not saved[i].has("w"):
+				valid = false
+				break
+		if valid:
+			for i in range(ITEM_COUNT):
+				var data: Dictionary = saved[i]
+				ITEM_DATA[i].pos = Vector2(float(data.get("x", 0.0)), float(data.get("y", 0.0)))
+				ITEM_DATA[i].size = Vector2(float(data.get("w", 48.0)), float(data.get("h", 48.0)))
+				ITEM_DATA[i].rotation = float(data.get("r", 0.0))
+			return
+	_generate_level_layout()
+	var result: Array = []
+	for item in ITEM_DATA:
+		result.append({
+			"x": item.pos.x,
+			"y": item.pos.y,
+			"w": item.size.x,
+			"h": item.size.y,
+			"r": item.rotation
+		})
+	layout_store[level_key] = result
+	_save_layout_store()
+
+func _generate_level_layout() -> void:
+	var placed: Array[Rect2] = []
+	for i in range(ITEM_COUNT):
+		var texture_size := Vector2(item_textures[i].get_size())
+		var aspect := texture_size.x / maxf(1.0, texture_size.y)
+		var longest := randf_range(42.0, 66.0)
+		var item_size := Vector2(longest, longest)
+		if aspect >= 1.0:
+			item_size.y = longest / maxf(0.35, aspect)
+		else:
+			item_size.x = longest * aspect
+		var angle := deg_to_rad(randf_range(-13.0, 13.0))
+		var found_spot := false
+		for attempt in range(3500):
+			var candidate := Vector2(
+				randf_range(LAYOUT_MARGIN + item_size.x, WORLD_SIZE.x - LAYOUT_MARGIN - item_size.x),
+				randf_range(LAYOUT_MARGIN + item_size.y, WORLD_SIZE.y - LAYOUT_MARGIN - item_size.y)
+			)
+			var candidate_rect := _layout_rect(candidate, item_size, angle)
+			var overlaps := false
+			for previous in placed:
+				if candidate_rect.intersects(previous):
+					overlaps = true
+					break
+			if not overlaps:
+				ITEM_DATA[i].pos = candidate
+				ITEM_DATA[i].size = item_size
+				ITEM_DATA[i].rotation = angle
+				placed.append(candidate_rect)
+				found_spot = true
+				break
+			if attempt == 2000:
+				item_size *= 0.88
+		if not found_spot:
+			push_warning("Не удалось найти свободное место для предмета: " + str(ITEM_DATA[i].name))
+			ITEM_DATA[i].pos = Vector2(
+				randf_range(LAYOUT_MARGIN, WORLD_SIZE.x - LAYOUT_MARGIN),
+				randf_range(LAYOUT_MARGIN, WORLD_SIZE.y - LAYOUT_MARGIN)
+			)
+			ITEM_DATA[i].size = item_size
+			ITEM_DATA[i].rotation = angle
+
+func _layout_rect(center: Vector2, item_size: Vector2, angle: float) -> Rect2:
+	var c := absf(cos(angle))
+	var sn := absf(sin(angle))
+	var bounds := Vector2(
+		c * item_size.x + sn * item_size.y,
+		sn * item_size.x + c * item_size.y
+	)
+	return Rect2(center - bounds * 0.5 - Vector2.ONE * (LAYOUT_GAP * 0.5), bounds + Vector2.ONE * LAYOUT_GAP)
 
 func _make_audio() -> void:
 	audio_found = _player("res://assets/audio/found.wav", false)
@@ -164,14 +271,16 @@ func _draw() -> void:
 	for i in range(ITEM_COUNT):
 		if found.has(i):
 			continue
-		var p: Vector2 = ITEM_DATA[i].pos
-		var texture: Texture2D = item_textures[i]
-		var size := Vector2(48, 48)
+		var item: Dictionary = ITEM_DATA[i]
+		var p: Vector2 = item.pos
+		var size: Vector2 = item.size
 		if hint_id == i and hint_time > 0.0:
 			var pulse := 1.0 + 0.12 * sin(Time.get_ticks_msec() * 0.012)
+			draw_circle(p, maxf(size.x, size.y) * 0.72, Color(1.0,0.82,0.2,0.22))
 			size *= pulse
-			draw_circle(p, 36.0, Color(1.0,0.82,0.2,0.22))
-		draw_texture_rect(texture, Rect2(p - size*0.5, size), false)
+		draw_set_transform(origin + p * s, float(item.rotation), Vector2.ONE * s)
+		draw_texture_rect(item_textures[i], Rect2(-size * 0.5, size), false)
+		draw_set_transform(origin, 0.0, Vector2.ONE * s)
 	if celebration_time > 0.0:
 		var progress := 1.0 - celebration_time / 0.55
 		var radius := 18.0 + progress * 78.0
@@ -377,8 +486,9 @@ func _handle_tap(point: Vector2) -> void:
 		var id: int = item.id
 		if found.has(id):
 			continue
-		var radius := 34.0
-		if Rect2(item.pos-Vector2.ONE*radius,Vector2.ONE*radius*2).has_point(world_pos):
+		var local_hit: Vector2 = (world_pos - item.pos).rotated(-float(item.rotation))
+		var hit_rect := Rect2(-item.size * 0.5, item.size)
+		if hit_rect.has_point(local_hit):
 			found[id] = true
 			hint_id = id
 			hint_time = 0.0
