@@ -4,6 +4,7 @@ const WORLD_SIZE := Vector2(1536, 864)
 const BAR_HEIGHT := 116.0
 const MIN_ZOOM := 1.0
 const MAX_ZOOM := 2.6
+const TOUCH_TAP_SLOP := 18.0
 var ITEM_COUNT := 0
 var ITEM_DATA: Array[Dictionary] = []
 var levels: Array = []
@@ -300,9 +301,15 @@ func _drag_event(index: int, pos: Vector2, relative: Vector2) -> void:
 			pinch_distance = new_distance
 			pinch_center = center
 	elif touches.size() == 1:
-		if zoom > 1.02:
-			camera_offset += relative
-			dragging = true
+		# Ignore tiny finger drift so an ordinary tap is not mistaken for a pan.
+		if zoom > 1.02 and one_finger_start.distance_to(pos) > TOUCH_TAP_SLOP:
+			if not dragging:
+				dragging = true
+				camera_offset += pos - one_finger_start
+			else:
+				camera_offset += pos - one_finger_last
+			_clamp_camera()
+			queue_redraw()
 		one_finger_last = pos
 
 func _zoom_at(point: Vector2, factor: float, pan_delta := Vector2.ZERO) -> void:
