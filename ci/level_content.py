@@ -218,8 +218,27 @@ def draw_item(path,kind,color,dark,seed):
     for x,y in [(85,80),(300,110),(280,300)]: d.ellipse((x-5,y-5,x+5,y+5),fill=light)
     im.save(path,"PNG",optimize=True)
 
+def normalize_png_assets(asset_root):
+    """Validate every .png asset and repair JPEG data stored with a .png suffix."""
+    for path in asset_root.rglob("*.png"):
+        try:
+            with Image.open(path) as image:
+                image.verify()
+            with Image.open(path) as image:
+                if image.format != "PNG":
+                    mode = "RGBA" if "A" in image.getbands() else "RGB"
+                    image.convert(mode).save(path, format="PNG", optimize=True)
+                with Image.open(path) as normalized:
+                    normalized.verify()
+                    if normalized.format != "PNG":
+                        raise ValueError("conversion did not produce PNG data")
+        except Exception as exc:
+            raise SystemExit(f"Invalid PNG asset {path}: {exc}") from exc
+
+
 def enhance_game(root):
     base=Path(__file__).resolve().parent.parent
+    normalize_png_assets(root / "assets")
     story_path=base/"game_data/story.json"; story=json.loads(story_path.read_text(encoding="utf-8"))
     levels=story["levels"]
     if len(levels)!=10 or sum(len(x.get("items",[])) for x in levels[1:])!=45: raise SystemExit("Expected 45 chapter targets")
