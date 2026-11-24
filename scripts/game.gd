@@ -26,7 +26,7 @@ const LEVELS := [
     },
     {
         "title": "Пещера водопада",
-        "background": "res://assets/levels/waterfall_cave.svg",
+        "background": "res://assets/backgrounds/bg_03.png",
         "targets": [
             {"id":"светящийся_кристалл", "name":"Светящийся кристалл", "rect":Rect2(180,185,140,110)},
             {"id":"старинный_фонарь", "name":"Старинный фонарь", "rect":Rect2(1120,195,140,110)},
