@@ -56,6 +56,7 @@ var mini_dirt_texture: Texture2D
 var mini_sponge_texture: Texture2D
 var mini_puzzle_texture: Texture2D
 var mini_paint_emblem_texture: Texture2D
+var mini_paint_drop_texture: Texture2D
 var mini_paintbrush_texture: Texture2D
 var mini_wrench_texture: Texture2D
 var mini_hammer_texture: Texture2D
@@ -115,6 +116,8 @@ func _load_minigame_art_pack() -> void:
 	mini_sponge_texture = load("res://assets/minigames/sponge.png") as Texture2D
 	mini_puzzle_texture = load("res://assets/minigames/puzzle_overlay.png") as Texture2D
 	mini_paint_emblem_texture = load("res://assets/minigames/paint_emblem.png") as Texture2D
+	var paint_drop_path := "res://assets/minigames/paint_drop.png"
+	mini_paint_drop_texture = load(paint_drop_path) as Texture2D if ResourceLoader.exists(paint_drop_path) else null
 	mini_paintbrush_texture = load("res://assets/minigames/paintbrush.png") as Texture2D
 	mini_wrench_texture = load("res://assets/minigames/tool_wrench.png") as Texture2D
 	mini_hammer_texture = load("res://assets/minigames/tool_hammer.png") as Texture2D
@@ -919,6 +922,8 @@ func _draw_minigame(view: Vector2) -> void:
 			for i in range(MINI_PALETTE.size()):
 				var swatch := _minigame_palette_rect(i, view)
 				_draw_rounded_panel(swatch, MINI_PALETTE[i], GOLD if i == minigame_selected_color else Color("#7394a4"), 3.0 if i == minigame_selected_color else 1.0, 12.0)
+				if mini_paint_drop_texture != null:
+					draw_texture_rect(mini_paint_drop_texture, Rect2(swatch.position + Vector2(4.0, 2.0), Vector2(34.0, 38.0)), false, MINI_PALETTE[i])
 				if i == minigame_selected_color:
 					draw_arc(swatch.get_center(), 26.0 + 2.0 * sin(minigame_animation_time * 5.0), 0.0, TAU, 32, Color("#fff1c7"), 2.0)
 				_draw_text(["КОРАЛЛ", "ЗОЛОТО", "МОРЕ", "НЕБО", "АМИСТ" ][i], Vector2(swatch.position.x + swatch.size.x + 12.0, swatch.position.y + 27.0), 12, CREAM, HORIZONTAL_ALIGNMENT_LEFT, 90.0)
