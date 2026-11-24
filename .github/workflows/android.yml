@@ -221,6 +221,14 @@ jobs:
           print("Validated 10 levels, 450 item placements, image paths, positions, fallback background and audio.")
           PY
 
+      - name: Normalize JPEG assets for Godot
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m venv /tmp/gamegro-image-tools
+          /tmp/gamegro-image-tools/bin/pip install --disable-pip-version-check Pillow
+          /tmp/gamegro-image-tools/bin/python ci/normalize_jpeg_assets.py packaged/assets
+
       - name: Create debug keystore
         shell: bash
         run: |
