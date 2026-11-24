@@ -2337,6 +2337,7 @@
       "level_name": "Подводная лагуна",
       "id": 14,
       "slug": "pearl_l5",
+      "name": "Жемчужина",
       "image": "res://assets/items/pearl_l5.png",
       "position": [
         925,
@@ -3956,6 +3957,7 @@
       "level_name": "Ледяное королевство",
       "id": 14,
       "slug": "pearl_l8",
+      "name": "Жемчужина",
       "image": "res://assets/items/pearl_l8.png",
       "position": [
         925,
