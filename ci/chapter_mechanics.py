@@ -23,7 +23,7 @@ def apply_chapter_mechanics(root: Path) -> None:
     {"mode":"sequence","title":"Печати древнего города","prompt":"Порядок печатей: Вода → Солнце → Луна → Земля","buttons":["Луна","Вода","Земля","Солнце"],"solution":[1,3,0,2]},
     {"mode":"dial","title":"Сердце последнего маяка","prompt":"Выставь зеркала на III, II и IV положение","buttons":["Зеркало 1","Зеркало 2","Зеркало 3"],"solution":[2,1,3]}
 ]
-'''.replace("    ", "\\t")
+'''.replace("    ", "\t")
     once("var background: Texture2D", challenge_data + "\nvar background: Texture2D", "challenge definitions")
     once("var map_open := false\n", "var map_open := false\nvar puzzle_active := false\nvar puzzle_step := 0\nvar puzzle_feedback := \"\"\nvar puzzle_dials := [0, 0, 0]\nvar puzzle_first_pick := -1\nvar puzzle_matched := []\n", "challenge state")
     once("\twon = false\n\tqueue_redraw()", "\twon = false\n\tpuzzle_active = false\n\tpuzzle_step = 0\n\tpuzzle_feedback = \"\"\n\tpuzzle_dials = [0, 0, 0]\n\tpuzzle_first_pick = -1\n\tpuzzle_matched.clear()\n\tqueue_redraw()", "reset challenge state")
@@ -168,5 +168,5 @@ func _finish_challenge() -> void:
     unlocked_level_count = mini(LEVEL_DATA.size(), maxi(unlocked_level_count, current_level+2))
     _save_progress()
     queue_redraw()
-'''.replace("    ", "\\t")
+'''.replace("    ", "\t")
     game.write_text(source, encoding="utf-8")
