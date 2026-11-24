@@ -461,17 +461,26 @@ if not story_source.is_file():
 story_target = root / "data" / "story.json"
 story_target.parent.mkdir(parents=True, exist_ok=True)
 story_target.write_text(story_source.read_text(encoding="utf-8"), encoding="utf-8")
-# Include the nine authored chapter environments in the packaged Godot project.
-levels_source = Path(__file__).resolve().parent.parent / "assets" / "levels"
-levels_target = root / "assets" / "levels"
-levels_target.mkdir(parents=True, exist_ok=True)
-level_assets = list(levels_source.glob("*.svg"))
-if len(level_assets) != 9:
-    raise SystemExit(f"Expected nine chapter backgrounds, found {len(level_assets)}")
-for level_asset in level_assets:
-    (levels_target / level_asset.name).write_bytes(level_asset.read_bytes())
+# Chapter backgrounds are PNG files under assets/backgrounds.
+background_dir = root / "assets" / "backgrounds"
+required_backgrounds = ["tropical_cove.png", "bg_02.png", "bg_03.png", "bg_04.png", "bg_05.png"]
+missing_backgrounds = [name for name in required_backgrounds if not (background_dir / name).is_file()]
+if missing_backgrounds:
+    raise SystemExit("Missing existing chapter PNG backgrounds: " + ", ".join(missing_backgrounds))
 
-replace_once("const CREAM :=", "const LEVEL_DATA := [\n\t{\"name\":\"Затерянный остров\",\"background\":\"res://assets/backgrounds/tropical_cove.png\",\"artifact\":\"Фрагмент карты\"},\n\t{\"name\":\"Тайна джунглей\",\"background\":\"res://assets/levels/jungle_ruins.svg\",\"artifact\":\"Камень памяти\"},\n\t{\"name\":\"Пещера водопада\",\"background\":\"res://assets/levels/waterfall_cave.svg\",\"artifact\":\"Жемчужина приливов\"},\n\t{\"name\":\"Бухта пиратов\",\"background\":\"res://assets/levels/pirate_cove.svg\",\"artifact\":\"Печать капитана\"},\n\t{\"name\":\"Затонувшая лагуна\",\"background\":\"res://assets/levels/sunken_lagoon.svg\",\"artifact\":\"Сердце океана\"},\n\t{\"name\":\"Остров огня\",\"background\":\"res://assets/levels/volcano_forge.svg\",\"artifact\":\"Огненный кристалл\"},\n\t{\"name\":\"Небесная обсерватория\",\"background\":\"res://assets/levels/sky_observatory.svg\",\"artifact\":\"Звёздный компас\"},\n\t{\"name\":\"Ледяное королевство\",\"background\":\"res://assets/levels/ice_kingdom.svg\",\"artifact\":\"Кристалл памяти\"},\n\t{\"name\":\"Затерянный город\",\"background\":\"res://assets/levels/lost_city.svg\",\"artifact\":\"Сердце архипелага\"},\n\t{\"name\":\"Последний маяк\",\"background\":\"res://assets/levels/final_lighthouse.svg\",\"artifact\":\"Свет архипелага\"}\n]\nconst CREAM :=", "ten playable chapter definitions")
+replace_once("const CREAM :=", "const LEVEL_DATA := [
+	{\"name\":\"Затерянный остров\",\"background\":\"res://assets/backgrounds/tropical_cove.png\",\"artifact\":\"Фрагмент карты\"},
+	{\"name\":\"Древние джунгли\",\"background\":\"res://assets/backgrounds/bg_02.png\",\"artifact\":\"Камень памяти\"},
+	{\"name\":\"Пещера водопада\",\"background\":\"res://assets/backgrounds/bg_03.png\",\"artifact\":\"Жемчужина приливов\"},
+	{\"name\":\"Бухта пиратов\",\"background\":\"res://assets/backgrounds/bg_04.png\",\"artifact\":\"Печать капитана\"},
+	{\"name\":\"Затонувшая лагуна\",\"background\":\"res://assets/backgrounds/bg_05.png\",\"artifact\":\"Сердце океана\"},
+	{\"name\":\"Остров огня\",\"background\":\"res://assets/backgrounds/volcano_forge.png\",\"artifact\":\"Огненный кристалл\"},
+	{\"name\":\"Небесная обсерватория\",\"background\":\"res://assets/backgrounds/sky_observatory.png\",\"artifact\":\"Звёздный компас\"},
+	{\"name\":\"Ледяное королевство\",\"background\":\"res://assets/backgrounds/ice_kingdom.png\",\"artifact\":\"Кристалл памяти\"},
+	{\"name\":\"Затерянный город\",\"background\":\"res://assets/backgrounds/lost_city.png\",\"artifact\":\"Сердце архипелага\"},
+	{\"name\":\"Последний маяк\",\"background\":\"res://assets/backgrounds/final_lighthouse.png\",\"artifact\":\"Свет архипелага\"}
+]
+const CREAM :=", "ten playable chapter definitions")
 replace_once("var story_intro_pending := true", "var story_intro_pending := true\nvar current_level := 0\nvar unlocked_level_count := 1\nvar map_open := false", "chapter progress state")
 replace_once('background = load("res://assets/backgrounds/tropical_cove.png")', "_load_current_level()", "load the selected chapter background")
 replace_once("var p: Vector2 = ITEM_DATA[i].pos", "var p: Vector2 = _item_position(ITEM_DATA[i])", "level-specific object positions in draw")

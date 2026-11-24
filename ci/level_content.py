@@ -239,22 +239,35 @@ def enhance_game(root):
     for p in (root/"assets").rglob("*.svg"): p.unlink()
     backgrounds=root/"assets/backgrounds"; backgrounds.mkdir(parents=True,exist_ok=True)
     items_dir=root/"assets/items"; items_dir.mkdir(parents=True,exist_ok=True)
+    # Preserve the supplied numbered PNG artwork for chapters 2-5.
+    numbered_backgrounds={
+        "jungle_ruins":"bg_02.png",
+        "waterfall_cave":"bg_03.png",
+        "pirate_cove":"bg_04.png",
+        "sunken_lagoon":"bg_05.png",
+    }
     source_map={
-        "jungle_ruins":"source_meadow.jpg",
-        "pirate_cove":"source_port_hayalang3.png",
         "sky_observatory":"source_wizardtower.png",
         "ice_kingdom":"source_coldmountain.png",
         "lost_city":"source_desert_clouds.png",
         "final_lighthouse":"source_port_hayalang4.png",
     }
     for i,level in enumerate(levels[1:]):
-        level["background_path"]=f"res://assets/backgrounds/{level['scene']}.png"
-        target=backgrounds/f"{level['scene']}.png"
-        source=base/"assets/backgrounds"/source_map.get(level["scene"],"")
-        if level["scene"] in source_map and source.is_file():
-            make_background_from_source(source,target)
+        scene=level["scene"]
+        if scene in numbered_backgrounds:
+            filename=numbered_backgrounds[scene]
+            target=backgrounds/filename
+            if not target.is_file():
+                raise SystemExit(f"Required supplied PNG background is missing: {target}")
         else:
-            make_background(target,i)
+            filename=f"{scene}.png"
+            target=backgrounds/filename
+            source=base/"assets/backgrounds"/source_map.get(scene,"")
+            if scene in source_map and source.is_file():
+                make_background_from_source(source,target)
+            else:
+                make_background(target,i)
+        level["background_path"]=f"res://assets/backgrounds/{filename}"
     story_path.write_text(json.dumps(story,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     palette=[("#b86b3d","#633d32"),("#67d9e8","#276b91"),("#d8a34e","#77502e"),("#3dbfc4","#176f8c"),("#f16d42","#872d2b"),("#d8b36b","#765332"),("#9fd6ed","#4c829f"),("#d4b36c","#785634"),("#bde5ee","#5e91a3")]
     rows=[]; n=0
