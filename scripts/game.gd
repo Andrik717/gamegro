@@ -348,7 +348,7 @@ func _reset_round() -> void:
 	queue_redraw()
 
 func _process(delta: float) -> void:
-	if not paused and not map_open and not won:
+	if not paused and not map_open and not won and not minigame_active:
 		elapsed += delta
 	if hint_time > 0.0:
 		hint_time = maxf(0.0, hint_time - delta)
