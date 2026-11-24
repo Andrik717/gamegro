@@ -106,7 +106,7 @@ func _draw_challenge(view: Vector2) -> void:
     else:
         for i in range(data.buttons.size()):
             var r := _challenge_button_rect(i, view)
-            var active := mode == "sequence" and puzzle_step < data.solution.size() and i == int(data.solution[puzzle_step])
+            var active: bool = mode == "sequence" and puzzle_step < data.solution.size() and i == int(data.solution[puzzle_step])
             draw_style_box(_rounded_style(Color("#246b70") if active else Color("#1c4d68"), GOLD if active else Color("#bd8c48"), 16, 8), r)
             _center_text(str(data.buttons[i]), r.get_center()+Vector2(0,8), 17, CREAM)
     if not puzzle_feedback.is_empty():
