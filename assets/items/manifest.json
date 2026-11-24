@@ -1,0 +1,548 @@
+{
+  "directory": "assets/items",
+  "format": "PNG",
+  "background": "transparent",
+  "expected_count": 45,
+  "items": [
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 0,
+      "slug": "jungle_totem",
+      "name": "Резной тотем",
+      "image": "res://assets/items/jungle_totem.png",
+      "position": [
+        230,
+        300
+      ]
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 1,
+      "slug": "expedition_journal",
+      "name": "Дневник исследователя",
+      "image": "res://assets/items/expedition_journal.png",
+      "position": [
+        1150,
+        660
+      ]
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 2,
+      "slug": "stone_key",
+      "name": "Каменный ключ",
+      "image": "res://assets/items/stone_key.png",
+      "position": [
+        1360,
+        260
+      ]
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 3,
+      "slug": "golden_idol",
+      "name": "Золотой идол",
+      "image": "res://assets/items/golden_idol.png",
+      "position": [
+        800,
+        520
+      ]
+    },
+    {
+      "level": 2,
+      "level_name": "Древние джунгли",
+      "id": 4,
+      "slug": "broken_compass",
+      "name": "Сломанный компас",
+      "image": "res://assets/items/broken_compass.png",
+      "position": [
+        520,
+        700
+      ]
+    },
+    {
+      "level": 3,
+      "level_name": "Пещера водопада",
+      "id": 0,
+      "slug": "glow_crystal",
+      "name": "Светящийся кристалл",
+      "image": "res://assets/items/glow_crystal.png",
+      "position": [
+        250,
+        240
+      ]
+    },
+    {
+      "level": 3,
+      "level_name": "Пещера водопада",
+      "id": 1,
+      "slug": "old_lantern",
+      "name": "Старинный фонарь",
+      "image": "res://assets/items/old_lantern.png",
+      "position": [
+        1190,
+        250
+      ]
+    },
+    {
+      "level": 3,
+      "level_name": "Пещера водопада",
+      "id": 2,
+      "slug": "crystal_bowl",
+      "name": "Кристальная чаша",
+      "image": "res://assets/items/crystal_bowl.png",
+      "position": [
+        760,
+        650
+      ]
+    },
+    {
+      "level": 3,
+      "level_name": "Пещера водопада",
+      "id": 3,
+      "slug": "silver_key",
+      "name": "Серебряный ключ",
+      "image": "res://assets/items/silver_key.png",
+      "position": [
+        1340,
+        600
+      ]
+    },
+    {
+      "level": 3,
+      "level_name": "Пещера водопада",
+      "id": 4,
+      "slug": "tide_pearl",
+      "name": "Жемчужина",
+      "image": "res://assets/items/tide_pearl.png",
+      "position": [
+        510,
+        470
+      ]
+    },
+    {
+      "level": 4,
+      "level_name": "Пиратская бухта",
+      "id": 0,
+      "slug": "captains_log",
+      "name": "Капитанский журнал",
+      "image": "res://assets/items/captains_log.png",
+      "position": [
+        250,
+        530
+      ]
+    },
+    {
+      "level": 4,
+      "level_name": "Пиратская бухта",
+      "id": 1,
+      "slug": "brass_spyglass",
+      "name": "Подзорная труба",
+      "image": "res://assets/items/brass_spyglass.png",
+      "position": [
+        1280,
+        250
+      ]
+    },
+    {
+      "level": 4,
+      "level_name": "Пиратская бухта",
+      "id": 2,
+      "slug": "captain_seal",
+      "name": "Пиратская печать",
+      "image": "res://assets/items/captain_seal.png",
+      "position": [
+        750,
+        380
+      ]
+    },
+    {
+      "level": 4,
+      "level_name": "Пиратская бухта",
+      "id": 3,
+      "slug": "ship_bell",
+      "name": "Судовой колокол",
+      "image": "res://assets/items/ship_bell.png",
+      "position": [
+        1080,
+        690
+      ]
+    },
+    {
+      "level": 4,
+      "level_name": "Пиратская бухта",
+      "id": 4,
+      "slug": "chart_chest",
+      "name": "Сундук с картой",
+      "image": "res://assets/items/chart_chest.png",
+      "position": [
+        420,
+        730
+      ]
+    },
+    {
+      "level": 5,
+      "level_name": "Подводная лагуна",
+      "id": 0,
+      "slug": "coral_trident",
+      "name": "Трезубец",
+      "image": "res://assets/items/coral_trident.png",
+      "position": [
+        260,
+        300
+      ]
+    },
+    {
+      "level": 5,
+      "level_name": "Подводная лагуна",
+      "id": 1,
+      "slug": "ocean_crown",
+      "name": "Морская корона",
+      "image": "res://assets/items/ocean_crown.png",
+      "position": [
+        1260,
+        280
+      ]
+    },
+    {
+      "level": 5,
+      "level_name": "Подводная лагуна",
+      "id": 2,
+      "slug": "ancient_amphora",
+      "name": "Древняя амфора",
+      "image": "res://assets/items/ancient_amphora.png",
+      "position": [
+        760,
+        500
+      ]
+    },
+    {
+      "level": 5,
+      "level_name": "Подводная лагуна",
+      "id": 3,
+      "slug": "golden_shell",
+      "name": "Золотая раковина",
+      "image": "res://assets/items/golden_shell.png",
+      "position": [
+        420,
+        700
+      ]
+    },
+    {
+      "level": 5,
+      "level_name": "Подводная лагуна",
+      "id": 4,
+      "slug": "ocean_heart",
+      "name": "Сердце океана",
+      "image": "res://assets/items/ocean_heart.png",
+      "position": [
+        1320,
+        690
+      ]
+    },
+    {
+      "level": 6,
+      "level_name": "Остров огня",
+      "id": 0,
+      "slug": "blacksmith_hammer",
+      "name": "Молот кузнеца",
+      "image": "res://assets/items/blacksmith_hammer.png",
+      "position": [
+        250,
+        620
+      ]
+    },
+    {
+      "level": 6,
+      "level_name": "Остров огня",
+      "id": 1,
+      "slug": "lava_crystal",
+      "name": "Лавовый кристалл",
+      "image": "res://assets/items/lava_crystal.png",
+      "position": [
+        770,
+        240
+      ]
+    },
+    {
+      "level": 6,
+      "level_name": "Остров огня",
+      "id": 2,
+      "slug": "fire_rune",
+      "name": "Огненная руна",
+      "image": "res://assets/items/fire_rune.png",
+      "position": [
+        1290,
+        300
+      ]
+    },
+    {
+      "level": 6,
+      "level_name": "Остров огня",
+      "id": 3,
+      "slug": "forge_tongs",
+      "name": "Клещи",
+      "image": "res://assets/items/forge_tongs.png",
+      "position": [
+        1110,
+        690
+      ]
+    },
+    {
+      "level": 6,
+      "level_name": "Остров огня",
+      "id": 4,
+      "slug": "flame_medallion",
+      "name": "Пылающий медальон",
+      "image": "res://assets/items/flame_medallion.png",
+      "position": [
+        510,
+        450
+      ]
+    },
+    {
+      "level": 7,
+      "level_name": "Небесная обсерватория",
+      "id": 0,
+      "slug": "astrolabe",
+      "name": "Астролябия",
+      "image": "res://assets/items/astrolabe.png",
+      "position": [
+        280,
+        640
+      ]
+    },
+    {
+      "level": 7,
+      "level_name": "Небесная обсерватория",
+      "id": 1,
+      "slug": "star_chart",
+      "name": "Звёздная карта",
+      "image": "res://assets/items/star_chart.png",
+      "position": [
+        1190,
+        660
+      ]
+    },
+    {
+      "level": 7,
+      "level_name": "Небесная обсерватория",
+      "id": 2,
+      "slug": "moonstone",
+      "name": "Лунный камень",
+      "image": "res://assets/items/moonstone.png",
+      "position": [
+        750,
+        270
+      ]
+    },
+    {
+      "level": 7,
+      "level_name": "Небесная обсерватория",
+      "id": 3,
+      "slug": "telescope",
+      "name": "Телескоп",
+      "image": "res://assets/items/telescope.png",
+      "position": [
+        1330,
+        360
+      ]
+    },
+    {
+      "level": 7,
+      "level_name": "Небесная обсерватория",
+      "id": 4,
+      "slug": "star_compass",
+      "name": "Звёздный компас",
+      "image": "res://assets/items/star_compass.png",
+      "position": [
+        520,
+        430
+      ]
+    },
+    {
+      "level": 8,
+      "level_name": "Ледяное королевство",
+      "id": 0,
+      "slug": "ice_crown",
+      "name": "Ледяная корона",
+      "image": "res://assets/items/ice_crown.png",
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "level": 8,
+      "level_name": "Ледяное королевство",
+      "id": 1,
+      "slug": "frozen_letter",
+      "name": "Замёрзшее письмо",
+      "image": "res://assets/items/frozen_letter.png",
+      "position": [
+        1270,
+        280
+      ]
+    },
+    {
+      "level": 8,
+      "level_name": "Ледяное королевство",
+      "id": 2,
+      "slug": "blue_crystal",
+      "name": "Синий кристалл",
+      "image": "res://assets/items/blue_crystal.png",
+      "position": [
+        760,
+        540
+      ]
+    },
+    {
+      "level": 8,
+      "level_name": "Ледяное королевство",
+      "id": 3,
+      "slug": "ancient_ice_key",
+      "name": "Старинный ключ",
+      "image": "res://assets/items/ancient_ice_key.png",
+      "position": [
+        410,
+        700
+      ]
+    },
+    {
+      "level": 8,
+      "level_name": "Ледяное королевство",
+      "id": 4,
+      "slug": "memory_crystal",
+      "name": "Кристалл памяти",
+      "image": "res://assets/items/memory_crystal.png",
+      "position": [
+        1330,
+        690
+      ]
+    },
+    {
+      "level": 9,
+      "level_name": "Древний город",
+      "id": 0,
+      "slug": "guardian_seal",
+      "name": "Печать хранителей",
+      "image": "res://assets/items/guardian_seal.png",
+      "position": [
+        250,
+        620
+      ]
+    },
+    {
+      "level": 9,
+      "level_name": "Древний город",
+      "id": 1,
+      "slug": "chronicle_book",
+      "name": "Книга летописей",
+      "image": "res://assets/items/chronicle_book.png",
+      "position": [
+        1250,
+        280
+      ]
+    },
+    {
+      "level": 9,
+      "level_name": "Древний город",
+      "id": 2,
+      "slug": "golden_mask",
+      "name": "Золотая маска",
+      "image": "res://assets/items/golden_mask.png",
+      "position": [
+        760,
+        420
+      ]
+    },
+    {
+      "level": 9,
+      "level_name": "Древний город",
+      "id": 3,
+      "slug": "sun_disk",
+      "name": "Солнечный диск",
+      "image": "res://assets/items/sun_disk.png",
+      "position": [
+        420,
+        290
+      ]
+    },
+    {
+      "level": 9,
+      "level_name": "Древний город",
+      "id": 4,
+      "slug": "archipelago_heart",
+      "name": "Сердце архипелага",
+      "image": "res://assets/items/archipelago_heart.png",
+      "position": [
+        1330,
+        700
+      ]
+    },
+    {
+      "level": 10,
+      "level_name": "Последний маяк",
+      "id": 0,
+      "slug": "lighthouse_lens",
+      "name": "Линза маяка",
+      "image": "res://assets/items/lighthouse_lens.png",
+      "position": [
+        760,
+        260
+      ]
+    },
+    {
+      "level": 10,
+      "level_name": "Последний маяк",
+      "id": 1,
+      "slug": "silver_lever",
+      "name": "Серебряный рычаг",
+      "image": "res://assets/items/silver_lever.png",
+      "position": [
+        250,
+        670
+      ]
+    },
+    {
+      "level": 10,
+      "level_name": "Последний маяк",
+      "id": 2,
+      "slug": "final_map_piece",
+      "name": "Последний фрагмент карты",
+      "image": "res://assets/items/final_map_piece.png",
+      "position": [
+        1250,
+        650
+      ]
+    },
+    {
+      "level": 10,
+      "level_name": "Последний маяк",
+      "id": 3,
+      "slug": "keeper_key",
+      "name": "Ключ хранителя",
+      "image": "res://assets/items/keeper_key.png",
+      "position": [
+        430,
+        420
+      ]
+    },
+    {
+      "level": 10,
+      "level_name": "Последний маяк",
+      "id": 4,
+      "slug": "archipelago_light",
+      "name": "Свет архипелага",
+      "image": "res://assets/items/archipelago_light.png",
+      "position": [
+        1320,
+        270
+      ]
+    }
+  ]
+}
