@@ -250,7 +250,7 @@ def enhance_game(root):
         # The packaged original scene uses tropical_cove.png, while the
         # repository preview asset has a different filename. Keep the
         # existing packaged artwork and point story data to that exact file.
-        fallback="assets/backgrounds/tropical_cove.jpg"
+        fallback="assets/backgrounds/tropical_cove.png"
         if (root/fallback).is_file():
             levels[0]["background_path"]="res://"+fallback
         else:
