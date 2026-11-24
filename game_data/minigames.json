@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "levels": [
+    {
+      "level": 1,
+      "type": "cleaning",
+      "title": "Компас приливов",
+      "artifact": "res://assets/items/compass.png",
+      "subtitle": "Очистите древний компас от песка и морских водорослей.",
+      "goal": "Проведите пальцем по всем загрязнённым участкам."
+    },
+    {
+      "level": 2,
+      "type": "assembly",
+      "title": "Солнечный медальон",
+      "artifact": "res://assets/items/l2_sun_medallion.png",
+      "subtitle": "Соберите медальон из четырёх найденных фрагментов.",
+      "goal": "Перетащите каждый фрагмент на соответствующую часть контура."
+    },
+    {
+      "level": 3,
+      "type": "painting",
+      "title": "Фонарь водопада",
+      "artifact": "res://assets/items/l2_stone_well_lantern.png",
+      "subtitle": "Верните древнему фонарю его магические цвета.",
+      "goal": "Выберите краску и раскрасьте все пять узоров."
+    },
+    {
+      "level": 4,
+      "type": "repair",
+      "title": "Пиратский телескоп",
+      "artifact": "res://assets/items/telescope.png",
+      "subtitle": "Почините телескоп, чтобы прочитать координаты следующего острова.",
+      "goal": "Подберите правильный инструмент для каждой неисправности."
+    },
+    {
+      "level": 5,
+      "type": "cleaning",
+      "title": "Жемчужина океана",
+      "artifact": "res://assets/items/pearl.png",
+      "subtitle": "Освободите жемчужину от налёта морской пещеры.",
+      "goal": "Очистите все пятна, проводя по ним пальцем."
+    },
+    {
+      "level": 6,
+      "type": "assembly",
+      "title": "Сердце вулкана",
+      "artifact": "res://assets/items/l2_green_crystal.png",
+      "subtitle": "Соедините осколки кристалла в единое целое.",
+      "goal": "Перетащите четыре фрагмента на места."
+    },
+    {
+      "level": 7,
+      "type": "painting",
+      "title": "Астролябия небес",
+      "artifact": "res://assets/items/l2_ancient_compass.png",
+      "subtitle": "Нанесите небесные цвета на древний навигационный прибор.",
+      "goal": "Раскрасьте пять светящихся элементов."
+    },
+    {
+      "level": 8,
+      "type": "repair",
+      "title": "Ледяной фонарь",
+      "artifact": "res://assets/items/lantern.png",
+      "subtitle": "Верните свет фонарю ледяного королевства.",
+      "goal": "Используйте три подходящих инструмента по порядку."
+    },
+    {
+      "level": 9,
+      "type": "assembly",
+      "title": "Идол древнего города",
+      "artifact": "res://assets/items/l2_golden_jungle_idol.png",
+      "subtitle": "Восстановите древний идол из четырёх частей.",
+      "goal": "Установите каждый фрагмент в правильный сектор."
+    },
+    {
+      "level": 10,
+      "type": "repair",
+      "title": "Механизм последнего маяка",
+      "artifact": "res://assets/items/l3_lighthouse.png",
+      "subtitle": "Почините механизм и зажгите последний маяк архипелага.",
+      "goal": "Завершите три этапа ремонта, чтобы закончить приключение."
+    }
+  ]
+}
