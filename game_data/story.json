@@ -965,7 +965,7 @@
         "Пиратская повязка"
       ],
       "transition": "Подземная река выводит к пиратской бухте.",
-      "background_path": "res://assets/levels/waterfall_cave.svg",
+      "background_path": "res://assets/backgrounds/bg_03.jpg",
       "items": [
         {
           "id": 0,
@@ -1905,7 +1905,7 @@
         "Сёрфборд"
       ],
       "transition": "Сердце океана указывает на вулканический остров.",
-      "background_path": "res://assets/levels/sunken_lagoon.svg",
+      "background_path": "res://assets/backgrounds/bg_05.jpg",
       "items": [
         {
           "id": 0,
