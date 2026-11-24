@@ -4,7 +4,7 @@ const DESIGN := Vector2(1672, 941)
 const LEVELS := [
     {
         "title": "Затерянный остров",
-        "background": "res://assets/tropical_island.svg",
+        "background": "res://assets/backgrounds/level1_tropical_bay.png",
         "targets": [
             {"id":"star", "name":"Звезда", "rect":Rect2(180,710,180,170)},
             {"id":"shell", "name":"Ракушка", "rect":Rect2(610,690,200,170)},
