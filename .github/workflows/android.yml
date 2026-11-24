@@ -133,6 +133,38 @@ jobs:
           mkdir -p "$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.${GODOT_RELEASE}"
           cp -a templates/templates/. "$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.${GODOT_RELEASE}/"
 
+      - name: Validate repository project and all 10 playable levels
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path(".")
+          story = json.loads((root / "game_data/story.json").read_text(encoding="utf-8"))
+          levels = story.get("levels", [])
+          if len(levels) != 10:
+              raise SystemExit(f"Expected 10 story levels, found {len(levels)}")
+          script = (root / "scripts/game.gd").read_text(encoding="utf-8")
+          if script.count('"title":') != 10:
+              raise SystemExit("Gameplay registry does not contain exactly 10 levels")
+          for level in levels:
+              path = level["background_path"].replace("res://", "")
+              if not (root / path).is_file():
+                  raise SystemExit(f"Missing background for {level['name']}: {path}")
+              if path not in script:
+                  raise SystemExit(f"Level background is not connected in game.gd: {path}")
+              if len(level.get("targets", [])) != 5 or len(level.get("items", [])) != 5 and level["id"] != 1:
+                  raise SystemExit(f"Level does not define five search targets: {level['name']}")
+          print("Validated 10 levels, 10 gameplay backgrounds and 5 targets per level.")
+          PY
+          ./godot --headless --editor --path . --quit > root_validation.log 2>&1 || { cat root_validation.log; exit 1; }
+          cat root_validation.log
+          if grep -E "SCRIPT ERROR|Parse Error|Failed to load script" root_validation.log; then
+            echo "Repository project has script errors."
+            exit 1
+          fi
+
       - name: Create debug keystore
         shell: bash
         run: |
