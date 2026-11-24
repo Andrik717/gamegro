@@ -191,8 +191,8 @@ jobs:
                   pos = item.get("position")
                   if not isinstance(pos, list) or len(pos) != 2:
                       raise SystemExit(f"Invalid item position in {level.get('name')}: {slug}")
-          fallback = root / "assets/backgrounds/tropical_cove.jpg"
-          if not fallback.is_file() or 'load("res://assets/backgrounds/tropical_cove.jpg")' not in script:
+          fallback = root / "assets/backgrounds/tropical_cove.png"
+          if not fallback.is_file() or 'load("res://assets/backgrounds/tropical_cove.png")' not in script:
               raise SystemExit("Missing valid fallback background")
           # Validate image signatures, not just filenames, and report every mismatch.
           invalid_images = []
