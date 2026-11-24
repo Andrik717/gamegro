@@ -31,6 +31,7 @@
           "id": 0,
           "slug": "starfish",
           "name": "Морская звезда",
+          "image": "res://assets/items/starfish.png",
           "position": [
             100,
             100
@@ -40,6 +41,7 @@
           "id": 1,
           "slug": "conch",
           "name": "Ракушка",
+          "image": "res://assets/items/conch.png",
           "position": [
             265,
             100
@@ -49,6 +51,7 @@
           "id": 2,
           "slug": "key",
           "name": "Золотой ключ",
+          "image": "res://assets/items/key.png",
           "position": [
             430,
             100
@@ -58,6 +61,7 @@
           "id": 3,
           "slug": "crab",
           "name": "Краб",
+          "image": "res://assets/items/crab.png",
           "position": [
             595,
             100
@@ -67,6 +71,7 @@
           "id": 4,
           "slug": "pineapple",
           "name": "Ананас",
+          "image": "res://assets/items/pineapple.png",
           "position": [
             760,
             100
@@ -76,6 +81,7 @@
           "id": 5,
           "slug": "message_bottle",
           "name": "Бутылка с посланием",
+          "image": "res://assets/items/message_bottle.png",
           "position": [
             925,
             100
@@ -85,6 +91,7 @@
           "id": 6,
           "slug": "apple",
           "name": "Яблоко",
+          "image": "res://assets/items/apple.png",
           "position": [
             1090,
             100
@@ -94,6 +101,7 @@
           "id": 7,
           "slug": "parrot",
           "name": "Попугай",
+          "image": "res://assets/items/parrot.png",
           "position": [
             1255,
             100
@@ -103,6 +111,7 @@
           "id": 8,
           "slug": "lifebuoy",
           "name": "Спасательный круг",
+          "image": "res://assets/items/lifebuoy.png",
           "position": [
             1420,
             100
@@ -112,6 +121,7 @@
           "id": 9,
           "slug": "treasure_map",
           "name": "Карта сокровищ",
+          "image": "res://assets/items/treasure_map.png",
           "position": [
             100,
             250
@@ -121,6 +131,7 @@
           "id": 10,
           "slug": "compass",
           "name": "Компас",
+          "image": "res://assets/items/compass.png",
           "position": [
             265,
             250
@@ -130,6 +141,7 @@
           "id": 11,
           "slug": "butterfly",
           "name": "Бабочка",
+          "image": "res://assets/items/butterfly.png",
           "position": [
             430,
             250
@@ -139,6 +151,7 @@
           "id": 12,
           "slug": "fish",
           "name": "Рыбка",
+          "image": "res://assets/items/fish.png",
           "position": [
             595,
             250
@@ -148,6 +161,7 @@
           "id": 13,
           "slug": "anchor",
           "name": "Якорь",
+          "image": "res://assets/items/anchor.png",
           "position": [
             760,
             250
@@ -157,6 +171,7 @@
           "id": 14,
           "slug": "coconut",
           "name": "Кокос",
+          "image": "res://assets/items/coconut.png",
           "position": [
             925,
             250
@@ -166,6 +181,7 @@
           "id": 15,
           "slug": "duck",
           "name": "Уточка",
+          "image": "res://assets/items/duck.png",
           "position": [
             1090,
             250
@@ -175,6 +191,7 @@
           "id": 16,
           "slug": "turtle",
           "name": "Черепаха",
+          "image": "res://assets/items/turtle.png",
           "position": [
             1255,
             250
@@ -184,6 +201,7 @@
           "id": 17,
           "slug": "pearl",
           "name": "Жемчужина",
+          "image": "res://assets/items/pearl.png",
           "position": [
             1420,
             250
@@ -193,6 +211,7 @@
           "id": 18,
           "slug": "eyepatch",
           "name": "Пиратская повязка",
+          "image": "res://assets/items/eyepatch.png",
           "position": [
             100,
             400
@@ -202,6 +221,7 @@
           "id": 19,
           "slug": "telescope",
           "name": "Подзорная труба",
+          "image": "res://assets/items/telescope.png",
           "position": [
             265,
             400
@@ -211,6 +231,7 @@
           "id": 20,
           "slug": "hibiscus",
           "name": "Гибискус",
+          "image": "res://assets/items/hibiscus.png",
           "position": [
             430,
             400
@@ -220,6 +241,7 @@
           "id": 21,
           "slug": "flipflop",
           "name": "Шлёпанец",
+          "image": "res://assets/items/flipflop.png",
           "position": [
             595,
             400
@@ -229,6 +251,7 @@
           "id": 22,
           "slug": "sailboat",
           "name": "Парусник",
+          "image": "res://assets/items/sailboat.png",
           "position": [
             760,
             400
@@ -238,6 +261,7 @@
           "id": 23,
           "slug": "coin",
           "name": "Золотая монета",
+          "image": "res://assets/items/coin.png",
           "position": [
             925,
             400
@@ -247,6 +271,7 @@
           "id": 24,
           "slug": "bucket",
           "name": "Ведёрко",
+          "image": "res://assets/items/bucket.png",
           "position": [
             1090,
             400
@@ -256,6 +281,7 @@
           "id": 25,
           "slug": "shovel",
           "name": "Лопатка",
+          "image": "res://assets/items/shovel.png",
           "position": [
             1255,
             400
@@ -265,6 +291,7 @@
           "id": 26,
           "slug": "scallop",
           "name": "Морской гребешок",
+          "image": "res://assets/items/scallop.png",
           "position": [
             1420,
             400
@@ -274,6 +301,7 @@
           "id": 27,
           "slug": "beachball",
           "name": "Мяч",
+          "image": "res://assets/items/beachball.png",
           "position": [
             100,
             550
@@ -283,6 +311,7 @@
           "id": 28,
           "slug": "lantern",
           "name": "Фонарь",
+          "image": "res://assets/items/lantern.png",
           "position": [
             265,
             550
@@ -292,6 +321,7 @@
           "id": 29,
           "slug": "crown",
           "name": "Корона",
+          "image": "res://assets/items/crown.png",
           "position": [
             430,
             550
@@ -299,8 +329,9 @@
         },
         {
           "id": 30,
-          "slug": "beach_ball_colorful_l1",
-          "name": "Пёстрый пляжный мяч",
+          "slug": "l3_sunglasses",
+          "name": "Солнцезащитные очки",
+          "image": "res://assets/items/l3_sunglasses.png",
           "position": [
             595,
             550
@@ -308,8 +339,9 @@
         },
         {
           "id": 31,
-          "slug": "beach_chair_l1",
-          "name": "Пляжный шезлонг",
+          "slug": "l3_straw_hat",
+          "name": "Соломенная шляпа",
+          "image": "res://assets/items/l3_straw_hat.png",
           "position": [
             760,
             550
@@ -317,8 +349,9 @@
         },
         {
           "id": 32,
-          "slug": "beach_umbrella_l1",
-          "name": "Пляжный зонт",
+          "slug": "l3_sunscreen",
+          "name": "Солнцезащитный крем",
+          "image": "res://assets/items/l3_sunscreen.png",
           "position": [
             925,
             550
@@ -326,8 +359,9 @@
         },
         {
           "id": 33,
-          "slug": "coconut_drink_l1",
-          "name": "Кокосовый напиток",
+          "slug": "l3_beach_ball_colorful",
+          "name": "Пляжный мяч",
+          "image": "res://assets/items/l3_beach_ball_colorful.png",
           "position": [
             1090,
             550
@@ -335,8 +369,9 @@
         },
         {
           "id": 34,
-          "slug": "flip_flops_l1",
-          "name": "Шлёпанцы",
+          "slug": "l3_sandcastle",
+          "name": "Замок из песка",
+          "image": "res://assets/items/l3_sandcastle.png",
           "position": [
             1255,
             550
@@ -344,8 +379,9 @@
         },
         {
           "id": 35,
-          "slug": "lifebuoy_red_l1",
-          "name": "Красный спасательный круг",
+          "slug": "l3_starfish_red",
+          "name": "Морская звезда",
+          "image": "res://assets/items/l3_starfish_red.png",
           "position": [
             1420,
             550
@@ -353,8 +389,9 @@
         },
         {
           "id": 36,
-          "slug": "sandcastle_l1",
-          "name": "Замок из песка",
+          "slug": "l3_diving_mask",
+          "name": "Маска для плавания",
+          "image": "res://assets/items/l3_diving_mask.png",
           "position": [
             100,
             700
@@ -362,8 +399,9 @@
         },
         {
           "id": 37,
-          "slug": "seagull_l1",
-          "name": "Чайка",
+          "slug": "l3_surfboard",
+          "name": "Сёрфборд",
+          "image": "res://assets/items/l3_surfboard.png",
           "position": [
             265,
             700
@@ -371,8 +409,9 @@
         },
         {
           "id": 38,
-          "slug": "starfish_red_l1",
-          "name": "Красная морская звезда",
+          "slug": "l3_flip_flops",
+          "name": "Розовые шлёпанцы",
+          "image": "res://assets/items/l3_flip_flops.png",
           "position": [
             430,
             700
@@ -380,8 +419,9 @@
         },
         {
           "id": 39,
-          "slug": "straw_hat_l1",
-          "name": "Соломенная шляпа",
+          "slug": "l3_coconut_drink",
+          "name": "Коктейль в кокосе",
+          "image": "res://assets/items/l3_coconut_drink.png",
           "position": [
             595,
             700
@@ -389,8 +429,9 @@
         },
         {
           "id": 40,
-          "slug": "sunglasses_l1",
-          "name": "Солнцезащитные очки",
+          "slug": "l3_crab_orange",
+          "name": "Оранжевый краб",
+          "image": "res://assets/items/l3_crab_orange.png",
           "position": [
             760,
             700
@@ -398,8 +439,9 @@
         },
         {
           "id": 41,
-          "slug": "sunscreen_l1",
-          "name": "Солнцезащитный крем",
+          "slug": "l3_seagull",
+          "name": "Чайка",
+          "image": "res://assets/items/l3_seagull.png",
           "position": [
             925,
             700
@@ -407,8 +449,9 @@
         },
         {
           "id": 42,
-          "slug": "surfboard_l1",
-          "name": "Сёрфборд",
+          "slug": "l3_conch_shell",
+          "name": "Морская раковина",
+          "image": "res://assets/items/l3_conch_shell.png",
           "position": [
             1090,
             700
@@ -416,8 +459,9 @@
         },
         {
           "id": 43,
-          "slug": "palm_tree_l1",
-          "name": "Пальма",
+          "slug": "l3_anchor_blue",
+          "name": "Синий якорь",
+          "image": "res://assets/items/l3_anchor_blue.png",
           "position": [
             1255,
             700
@@ -425,8 +469,9 @@
         },
         {
           "id": 44,
-          "slug": "hibiscus_flower_l1",
-          "name": "Цветок гибискуса",
+          "slug": "l3_dolphin",
+          "name": "Дельфин",
+          "image": "res://assets/items/l3_dolphin.png",
           "position": [
             1420,
             700
@@ -443,19 +488,20 @@
       "story": "За заросшими воротами герой обнаруживает храм и следы экспедиции, которая искала источник силы маяка.",
       "scene": "jungle_ruins",
       "targets": [
-        "Тотем",
-        "Золотой идол джунглей",
         "Изумрудный скарабей",
         "Золотой жук",
-        "Статуя обезьяны"
+        "Карта сокровищ",
+        "Компас",
+        "Бабочка"
       ],
       "transition": "За храмом открывается проход к водопаду.",
       "background_path": "res://assets/levels/jungle_ruins.svg",
       "items": [
         {
           "id": 0,
-          "slug": "tiki_totem_l2",
-          "name": "Тотем",
+          "slug": "l2_emerald_scarab",
+          "name": "Изумрудный скарабей",
+          "image": "res://assets/items/l2_emerald_scarab.png",
           "position": [
             100,
             100
@@ -463,8 +509,9 @@
         },
         {
           "id": 1,
-          "slug": "golden_jungle_idol_l2",
-          "name": "Золотой идол джунглей",
+          "slug": "l2_golden_beetle",
+          "name": "Золотой жук",
+          "image": "res://assets/items/l2_golden_beetle.png",
           "position": [
             265,
             100
@@ -472,8 +519,9 @@
         },
         {
           "id": 2,
-          "slug": "emerald_scarab_l2",
-          "name": "Изумрудный скарабей",
+          "slug": "treasure_map",
+          "name": "Карта сокровищ",
+          "image": "res://assets/items/treasure_map.png",
           "position": [
             430,
             100
@@ -481,8 +529,9 @@
         },
         {
           "id": 3,
-          "slug": "golden_beetle_l2",
-          "name": "Золотой жук",
+          "slug": "compass",
+          "name": "Компас",
+          "image": "res://assets/items/compass.png",
           "position": [
             595,
             100
@@ -490,8 +539,9 @@
         },
         {
           "id": 4,
-          "slug": "monkey_statue_l2",
-          "name": "Статуя обезьяны",
+          "slug": "butterfly",
+          "name": "Бабочка",
+          "image": "res://assets/items/butterfly.png",
           "position": [
             760,
             100
@@ -499,8 +549,9 @@
         },
         {
           "id": 5,
-          "slug": "feather_headdress_l2",
-          "name": "Головной убор из перьев",
+          "slug": "fish",
+          "name": "Рыбка",
+          "image": "res://assets/items/fish.png",
           "position": [
             925,
             100
@@ -508,8 +559,9 @@
         },
         {
           "id": 6,
-          "slug": "ceremonial_mask_l2",
-          "name": "Ритуальная маска",
+          "slug": "anchor",
+          "name": "Якорь",
+          "image": "res://assets/items/anchor.png",
           "position": [
             1090,
             100
@@ -517,8 +569,9 @@
         },
         {
           "id": 7,
-          "slug": "tribal_dagger_l2",
-          "name": "Племенной кинжал",
+          "slug": "coconut",
+          "name": "Кокос",
+          "image": "res://assets/items/coconut.png",
           "position": [
             1255,
             100
@@ -526,8 +579,9 @@
         },
         {
           "id": 8,
-          "slug": "overgrown_relic_l2",
-          "name": "Заросшая реликвия",
+          "slug": "duck",
+          "name": "Уточка",
+          "image": "res://assets/items/duck.png",
           "position": [
             1420,
             100
@@ -535,8 +589,9 @@
         },
         {
           "id": 9,
-          "slug": "jungle_fern_l2",
-          "name": "Папоротник джунглей",
+          "slug": "turtle",
+          "name": "Черепаха",
+          "image": "res://assets/items/turtle.png",
           "position": [
             100,
             250
@@ -544,8 +599,9 @@
         },
         {
           "id": 10,
-          "slug": "carved_stone_tablet_l2",
-          "name": "Каменная табличка",
+          "slug": "pearl",
+          "name": "Жемчужина",
+          "image": "res://assets/items/pearl.png",
           "position": [
             265,
             250
@@ -553,8 +609,9 @@
         },
         {
           "id": 11,
-          "slug": "ancient_scroll_l2",
-          "name": "Древний свиток",
+          "slug": "eyepatch",
+          "name": "Пиратская повязка",
+          "image": "res://assets/items/eyepatch.png",
           "position": [
             430,
             250
@@ -562,8 +619,9 @@
         },
         {
           "id": 12,
-          "slug": "expedition_book_l2",
-          "name": "Дневник экспедиции",
+          "slug": "telescope",
+          "name": "Подзорная труба",
+          "image": "res://assets/items/telescope.png",
           "position": [
             595,
             250
@@ -571,8 +629,9 @@
         },
         {
           "id": 13,
-          "slug": "adventurer_backpack_l2",
-          "name": "Рюкзак исследователя",
+          "slug": "hibiscus",
+          "name": "Гибискус",
+          "image": "res://assets/items/hibiscus.png",
           "position": [
             760,
             250
@@ -580,8 +639,9 @@
         },
         {
           "id": 14,
-          "slug": "sun_key_l2",
-          "name": "Солнечный ключ",
+          "slug": "flipflop",
+          "name": "Шлёпанец",
+          "image": "res://assets/items/flipflop.png",
           "position": [
             925,
             250
@@ -589,8 +649,9 @@
         },
         {
           "id": 15,
-          "slug": "sun_medallion_l2",
-          "name": "Солнечный медальон",
+          "slug": "sailboat",
+          "name": "Парусник",
+          "image": "res://assets/items/sailboat.png",
           "position": [
             1090,
             250
@@ -598,8 +659,9 @@
         },
         {
           "id": 16,
-          "slug": "golden_fruit_l2",
-          "name": "Золотой плод",
+          "slug": "coin",
+          "name": "Золотая монета",
+          "image": "res://assets/items/coin.png",
           "position": [
             1255,
             250
@@ -607,8 +669,9 @@
         },
         {
           "id": 17,
-          "slug": "tropical_fruit_l2",
-          "name": "Тропический фрукт",
+          "slug": "bucket",
+          "name": "Ведёрко",
+          "image": "res://assets/items/bucket.png",
           "position": [
             1420,
             250
@@ -616,8 +679,9 @@
         },
         {
           "id": 18,
-          "slug": "ammonite_fossil_l2",
-          "name": "Окаменелость аммонита",
+          "slug": "shovel",
+          "name": "Лопатка",
+          "image": "res://assets/items/shovel.png",
           "position": [
             100,
             400
@@ -625,8 +689,9 @@
         },
         {
           "id": 19,
-          "slug": "anchor_blue_l2",
-          "name": "Синий якорь",
+          "slug": "scallop",
+          "name": "Морской гребешок",
+          "image": "res://assets/items/scallop.png",
           "position": [
             265,
             400
@@ -634,8 +699,9 @@
         },
         {
           "id": 20,
-          "slug": "ancient_compass_l2",
-          "name": "Древний компас",
+          "slug": "beachball",
+          "name": "Мяч",
+          "image": "res://assets/items/beachball.png",
           "position": [
             430,
             400
@@ -643,8 +709,9 @@
         },
         {
           "id": 21,
-          "slug": "beach_ball_colorful_l2",
-          "name": "Пёстрый пляжный мяч",
+          "slug": "lantern",
+          "name": "Фонарь",
+          "image": "res://assets/items/lantern.png",
           "position": [
             595,
             400
@@ -652,8 +719,9 @@
         },
         {
           "id": 22,
-          "slug": "beach_chair_l2",
-          "name": "Пляжный шезлонг",
+          "slug": "crown",
+          "name": "Корона",
+          "image": "res://assets/items/crown.png",
           "position": [
             760,
             400
@@ -661,8 +729,9 @@
         },
         {
           "id": 23,
-          "slug": "beach_umbrella_l2",
-          "name": "Пляжный зонт",
+          "slug": "l3_sunglasses",
+          "name": "Солнцезащитные очки",
+          "image": "res://assets/items/l3_sunglasses.png",
           "position": [
             925,
             400
@@ -670,8 +739,9 @@
         },
         {
           "id": 24,
-          "slug": "binoculars_l2",
-          "name": "Бинокль",
+          "slug": "l3_straw_hat",
+          "name": "Соломенная шляпа",
+          "image": "res://assets/items/l3_straw_hat.png",
           "position": [
             1090,
             400
@@ -679,8 +749,9 @@
         },
         {
           "id": 25,
-          "slug": "bird_skull_l2",
-          "name": "Череп птицы",
+          "slug": "l3_sunscreen",
+          "name": "Солнцезащитный крем",
+          "image": "res://assets/items/l3_sunscreen.png",
           "position": [
             1255,
             400
@@ -688,8 +759,9 @@
         },
         {
           "id": 26,
-          "slug": "carrots_l2",
-          "name": "Морковь",
+          "slug": "l3_beach_ball_colorful",
+          "name": "Пляжный мяч",
+          "image": "res://assets/items/l3_beach_ball_colorful.png",
           "position": [
             1420,
             400
@@ -697,8 +769,9 @@
         },
         {
           "id": 27,
-          "slug": "clay_vase_l2",
-          "name": "Глиняная ваза",
+          "slug": "l3_sandcastle",
+          "name": "Замок из песка",
+          "image": "res://assets/items/l3_sandcastle.png",
           "position": [
             100,
             550
@@ -706,8 +779,9 @@
         },
         {
           "id": 28,
-          "slug": "coconut_drink_l2",
-          "name": "Кокосовый напиток",
+          "slug": "l3_starfish_red",
+          "name": "Морская звезда",
+          "image": "res://assets/items/l3_starfish_red.png",
           "position": [
             265,
             550
@@ -715,8 +789,9 @@
         },
         {
           "id": 29,
-          "slug": "coiled_rope_l2",
-          "name": "Свернутая верёвка",
+          "slug": "l3_diving_mask",
+          "name": "Маска для плавания",
+          "image": "res://assets/items/l3_diving_mask.png",
           "position": [
             430,
             550
@@ -724,8 +799,9 @@
         },
         {
           "id": 30,
-          "slug": "conch_shell_l2",
-          "name": "Морская раковина",
+          "slug": "l3_surfboard",
+          "name": "Сёрфборд",
+          "image": "res://assets/items/l3_surfboard.png",
           "position": [
             595,
             550
@@ -733,8 +809,9 @@
         },
         {
           "id": 31,
-          "slug": "crab_orange_l2",
-          "name": "Оранжевый краб",
+          "slug": "l3_flip_flops",
+          "name": "Розовые шлёпанцы",
+          "image": "res://assets/items/l3_flip_flops.png",
           "position": [
             760,
             550
@@ -742,8 +819,9 @@
         },
         {
           "id": 32,
-          "slug": "diving_mask_l2",
-          "name": "Маска для ныряния",
+          "slug": "l3_coconut_drink",
+          "name": "Коктейль в кокосе",
+          "image": "res://assets/items/l3_coconut_drink.png",
           "position": [
             925,
             550
@@ -751,8 +829,9 @@
         },
         {
           "id": 33,
-          "slug": "dolphin_l2",
-          "name": "Дельфин",
+          "slug": "l3_crab_orange",
+          "name": "Оранжевый краб",
+          "image": "res://assets/items/l3_crab_orange.png",
           "position": [
             1090,
             550
@@ -760,8 +839,9 @@
         },
         {
           "id": 34,
-          "slug": "egg_basket_l2",
-          "name": "Корзина с яйцами",
+          "slug": "l3_seagull",
+          "name": "Чайка",
+          "image": "res://assets/items/l3_seagull.png",
           "position": [
             1255,
             550
@@ -769,8 +849,9 @@
         },
         {
           "id": 35,
-          "slug": "flip_flops_l2",
-          "name": "Шлёпанцы",
+          "slug": "l3_conch_shell",
+          "name": "Морская раковина",
+          "image": "res://assets/items/l3_conch_shell.png",
           "position": [
             1420,
             550
@@ -778,8 +859,9 @@
         },
         {
           "id": 36,
-          "slug": "garden_fence_l2",
-          "name": "Садовый забор",
+          "slug": "l3_anchor_blue",
+          "name": "Синий якорь",
+          "image": "res://assets/items/l3_anchor_blue.png",
           "position": [
             100,
             700
@@ -787,8 +869,9 @@
         },
         {
           "id": 37,
-          "slug": "garden_gloves_l2",
-          "name": "Садовые перчатки",
+          "slug": "l3_dolphin",
+          "name": "Дельфин",
+          "image": "res://assets/items/l3_dolphin.png",
           "position": [
             265,
             700
@@ -796,8 +879,9 @@
         },
         {
           "id": 38,
-          "slug": "garden_shovel_l2",
-          "name": "Садовая лопата",
+          "slug": "l3_lifebuoy_red",
+          "name": "Спасательный круг",
+          "image": "res://assets/items/l3_lifebuoy_red.png",
           "position": [
             430,
             700
@@ -805,8 +889,9 @@
         },
         {
           "id": 39,
-          "slug": "green_crystal_l2",
-          "name": "Зелёный кристалл",
+          "slug": "l3_binoculars",
+          "name": "Бинокль",
+          "image": "res://assets/items/l3_binoculars.png",
           "position": [
             595,
             700
@@ -814,8 +899,9 @@
         },
         {
           "id": 40,
-          "slug": "hen_l2",
-          "name": "Курица",
+          "slug": "l3_lighthouse",
+          "name": "Маяк",
+          "image": "res://assets/items/l3_lighthouse.png",
           "position": [
             760,
             700
@@ -823,8 +909,9 @@
         },
         {
           "id": 41,
-          "slug": "hibiscus_flower_l2",
-          "name": "Цветок гибискуса",
+          "slug": "l3_palm_tree",
+          "name": "Пальма",
+          "image": "res://assets/items/l3_palm_tree.png",
           "position": [
             925,
             700
@@ -832,8 +919,9 @@
         },
         {
           "id": 42,
-          "slug": "jungle_treasure_chest_l2",
-          "name": "Сундук джунглей",
+          "slug": "l3_beach_chair",
+          "name": "Пляжный шезлонг",
+          "image": "res://assets/items/l3_beach_chair.png",
           "position": [
             1090,
             700
@@ -841,8 +929,9 @@
         },
         {
           "id": 43,
-          "slug": "lifebuoy_red_l2",
-          "name": "Красный спасательный круг",
+          "slug": "l3_beach_umbrella",
+          "name": "Пляжный зонт",
+          "image": "res://assets/items/l3_beach_umbrella.png",
           "position": [
             1255,
             700
@@ -850,8 +939,9 @@
         },
         {
           "id": 44,
-          "slug": "lighthouse_l2",
-          "name": "Маяк",
+          "slug": "l3_watering_can_blue",
+          "name": "Синяя лейка",
+          "image": "res://assets/items/l3_watering_can_blue.png",
           "position": [
             1420,
             700
@@ -872,15 +962,16 @@
         "Окаменелость аммонита",
         "Каменный фонарь",
         "Морская раковина",
-        "Маска для ныряния"
+        "Пиратская повязка"
       ],
       "transition": "Подземная река выводит к пиратской бухте.",
       "background_path": "res://assets/levels/waterfall_cave.svg",
       "items": [
         {
           "id": 0,
-          "slug": "green_crystal_l3",
+          "slug": "l2_green_crystal",
           "name": "Зелёный кристалл",
+          "image": "res://assets/items/l2_green_crystal.png",
           "position": [
             100,
             100
@@ -888,8 +979,9 @@
         },
         {
           "id": 1,
-          "slug": "ammonite_fossil_l3",
+          "slug": "l2_ammonite_fossil",
           "name": "Окаменелость аммонита",
+          "image": "res://assets/items/l2_ammonite_fossil.png",
           "position": [
             265,
             100
@@ -897,8 +989,9 @@
         },
         {
           "id": 2,
-          "slug": "stone_well_lantern_l3",
+          "slug": "l2_stone_well_lantern",
           "name": "Каменный фонарь",
+          "image": "res://assets/items/l2_stone_well_lantern.png",
           "position": [
             430,
             100
@@ -906,8 +999,9 @@
         },
         {
           "id": 3,
-          "slug": "conch_shell_l3",
+          "slug": "l3_conch_shell",
           "name": "Морская раковина",
+          "image": "res://assets/items/l3_conch_shell.png",
           "position": [
             595,
             100
@@ -915,8 +1009,9 @@
         },
         {
           "id": 4,
-          "slug": "diving_mask_l3",
-          "name": "Маска для ныряния",
+          "slug": "eyepatch",
+          "name": "Пиратская повязка",
+          "image": "res://assets/items/eyepatch.png",
           "position": [
             760,
             100
@@ -924,8 +1019,9 @@
         },
         {
           "id": 5,
-          "slug": "clay_vase_l3",
-          "name": "Глиняная ваза",
+          "slug": "telescope",
+          "name": "Подзорная труба",
+          "image": "res://assets/items/telescope.png",
           "position": [
             925,
             100
@@ -933,8 +1029,9 @@
         },
         {
           "id": 6,
-          "slug": "ancient_scroll_l3",
-          "name": "Древний свиток",
+          "slug": "hibiscus",
+          "name": "Гибискус",
+          "image": "res://assets/items/hibiscus.png",
           "position": [
             1090,
             100
@@ -942,8 +1039,9 @@
         },
         {
           "id": 7,
-          "slug": "bird_skull_l3",
-          "name": "Череп птицы",
+          "slug": "flipflop",
+          "name": "Шлёпанец",
+          "image": "res://assets/items/flipflop.png",
           "position": [
             1255,
             100
@@ -951,8 +1049,9 @@
         },
         {
           "id": 8,
-          "slug": "magnifying_glass_l3",
-          "name": "Лупа",
+          "slug": "sailboat",
+          "name": "Парусник",
+          "image": "res://assets/items/sailboat.png",
           "position": [
             1420,
             100
@@ -960,8 +1059,9 @@
         },
         {
           "id": 9,
-          "slug": "overgrown_relic_l3",
-          "name": "Заросшая реликвия",
+          "slug": "coin",
+          "name": "Золотая монета",
+          "image": "res://assets/items/coin.png",
           "position": [
             100,
             250
@@ -969,8 +1069,9 @@
         },
         {
           "id": 10,
-          "slug": "coiled_rope_l3",
-          "name": "Свернутая верёвка",
+          "slug": "bucket",
+          "name": "Ведёрко",
+          "image": "res://assets/items/bucket.png",
           "position": [
             265,
             250
@@ -978,8 +1079,9 @@
         },
         {
           "id": 11,
-          "slug": "water_bucket_l3",
-          "name": "Ведро с водой",
+          "slug": "shovel",
+          "name": "Лопатка",
+          "image": "res://assets/items/shovel.png",
           "position": [
             430,
             250
@@ -987,8 +1089,9 @@
         },
         {
           "id": 12,
-          "slug": "dolphin_l3",
-          "name": "Дельфин",
+          "slug": "scallop",
+          "name": "Морской гребешок",
+          "image": "res://assets/items/scallop.png",
           "position": [
             595,
             250
@@ -996,8 +1099,9 @@
         },
         {
           "id": 13,
-          "slug": "starfish_red_l3",
-          "name": "Красная морская звезда",
+          "slug": "beachball",
+          "name": "Мяч",
+          "image": "res://assets/items/beachball.png",
           "position": [
             760,
             250
@@ -1005,8 +1109,9 @@
         },
         {
           "id": 14,
-          "slug": "lifebuoy_red_l3",
-          "name": "Красный спасательный круг",
+          "slug": "lantern",
+          "name": "Фонарь",
+          "image": "res://assets/items/lantern.png",
           "position": [
             925,
             250
@@ -1014,8 +1119,9 @@
         },
         {
           "id": 15,
-          "slug": "adventurer_backpack_l3",
-          "name": "Рюкзак исследователя",
+          "slug": "crown",
+          "name": "Корона",
+          "image": "res://assets/items/crown.png",
           "position": [
             1090,
             250
@@ -1023,8 +1129,9 @@
         },
         {
           "id": 16,
-          "slug": "anchor_blue_l3",
-          "name": "Синий якорь",
+          "slug": "l3_sunglasses",
+          "name": "Солнцезащитные очки",
+          "image": "res://assets/items/l3_sunglasses.png",
           "position": [
             1255,
             250
@@ -1032,8 +1139,9 @@
         },
         {
           "id": 17,
-          "slug": "ancient_compass_l3",
-          "name": "Древний компас",
+          "slug": "l3_straw_hat",
+          "name": "Соломенная шляпа",
+          "image": "res://assets/items/l3_straw_hat.png",
           "position": [
             1420,
             250
@@ -1041,8 +1149,9 @@
         },
         {
           "id": 18,
-          "slug": "beach_ball_colorful_l3",
-          "name": "Пёстрый пляжный мяч",
+          "slug": "l3_sunscreen",
+          "name": "Солнцезащитный крем",
+          "image": "res://assets/items/l3_sunscreen.png",
           "position": [
             100,
             400
@@ -1050,8 +1159,9 @@
         },
         {
           "id": 19,
-          "slug": "beach_chair_l3",
-          "name": "Пляжный шезлонг",
+          "slug": "l3_beach_ball_colorful",
+          "name": "Пляжный мяч",
+          "image": "res://assets/items/l3_beach_ball_colorful.png",
           "position": [
             265,
             400
@@ -1059,8 +1169,9 @@
         },
         {
           "id": 20,
-          "slug": "beach_umbrella_l3",
-          "name": "Пляжный зонт",
+          "slug": "l3_sandcastle",
+          "name": "Замок из песка",
+          "image": "res://assets/items/l3_sandcastle.png",
           "position": [
             430,
             400
@@ -1068,8 +1179,9 @@
         },
         {
           "id": 21,
-          "slug": "binoculars_l3",
-          "name": "Бинокль",
+          "slug": "l3_starfish_red",
+          "name": "Морская звезда",
+          "image": "res://assets/items/l3_starfish_red.png",
           "position": [
             595,
             400
@@ -1077,8 +1189,9 @@
         },
         {
           "id": 22,
-          "slug": "carrots_l3",
-          "name": "Морковь",
+          "slug": "l3_diving_mask",
+          "name": "Маска для плавания",
+          "image": "res://assets/items/l3_diving_mask.png",
           "position": [
             760,
             400
@@ -1086,8 +1199,9 @@
         },
         {
           "id": 23,
-          "slug": "carved_stone_tablet_l3",
-          "name": "Каменная табличка",
+          "slug": "l3_surfboard",
+          "name": "Сёрфборд",
+          "image": "res://assets/items/l3_surfboard.png",
           "position": [
             925,
             400
@@ -1095,8 +1209,9 @@
         },
         {
           "id": 24,
-          "slug": "ceremonial_mask_l3",
-          "name": "Ритуальная маска",
+          "slug": "l3_flip_flops",
+          "name": "Розовые шлёпанцы",
+          "image": "res://assets/items/l3_flip_flops.png",
           "position": [
             1090,
             400
@@ -1104,8 +1219,9 @@
         },
         {
           "id": 25,
-          "slug": "coconut_drink_l3",
-          "name": "Кокосовый напиток",
+          "slug": "l3_coconut_drink",
+          "name": "Коктейль в кокосе",
+          "image": "res://assets/items/l3_coconut_drink.png",
           "position": [
             1255,
             400
@@ -1113,8 +1229,9 @@
         },
         {
           "id": 26,
-          "slug": "crab_orange_l3",
+          "slug": "l3_crab_orange",
           "name": "Оранжевый краб",
+          "image": "res://assets/items/l3_crab_orange.png",
           "position": [
             1420,
             400
@@ -1122,8 +1239,9 @@
         },
         {
           "id": 27,
-          "slug": "egg_basket_l3",
-          "name": "Корзина с яйцами",
+          "slug": "l3_seagull",
+          "name": "Чайка",
+          "image": "res://assets/items/l3_seagull.png",
           "position": [
             100,
             550
@@ -1131,8 +1249,9 @@
         },
         {
           "id": 28,
-          "slug": "emerald_scarab_l3",
-          "name": "Изумрудный скарабей",
+          "slug": "l3_anchor_blue",
+          "name": "Синий якорь",
+          "image": "res://assets/items/l3_anchor_blue.png",
           "position": [
             265,
             550
@@ -1140,8 +1259,9 @@
         },
         {
           "id": 29,
-          "slug": "expedition_book_l3",
-          "name": "Дневник экспедиции",
+          "slug": "l3_dolphin",
+          "name": "Дельфин",
+          "image": "res://assets/items/l3_dolphin.png",
           "position": [
             430,
             550
@@ -1149,8 +1269,9 @@
         },
         {
           "id": 30,
-          "slug": "feather_headdress_l3",
-          "name": "Головной убор из перьев",
+          "slug": "l3_lifebuoy_red",
+          "name": "Спасательный круг",
+          "image": "res://assets/items/l3_lifebuoy_red.png",
           "position": [
             595,
             550
@@ -1158,8 +1279,9 @@
         },
         {
           "id": 31,
-          "slug": "flip_flops_l3",
-          "name": "Шлёпанцы",
+          "slug": "l3_binoculars",
+          "name": "Бинокль",
+          "image": "res://assets/items/l3_binoculars.png",
           "position": [
             760,
             550
@@ -1167,8 +1289,9 @@
         },
         {
           "id": 32,
-          "slug": "garden_fence_l3",
-          "name": "Садовый забор",
+          "slug": "l3_lighthouse",
+          "name": "Маяк",
+          "image": "res://assets/items/l3_lighthouse.png",
           "position": [
             925,
             550
@@ -1176,8 +1299,9 @@
         },
         {
           "id": 33,
-          "slug": "garden_gloves_l3",
-          "name": "Садовые перчатки",
+          "slug": "l3_palm_tree",
+          "name": "Пальма",
+          "image": "res://assets/items/l3_palm_tree.png",
           "position": [
             1090,
             550
@@ -1185,8 +1309,9 @@
         },
         {
           "id": 34,
-          "slug": "garden_shovel_l3",
-          "name": "Садовая лопата",
+          "slug": "l3_beach_chair",
+          "name": "Пляжный шезлонг",
+          "image": "res://assets/items/l3_beach_chair.png",
           "position": [
             1255,
             550
@@ -1194,8 +1319,9 @@
         },
         {
           "id": 35,
-          "slug": "golden_beetle_l3",
-          "name": "Золотой жук",
+          "slug": "l3_beach_umbrella",
+          "name": "Пляжный зонт",
+          "image": "res://assets/items/l3_beach_umbrella.png",
           "position": [
             1420,
             550
@@ -1203,8 +1329,9 @@
         },
         {
           "id": 36,
-          "slug": "golden_fruit_l3",
-          "name": "Золотой плод",
+          "slug": "l3_watering_can_blue",
+          "name": "Синяя лейка",
+          "image": "res://assets/items/l3_watering_can_blue.png",
           "position": [
             100,
             700
@@ -1212,8 +1339,9 @@
         },
         {
           "id": 37,
-          "slug": "golden_jungle_idol_l3",
-          "name": "Золотой идол джунглей",
+          "slug": "l3_garden_gloves",
+          "name": "Садовые перчатки",
+          "image": "res://assets/items/l3_garden_gloves.png",
           "position": [
             265,
             700
@@ -1221,8 +1349,9 @@
         },
         {
           "id": 38,
-          "slug": "hen_l3",
-          "name": "Курица",
+          "slug": "l3_wheelbarrow",
+          "name": "Тачка с землёй",
+          "image": "res://assets/items/l3_wheelbarrow.png",
           "position": [
             430,
             700
@@ -1230,8 +1359,9 @@
         },
         {
           "id": 39,
-          "slug": "hibiscus_flower_l3",
-          "name": "Цветок гибискуса",
+          "slug": "l3_carrots",
+          "name": "Морковь",
+          "image": "res://assets/items/l3_carrots.png",
           "position": [
             595,
             700
@@ -1239,8 +1369,9 @@
         },
         {
           "id": 40,
-          "slug": "jungle_fern_l3",
-          "name": "Папоротник джунглей",
+          "slug": "l3_tomato",
+          "name": "Помидор",
+          "image": "res://assets/items/l3_tomato.png",
           "position": [
             760,
             700
@@ -1248,8 +1379,9 @@
         },
         {
           "id": 41,
-          "slug": "jungle_treasure_chest_l3",
-          "name": "Сундук джунглей",
+          "slug": "l3_sunflower",
+          "name": "Подсолнух",
+          "image": "res://assets/items/l3_sunflower.png",
           "position": [
             925,
             700
@@ -1257,8 +1389,9 @@
         },
         {
           "id": 42,
-          "slug": "lighthouse_l3",
-          "name": "Маяк",
+          "slug": "l3_tomato_crate",
+          "name": "Ящик помидоров",
+          "image": "res://assets/items/l3_tomato_crate.png",
           "position": [
             1090,
             700
@@ -1266,8 +1399,9 @@
         },
         {
           "id": 43,
-          "slug": "monkey_statue_l3",
-          "name": "Статуя обезьяны",
+          "slug": "l3_garden_fence",
+          "name": "Деревянный забор",
+          "image": "res://assets/items/l3_garden_fence.png",
           "position": [
             1255,
             700
@@ -1275,8 +1409,9 @@
         },
         {
           "id": 44,
-          "slug": "palm_tree_l3",
-          "name": "Пальма",
+          "slug": "l3_hen",
+          "name": "Курица",
+          "image": "res://assets/items/l3_hen.png",
           "position": [
             1420,
             700
@@ -1294,18 +1429,19 @@
       "scene": "pirate_cove",
       "targets": [
         "Синий якорь",
-        "Свернутая верёвка",
         "Бинокль",
-        "Дневник экспедиции",
-        "Рюкзак исследователя"
+        "Рюкзак исследователя",
+        "Мяч",
+        "Фонарь"
       ],
       "transition": "Координаты ведут к затонувшей лагуне.",
       "background_path": "res://assets/levels/pirate_cove.svg",
       "items": [
         {
           "id": 0,
-          "slug": "anchor_blue_l4",
+          "slug": "l3_anchor_blue",
           "name": "Синий якорь",
+          "image": "res://assets/items/l3_anchor_blue.png",
           "position": [
             100,
             100
@@ -1313,8 +1449,9 @@
         },
         {
           "id": 1,
-          "slug": "coiled_rope_l4",
-          "name": "Свернутая верёвка",
+          "slug": "l3_binoculars",
+          "name": "Бинокль",
+          "image": "res://assets/items/l3_binoculars.png",
           "position": [
             265,
             100
@@ -1322,8 +1459,9 @@
         },
         {
           "id": 2,
-          "slug": "binoculars_l4",
-          "name": "Бинокль",
+          "slug": "l2_adventurer_backpack",
+          "name": "Рюкзак исследователя",
+          "image": "res://assets/items/l2_adventurer_backpack.png",
           "position": [
             430,
             100
@@ -1331,8 +1469,9 @@
         },
         {
           "id": 3,
-          "slug": "expedition_book_l4",
-          "name": "Дневник экспедиции",
+          "slug": "beachball",
+          "name": "Мяч",
+          "image": "res://assets/items/beachball.png",
           "position": [
             595,
             100
@@ -1340,8 +1479,9 @@
         },
         {
           "id": 4,
-          "slug": "adventurer_backpack_l4",
-          "name": "Рюкзак исследователя",
+          "slug": "lantern",
+          "name": "Фонарь",
+          "image": "res://assets/items/lantern.png",
           "position": [
             760,
             100
@@ -1349,8 +1489,9 @@
         },
         {
           "id": 5,
-          "slug": "jungle_treasure_chest_l4",
-          "name": "Сундук джунглей",
+          "slug": "crown",
+          "name": "Корона",
+          "image": "res://assets/items/crown.png",
           "position": [
             925,
             100
@@ -1358,8 +1499,9 @@
         },
         {
           "id": 6,
-          "slug": "sun_key_l4",
-          "name": "Солнечный ключ",
+          "slug": "l3_sunglasses",
+          "name": "Солнцезащитные очки",
+          "image": "res://assets/items/l3_sunglasses.png",
           "position": [
             1090,
             100
@@ -1367,8 +1509,9 @@
         },
         {
           "id": 7,
-          "slug": "ancient_compass_l4",
-          "name": "Древний компас",
+          "slug": "l3_straw_hat",
+          "name": "Соломенная шляпа",
+          "image": "res://assets/items/l3_straw_hat.png",
           "position": [
             1255,
             100
@@ -1376,8 +1519,9 @@
         },
         {
           "id": 8,
-          "slug": "bird_skull_l4",
-          "name": "Череп птицы",
+          "slug": "l3_sunscreen",
+          "name": "Солнцезащитный крем",
+          "image": "res://assets/items/l3_sunscreen.png",
           "position": [
             1420,
             100
@@ -1385,8 +1529,9 @@
         },
         {
           "id": 9,
-          "slug": "tribal_dagger_l4",
-          "name": "Племенной кинжал",
+          "slug": "l3_beach_ball_colorful",
+          "name": "Пляжный мяч",
+          "image": "res://assets/items/l3_beach_ball_colorful.png",
           "position": [
             100,
             250
@@ -1394,8 +1539,9 @@
         },
         {
           "id": 10,
-          "slug": "clay_vase_l4",
-          "name": "Глиняная ваза",
+          "slug": "l3_sandcastle",
+          "name": "Замок из песка",
+          "image": "res://assets/items/l3_sandcastle.png",
           "position": [
             265,
             250
@@ -1403,8 +1549,9 @@
         },
         {
           "id": 11,
-          "slug": "wooden_flute_l4",
-          "name": "Деревянная флейта",
+          "slug": "l3_starfish_red",
+          "name": "Морская звезда",
+          "image": "res://assets/items/l3_starfish_red.png",
           "position": [
             430,
             250
@@ -1412,8 +1559,9 @@
         },
         {
           "id": 12,
-          "slug": "lifebuoy_red_l4",
-          "name": "Красный спасательный круг",
+          "slug": "l3_diving_mask",
+          "name": "Маска для плавания",
+          "image": "res://assets/items/l3_diving_mask.png",
           "position": [
             595,
             250
@@ -1421,8 +1569,9 @@
         },
         {
           "id": 13,
-          "slug": "lighthouse_l4",
-          "name": "Маяк",
+          "slug": "l3_surfboard",
+          "name": "Сёрфборд",
+          "image": "res://assets/items/l3_surfboard.png",
           "position": [
             760,
             250
@@ -1430,8 +1579,9 @@
         },
         {
           "id": 14,
-          "slug": "sunglasses_l4",
-          "name": "Солнцезащитные очки",
+          "slug": "l3_flip_flops",
+          "name": "Розовые шлёпанцы",
+          "image": "res://assets/items/l3_flip_flops.png",
           "position": [
             925,
             250
@@ -1439,8 +1589,9 @@
         },
         {
           "id": 15,
-          "slug": "ammonite_fossil_l4",
-          "name": "Окаменелость аммонита",
+          "slug": "l3_coconut_drink",
+          "name": "Коктейль в кокосе",
+          "image": "res://assets/items/l3_coconut_drink.png",
           "position": [
             1090,
             250
@@ -1448,8 +1599,9 @@
         },
         {
           "id": 16,
-          "slug": "ancient_scroll_l4",
-          "name": "Древний свиток",
+          "slug": "l3_crab_orange",
+          "name": "Оранжевый краб",
+          "image": "res://assets/items/l3_crab_orange.png",
           "position": [
             1255,
             250
@@ -1457,8 +1609,9 @@
         },
         {
           "id": 17,
-          "slug": "beach_ball_colorful_l4",
-          "name": "Пёстрый пляжный мяч",
+          "slug": "l3_seagull",
+          "name": "Чайка",
+          "image": "res://assets/items/l3_seagull.png",
           "position": [
             1420,
             250
@@ -1466,8 +1619,9 @@
         },
         {
           "id": 18,
-          "slug": "beach_chair_l4",
-          "name": "Пляжный шезлонг",
+          "slug": "l3_conch_shell",
+          "name": "Морская раковина",
+          "image": "res://assets/items/l3_conch_shell.png",
           "position": [
             100,
             400
@@ -1475,8 +1629,9 @@
         },
         {
           "id": 19,
-          "slug": "beach_umbrella_l4",
-          "name": "Пляжный зонт",
+          "slug": "l3_dolphin",
+          "name": "Дельфин",
+          "image": "res://assets/items/l3_dolphin.png",
           "position": [
             265,
             400
@@ -1484,8 +1639,9 @@
         },
         {
           "id": 20,
-          "slug": "carrots_l4",
-          "name": "Морковь",
+          "slug": "l3_lifebuoy_red",
+          "name": "Спасательный круг",
+          "image": "res://assets/items/l3_lifebuoy_red.png",
           "position": [
             430,
             400
@@ -1493,8 +1649,9 @@
         },
         {
           "id": 21,
-          "slug": "carved_stone_tablet_l4",
-          "name": "Каменная табличка",
+          "slug": "l3_lighthouse",
+          "name": "Маяк",
+          "image": "res://assets/items/l3_lighthouse.png",
           "position": [
             595,
             400
@@ -1502,8 +1659,9 @@
         },
         {
           "id": 22,
-          "slug": "ceremonial_mask_l4",
-          "name": "Ритуальная маска",
+          "slug": "l3_palm_tree",
+          "name": "Пальма",
+          "image": "res://assets/items/l3_palm_tree.png",
           "position": [
             760,
             400
@@ -1511,8 +1669,9 @@
         },
         {
           "id": 23,
-          "slug": "coconut_drink_l4",
-          "name": "Кокосовый напиток",
+          "slug": "l3_beach_chair",
+          "name": "Пляжный шезлонг",
+          "image": "res://assets/items/l3_beach_chair.png",
           "position": [
             925,
             400
@@ -1520,8 +1679,9 @@
         },
         {
           "id": 24,
-          "slug": "conch_shell_l4",
-          "name": "Морская раковина",
+          "slug": "l3_beach_umbrella",
+          "name": "Пляжный зонт",
+          "image": "res://assets/items/l3_beach_umbrella.png",
           "position": [
             1090,
             400
@@ -1529,8 +1689,9 @@
         },
         {
           "id": 25,
-          "slug": "crab_orange_l4",
-          "name": "Оранжевый краб",
+          "slug": "l3_watering_can_blue",
+          "name": "Синяя лейка",
+          "image": "res://assets/items/l3_watering_can_blue.png",
           "position": [
             1255,
             400
@@ -1538,8 +1699,9 @@
         },
         {
           "id": 26,
-          "slug": "diving_mask_l4",
-          "name": "Маска для ныряния",
+          "slug": "l3_garden_gloves",
+          "name": "Садовые перчатки",
+          "image": "res://assets/items/l3_garden_gloves.png",
           "position": [
             1420,
             400
@@ -1547,8 +1709,9 @@
         },
         {
           "id": 27,
-          "slug": "dolphin_l4",
-          "name": "Дельфин",
+          "slug": "l3_wheelbarrow",
+          "name": "Тачка с землёй",
+          "image": "res://assets/items/l3_wheelbarrow.png",
           "position": [
             100,
             550
@@ -1556,8 +1719,9 @@
         },
         {
           "id": 28,
-          "slug": "egg_basket_l4",
-          "name": "Корзина с яйцами",
+          "slug": "l3_carrots",
+          "name": "Морковь",
+          "image": "res://assets/items/l3_carrots.png",
           "position": [
             265,
             550
@@ -1565,8 +1729,9 @@
         },
         {
           "id": 29,
-          "slug": "emerald_scarab_l4",
-          "name": "Изумрудный скарабей",
+          "slug": "l3_tomato",
+          "name": "Помидор",
+          "image": "res://assets/items/l3_tomato.png",
           "position": [
             430,
             550
@@ -1574,8 +1739,9 @@
         },
         {
           "id": 30,
-          "slug": "feather_headdress_l4",
-          "name": "Головной убор из перьев",
+          "slug": "l3_sunflower",
+          "name": "Подсолнух",
+          "image": "res://assets/items/l3_sunflower.png",
           "position": [
             595,
             550
@@ -1583,8 +1749,9 @@
         },
         {
           "id": 31,
-          "slug": "flip_flops_l4",
-          "name": "Шлёпанцы",
+          "slug": "l3_tomato_crate",
+          "name": "Ящик помидоров",
+          "image": "res://assets/items/l3_tomato_crate.png",
           "position": [
             760,
             550
@@ -1592,8 +1759,9 @@
         },
         {
           "id": 32,
-          "slug": "garden_fence_l4",
-          "name": "Садовый забор",
+          "slug": "l3_garden_fence",
+          "name": "Деревянный забор",
+          "image": "res://assets/items/l3_garden_fence.png",
           "position": [
             925,
             550
@@ -1601,8 +1769,9 @@
         },
         {
           "id": 33,
-          "slug": "garden_gloves_l4",
-          "name": "Садовые перчатки",
+          "slug": "l3_hen",
+          "name": "Курица",
+          "image": "res://assets/items/l3_hen.png",
           "position": [
             1090,
             550
@@ -1610,8 +1779,9 @@
         },
         {
           "id": 34,
-          "slug": "garden_shovel_l4",
-          "name": "Садовая лопата",
+          "slug": "l3_egg_basket",
+          "name": "Корзина яиц",
+          "image": "res://assets/items/l3_egg_basket.png",
           "position": [
             1255,
             550
@@ -1619,8 +1789,9 @@
         },
         {
           "id": 35,
-          "slug": "golden_beetle_l4",
-          "name": "Золотой жук",
+          "slug": "l3_garden_shovel",
+          "name": "Садовая лопата",
+          "image": "res://assets/items/l3_garden_shovel.png",
           "position": [
             1420,
             550
@@ -1628,8 +1799,9 @@
         },
         {
           "id": 36,
-          "slug": "golden_fruit_l4",
-          "name": "Золотой плод",
+          "slug": "l3_water_bucket",
+          "name": "Ведро с водой",
+          "image": "res://assets/items/l3_water_bucket.png",
           "position": [
             100,
             700
@@ -1637,8 +1809,9 @@
         },
         {
           "id": 37,
-          "slug": "golden_jungle_idol_l4",
-          "name": "Золотой идол джунглей",
+          "slug": "l3_watering_can_yellow",
+          "name": "Жёлтая лейка",
+          "image": "res://assets/items/l3_watering_can_yellow.png",
           "position": [
             265,
             700
@@ -1646,8 +1819,9 @@
         },
         {
           "id": 38,
-          "slug": "green_crystal_l4",
-          "name": "Зелёный кристалл",
+          "slug": "l3_scarecrow",
+          "name": "Пугало",
+          "image": "res://assets/items/l3_scarecrow.png",
           "position": [
             430,
             700
@@ -1655,8 +1829,9 @@
         },
         {
           "id": 39,
-          "slug": "hen_l4",
-          "name": "Курица",
+          "slug": "l2_tiki_totem",
+          "name": "Резной тотем",
+          "image": "res://assets/items/l2_tiki_totem.png",
           "position": [
             595,
             700
@@ -1664,8 +1839,9 @@
         },
         {
           "id": 40,
-          "slug": "hibiscus_flower_l4",
-          "name": "Цветок гибискуса",
+          "slug": "l2_expedition_book",
+          "name": "Дневник исследователя",
+          "image": "res://assets/items/l2_expedition_book.png",
           "position": [
             760,
             700
@@ -1673,8 +1849,9 @@
         },
         {
           "id": 41,
-          "slug": "jungle_fern_l4",
-          "name": "Папоротник джунглей",
+          "slug": "l2_sun_key",
+          "name": "Солнечный ключ",
+          "image": "res://assets/items/l2_sun_key.png",
           "position": [
             925,
             700
@@ -1682,8 +1859,9 @@
         },
         {
           "id": 42,
-          "slug": "magnifying_glass_l4",
-          "name": "Лупа",
+          "slug": "l2_golden_jungle_idol",
+          "name": "Золотой идол",
+          "image": "res://assets/items/l2_golden_jungle_idol.png",
           "position": [
             1090,
             700
@@ -1691,8 +1869,9 @@
         },
         {
           "id": 43,
-          "slug": "monkey_statue_l4",
-          "name": "Статуя обезьяны",
+          "slug": "l2_ancient_compass",
+          "name": "Древний компас",
+          "image": "res://assets/items/l2_ancient_compass.png",
           "position": [
             1255,
             700
@@ -1700,8 +1879,9 @@
         },
         {
           "id": 44,
-          "slug": "overgrown_relic_l4",
-          "name": "Заросшая реликвия",
+          "slug": "l2_carved_stone_tablet",
+          "name": "Каменная плита с символами",
+          "image": "res://assets/items/l2_carved_stone_tablet.png",
           "position": [
             1420,
             700
@@ -1721,16 +1901,17 @@
         "Дельфин",
         "Морская раковина",
         "Оранжевый краб",
-        "Красная морская звезда",
-        "Красный спасательный круг"
+        "Маска для плавания",
+        "Сёрфборд"
       ],
       "transition": "Сердце океана указывает на вулканический остров.",
       "background_path": "res://assets/levels/sunken_lagoon.svg",
       "items": [
         {
           "id": 0,
-          "slug": "dolphin_l5",
+          "slug": "l3_dolphin",
           "name": "Дельфин",
+          "image": "res://assets/items/l3_dolphin.png",
           "position": [
             100,
             100
@@ -1738,8 +1919,9 @@
         },
         {
           "id": 1,
-          "slug": "conch_shell_l5",
+          "slug": "l3_conch_shell",
           "name": "Морская раковина",
+          "image": "res://assets/items/l3_conch_shell.png",
           "position": [
             265,
             100
@@ -1747,8 +1929,9 @@
         },
         {
           "id": 2,
-          "slug": "crab_orange_l5",
+          "slug": "l3_crab_orange",
           "name": "Оранжевый краб",
+          "image": "res://assets/items/l3_crab_orange.png",
           "position": [
             430,
             100
@@ -1756,8 +1939,9 @@
         },
         {
           "id": 3,
-          "slug": "starfish_red_l5",
-          "name": "Красная морская звезда",
+          "slug": "l3_diving_mask",
+          "name": "Маска для плавания",
+          "image": "res://assets/items/l3_diving_mask.png",
           "position": [
             595,
             100
@@ -1765,8 +1949,9 @@
         },
         {
           "id": 4,
-          "slug": "lifebuoy_red_l5",
-          "name": "Красный спасательный круг",
+          "slug": "l3_surfboard",
+          "name": "Сёрфборд",
+          "image": "res://assets/items/l3_surfboard.png",
           "position": [
             760,
             100
@@ -1774,8 +1959,9 @@
         },
         {
           "id": 5,
-          "slug": "diving_mask_l5",
-          "name": "Маска для ныряния",
+          "slug": "l3_flip_flops",
+          "name": "Розовые шлёпанцы",
+          "image": "res://assets/items/l3_flip_flops.png",
           "position": [
             925,
             100
@@ -1783,8 +1969,9 @@
         },
         {
           "id": 6,
-          "slug": "green_crystal_l5",
-          "name": "Зелёный кристалл",
+          "slug": "l3_coconut_drink",
+          "name": "Коктейль в кокосе",
+          "image": "res://assets/items/l3_coconut_drink.png",
           "position": [
             1090,
             100
@@ -1792,8 +1979,9 @@
         },
         {
           "id": 7,
-          "slug": "ammonite_fossil_l5",
-          "name": "Окаменелость аммонита",
+          "slug": "l3_seagull",
+          "name": "Чайка",
+          "image": "res://assets/items/l3_seagull.png",
           "position": [
             1255,
             100
@@ -1801,8 +1989,9 @@
         },
         {
           "id": 8,
-          "slug": "water_bucket_l5",
-          "name": "Ведро с водой",
+          "slug": "l3_anchor_blue",
+          "name": "Синий якорь",
+          "image": "res://assets/items/l3_anchor_blue.png",
           "position": [
             1420,
             100
@@ -1810,8 +1999,9 @@
         },
         {
           "id": 9,
-          "slug": "coconut_drink_l5",
-          "name": "Кокосовый напиток",
+          "slug": "l3_lifebuoy_red",
+          "name": "Спасательный круг",
+          "image": "res://assets/items/l3_lifebuoy_red.png",
           "position": [
             100,
             250
@@ -1819,8 +2009,9 @@
         },
         {
           "id": 10,
-          "slug": "beach_ball_colorful_l5",
-          "name": "Пёстрый пляжный мяч",
+          "slug": "l3_binoculars",
+          "name": "Бинокль",
+          "image": "res://assets/items/l3_binoculars.png",
           "position": [
             265,
             250
@@ -1828,8 +2019,9 @@
         },
         {
           "id": 11,
-          "slug": "anchor_blue_l5",
-          "name": "Синий якорь",
+          "slug": "l3_lighthouse",
+          "name": "Маяк",
+          "image": "res://assets/items/l3_lighthouse.png",
           "position": [
             430,
             250
@@ -1837,8 +2029,9 @@
         },
         {
           "id": 12,
-          "slug": "palm_tree_l5",
+          "slug": "l3_palm_tree",
           "name": "Пальма",
+          "image": "res://assets/items/l3_palm_tree.png",
           "position": [
             595,
             250
@@ -1846,8 +2039,9 @@
         },
         {
           "id": 13,
-          "slug": "seagull_l5",
-          "name": "Чайка",
+          "slug": "l3_beach_chair",
+          "name": "Пляжный шезлонг",
+          "image": "res://assets/items/l3_beach_chair.png",
           "position": [
             760,
             250
@@ -1855,17 +2049,19 @@
         },
         {
           "id": 14,
-          "slug": "pearl_l5",
+          "slug": "l3_beach_umbrella",
+          "name": "Пляжный зонт",
+          "image": "res://assets/items/l3_beach_umbrella.png",
           "position": [
             925,
             250
-          ],
-          "name": "Жемчужина"
+          ]
         },
         {
           "id": 15,
-          "slug": "adventurer_backpack_l5",
-          "name": "Рюкзак исследователя",
+          "slug": "l3_watering_can_blue",
+          "name": "Синяя лейка",
+          "image": "res://assets/items/l3_watering_can_blue.png",
           "position": [
             1090,
             250
@@ -1873,8 +2069,9 @@
         },
         {
           "id": 16,
-          "slug": "ancient_compass_l5",
-          "name": "Древний компас",
+          "slug": "l3_garden_gloves",
+          "name": "Садовые перчатки",
+          "image": "res://assets/items/l3_garden_gloves.png",
           "position": [
             1255,
             250
@@ -1882,8 +2079,9 @@
         },
         {
           "id": 17,
-          "slug": "ancient_scroll_l5",
-          "name": "Древний свиток",
+          "slug": "l3_wheelbarrow",
+          "name": "Тачка с землёй",
+          "image": "res://assets/items/l3_wheelbarrow.png",
           "position": [
             1420,
             250
@@ -1891,8 +2089,9 @@
         },
         {
           "id": 18,
-          "slug": "beach_chair_l5",
-          "name": "Пляжный шезлонг",
+          "slug": "l3_carrots",
+          "name": "Морковь",
+          "image": "res://assets/items/l3_carrots.png",
           "position": [
             100,
             400
@@ -1900,8 +2099,9 @@
         },
         {
           "id": 19,
-          "slug": "beach_umbrella_l5",
-          "name": "Пляжный зонт",
+          "slug": "l3_tomato",
+          "name": "Помидор",
+          "image": "res://assets/items/l3_tomato.png",
           "position": [
             265,
             400
@@ -1909,8 +2109,9 @@
         },
         {
           "id": 20,
-          "slug": "binoculars_l5",
-          "name": "Бинокль",
+          "slug": "l3_sunflower",
+          "name": "Подсолнух",
+          "image": "res://assets/items/l3_sunflower.png",
           "position": [
             430,
             400
@@ -1918,8 +2119,9 @@
         },
         {
           "id": 21,
-          "slug": "bird_skull_l5",
-          "name": "Череп птицы",
+          "slug": "l3_tomato_crate",
+          "name": "Ящик помидоров",
+          "image": "res://assets/items/l3_tomato_crate.png",
           "position": [
             595,
             400
@@ -1927,8 +2129,9 @@
         },
         {
           "id": 22,
-          "slug": "carrots_l5",
-          "name": "Морковь",
+          "slug": "l3_garden_fence",
+          "name": "Деревянный забор",
+          "image": "res://assets/items/l3_garden_fence.png",
           "position": [
             760,
             400
@@ -1936,8 +2139,9 @@
         },
         {
           "id": 23,
-          "slug": "carved_stone_tablet_l5",
-          "name": "Каменная табличка",
+          "slug": "l3_hen",
+          "name": "Курица",
+          "image": "res://assets/items/l3_hen.png",
           "position": [
             925,
             400
@@ -1945,8 +2149,9 @@
         },
         {
           "id": 24,
-          "slug": "ceremonial_mask_l5",
-          "name": "Ритуальная маска",
+          "slug": "l3_egg_basket",
+          "name": "Корзина яиц",
+          "image": "res://assets/items/l3_egg_basket.png",
           "position": [
             1090,
             400
@@ -1954,8 +2159,9 @@
         },
         {
           "id": 25,
-          "slug": "clay_vase_l5",
-          "name": "Глиняная ваза",
+          "slug": "l3_garden_shovel",
+          "name": "Садовая лопата",
+          "image": "res://assets/items/l3_garden_shovel.png",
           "position": [
             1255,
             400
@@ -1963,8 +2169,9 @@
         },
         {
           "id": 26,
-          "slug": "coiled_rope_l5",
-          "name": "Свернутая верёвка",
+          "slug": "l3_water_bucket",
+          "name": "Ведро с водой",
+          "image": "res://assets/items/l3_water_bucket.png",
           "position": [
             1420,
             400
@@ -1972,8 +2179,9 @@
         },
         {
           "id": 27,
-          "slug": "egg_basket_l5",
-          "name": "Корзина с яйцами",
+          "slug": "l3_watering_can_yellow",
+          "name": "Жёлтая лейка",
+          "image": "res://assets/items/l3_watering_can_yellow.png",
           "position": [
             100,
             550
@@ -1981,8 +2189,9 @@
         },
         {
           "id": 28,
-          "slug": "emerald_scarab_l5",
-          "name": "Изумрудный скарабей",
+          "slug": "l3_scarecrow",
+          "name": "Пугало",
+          "image": "res://assets/items/l3_scarecrow.png",
           "position": [
             265,
             550
@@ -1990,8 +2199,9 @@
         },
         {
           "id": 29,
-          "slug": "expedition_book_l5",
-          "name": "Дневник экспедиции",
+          "slug": "l2_tiki_totem",
+          "name": "Резной тотем",
+          "image": "res://assets/items/l2_tiki_totem.png",
           "position": [
             430,
             550
@@ -1999,8 +2209,9 @@
         },
         {
           "id": 30,
-          "slug": "feather_headdress_l5",
-          "name": "Головной убор из перьев",
+          "slug": "l2_expedition_book",
+          "name": "Дневник исследователя",
+          "image": "res://assets/items/l2_expedition_book.png",
           "position": [
             595,
             550
@@ -2008,8 +2219,9 @@
         },
         {
           "id": 31,
-          "slug": "flip_flops_l5",
-          "name": "Шлёпанцы",
+          "slug": "l2_sun_key",
+          "name": "Солнечный ключ",
+          "image": "res://assets/items/l2_sun_key.png",
           "position": [
             760,
             550
@@ -2017,8 +2229,9 @@
         },
         {
           "id": 32,
-          "slug": "garden_fence_l5",
-          "name": "Садовый забор",
+          "slug": "l2_golden_jungle_idol",
+          "name": "Золотой идол",
+          "image": "res://assets/items/l2_golden_jungle_idol.png",
           "position": [
             925,
             550
@@ -2026,8 +2239,9 @@
         },
         {
           "id": 33,
-          "slug": "garden_gloves_l5",
-          "name": "Садовые перчатки",
+          "slug": "l2_ancient_compass",
+          "name": "Древний компас",
+          "image": "res://assets/items/l2_ancient_compass.png",
           "position": [
             1090,
             550
@@ -2035,8 +2249,9 @@
         },
         {
           "id": 34,
-          "slug": "garden_shovel_l5",
-          "name": "Садовая лопата",
+          "slug": "l2_carved_stone_tablet",
+          "name": "Каменная плита с символами",
+          "image": "res://assets/items/l2_carved_stone_tablet.png",
           "position": [
             1255,
             550
@@ -2044,8 +2259,9 @@
         },
         {
           "id": 35,
-          "slug": "golden_beetle_l5",
-          "name": "Золотой жук",
+          "slug": "l2_ceremonial_mask",
+          "name": "Ритуальная маска",
+          "image": "res://assets/items/l2_ceremonial_mask.png",
           "position": [
             1420,
             550
@@ -2053,8 +2269,9 @@
         },
         {
           "id": 36,
-          "slug": "golden_fruit_l5",
-          "name": "Золотой плод",
+          "slug": "l2_overgrown_relic",
+          "name": "Заросший артефакт",
+          "image": "res://assets/items/l2_overgrown_relic.png",
           "position": [
             100,
             700
@@ -2062,8 +2279,9 @@
         },
         {
           "id": 37,
-          "slug": "golden_jungle_idol_l5",
-          "name": "Золотой идол джунглей",
+          "slug": "l2_tribal_dagger",
+          "name": "Ритуальный кинжал",
+          "image": "res://assets/items/l2_tribal_dagger.png",
           "position": [
             265,
             700
@@ -2071,8 +2289,9 @@
         },
         {
           "id": 38,
-          "slug": "hen_l5",
-          "name": "Курица",
+          "slug": "l2_emerald_scarab",
+          "name": "Изумрудный скарабей",
+          "image": "res://assets/items/l2_emerald_scarab.png",
           "position": [
             430,
             700
@@ -2080,8 +2299,9 @@
         },
         {
           "id": 39,
-          "slug": "hibiscus_flower_l5",
-          "name": "Цветок гибискуса",
+          "slug": "l2_golden_beetle",
+          "name": "Золотой жук",
+          "image": "res://assets/items/l2_golden_beetle.png",
           "position": [
             595,
             700
@@ -2089,8 +2309,9 @@
         },
         {
           "id": 40,
-          "slug": "jungle_fern_l5",
-          "name": "Папоротник джунглей",
+          "slug": "l2_hibiscus_flower",
+          "name": "Гибискус",
+          "image": "res://assets/items/l2_hibiscus_flower.png",
           "position": [
             760,
             700
@@ -2098,8 +2319,9 @@
         },
         {
           "id": 41,
-          "slug": "jungle_treasure_chest_l5",
-          "name": "Сундук джунглей",
+          "slug": "l2_jungle_fern",
+          "name": "Папоротник",
+          "image": "res://assets/items/l2_jungle_fern.png",
           "position": [
             925,
             700
@@ -2107,8 +2329,9 @@
         },
         {
           "id": 42,
-          "slug": "lighthouse_l5",
-          "name": "Маяк",
+          "slug": "l2_tropical_fruit",
+          "name": "Тропический фрукт",
+          "image": "res://assets/items/l2_tropical_fruit.png",
           "position": [
             1090,
             700
@@ -2116,8 +2339,9 @@
         },
         {
           "id": 43,
-          "slug": "magnifying_glass_l5",
-          "name": "Лупа",
+          "slug": "l2_wooden_flute",
+          "name": "Деревянная флейта",
+          "image": "res://assets/items/l2_wooden_flute.png",
           "position": [
             1255,
             700
@@ -2125,8 +2349,9 @@
         },
         {
           "id": 44,
-          "slug": "monkey_statue_l5",
-          "name": "Статуя обезьяны",
+          "slug": "l2_clay_vase",
+          "name": "Глиняная ваза",
+          "image": "res://assets/items/l2_clay_vase.png",
           "position": [
             1420,
             700
@@ -2154,8 +2379,9 @@
       "items": [
         {
           "id": 0,
-          "slug": "golden_beetle_l6",
+          "slug": "l2_golden_beetle",
           "name": "Золотой жук",
+          "image": "res://assets/items/l2_golden_beetle.png",
           "position": [
             100,
             100
@@ -2163,8 +2389,9 @@
         },
         {
           "id": 1,
-          "slug": "green_crystal_l6",
+          "slug": "l2_green_crystal",
           "name": "Зелёный кристалл",
+          "image": "res://assets/items/l2_green_crystal.png",
           "position": [
             265,
             100
@@ -2172,8 +2399,9 @@
         },
         {
           "id": 2,
-          "slug": "sun_medallion_l6",
+          "slug": "l2_sun_medallion",
           "name": "Солнечный медальон",
+          "image": "res://assets/items/l2_sun_medallion.png",
           "position": [
             430,
             100
@@ -2181,8 +2409,9 @@
         },
         {
           "id": 3,
-          "slug": "stone_sundial_l6",
+          "slug": "l2_stone_sundial",
           "name": "Каменные солнечные часы",
+          "image": "res://assets/items/l2_stone_sundial.png",
           "position": [
             595,
             100
@@ -2190,8 +2419,9 @@
         },
         {
           "id": 4,
-          "slug": "clay_vase_l6",
+          "slug": "l2_clay_vase",
           "name": "Глиняная ваза",
+          "image": "res://assets/items/l2_clay_vase.png",
           "position": [
             760,
             100
@@ -2199,8 +2429,9 @@
         },
         {
           "id": 5,
-          "slug": "tribal_dagger_l6",
-          "name": "Племенной кинжал",
+          "slug": "l3_lifebuoy_red",
+          "name": "Спасательный круг",
+          "image": "res://assets/items/l3_lifebuoy_red.png",
           "position": [
             925,
             100
@@ -2208,8 +2439,9 @@
         },
         {
           "id": 6,
-          "slug": "golden_jungle_idol_l6",
-          "name": "Золотой идол джунглей",
+          "slug": "l3_binoculars",
+          "name": "Бинокль",
+          "image": "res://assets/items/l3_binoculars.png",
           "position": [
             1090,
             100
@@ -2217,8 +2449,9 @@
         },
         {
           "id": 7,
-          "slug": "ceremonial_mask_l6",
-          "name": "Ритуальная маска",
+          "slug": "l3_lighthouse",
+          "name": "Маяк",
+          "image": "res://assets/items/l3_lighthouse.png",
           "position": [
             1255,
             100
@@ -2226,8 +2459,9 @@
         },
         {
           "id": 8,
-          "slug": "tiki_totem_l6",
-          "name": "Тотем",
+          "slug": "l3_palm_tree",
+          "name": "Пальма",
+          "image": "res://assets/items/l3_palm_tree.png",
           "position": [
             1420,
             100
@@ -2235,8 +2469,9 @@
         },
         {
           "id": 9,
-          "slug": "carved_stone_tablet_l6",
-          "name": "Каменная табличка",
+          "slug": "l3_beach_chair",
+          "name": "Пляжный шезлонг",
+          "image": "res://assets/items/l3_beach_chair.png",
           "position": [
             100,
             250
@@ -2244,8 +2479,9 @@
         },
         {
           "id": 10,
-          "slug": "ancient_scroll_l6",
-          "name": "Древний свиток",
+          "slug": "l3_beach_umbrella",
+          "name": "Пляжный зонт",
+          "image": "res://assets/items/l3_beach_umbrella.png",
           "position": [
             265,
             250
@@ -2253,8 +2489,9 @@
         },
         {
           "id": 11,
-          "slug": "bird_skull_l6",
-          "name": "Череп птицы",
+          "slug": "l3_watering_can_blue",
+          "name": "Синяя лейка",
+          "image": "res://assets/items/l3_watering_can_blue.png",
           "position": [
             430,
             250
@@ -2262,8 +2499,9 @@
         },
         {
           "id": 12,
-          "slug": "wheelbarrow_l6",
-          "name": "Тачка",
+          "slug": "l3_garden_gloves",
+          "name": "Садовые перчатки",
+          "image": "res://assets/items/l3_garden_gloves.png",
           "position": [
             595,
             250
@@ -2271,8 +2509,9 @@
         },
         {
           "id": 13,
-          "slug": "sun_key_l6",
-          "name": "Солнечный ключ",
+          "slug": "l3_wheelbarrow",
+          "name": "Тачка с землёй",
+          "image": "res://assets/items/l3_wheelbarrow.png",
           "position": [
             760,
             250
@@ -2280,8 +2519,9 @@
         },
         {
           "id": 14,
-          "slug": "adventurer_backpack_l6",
-          "name": "Рюкзак исследователя",
+          "slug": "l3_carrots",
+          "name": "Морковь",
+          "image": "res://assets/items/l3_carrots.png",
           "position": [
             925,
             250
@@ -2289,8 +2529,9 @@
         },
         {
           "id": 15,
-          "slug": "ammonite_fossil_l6",
-          "name": "Окаменелость аммонита",
+          "slug": "l3_tomato",
+          "name": "Помидор",
+          "image": "res://assets/items/l3_tomato.png",
           "position": [
             1090,
             250
@@ -2298,8 +2539,9 @@
         },
         {
           "id": 16,
-          "slug": "anchor_blue_l6",
-          "name": "Синий якорь",
+          "slug": "l3_sunflower",
+          "name": "Подсолнух",
+          "image": "res://assets/items/l3_sunflower.png",
           "position": [
             1255,
             250
@@ -2307,8 +2549,9 @@
         },
         {
           "id": 17,
-          "slug": "ancient_compass_l6",
-          "name": "Древний компас",
+          "slug": "l3_tomato_crate",
+          "name": "Ящик помидоров",
+          "image": "res://assets/items/l3_tomato_crate.png",
           "position": [
             1420,
             250
@@ -2316,8 +2559,9 @@
         },
         {
           "id": 18,
-          "slug": "beach_ball_colorful_l6",
-          "name": "Пёстрый пляжный мяч",
+          "slug": "l3_garden_fence",
+          "name": "Деревянный забор",
+          "image": "res://assets/items/l3_garden_fence.png",
           "position": [
             100,
             400
@@ -2325,8 +2569,9 @@
         },
         {
           "id": 19,
-          "slug": "beach_chair_l6",
-          "name": "Пляжный шезлонг",
+          "slug": "l3_hen",
+          "name": "Курица",
+          "image": "res://assets/items/l3_hen.png",
           "position": [
             265,
             400
@@ -2334,8 +2579,9 @@
         },
         {
           "id": 20,
-          "slug": "beach_umbrella_l6",
-          "name": "Пляжный зонт",
+          "slug": "l3_egg_basket",
+          "name": "Корзина яиц",
+          "image": "res://assets/items/l3_egg_basket.png",
           "position": [
             430,
             400
@@ -2343,8 +2589,9 @@
         },
         {
           "id": 21,
-          "slug": "binoculars_l6",
-          "name": "Бинокль",
+          "slug": "l3_garden_shovel",
+          "name": "Садовая лопата",
+          "image": "res://assets/items/l3_garden_shovel.png",
           "position": [
             595,
             400
@@ -2352,8 +2599,9 @@
         },
         {
           "id": 22,
-          "slug": "carrots_l6",
-          "name": "Морковь",
+          "slug": "l3_water_bucket",
+          "name": "Ведро с водой",
+          "image": "res://assets/items/l3_water_bucket.png",
           "position": [
             760,
             400
@@ -2361,8 +2609,9 @@
         },
         {
           "id": 23,
-          "slug": "coconut_drink_l6",
-          "name": "Кокосовый напиток",
+          "slug": "l3_watering_can_yellow",
+          "name": "Жёлтая лейка",
+          "image": "res://assets/items/l3_watering_can_yellow.png",
           "position": [
             925,
             400
@@ -2370,8 +2619,9 @@
         },
         {
           "id": 24,
-          "slug": "coiled_rope_l6",
-          "name": "Свернутая верёвка",
+          "slug": "l3_scarecrow",
+          "name": "Пугало",
+          "image": "res://assets/items/l3_scarecrow.png",
           "position": [
             1090,
             400
@@ -2379,8 +2629,9 @@
         },
         {
           "id": 25,
-          "slug": "conch_shell_l6",
-          "name": "Морская раковина",
+          "slug": "l2_tiki_totem",
+          "name": "Резной тотем",
+          "image": "res://assets/items/l2_tiki_totem.png",
           "position": [
             1255,
             400
@@ -2388,8 +2639,9 @@
         },
         {
           "id": 26,
-          "slug": "crab_orange_l6",
-          "name": "Оранжевый краб",
+          "slug": "l2_expedition_book",
+          "name": "Дневник исследователя",
+          "image": "res://assets/items/l2_expedition_book.png",
           "position": [
             1420,
             400
@@ -2397,8 +2649,9 @@
         },
         {
           "id": 27,
-          "slug": "diving_mask_l6",
-          "name": "Маска для ныряния",
+          "slug": "l2_sun_key",
+          "name": "Солнечный ключ",
+          "image": "res://assets/items/l2_sun_key.png",
           "position": [
             100,
             550
@@ -2406,8 +2659,9 @@
         },
         {
           "id": 28,
-          "slug": "dolphin_l6",
-          "name": "Дельфин",
+          "slug": "l2_golden_jungle_idol",
+          "name": "Золотой идол",
+          "image": "res://assets/items/l2_golden_jungle_idol.png",
           "position": [
             265,
             550
@@ -2415,8 +2669,9 @@
         },
         {
           "id": 29,
-          "slug": "egg_basket_l6",
-          "name": "Корзина с яйцами",
+          "slug": "l2_ancient_compass",
+          "name": "Древний компас",
+          "image": "res://assets/items/l2_ancient_compass.png",
           "position": [
             430,
             550
@@ -2424,8 +2679,9 @@
         },
         {
           "id": 30,
-          "slug": "emerald_scarab_l6",
-          "name": "Изумрудный скарабей",
+          "slug": "l2_carved_stone_tablet",
+          "name": "Каменная плита с символами",
+          "image": "res://assets/items/l2_carved_stone_tablet.png",
           "position": [
             595,
             550
@@ -2433,8 +2689,9 @@
         },
         {
           "id": 31,
-          "slug": "expedition_book_l6",
-          "name": "Дневник экспедиции",
+          "slug": "l2_ceremonial_mask",
+          "name": "Ритуальная маска",
+          "image": "res://assets/items/l2_ceremonial_mask.png",
           "position": [
             760,
             550
@@ -2442,8 +2699,9 @@
         },
         {
           "id": 32,
-          "slug": "feather_headdress_l6",
-          "name": "Головной убор из перьев",
+          "slug": "l2_overgrown_relic",
+          "name": "Заросший артефакт",
+          "image": "res://assets/items/l2_overgrown_relic.png",
           "position": [
             925,
             550
@@ -2451,8 +2709,9 @@
         },
         {
           "id": 33,
-          "slug": "flip_flops_l6",
-          "name": "Шлёпанцы",
+          "slug": "l2_tribal_dagger",
+          "name": "Ритуальный кинжал",
+          "image": "res://assets/items/l2_tribal_dagger.png",
           "position": [
             1090,
             550
@@ -2460,8 +2719,9 @@
         },
         {
           "id": 34,
-          "slug": "garden_fence_l6",
-          "name": "Садовый забор",
+          "slug": "l2_emerald_scarab",
+          "name": "Изумрудный скарабей",
+          "image": "res://assets/items/l2_emerald_scarab.png",
           "position": [
             1255,
             550
@@ -2469,8 +2729,9 @@
         },
         {
           "id": 35,
-          "slug": "garden_gloves_l6",
-          "name": "Садовые перчатки",
+          "slug": "l2_hibiscus_flower",
+          "name": "Гибискус",
+          "image": "res://assets/items/l2_hibiscus_flower.png",
           "position": [
             1420,
             550
@@ -2478,8 +2739,9 @@
         },
         {
           "id": 36,
-          "slug": "garden_shovel_l6",
-          "name": "Садовая лопата",
+          "slug": "l2_jungle_fern",
+          "name": "Папоротник",
+          "image": "res://assets/items/l2_jungle_fern.png",
           "position": [
             100,
             700
@@ -2487,8 +2749,9 @@
         },
         {
           "id": 37,
-          "slug": "golden_fruit_l6",
-          "name": "Золотой плод",
+          "slug": "l2_tropical_fruit",
+          "name": "Тропический фрукт",
+          "image": "res://assets/items/l2_tropical_fruit.png",
           "position": [
             265,
             700
@@ -2496,8 +2759,9 @@
         },
         {
           "id": 38,
-          "slug": "hen_l6",
-          "name": "Курица",
+          "slug": "l2_wooden_flute",
+          "name": "Деревянная флейта",
+          "image": "res://assets/items/l2_wooden_flute.png",
           "position": [
             430,
             700
@@ -2505,8 +2769,9 @@
         },
         {
           "id": 39,
-          "slug": "hibiscus_flower_l6",
-          "name": "Цветок гибискуса",
+          "slug": "l2_coiled_rope",
+          "name": "Верёвка",
+          "image": "res://assets/items/l2_coiled_rope.png",
           "position": [
             595,
             700
@@ -2514,8 +2779,9 @@
         },
         {
           "id": 40,
-          "slug": "jungle_fern_l6",
-          "name": "Папоротник джунглей",
+          "slug": "l2_adventurer_backpack",
+          "name": "Рюкзак исследователя",
+          "image": "res://assets/items/l2_adventurer_backpack.png",
           "position": [
             760,
             700
@@ -2523,8 +2789,9 @@
         },
         {
           "id": 41,
-          "slug": "jungle_treasure_chest_l6",
-          "name": "Сундук джунглей",
+          "slug": "l2_magnifying_glass",
+          "name": "Лупа",
+          "image": "res://assets/items/l2_magnifying_glass.png",
           "position": [
             925,
             700
@@ -2532,8 +2799,9 @@
         },
         {
           "id": 42,
-          "slug": "lifebuoy_red_l6",
-          "name": "Красный спасательный круг",
+          "slug": "l2_ancient_scroll",
+          "name": "Древний свиток",
+          "image": "res://assets/items/l2_ancient_scroll.png",
           "position": [
             1090,
             700
@@ -2541,8 +2809,9 @@
         },
         {
           "id": 43,
-          "slug": "lighthouse_l6",
-          "name": "Маяк",
+          "slug": "l2_ammonite_fossil",
+          "name": "Окаменелость аммонита",
+          "image": "res://assets/items/l2_ammonite_fossil.png",
           "position": [
             1255,
             700
@@ -2550,8 +2819,9 @@
         },
         {
           "id": 44,
-          "slug": "magnifying_glass_l6",
-          "name": "Лупа",
+          "slug": "l2_stone_well_lantern",
+          "name": "Каменный фонарь",
+          "image": "res://assets/items/l2_stone_well_lantern.png",
           "position": [
             1420,
             700
@@ -2579,8 +2849,9 @@
       "items": [
         {
           "id": 0,
-          "slug": "ancient_compass_l7",
+          "slug": "l2_ancient_compass",
           "name": "Древний компас",
+          "image": "res://assets/items/l2_ancient_compass.png",
           "position": [
             100,
             100
@@ -2588,8 +2859,9 @@
         },
         {
           "id": 1,
-          "slug": "binoculars_l7",
+          "slug": "l3_binoculars",
           "name": "Бинокль",
+          "image": "res://assets/items/l3_binoculars.png",
           "position": [
             265,
             100
@@ -2597,8 +2869,9 @@
         },
         {
           "id": 2,
-          "slug": "magnifying_glass_l7",
+          "slug": "l2_magnifying_glass",
           "name": "Лупа",
+          "image": "res://assets/items/l2_magnifying_glass.png",
           "position": [
             430,
             100
@@ -2606,8 +2879,9 @@
         },
         {
           "id": 3,
-          "slug": "wooden_flute_l7",
+          "slug": "l2_wooden_flute",
           "name": "Деревянная флейта",
+          "image": "res://assets/items/l2_wooden_flute.png",
           "position": [
             595,
             100
@@ -2615,8 +2889,9 @@
         },
         {
           "id": 4,
-          "slug": "feather_headdress_l7",
+          "slug": "l2_feather_headdress",
           "name": "Головной убор из перьев",
+          "image": "res://assets/items/l2_feather_headdress.png",
           "position": [
             760,
             100
@@ -2624,8 +2899,9 @@
         },
         {
           "id": 5,
-          "slug": "bird_skull_l7",
-          "name": "Череп птицы",
+          "slug": "l3_carrots",
+          "name": "Морковь",
+          "image": "res://assets/items/l3_carrots.png",
           "position": [
             925,
             100
@@ -2633,8 +2909,9 @@
         },
         {
           "id": 6,
-          "slug": "sun_medallion_l7",
-          "name": "Солнечный медальон",
+          "slug": "l3_tomato",
+          "name": "Помидор",
+          "image": "res://assets/items/l3_tomato.png",
           "position": [
             1090,
             100
@@ -2642,8 +2919,9 @@
         },
         {
           "id": 7,
-          "slug": "green_crystal_l7",
-          "name": "Зелёный кристалл",
+          "slug": "l3_sunflower",
+          "name": "Подсолнух",
+          "image": "res://assets/items/l3_sunflower.png",
           "position": [
             1255,
             100
@@ -2651,8 +2929,9 @@
         },
         {
           "id": 8,
-          "slug": "lighthouse_l7",
-          "name": "Маяк",
+          "slug": "l3_tomato_crate",
+          "name": "Ящик помидоров",
+          "image": "res://assets/items/l3_tomato_crate.png",
           "position": [
             1420,
             100
@@ -2660,8 +2939,9 @@
         },
         {
           "id": 9,
-          "slug": "straw_hat_l7",
-          "name": "Соломенная шляпа",
+          "slug": "l3_garden_fence",
+          "name": "Деревянный забор",
+          "image": "res://assets/items/l3_garden_fence.png",
           "position": [
             100,
             250
@@ -2669,8 +2949,9 @@
         },
         {
           "id": 10,
-          "slug": "adventurer_backpack_l7",
-          "name": "Рюкзак исследователя",
+          "slug": "l3_hen",
+          "name": "Курица",
+          "image": "res://assets/items/l3_hen.png",
           "position": [
             265,
             250
@@ -2678,8 +2959,9 @@
         },
         {
           "id": 11,
-          "slug": "expedition_book_l7",
-          "name": "Дневник экспедиции",
+          "slug": "l3_egg_basket",
+          "name": "Корзина яиц",
+          "image": "res://assets/items/l3_egg_basket.png",
           "position": [
             430,
             250
@@ -2687,8 +2969,9 @@
         },
         {
           "id": 12,
-          "slug": "sun_key_l7",
-          "name": "Солнечный ключ",
+          "slug": "l3_garden_shovel",
+          "name": "Садовая лопата",
+          "image": "res://assets/items/l3_garden_shovel.png",
           "position": [
             595,
             250
@@ -2696,8 +2979,9 @@
         },
         {
           "id": 13,
-          "slug": "golden_beetle_l7",
-          "name": "Золотой жук",
+          "slug": "l3_water_bucket",
+          "name": "Ведро с водой",
+          "image": "res://assets/items/l3_water_bucket.png",
           "position": [
             760,
             250
@@ -2705,8 +2989,9 @@
         },
         {
           "id": 14,
-          "slug": "overgrown_relic_l7",
-          "name": "Заросшая реликвия",
+          "slug": "l3_watering_can_yellow",
+          "name": "Жёлтая лейка",
+          "image": "res://assets/items/l3_watering_can_yellow.png",
           "position": [
             925,
             250
@@ -2714,8 +2999,9 @@
         },
         {
           "id": 15,
-          "slug": "ammonite_fossil_l7",
-          "name": "Окаменелость аммонита",
+          "slug": "l3_scarecrow",
+          "name": "Пугало",
+          "image": "res://assets/items/l3_scarecrow.png",
           "position": [
             1090,
             250
@@ -2723,8 +3009,9 @@
         },
         {
           "id": 16,
-          "slug": "anchor_blue_l7",
-          "name": "Синий якорь",
+          "slug": "l2_tiki_totem",
+          "name": "Резной тотем",
+          "image": "res://assets/items/l2_tiki_totem.png",
           "position": [
             1255,
             250
@@ -2732,8 +3019,9 @@
         },
         {
           "id": 17,
-          "slug": "ancient_scroll_l7",
-          "name": "Древний свиток",
+          "slug": "l2_expedition_book",
+          "name": "Дневник исследователя",
+          "image": "res://assets/items/l2_expedition_book.png",
           "position": [
             1420,
             250
@@ -2741,8 +3029,9 @@
         },
         {
           "id": 18,
-          "slug": "beach_ball_colorful_l7",
-          "name": "Пёстрый пляжный мяч",
+          "slug": "l2_sun_key",
+          "name": "Солнечный ключ",
+          "image": "res://assets/items/l2_sun_key.png",
           "position": [
             100,
             400
@@ -2750,8 +3039,9 @@
         },
         {
           "id": 19,
-          "slug": "beach_chair_l7",
-          "name": "Пляжный шезлонг",
+          "slug": "l2_golden_jungle_idol",
+          "name": "Золотой идол",
+          "image": "res://assets/items/l2_golden_jungle_idol.png",
           "position": [
             265,
             400
@@ -2759,8 +3049,9 @@
         },
         {
           "id": 20,
-          "slug": "beach_umbrella_l7",
-          "name": "Пляжный зонт",
+          "slug": "l2_carved_stone_tablet",
+          "name": "Каменная плита с символами",
+          "image": "res://assets/items/l2_carved_stone_tablet.png",
           "position": [
             430,
             400
@@ -2768,8 +3059,9 @@
         },
         {
           "id": 21,
-          "slug": "carrots_l7",
-          "name": "Морковь",
+          "slug": "l2_ceremonial_mask",
+          "name": "Ритуальная маска",
+          "image": "res://assets/items/l2_ceremonial_mask.png",
           "position": [
             595,
             400
@@ -2777,8 +3069,9 @@
         },
         {
           "id": 22,
-          "slug": "carved_stone_tablet_l7",
-          "name": "Каменная табличка",
+          "slug": "l2_overgrown_relic",
+          "name": "Заросший артефакт",
+          "image": "res://assets/items/l2_overgrown_relic.png",
           "position": [
             760,
             400
@@ -2786,8 +3079,9 @@
         },
         {
           "id": 23,
-          "slug": "ceremonial_mask_l7",
-          "name": "Ритуальная маска",
+          "slug": "l2_tribal_dagger",
+          "name": "Ритуальный кинжал",
+          "image": "res://assets/items/l2_tribal_dagger.png",
           "position": [
             925,
             400
@@ -2795,8 +3089,9 @@
         },
         {
           "id": 24,
-          "slug": "clay_vase_l7",
-          "name": "Глиняная ваза",
+          "slug": "l2_emerald_scarab",
+          "name": "Изумрудный скарабей",
+          "image": "res://assets/items/l2_emerald_scarab.png",
           "position": [
             1090,
             400
@@ -2804,8 +3099,9 @@
         },
         {
           "id": 25,
-          "slug": "coconut_drink_l7",
-          "name": "Кокосовый напиток",
+          "slug": "l2_golden_beetle",
+          "name": "Золотой жук",
+          "image": "res://assets/items/l2_golden_beetle.png",
           "position": [
             1255,
             400
@@ -2813,8 +3109,9 @@
         },
         {
           "id": 26,
-          "slug": "coiled_rope_l7",
-          "name": "Свернутая верёвка",
+          "slug": "l2_hibiscus_flower",
+          "name": "Гибискус",
+          "image": "res://assets/items/l2_hibiscus_flower.png",
           "position": [
             1420,
             400
@@ -2822,8 +3119,9 @@
         },
         {
           "id": 27,
-          "slug": "conch_shell_l7",
-          "name": "Морская раковина",
+          "slug": "l2_jungle_fern",
+          "name": "Папоротник",
+          "image": "res://assets/items/l2_jungle_fern.png",
           "position": [
             100,
             550
@@ -2831,8 +3129,9 @@
         },
         {
           "id": 28,
-          "slug": "crab_orange_l7",
-          "name": "Оранжевый краб",
+          "slug": "l2_tropical_fruit",
+          "name": "Тропический фрукт",
+          "image": "res://assets/items/l2_tropical_fruit.png",
           "position": [
             265,
             550
@@ -2840,8 +3139,9 @@
         },
         {
           "id": 29,
-          "slug": "diving_mask_l7",
-          "name": "Маска для ныряния",
+          "slug": "l2_clay_vase",
+          "name": "Глиняная ваза",
+          "image": "res://assets/items/l2_clay_vase.png",
           "position": [
             430,
             550
@@ -2849,8 +3149,9 @@
         },
         {
           "id": 30,
-          "slug": "dolphin_l7",
-          "name": "Дельфин",
+          "slug": "l2_coiled_rope",
+          "name": "Верёвка",
+          "image": "res://assets/items/l2_coiled_rope.png",
           "position": [
             595,
             550
@@ -2858,8 +3159,9 @@
         },
         {
           "id": 31,
-          "slug": "egg_basket_l7",
-          "name": "Корзина с яйцами",
+          "slug": "l2_adventurer_backpack",
+          "name": "Рюкзак исследователя",
+          "image": "res://assets/items/l2_adventurer_backpack.png",
           "position": [
             760,
             550
@@ -2867,8 +3169,9 @@
         },
         {
           "id": 32,
-          "slug": "emerald_scarab_l7",
-          "name": "Изумрудный скарабей",
+          "slug": "l2_ancient_scroll",
+          "name": "Древний свиток",
+          "image": "res://assets/items/l2_ancient_scroll.png",
           "position": [
             925,
             550
@@ -2876,8 +3179,9 @@
         },
         {
           "id": 33,
-          "slug": "flip_flops_l7",
-          "name": "Шлёпанцы",
+          "slug": "l2_ammonite_fossil",
+          "name": "Окаменелость аммонита",
+          "image": "res://assets/items/l2_ammonite_fossil.png",
           "position": [
             1090,
             550
@@ -2885,8 +3189,9 @@
         },
         {
           "id": 34,
-          "slug": "garden_fence_l7",
-          "name": "Садовый забор",
+          "slug": "l2_stone_well_lantern",
+          "name": "Каменный фонарь",
+          "image": "res://assets/items/l2_stone_well_lantern.png",
           "position": [
             1255,
             550
@@ -2894,8 +3199,9 @@
         },
         {
           "id": 35,
-          "slug": "garden_gloves_l7",
-          "name": "Садовые перчатки",
+          "slug": "l2_green_crystal",
+          "name": "Зелёный кристалл",
+          "image": "res://assets/items/l2_green_crystal.png",
           "position": [
             1420,
             550
@@ -2903,8 +3209,9 @@
         },
         {
           "id": 36,
-          "slug": "garden_shovel_l7",
-          "name": "Садовая лопата",
+          "slug": "l2_jungle_treasure_chest",
+          "name": "Сундук с сокровищами",
+          "image": "res://assets/items/l2_jungle_treasure_chest.png",
           "position": [
             100,
             700
@@ -2912,8 +3219,9 @@
         },
         {
           "id": 37,
-          "slug": "golden_fruit_l7",
-          "name": "Золотой плод",
+          "slug": "l2_bird_skull",
+          "name": "Череп птицы",
+          "image": "res://assets/items/l2_bird_skull.png",
           "position": [
             265,
             700
@@ -2921,8 +3229,9 @@
         },
         {
           "id": 38,
-          "slug": "golden_jungle_idol_l7",
-          "name": "Золотой идол джунглей",
+          "slug": "l2_sun_medallion",
+          "name": "Солнечный медальон",
+          "image": "res://assets/items/l2_sun_medallion.png",
           "position": [
             430,
             700
@@ -2930,8 +3239,9 @@
         },
         {
           "id": 39,
-          "slug": "hen_l7",
-          "name": "Курица",
+          "slug": "l2_monkey_statue",
+          "name": "Статуэтка обезьяны",
+          "image": "res://assets/items/l2_monkey_statue.png",
           "position": [
             595,
             700
@@ -2939,8 +3249,9 @@
         },
         {
           "id": 40,
-          "slug": "hibiscus_flower_l7",
-          "name": "Цветок гибискуса",
+          "slug": "l2_golden_fruit",
+          "name": "Золотой плод",
+          "image": "res://assets/items/l2_golden_fruit.png",
           "position": [
             760,
             700
@@ -2948,8 +3259,9 @@
         },
         {
           "id": 41,
-          "slug": "jungle_fern_l7",
-          "name": "Папоротник джунглей",
+          "slug": "l2_stone_sundial",
+          "name": "Каменные солнечные часы",
+          "image": "res://assets/items/l2_stone_sundial.png",
           "position": [
             925,
             700
@@ -2957,8 +3269,9 @@
         },
         {
           "id": 42,
-          "slug": "jungle_treasure_chest_l7",
-          "name": "Сундук джунглей",
+          "slug": "starfish",
+          "name": "Морская звезда",
+          "image": "res://assets/items/starfish.png",
           "position": [
             1090,
             700
@@ -2966,8 +3279,9 @@
         },
         {
           "id": 43,
-          "slug": "lifebuoy_red_l7",
-          "name": "Красный спасательный круг",
+          "slug": "conch",
+          "name": "Ракушка",
+          "image": "res://assets/items/conch.png",
           "position": [
             1255,
             700
@@ -2975,8 +3289,9 @@
         },
         {
           "id": 44,
-          "slug": "monkey_statue_l7",
-          "name": "Статуя обезьяны",
+          "slug": "key",
+          "name": "Золотой ключ",
+          "image": "res://assets/items/key.png",
           "position": [
             1420,
             700
@@ -3004,8 +3319,9 @@
       "items": [
         {
           "id": 0,
-          "slug": "green_crystal_l8",
+          "slug": "l2_green_crystal",
           "name": "Зелёный кристалл",
+          "image": "res://assets/items/l2_green_crystal.png",
           "position": [
             100,
             100
@@ -3013,8 +3329,9 @@
         },
         {
           "id": 1,
-          "slug": "ammonite_fossil_l8",
+          "slug": "l2_ammonite_fossil",
           "name": "Окаменелость аммонита",
+          "image": "res://assets/items/l2_ammonite_fossil.png",
           "position": [
             265,
             100
@@ -3022,8 +3339,9 @@
         },
         {
           "id": 2,
-          "slug": "stone_well_lantern_l8",
+          "slug": "l2_stone_well_lantern",
           "name": "Каменный фонарь",
+          "image": "res://assets/items/l2_stone_well_lantern.png",
           "position": [
             430,
             100
@@ -3031,8 +3349,9 @@
         },
         {
           "id": 3,
-          "slug": "clay_vase_l8",
+          "slug": "l2_clay_vase",
           "name": "Глиняная ваза",
+          "image": "res://assets/items/l2_clay_vase.png",
           "position": [
             595,
             100
@@ -3040,8 +3359,9 @@
         },
         {
           "id": 4,
-          "slug": "ancient_scroll_l8",
+          "slug": "l2_ancient_scroll",
           "name": "Древний свиток",
+          "image": "res://assets/items/l2_ancient_scroll.png",
           "position": [
             760,
             100
@@ -3049,8 +3369,9 @@
         },
         {
           "id": 5,
-          "slug": "carved_stone_tablet_l8",
-          "name": "Каменная табличка",
+          "slug": "l3_watering_can_yellow",
+          "name": "Жёлтая лейка",
+          "image": "res://assets/items/l3_watering_can_yellow.png",
           "position": [
             925,
             100
@@ -3058,8 +3379,9 @@
         },
         {
           "id": 6,
-          "slug": "bird_skull_l8",
-          "name": "Череп птицы",
+          "slug": "l3_scarecrow",
+          "name": "Пугало",
+          "image": "res://assets/items/l3_scarecrow.png",
           "position": [
             1090,
             100
@@ -3067,8 +3389,9 @@
         },
         {
           "id": 7,
-          "slug": "ceremonial_mask_l8",
-          "name": "Ритуальная маска",
+          "slug": "l2_tiki_totem",
+          "name": "Резной тотем",
+          "image": "res://assets/items/l2_tiki_totem.png",
           "position": [
             1255,
             100
@@ -3076,8 +3399,9 @@
         },
         {
           "id": 8,
-          "slug": "golden_beetle_l8",
-          "name": "Золотой жук",
+          "slug": "l2_expedition_book",
+          "name": "Дневник исследователя",
+          "image": "res://assets/items/l2_expedition_book.png",
           "position": [
             1420,
             100
@@ -3085,8 +3409,9 @@
         },
         {
           "id": 9,
-          "slug": "water_bucket_l8",
-          "name": "Ведро с водой",
+          "slug": "l2_sun_key",
+          "name": "Солнечный ключ",
+          "image": "res://assets/items/l2_sun_key.png",
           "position": [
             100,
             250
@@ -3094,8 +3419,9 @@
         },
         {
           "id": 10,
-          "slug": "coiled_rope_l8",
-          "name": "Свернутая верёвка",
+          "slug": "l2_golden_jungle_idol",
+          "name": "Золотой идол",
+          "image": "res://assets/items/l2_golden_jungle_idol.png",
           "position": [
             265,
             250
@@ -3103,8 +3429,9 @@
         },
         {
           "id": 11,
-          "slug": "hibiscus_flower_l8",
-          "name": "Цветок гибискуса",
+          "slug": "l2_ancient_compass",
+          "name": "Древний компас",
+          "image": "res://assets/items/l2_ancient_compass.png",
           "position": [
             430,
             250
@@ -3112,8 +3439,9 @@
         },
         {
           "id": 12,
-          "slug": "tiki_totem_l8",
-          "name": "Тотем",
+          "slug": "l2_carved_stone_tablet",
+          "name": "Каменная плита с символами",
+          "image": "res://assets/items/l2_carved_stone_tablet.png",
           "position": [
             595,
             250
@@ -3121,8 +3449,9 @@
         },
         {
           "id": 13,
-          "slug": "sun_medallion_l8",
-          "name": "Солнечный медальон",
+          "slug": "l2_ceremonial_mask",
+          "name": "Ритуальная маска",
+          "image": "res://assets/items/l2_ceremonial_mask.png",
           "position": [
             760,
             250
@@ -3130,17 +3459,19 @@
         },
         {
           "id": 14,
-          "slug": "pearl_l8",
+          "slug": "l2_overgrown_relic",
+          "name": "Заросший артефакт",
+          "image": "res://assets/items/l2_overgrown_relic.png",
           "position": [
             925,
             250
-          ],
-          "name": "Жемчужина"
+          ]
         },
         {
           "id": 15,
-          "slug": "adventurer_backpack_l8",
-          "name": "Рюкзак исследователя",
+          "slug": "l2_tribal_dagger",
+          "name": "Ритуальный кинжал",
+          "image": "res://assets/items/l2_tribal_dagger.png",
           "position": [
             1090,
             250
@@ -3148,8 +3479,9 @@
         },
         {
           "id": 16,
-          "slug": "anchor_blue_l8",
-          "name": "Синий якорь",
+          "slug": "l2_emerald_scarab",
+          "name": "Изумрудный скарабей",
+          "image": "res://assets/items/l2_emerald_scarab.png",
           "position": [
             1255,
             250
@@ -3157,8 +3489,9 @@
         },
         {
           "id": 17,
-          "slug": "ancient_compass_l8",
-          "name": "Древний компас",
+          "slug": "l2_golden_beetle",
+          "name": "Золотой жук",
+          "image": "res://assets/items/l2_golden_beetle.png",
           "position": [
             1420,
             250
@@ -3166,8 +3499,9 @@
         },
         {
           "id": 18,
-          "slug": "beach_ball_colorful_l8",
-          "name": "Пёстрый пляжный мяч",
+          "slug": "l2_hibiscus_flower",
+          "name": "Гибискус",
+          "image": "res://assets/items/l2_hibiscus_flower.png",
           "position": [
             100,
             400
@@ -3175,8 +3509,9 @@
         },
         {
           "id": 19,
-          "slug": "beach_chair_l8",
-          "name": "Пляжный шезлонг",
+          "slug": "l2_jungle_fern",
+          "name": "Папоротник",
+          "image": "res://assets/items/l2_jungle_fern.png",
           "position": [
             265,
             400
@@ -3184,8 +3519,9 @@
         },
         {
           "id": 20,
-          "slug": "beach_umbrella_l8",
-          "name": "Пляжный зонт",
+          "slug": "l2_tropical_fruit",
+          "name": "Тропический фрукт",
+          "image": "res://assets/items/l2_tropical_fruit.png",
           "position": [
             430,
             400
@@ -3193,8 +3529,9 @@
         },
         {
           "id": 21,
-          "slug": "binoculars_l8",
-          "name": "Бинокль",
+          "slug": "l2_wooden_flute",
+          "name": "Деревянная флейта",
+          "image": "res://assets/items/l2_wooden_flute.png",
           "position": [
             595,
             400
@@ -3202,8 +3539,9 @@
         },
         {
           "id": 22,
-          "slug": "carrots_l8",
-          "name": "Морковь",
+          "slug": "l2_coiled_rope",
+          "name": "Верёвка",
+          "image": "res://assets/items/l2_coiled_rope.png",
           "position": [
             760,
             400
@@ -3211,8 +3549,9 @@
         },
         {
           "id": 23,
-          "slug": "coconut_drink_l8",
-          "name": "Кокосовый напиток",
+          "slug": "l2_adventurer_backpack",
+          "name": "Рюкзак исследователя",
+          "image": "res://assets/items/l2_adventurer_backpack.png",
           "position": [
             925,
             400
@@ -3220,8 +3559,9 @@
         },
         {
           "id": 24,
-          "slug": "conch_shell_l8",
-          "name": "Морская раковина",
+          "slug": "l2_magnifying_glass",
+          "name": "Лупа",
+          "image": "res://assets/items/l2_magnifying_glass.png",
           "position": [
             1090,
             400
@@ -3229,8 +3569,9 @@
         },
         {
           "id": 25,
-          "slug": "crab_orange_l8",
-          "name": "Оранжевый краб",
+          "slug": "l2_jungle_treasure_chest",
+          "name": "Сундук с сокровищами",
+          "image": "res://assets/items/l2_jungle_treasure_chest.png",
           "position": [
             1255,
             400
@@ -3238,8 +3579,9 @@
         },
         {
           "id": 26,
-          "slug": "diving_mask_l8",
-          "name": "Маска для ныряния",
+          "slug": "l2_feather_headdress",
+          "name": "Головной убор из перьев",
+          "image": "res://assets/items/l2_feather_headdress.png",
           "position": [
             1420,
             400
@@ -3247,8 +3589,9 @@
         },
         {
           "id": 27,
-          "slug": "dolphin_l8",
-          "name": "Дельфин",
+          "slug": "l2_bird_skull",
+          "name": "Череп птицы",
+          "image": "res://assets/items/l2_bird_skull.png",
           "position": [
             100,
             550
@@ -3256,8 +3599,9 @@
         },
         {
           "id": 28,
-          "slug": "egg_basket_l8",
-          "name": "Корзина с яйцами",
+          "slug": "l2_sun_medallion",
+          "name": "Солнечный медальон",
+          "image": "res://assets/items/l2_sun_medallion.png",
           "position": [
             265,
             550
@@ -3265,8 +3609,9 @@
         },
         {
           "id": 29,
-          "slug": "emerald_scarab_l8",
-          "name": "Изумрудный скарабей",
+          "slug": "l2_monkey_statue",
+          "name": "Статуэтка обезьяны",
+          "image": "res://assets/items/l2_monkey_statue.png",
           "position": [
             430,
             550
@@ -3274,8 +3619,9 @@
         },
         {
           "id": 30,
-          "slug": "expedition_book_l8",
-          "name": "Дневник экспедиции",
+          "slug": "l2_golden_fruit",
+          "name": "Золотой плод",
+          "image": "res://assets/items/l2_golden_fruit.png",
           "position": [
             595,
             550
@@ -3283,8 +3629,9 @@
         },
         {
           "id": 31,
-          "slug": "feather_headdress_l8",
-          "name": "Головной убор из перьев",
+          "slug": "l2_stone_sundial",
+          "name": "Каменные солнечные часы",
+          "image": "res://assets/items/l2_stone_sundial.png",
           "position": [
             760,
             550
@@ -3292,8 +3639,9 @@
         },
         {
           "id": 32,
-          "slug": "flip_flops_l8",
-          "name": "Шлёпанцы",
+          "slug": "starfish",
+          "name": "Морская звезда",
+          "image": "res://assets/items/starfish.png",
           "position": [
             925,
             550
@@ -3301,8 +3649,9 @@
         },
         {
           "id": 33,
-          "slug": "garden_fence_l8",
-          "name": "Садовый забор",
+          "slug": "conch",
+          "name": "Ракушка",
+          "image": "res://assets/items/conch.png",
           "position": [
             1090,
             550
@@ -3310,8 +3659,9 @@
         },
         {
           "id": 34,
-          "slug": "garden_gloves_l8",
-          "name": "Садовые перчатки",
+          "slug": "key",
+          "name": "Золотой ключ",
+          "image": "res://assets/items/key.png",
           "position": [
             1255,
             550
@@ -3319,8 +3669,9 @@
         },
         {
           "id": 35,
-          "slug": "garden_shovel_l8",
-          "name": "Садовая лопата",
+          "slug": "crab",
+          "name": "Краб",
+          "image": "res://assets/items/crab.png",
           "position": [
             1420,
             550
@@ -3328,8 +3679,9 @@
         },
         {
           "id": 36,
-          "slug": "golden_fruit_l8",
-          "name": "Золотой плод",
+          "slug": "pineapple",
+          "name": "Ананас",
+          "image": "res://assets/items/pineapple.png",
           "position": [
             100,
             700
@@ -3337,8 +3689,9 @@
         },
         {
           "id": 37,
-          "slug": "golden_jungle_idol_l8",
-          "name": "Золотой идол джунглей",
+          "slug": "message_bottle",
+          "name": "Бутылка с посланием",
+          "image": "res://assets/items/message_bottle.png",
           "position": [
             265,
             700
@@ -3346,8 +3699,9 @@
         },
         {
           "id": 38,
-          "slug": "hen_l8",
-          "name": "Курица",
+          "slug": "apple",
+          "name": "Яблоко",
+          "image": "res://assets/items/apple.png",
           "position": [
             430,
             700
@@ -3355,8 +3709,9 @@
         },
         {
           "id": 39,
-          "slug": "jungle_fern_l8",
-          "name": "Папоротник джунглей",
+          "slug": "parrot",
+          "name": "Попугай",
+          "image": "res://assets/items/parrot.png",
           "position": [
             595,
             700
@@ -3364,8 +3719,9 @@
         },
         {
           "id": 40,
-          "slug": "jungle_treasure_chest_l8",
-          "name": "Сундук джунглей",
+          "slug": "lifebuoy",
+          "name": "Спасательный круг",
+          "image": "res://assets/items/lifebuoy.png",
           "position": [
             760,
             700
@@ -3373,8 +3729,9 @@
         },
         {
           "id": 41,
-          "slug": "lifebuoy_red_l8",
-          "name": "Красный спасательный круг",
+          "slug": "treasure_map",
+          "name": "Карта сокровищ",
+          "image": "res://assets/items/treasure_map.png",
           "position": [
             925,
             700
@@ -3382,8 +3739,9 @@
         },
         {
           "id": 42,
-          "slug": "lighthouse_l8",
-          "name": "Маяк",
+          "slug": "compass",
+          "name": "Компас",
+          "image": "res://assets/items/compass.png",
           "position": [
             1090,
             700
@@ -3391,8 +3749,9 @@
         },
         {
           "id": 43,
-          "slug": "magnifying_glass_l8",
-          "name": "Лупа",
+          "slug": "butterfly",
+          "name": "Бабочка",
+          "image": "res://assets/items/butterfly.png",
           "position": [
             1255,
             700
@@ -3400,8 +3759,9 @@
         },
         {
           "id": 44,
-          "slug": "monkey_statue_l8",
-          "name": "Статуя обезьяны",
+          "slug": "fish",
+          "name": "Рыбка",
+          "image": "res://assets/items/fish.png",
           "position": [
             1420,
             700
@@ -3419,18 +3779,19 @@
       "scene": "lost_city",
       "targets": [
         "Ритуальная маска",
-        "Каменная табличка",
         "Каменные солнечные часы",
-        "Тотем",
-        "Статуя обезьяны"
+        "Заросший артефакт",
+        "Ритуальный кинжал",
+        "Изумрудный скарабей"
       ],
       "transition": "Все пути сходятся у последнего маяка.",
       "background_path": "res://assets/levels/lost_city.svg",
       "items": [
         {
           "id": 0,
-          "slug": "ceremonial_mask_l9",
+          "slug": "l2_ceremonial_mask",
           "name": "Ритуальная маска",
+          "image": "res://assets/items/l2_ceremonial_mask.png",
           "position": [
             100,
             100
@@ -3438,8 +3799,9 @@
         },
         {
           "id": 1,
-          "slug": "carved_stone_tablet_l9",
-          "name": "Каменная табличка",
+          "slug": "l2_stone_sundial",
+          "name": "Каменные солнечные часы",
+          "image": "res://assets/items/l2_stone_sundial.png",
           "position": [
             265,
             100
@@ -3447,8 +3809,9 @@
         },
         {
           "id": 2,
-          "slug": "stone_sundial_l9",
-          "name": "Каменные солнечные часы",
+          "slug": "l2_overgrown_relic",
+          "name": "Заросший артефакт",
+          "image": "res://assets/items/l2_overgrown_relic.png",
           "position": [
             430,
             100
@@ -3456,8 +3819,9 @@
         },
         {
           "id": 3,
-          "slug": "tiki_totem_l9",
-          "name": "Тотем",
+          "slug": "l2_tribal_dagger",
+          "name": "Ритуальный кинжал",
+          "image": "res://assets/items/l2_tribal_dagger.png",
           "position": [
             595,
             100
@@ -3465,8 +3829,9 @@
         },
         {
           "id": 4,
-          "slug": "monkey_statue_l9",
-          "name": "Статуя обезьяны",
+          "slug": "l2_emerald_scarab",
+          "name": "Изумрудный скарабей",
+          "image": "res://assets/items/l2_emerald_scarab.png",
           "position": [
             760,
             100
@@ -3474,8 +3839,9 @@
         },
         {
           "id": 5,
-          "slug": "clay_vase_l9",
-          "name": "Глиняная ваза",
+          "slug": "l2_golden_beetle",
+          "name": "Золотой жук",
+          "image": "res://assets/items/l2_golden_beetle.png",
           "position": [
             925,
             100
@@ -3483,8 +3849,9 @@
         },
         {
           "id": 6,
-          "slug": "golden_jungle_idol_l9",
-          "name": "Золотой идол джунглей",
+          "slug": "l2_hibiscus_flower",
+          "name": "Гибискус",
+          "image": "res://assets/items/l2_hibiscus_flower.png",
           "position": [
             1090,
             100
@@ -3492,8 +3859,9 @@
         },
         {
           "id": 7,
-          "slug": "emerald_scarab_l9",
-          "name": "Изумрудный скарабей",
+          "slug": "l2_jungle_fern",
+          "name": "Папоротник",
+          "image": "res://assets/items/l2_jungle_fern.png",
           "position": [
             1255,
             100
@@ -3501,8 +3869,9 @@
         },
         {
           "id": 8,
-          "slug": "ancient_scroll_l9",
-          "name": "Древний свиток",
+          "slug": "l2_tropical_fruit",
+          "name": "Тропический фрукт",
+          "image": "res://assets/items/l2_tropical_fruit.png",
           "position": [
             1420,
             100
@@ -3510,8 +3879,9 @@
         },
         {
           "id": 9,
-          "slug": "tribal_dagger_l9",
-          "name": "Племенной кинжал",
+          "slug": "l2_wooden_flute",
+          "name": "Деревянная флейта",
+          "image": "res://assets/items/l2_wooden_flute.png",
           "position": [
             100,
             250
@@ -3519,8 +3889,9 @@
         },
         {
           "id": 10,
-          "slug": "feather_headdress_l9",
-          "name": "Головной убор из перьев",
+          "slug": "l2_clay_vase",
+          "name": "Глиняная ваза",
+          "image": "res://assets/items/l2_clay_vase.png",
           "position": [
             265,
             250
@@ -3528,8 +3899,9 @@
         },
         {
           "id": 11,
-          "slug": "sun_key_l9",
-          "name": "Солнечный ключ",
+          "slug": "l2_coiled_rope",
+          "name": "Верёвка",
+          "image": "res://assets/items/l2_coiled_rope.png",
           "position": [
             430,
             250
@@ -3537,8 +3909,9 @@
         },
         {
           "id": 12,
-          "slug": "golden_fruit_l9",
-          "name": "Золотой плод",
+          "slug": "l2_adventurer_backpack",
+          "name": "Рюкзак исследователя",
+          "image": "res://assets/items/l2_adventurer_backpack.png",
           "position": [
             595,
             250
@@ -3546,8 +3919,9 @@
         },
         {
           "id": 13,
-          "slug": "bird_skull_l9",
-          "name": "Череп птицы",
+          "slug": "l2_magnifying_glass",
+          "name": "Лупа",
+          "image": "res://assets/items/l2_magnifying_glass.png",
           "position": [
             760,
             250
@@ -3555,8 +3929,9 @@
         },
         {
           "id": 14,
-          "slug": "overgrown_relic_l9",
-          "name": "Заросшая реликвия",
+          "slug": "l2_ancient_scroll",
+          "name": "Древний свиток",
+          "image": "res://assets/items/l2_ancient_scroll.png",
           "position": [
             925,
             250
@@ -3564,8 +3939,9 @@
         },
         {
           "id": 15,
-          "slug": "adventurer_backpack_l9",
-          "name": "Рюкзак исследователя",
+          "slug": "l2_ammonite_fossil",
+          "name": "Окаменелость аммонита",
+          "image": "res://assets/items/l2_ammonite_fossil.png",
           "position": [
             1090,
             250
@@ -3573,8 +3949,9 @@
         },
         {
           "id": 16,
-          "slug": "ammonite_fossil_l9",
-          "name": "Окаменелость аммонита",
+          "slug": "l2_stone_well_lantern",
+          "name": "Каменный фонарь",
+          "image": "res://assets/items/l2_stone_well_lantern.png",
           "position": [
             1255,
             250
@@ -3582,8 +3959,9 @@
         },
         {
           "id": 17,
-          "slug": "anchor_blue_l9",
-          "name": "Синий якорь",
+          "slug": "l2_green_crystal",
+          "name": "Зелёный кристалл",
+          "image": "res://assets/items/l2_green_crystal.png",
           "position": [
             1420,
             250
@@ -3591,8 +3969,9 @@
         },
         {
           "id": 18,
-          "slug": "ancient_compass_l9",
-          "name": "Древний компас",
+          "slug": "l2_jungle_treasure_chest",
+          "name": "Сундук с сокровищами",
+          "image": "res://assets/items/l2_jungle_treasure_chest.png",
           "position": [
             100,
             400
@@ -3600,8 +3979,9 @@
         },
         {
           "id": 19,
-          "slug": "beach_ball_colorful_l9",
-          "name": "Пёстрый пляжный мяч",
+          "slug": "l2_feather_headdress",
+          "name": "Головной убор из перьев",
+          "image": "res://assets/items/l2_feather_headdress.png",
           "position": [
             265,
             400
@@ -3609,8 +3989,9 @@
         },
         {
           "id": 20,
-          "slug": "beach_chair_l9",
-          "name": "Пляжный шезлонг",
+          "slug": "l2_bird_skull",
+          "name": "Череп птицы",
+          "image": "res://assets/items/l2_bird_skull.png",
           "position": [
             430,
             400
@@ -3618,8 +3999,9 @@
         },
         {
           "id": 21,
-          "slug": "beach_umbrella_l9",
-          "name": "Пляжный зонт",
+          "slug": "l2_sun_medallion",
+          "name": "Солнечный медальон",
+          "image": "res://assets/items/l2_sun_medallion.png",
           "position": [
             595,
             400
@@ -3627,8 +4009,9 @@
         },
         {
           "id": 22,
-          "slug": "binoculars_l9",
-          "name": "Бинокль",
+          "slug": "l2_monkey_statue",
+          "name": "Статуэтка обезьяны",
+          "image": "res://assets/items/l2_monkey_statue.png",
           "position": [
             760,
             400
@@ -3636,8 +4019,9 @@
         },
         {
           "id": 23,
-          "slug": "carrots_l9",
-          "name": "Морковь",
+          "slug": "l2_golden_fruit",
+          "name": "Золотой плод",
+          "image": "res://assets/items/l2_golden_fruit.png",
           "position": [
             925,
             400
@@ -3645,8 +4029,9 @@
         },
         {
           "id": 24,
-          "slug": "coconut_drink_l9",
-          "name": "Кокосовый напиток",
+          "slug": "starfish",
+          "name": "Морская звезда",
+          "image": "res://assets/items/starfish.png",
           "position": [
             1090,
             400
@@ -3654,8 +4039,9 @@
         },
         {
           "id": 25,
-          "slug": "coiled_rope_l9",
-          "name": "Свернутая верёвка",
+          "slug": "conch",
+          "name": "Ракушка",
+          "image": "res://assets/items/conch.png",
           "position": [
             1255,
             400
@@ -3663,8 +4049,9 @@
         },
         {
           "id": 26,
-          "slug": "conch_shell_l9",
-          "name": "Морская раковина",
+          "slug": "key",
+          "name": "Золотой ключ",
+          "image": "res://assets/items/key.png",
           "position": [
             1420,
             400
@@ -3672,8 +4059,9 @@
         },
         {
           "id": 27,
-          "slug": "crab_orange_l9",
-          "name": "Оранжевый краб",
+          "slug": "crab",
+          "name": "Краб",
+          "image": "res://assets/items/crab.png",
           "position": [
             100,
             550
@@ -3681,8 +4069,9 @@
         },
         {
           "id": 28,
-          "slug": "diving_mask_l9",
-          "name": "Маска для ныряния",
+          "slug": "pineapple",
+          "name": "Ананас",
+          "image": "res://assets/items/pineapple.png",
           "position": [
             265,
             550
@@ -3690,8 +4079,9 @@
         },
         {
           "id": 29,
-          "slug": "dolphin_l9",
-          "name": "Дельфин",
+          "slug": "message_bottle",
+          "name": "Бутылка с посланием",
+          "image": "res://assets/items/message_bottle.png",
           "position": [
             430,
             550
@@ -3699,8 +4089,9 @@
         },
         {
           "id": 30,
-          "slug": "egg_basket_l9",
-          "name": "Корзина с яйцами",
+          "slug": "apple",
+          "name": "Яблоко",
+          "image": "res://assets/items/apple.png",
           "position": [
             595,
             550
@@ -3708,8 +4099,9 @@
         },
         {
           "id": 31,
-          "slug": "expedition_book_l9",
-          "name": "Дневник экспедиции",
+          "slug": "parrot",
+          "name": "Попугай",
+          "image": "res://assets/items/parrot.png",
           "position": [
             760,
             550
@@ -3717,8 +4109,9 @@
         },
         {
           "id": 32,
-          "slug": "flip_flops_l9",
-          "name": "Шлёпанцы",
+          "slug": "lifebuoy",
+          "name": "Спасательный круг",
+          "image": "res://assets/items/lifebuoy.png",
           "position": [
             925,
             550
@@ -3726,8 +4119,9 @@
         },
         {
           "id": 33,
-          "slug": "garden_fence_l9",
-          "name": "Садовый забор",
+          "slug": "treasure_map",
+          "name": "Карта сокровищ",
+          "image": "res://assets/items/treasure_map.png",
           "position": [
             1090,
             550
@@ -3735,8 +4129,9 @@
         },
         {
           "id": 34,
-          "slug": "garden_gloves_l9",
-          "name": "Садовые перчатки",
+          "slug": "compass",
+          "name": "Компас",
+          "image": "res://assets/items/compass.png",
           "position": [
             1255,
             550
@@ -3744,8 +4139,9 @@
         },
         {
           "id": 35,
-          "slug": "garden_shovel_l9",
-          "name": "Садовая лопата",
+          "slug": "butterfly",
+          "name": "Бабочка",
+          "image": "res://assets/items/butterfly.png",
           "position": [
             1420,
             550
@@ -3753,8 +4149,9 @@
         },
         {
           "id": 36,
-          "slug": "golden_beetle_l9",
-          "name": "Золотой жук",
+          "slug": "fish",
+          "name": "Рыбка",
+          "image": "res://assets/items/fish.png",
           "position": [
             100,
             700
@@ -3762,8 +4159,9 @@
         },
         {
           "id": 37,
-          "slug": "green_crystal_l9",
-          "name": "Зелёный кристалл",
+          "slug": "anchor",
+          "name": "Якорь",
+          "image": "res://assets/items/anchor.png",
           "position": [
             265,
             700
@@ -3771,8 +4169,9 @@
         },
         {
           "id": 38,
-          "slug": "hen_l9",
-          "name": "Курица",
+          "slug": "coconut",
+          "name": "Кокос",
+          "image": "res://assets/items/coconut.png",
           "position": [
             430,
             700
@@ -3780,8 +4179,9 @@
         },
         {
           "id": 39,
-          "slug": "hibiscus_flower_l9",
-          "name": "Цветок гибискуса",
+          "slug": "duck",
+          "name": "Уточка",
+          "image": "res://assets/items/duck.png",
           "position": [
             595,
             700
@@ -3789,8 +4189,9 @@
         },
         {
           "id": 40,
-          "slug": "jungle_fern_l9",
-          "name": "Папоротник джунглей",
+          "slug": "turtle",
+          "name": "Черепаха",
+          "image": "res://assets/items/turtle.png",
           "position": [
             760,
             700
@@ -3798,8 +4199,9 @@
         },
         {
           "id": 41,
-          "slug": "jungle_treasure_chest_l9",
-          "name": "Сундук джунглей",
+          "slug": "pearl",
+          "name": "Жемчужина",
+          "image": "res://assets/items/pearl.png",
           "position": [
             925,
             700
@@ -3807,8 +4209,9 @@
         },
         {
           "id": 42,
-          "slug": "lifebuoy_red_l9",
-          "name": "Красный спасательный круг",
+          "slug": "eyepatch",
+          "name": "Пиратская повязка",
+          "image": "res://assets/items/eyepatch.png",
           "position": [
             1090,
             700
@@ -3816,8 +4219,9 @@
         },
         {
           "id": 43,
-          "slug": "lighthouse_l9",
-          "name": "Маяк",
+          "slug": "telescope",
+          "name": "Подзорная труба",
+          "image": "res://assets/items/telescope.png",
           "position": [
             1255,
             700
@@ -3825,8 +4229,9 @@
         },
         {
           "id": 44,
-          "slug": "magnifying_glass_l9",
-          "name": "Лупа",
+          "slug": "hibiscus",
+          "name": "Гибискус",
+          "image": "res://assets/items/hibiscus.png",
           "position": [
             1420,
             700
@@ -3844,18 +4249,19 @@
       "scene": "final_lighthouse",
       "targets": [
         "Маяк",
-        "Свернутая верёвка",
         "Синий якорь",
         "Бинокль",
-        "Древний компас"
+        "Древний компас",
+        "Верёвка"
       ],
       "transition": "Финал истории: архипелаг снова открыт миру.",
       "background_path": "res://assets/levels/final_lighthouse.svg",
       "items": [
         {
           "id": 0,
-          "slug": "lighthouse_l10",
+          "slug": "l3_lighthouse",
           "name": "Маяк",
+          "image": "res://assets/items/l3_lighthouse.png",
           "position": [
             100,
             100
@@ -3863,8 +4269,9 @@
         },
         {
           "id": 1,
-          "slug": "coiled_rope_l10",
-          "name": "Свернутая верёвка",
+          "slug": "l3_anchor_blue",
+          "name": "Синий якорь",
+          "image": "res://assets/items/l3_anchor_blue.png",
           "position": [
             265,
             100
@@ -3872,8 +4279,9 @@
         },
         {
           "id": 2,
-          "slug": "anchor_blue_l10",
-          "name": "Синий якорь",
+          "slug": "l3_binoculars",
+          "name": "Бинокль",
+          "image": "res://assets/items/l3_binoculars.png",
           "position": [
             430,
             100
@@ -3881,8 +4289,9 @@
         },
         {
           "id": 3,
-          "slug": "binoculars_l10",
-          "name": "Бинокль",
+          "slug": "l2_ancient_compass",
+          "name": "Древний компас",
+          "image": "res://assets/items/l2_ancient_compass.png",
           "position": [
             595,
             100
@@ -3890,8 +4299,9 @@
         },
         {
           "id": 4,
-          "slug": "ancient_compass_l10",
-          "name": "Древний компас",
+          "slug": "l2_coiled_rope",
+          "name": "Верёвка",
+          "image": "res://assets/items/l2_coiled_rope.png",
           "position": [
             760,
             100
@@ -3899,8 +4309,9 @@
         },
         {
           "id": 5,
-          "slug": "stone_well_lantern_l10",
-          "name": "Каменный фонарь",
+          "slug": "l2_adventurer_backpack",
+          "name": "Рюкзак исследователя",
+          "image": "res://assets/items/l2_adventurer_backpack.png",
           "position": [
             925,
             100
@@ -3908,8 +4319,9 @@
         },
         {
           "id": 6,
-          "slug": "lifebuoy_red_l10",
-          "name": "Красный спасательный круг",
+          "slug": "l2_magnifying_glass",
+          "name": "Лупа",
+          "image": "res://assets/items/l2_magnifying_glass.png",
           "position": [
             1090,
             100
@@ -3917,8 +4329,9 @@
         },
         {
           "id": 7,
-          "slug": "seagull_l10",
-          "name": "Чайка",
+          "slug": "l2_ancient_scroll",
+          "name": "Древний свиток",
+          "image": "res://assets/items/l2_ancient_scroll.png",
           "position": [
             1255,
             100
@@ -3926,8 +4339,9 @@
         },
         {
           "id": 8,
-          "slug": "wooden_flute_l10",
-          "name": "Деревянная флейта",
+          "slug": "l2_ammonite_fossil",
+          "name": "Окаменелость аммонита",
+          "image": "res://assets/items/l2_ammonite_fossil.png",
           "position": [
             1420,
             100
@@ -3935,8 +4349,9 @@
         },
         {
           "id": 9,
-          "slug": "sun_medallion_l10",
-          "name": "Солнечный медальон",
+          "slug": "l2_stone_well_lantern",
+          "name": "Каменный фонарь",
+          "image": "res://assets/items/l2_stone_well_lantern.png",
           "position": [
             100,
             250
@@ -3944,8 +4359,9 @@
         },
         {
           "id": 10,
-          "slug": "adventurer_backpack_l10",
-          "name": "Рюкзак исследователя",
+          "slug": "l2_green_crystal",
+          "name": "Зелёный кристалл",
+          "image": "res://assets/items/l2_green_crystal.png",
           "position": [
             265,
             250
@@ -3953,8 +4369,9 @@
         },
         {
           "id": 11,
-          "slug": "expedition_book_l10",
-          "name": "Дневник экспедиции",
+          "slug": "l2_jungle_treasure_chest",
+          "name": "Сундук с сокровищами",
+          "image": "res://assets/items/l2_jungle_treasure_chest.png",
           "position": [
             430,
             250
@@ -3962,8 +4379,9 @@
         },
         {
           "id": 12,
-          "slug": "green_crystal_l10",
-          "name": "Зелёный кристалл",
+          "slug": "l2_feather_headdress",
+          "name": "Головной убор из перьев",
+          "image": "res://assets/items/l2_feather_headdress.png",
           "position": [
             595,
             250
@@ -3971,8 +4389,9 @@
         },
         {
           "id": 13,
-          "slug": "water_bucket_l10",
-          "name": "Ведро с водой",
+          "slug": "l2_bird_skull",
+          "name": "Череп птицы",
+          "image": "res://assets/items/l2_bird_skull.png",
           "position": [
             760,
             250
@@ -3980,8 +4399,9 @@
         },
         {
           "id": 14,
-          "slug": "starfish_red_l10",
-          "name": "Красная морская звезда",
+          "slug": "l2_sun_medallion",
+          "name": "Солнечный медальон",
+          "image": "res://assets/items/l2_sun_medallion.png",
           "position": [
             925,
             250
@@ -3989,8 +4409,9 @@
         },
         {
           "id": 15,
-          "slug": "ammonite_fossil_l10",
-          "name": "Окаменелость аммонита",
+          "slug": "l2_monkey_statue",
+          "name": "Статуэтка обезьяны",
+          "image": "res://assets/items/l2_monkey_statue.png",
           "position": [
             1090,
             250
@@ -3998,8 +4419,9 @@
         },
         {
           "id": 16,
-          "slug": "ancient_scroll_l10",
-          "name": "Древний свиток",
+          "slug": "l2_golden_fruit",
+          "name": "Золотой плод",
+          "image": "res://assets/items/l2_golden_fruit.png",
           "position": [
             1255,
             250
@@ -4007,8 +4429,9 @@
         },
         {
           "id": 17,
-          "slug": "beach_ball_colorful_l10",
-          "name": "Пёстрый пляжный мяч",
+          "slug": "l2_stone_sundial",
+          "name": "Каменные солнечные часы",
+          "image": "res://assets/items/l2_stone_sundial.png",
           "position": [
             1420,
             250
@@ -4016,8 +4439,9 @@
         },
         {
           "id": 18,
-          "slug": "beach_chair_l10",
-          "name": "Пляжный шезлонг",
+          "slug": "starfish",
+          "name": "Морская звезда",
+          "image": "res://assets/items/starfish.png",
           "position": [
             100,
             400
@@ -4025,8 +4449,9 @@
         },
         {
           "id": 19,
-          "slug": "beach_umbrella_l10",
-          "name": "Пляжный зонт",
+          "slug": "conch",
+          "name": "Ракушка",
+          "image": "res://assets/items/conch.png",
           "position": [
             265,
             400
@@ -4034,8 +4459,9 @@
         },
         {
           "id": 20,
-          "slug": "bird_skull_l10",
-          "name": "Череп птицы",
+          "slug": "key",
+          "name": "Золотой ключ",
+          "image": "res://assets/items/key.png",
           "position": [
             430,
             400
@@ -4043,8 +4469,9 @@
         },
         {
           "id": 21,
-          "slug": "carrots_l10",
-          "name": "Морковь",
+          "slug": "crab",
+          "name": "Краб",
+          "image": "res://assets/items/crab.png",
           "position": [
             595,
             400
@@ -4052,8 +4479,9 @@
         },
         {
           "id": 22,
-          "slug": "carved_stone_tablet_l10",
-          "name": "Каменная табличка",
+          "slug": "pineapple",
+          "name": "Ананас",
+          "image": "res://assets/items/pineapple.png",
           "position": [
             760,
             400
@@ -4061,8 +4489,9 @@
         },
         {
           "id": 23,
-          "slug": "ceremonial_mask_l10",
-          "name": "Ритуальная маска",
+          "slug": "message_bottle",
+          "name": "Бутылка с посланием",
+          "image": "res://assets/items/message_bottle.png",
           "position": [
             925,
             400
@@ -4070,8 +4499,9 @@
         },
         {
           "id": 24,
-          "slug": "clay_vase_l10",
-          "name": "Глиняная ваза",
+          "slug": "apple",
+          "name": "Яблоко",
+          "image": "res://assets/items/apple.png",
           "position": [
             1090,
             400
@@ -4079,8 +4509,9 @@
         },
         {
           "id": 25,
-          "slug": "coconut_drink_l10",
-          "name": "Кокосовый напиток",
+          "slug": "parrot",
+          "name": "Попугай",
+          "image": "res://assets/items/parrot.png",
           "position": [
             1255,
             400
@@ -4088,8 +4519,9 @@
         },
         {
           "id": 26,
-          "slug": "conch_shell_l10",
-          "name": "Морская раковина",
+          "slug": "lifebuoy",
+          "name": "Спасательный круг",
+          "image": "res://assets/items/lifebuoy.png",
           "position": [
             1420,
             400
@@ -4097,8 +4529,9 @@
         },
         {
           "id": 27,
-          "slug": "crab_orange_l10",
-          "name": "Оранжевый краб",
+          "slug": "treasure_map",
+          "name": "Карта сокровищ",
+          "image": "res://assets/items/treasure_map.png",
           "position": [
             100,
             550
@@ -4106,8 +4539,9 @@
         },
         {
           "id": 28,
-          "slug": "diving_mask_l10",
-          "name": "Маска для ныряния",
+          "slug": "compass",
+          "name": "Компас",
+          "image": "res://assets/items/compass.png",
           "position": [
             265,
             550
@@ -4115,8 +4549,9 @@
         },
         {
           "id": 29,
-          "slug": "dolphin_l10",
-          "name": "Дельфин",
+          "slug": "butterfly",
+          "name": "Бабочка",
+          "image": "res://assets/items/butterfly.png",
           "position": [
             430,
             550
@@ -4124,8 +4559,9 @@
         },
         {
           "id": 30,
-          "slug": "egg_basket_l10",
-          "name": "Корзина с яйцами",
+          "slug": "fish",
+          "name": "Рыбка",
+          "image": "res://assets/items/fish.png",
           "position": [
             595,
             550
@@ -4133,8 +4569,9 @@
         },
         {
           "id": 31,
-          "slug": "emerald_scarab_l10",
-          "name": "Изумрудный скарабей",
+          "slug": "anchor",
+          "name": "Якорь",
+          "image": "res://assets/items/anchor.png",
           "position": [
             760,
             550
@@ -4142,8 +4579,9 @@
         },
         {
           "id": 32,
-          "slug": "feather_headdress_l10",
-          "name": "Головной убор из перьев",
+          "slug": "coconut",
+          "name": "Кокос",
+          "image": "res://assets/items/coconut.png",
           "position": [
             925,
             550
@@ -4151,8 +4589,9 @@
         },
         {
           "id": 33,
-          "slug": "flip_flops_l10",
-          "name": "Шлёпанцы",
+          "slug": "duck",
+          "name": "Уточка",
+          "image": "res://assets/items/duck.png",
           "position": [
             1090,
             550
@@ -4160,8 +4599,9 @@
         },
         {
           "id": 34,
-          "slug": "garden_fence_l10",
-          "name": "Садовый забор",
+          "slug": "turtle",
+          "name": "Черепаха",
+          "image": "res://assets/items/turtle.png",
           "position": [
             1255,
             550
@@ -4169,8 +4609,9 @@
         },
         {
           "id": 35,
-          "slug": "garden_gloves_l10",
-          "name": "Садовые перчатки",
+          "slug": "pearl",
+          "name": "Жемчужина",
+          "image": "res://assets/items/pearl.png",
           "position": [
             1420,
             550
@@ -4178,8 +4619,9 @@
         },
         {
           "id": 36,
-          "slug": "garden_shovel_l10",
-          "name": "Садовая лопата",
+          "slug": "eyepatch",
+          "name": "Пиратская повязка",
+          "image": "res://assets/items/eyepatch.png",
           "position": [
             100,
             700
@@ -4187,8 +4629,9 @@
         },
         {
           "id": 37,
-          "slug": "golden_beetle_l10",
-          "name": "Золотой жук",
+          "slug": "telescope",
+          "name": "Подзорная труба",
+          "image": "res://assets/items/telescope.png",
           "position": [
             265,
             700
@@ -4196,8 +4639,9 @@
         },
         {
           "id": 38,
-          "slug": "golden_fruit_l10",
-          "name": "Золотой плод",
+          "slug": "hibiscus",
+          "name": "Гибискус",
+          "image": "res://assets/items/hibiscus.png",
           "position": [
             430,
             700
@@ -4205,8 +4649,9 @@
         },
         {
           "id": 39,
-          "slug": "golden_jungle_idol_l10",
-          "name": "Золотой идол джунглей",
+          "slug": "flipflop",
+          "name": "Шлёпанец",
+          "image": "res://assets/items/flipflop.png",
           "position": [
             595,
             700
@@ -4214,8 +4659,9 @@
         },
         {
           "id": 40,
-          "slug": "hen_l10",
-          "name": "Курица",
+          "slug": "sailboat",
+          "name": "Парусник",
+          "image": "res://assets/items/sailboat.png",
           "position": [
             760,
             700
@@ -4223,8 +4669,9 @@
         },
         {
           "id": 41,
-          "slug": "hibiscus_flower_l10",
-          "name": "Цветок гибискуса",
+          "slug": "coin",
+          "name": "Золотая монета",
+          "image": "res://assets/items/coin.png",
           "position": [
             925,
             700
@@ -4232,8 +4679,9 @@
         },
         {
           "id": 42,
-          "slug": "jungle_fern_l10",
-          "name": "Папоротник джунглей",
+          "slug": "bucket",
+          "name": "Ведёрко",
+          "image": "res://assets/items/bucket.png",
           "position": [
             1090,
             700
@@ -4241,8 +4689,9 @@
         },
         {
           "id": 43,
-          "slug": "jungle_treasure_chest_l10",
-          "name": "Сундук джунглей",
+          "slug": "shovel",
+          "name": "Лопатка",
+          "image": "res://assets/items/shovel.png",
           "position": [
             1255,
             700
@@ -4250,8 +4699,9 @@
         },
         {
           "id": 44,
-          "slug": "magnifying_glass_l10",
-          "name": "Лупа",
+          "slug": "scallop",
+          "name": "Морской гребешок",
+          "image": "res://assets/items/scallop.png",
           "position": [
             1420,
             700
