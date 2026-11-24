@@ -1,42 +1,11 @@
 extends Node2D
 
 const WORLD_SIZE := Vector2(1536, 864)
-const ITEM_COUNT := 30
-const BAR_HEIGHT := 116.0
-const MIN_ZOOM := 1.0
-const MAX_ZOOM := 2.6
-const ITEM_DATA := [
-	{"id":0,"slug":"starfish","name":"Морская звезда","pos":Vector2(95,190)},
-	{"id":1,"slug":"conch","name":"Ракушка","pos":Vector2(470,430)},
-	{"id":2,"slug":"key","name":"Золотой ключ","pos":Vector2(890,635)},
-	{"id":3,"slug":"crab","name":"Краб","pos":Vector2(735,725)},
-	{"id":4,"slug":"pineapple","name":"Ананас","pos":Vector2(1185,205)},
-	{"id":5,"slug":"message_bottle","name":"Бутылка с посланием","pos":Vector2(1360,430)},
-	{"id":6,"slug":"apple","name":"Яблоко","pos":Vector2(330,580)},
-	{"id":7,"slug":"parrot","name":"Попугай","pos":Vector2(270,320)},
-	{"id":8,"slug":"lifebuoy","name":"Спасательный круг","pos":Vector2(600,440)},
-	{"id":9,"slug":"treasure_map","name":"Карта сокровищ","pos":Vector2(1050,365)},
-	{"id":10,"slug":"compass","name":"Компас","pos":Vector2(980,580)},
-	{"id":11,"slug":"butterfly","name":"Бабочка","pos":Vector2(75,520)},
-	{"id":12,"slug":"fish","name":"Рыбка","pos":Vector2(820,500)},
-	{"id":13,"slug":"anchor","name":"Якорь","pos":Vector2(1260,580)},
-	{"id":14,"slug":"coconut","name":"Кокос","pos":Vector2(190,700)},
-	{"id":15,"slug":"duck","name":"Уточка","pos":Vector2(1100,690)},
-	{"id":16,"slug":"turtle","name":"Черепаха","pos":Vector2(1420,720)},
-	{"id":17,"slug":"pearl","name":"Жемчужина","pos":Vector2(930,780)},
-	{"id":18,"slug":"eyepatch","name":"Пиратская повязка","pos":Vector2(530,250)},
-	{"id":19,"slug":"telescope","name":"Подзорная труба","pos":Vector2(1240,300)},
-	{"id":20,"slug":"hibiscus","name":"Гибискус","pos":Vector2(130,740)},
-	{"id":21,"slug":"flipflop","name":"Шлёпанец","pos":Vector2(700,560)},
-	{"id":22,"slug":"sailboat","name":"Парусник","pos":Vector2(1450,520)},
-	{"id":23,"slug":"coin","name":"Золотая монета","pos":Vector2(1010,250)},
-	{"id":24,"slug":"bucket","name":"Ведёрко","pos":Vector2(370,660)},
-	{"id":25,"slug":"shovel","name":"Лопатка","pos":Vector2(560,760)},
-	{"id":26,"slug":"scallop","name":"Морской гребешок","pos":Vector2(860,810)},
-	{"id":27,"slug":"beachball","name":"Мяч","pos":Vector2(1140,760)},
-	{"id":28,"slug":"lantern","name":"Фонарь","pos":Vector2(1280,240)},
-	{"id":29,"slug":"crown","name":"Корона","pos":Vector2(970,300)},
-]
+var ITEM_COUNT := 0
+var ITEM_DATA: Array[Dictionary] = []
+var levels: Array = []
+var current_level_index := 0
+var current_level_name := ""
 const CREAM := Color("#fff1ce")
 const GOLD := Color("#f6c66c")
 const NAVY := Color("#102d4d")
@@ -69,14 +38,59 @@ var audio_hint: AudioStreamPlayer
 var audio_surf: AudioStreamPlayer
 
 func _ready() -> void:
-	background = load("res://assets/backgrounds/tropical_cove.png")
-	for item in ITEM_DATA:
-		item_textures.append(load("res://assets/items/%s.png" % item.slug))
+	_load_story()
+	_load_level(0)
 	_make_audio()
 	_reset_round()
 	set_process(true)
 	get_viewport().size_changed.connect(queue_redraw)
 	queue_redraw()
+
+func _load_story() -> void:
+	var file := FileAccess.open("res://game_data/story.json", FileAccess.READ)
+	if file == null:
+		push_error("Не удалось открыть game_data/story.json")
+		return
+	var parsed: Variant = JSON.parse_string(file.get_as_text())
+	if parsed is Dictionary and parsed.has("levels") and parsed.levels is Array:
+		levels = parsed.levels
+	else:
+		push_error("Некорректный формат game_data/story.json")
+
+func _load_level(level_index: int) -> void:
+	if levels.is_empty():
+		return
+	current_level_index = clampi(level_index, 0, levels.size() - 1)
+	var level: Dictionary = levels[current_level_index]
+	current_level_name = str(level.get("name", "Локация %d" % (current_level_index + 1)))
+	var background_path := str(level.get("background_path", ""))
+	if background_path.begins_with("res://") and ResourceLoader.exists(background_path):
+		background = load(background_path)
+	else:
+		# Некоторые главы пока не имеют отдельного фона: используем доступный фон игры.
+		background = load("res://assets/backgrounds/tropical_cove.png")
+	ITEM_DATA.clear()
+	item_textures.clear()
+	for entry in level.get("items", []):
+		if not entry is Dictionary:
+			continue
+		var coords: Array = entry.get("position", [768, 432])
+		var item := {
+			"id": ITEM_DATA.size(),
+			"slug": str(entry.get("slug", "")),
+			"name": str(entry.get("name", "Предмет")),
+			"pos": Vector2(float(coords[0]), float(coords[1]))
+		}
+		var image_path := str(entry.get("image", ""))
+		var texture: Texture2D = load(image_path) if ResourceLoader.exists(image_path) else null
+		if texture == null:
+			push_warning("Не найдена картинка предмета: " + image_path)
+			continue
+		ITEM_DATA.append(item)
+		item_textures.append(texture)
+	ITEM_COUNT = ITEM_DATA.size()
+	if ITEM_COUNT == 0:
+		push_error("В локации нет загружаемых предметов: " + current_level_name)
 
 func _make_audio() -> void:
 	audio_found = _player("res://assets/audio/found.wav", false)
@@ -170,16 +184,18 @@ func _draw() -> void:
 		_center_text("ПАУЗА  •  КОСНИТЕСЬ, ЧТОБЫ ПРОДОЛЖИТЬ", view * 0.5, 30, CREAM)
 	if won:
 		draw_rect(Rect2(Vector2.ZERO, view), Color(0,0,0,0.68), true)
-		_center_text("ВСЕ 30 СОКРОВИЩ НАЙДЕНЫ!", view*0.5-Vector2(0,35), 38, GOLD)
-		_center_text("Коснитесь экрана, чтобы сыграть ещё раз", view*0.5+Vector2(0,22), 24, CREAM)
+		_center_text("ВСЕ %d ПРЕДМЕТОВ НАЙДЕНЫ!" % ITEM_COUNT, view*0.5-Vector2(0,58), 36, GOLD)
+		_center_text(current_level_name, view*0.5-Vector2(0,12), 27, CREAM)
+		var next_text := "Коснитесь, чтобы открыть следующую локацию" if current_level_index < levels.size() - 1 else "Архипелаг восстановлен! Коснитесь, чтобы начать заново"
+		_center_text(next_text, view*0.5+Vector2(0,38), 21, CREAM)
 
 func _draw_hud(view: Vector2) -> void:
 	var font := ThemeDB.fallback_font
 	var bar := Rect2(0, view.y - BAR_HEIGHT, view.x, BAR_HEIGHT)
 	draw_rect(bar, Color("#09213a"), true)
 	draw_rect(Rect2(0, bar.position.y, view.x, 5), GOLD, true)
-	draw_string(font, Vector2(22, bar.position.y+25), "НАЙДИ ПРЕДМЕТЫ", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, GOLD)
-	draw_string(font, Vector2(view.x-190, bar.position.y+25), "%02d / 30" % found.size(), HORIZONTAL_ALIGNMENT_LEFT, -1, 22, CREAM)
+	draw_string(font, Vector2(22, bar.position.y+25), current_level_name.to_upper(), HORIZONTAL_ALIGNMENT_LEFT, minf(view.x * 0.48, 420.0), 18, GOLD)
+	draw_string(font, Vector2(view.x-190, bar.position.y+25), "%02d / %02d" % [found.size(), ITEM_COUNT], HORIZONTAL_ALIGNMENT_LEFT, -1, 22, CREAM)
 	var slots := mini(5, ITEM_COUNT - found.size())
 	var slot_w := minf(112.0, (view.x-48.0)/5.0)
 	var first_x := (view.x - slot_w*5.0)/2.0
@@ -314,6 +330,10 @@ func _handle_tap(point: Vector2) -> void:
 		paused = false
 		return
 	if won:
+		if current_level_index < levels.size() - 1:
+			_load_level(current_level_index + 1)
+		else:
+			_load_level(0)
 		_reset_round()
 		return
 	if point.y > view.y-BAR_HEIGHT:
@@ -361,5 +381,5 @@ func _use_hint() -> void:
 				audio_hint.play()
 			return
 
-# Inventory is always the next five unfound objects from the shuffled 30-item queue.
+# Inventory is always the next five unfound objects from the shuffled current-level queue.
 # Finding one removes it from the scene and immediately pulls the next queued item into the bar.
