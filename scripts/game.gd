@@ -30,6 +30,8 @@ var elapsed := 0.0
 var zoom := 1.0
 var camera_offset := Vector2.ZERO
 var touches := {}
+var touch_began_in_minigame := false
+var mouse_began_in_minigame := false
 var pinch_distance := 0.0
 var pinch_center := Vector2.ZERO
 var one_finger_start := Vector2.ZERO
@@ -380,6 +382,13 @@ func _reset_round() -> void:
 	minigame_active = false
 	minigame_success = false
 	minigame_drag_piece = -1
+	minigame_pointer_position = Vector2.ZERO
+	touches.clear()
+	touch_began_in_minigame = false
+	mouse_began_in_minigame = false
+	dragging = false
+	multi_touch_gesture = false
+	touch_started_on_hud = false
 	queue_redraw()
 
 func _process(delta: float) -> void:
@@ -987,12 +996,17 @@ func _input(event: InputEvent) -> void:
 	elif event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
-				if minigame_active:
+				mouse_began_in_minigame = minigame_active
+				if mouse_began_in_minigame:
 					_minigame_pointer_down(event.position)
 				else:
 					_handle_tap(event.position)
-			elif minigame_active:
-				_minigame_pointer_up(event.position)
+			else:
+				# A release belongs to the same mode in which its press began.
+				# This prevents the mini-game's Continue click leaking into the map.
+				if mouse_began_in_minigame and minigame_active:
+					_minigame_pointer_up(event.position)
+				mouse_began_in_minigame = false
 		elif event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_UP and not minigame_active:
 			_zoom_at(event.position, 1.12)
 		elif event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_DOWN and not minigame_active:
@@ -1003,9 +1017,12 @@ func _input(event: InputEvent) -> void:
 func _touch_event(index: int, pos: Vector2, pressed: bool) -> void:
 	if pressed:
 		touches[index] = pos
-		if minigame_active and touches.size() == 1:
+		if touches.size() == 1:
+			touch_began_in_minigame = minigame_active
+		if minigame_active:
 			touch_started_on_hud = true
-			_minigame_pointer_down(pos)
+			if touches.size() == 1:
+				_minigame_pointer_down(pos)
 			return
 		if touches.size() == 1:
 			one_finger_start = pos
@@ -1021,12 +1038,20 @@ func _touch_event(index: int, pos: Vector2, pressed: bool) -> void:
 		if touches.has(index):
 			var was_single := touches.size() == 1
 			touches.erase(index)
-			if was_single and minigame_active:
-				_minigame_pointer_up(pos)
+			if was_single and touch_began_in_minigame:
+				# Never reinterpret a mini-game release as a main-game tap,
+				# even if Continue changed minigame_active on pointer-down.
+				if minigame_active:
+					_minigame_pointer_up(pos)
+			elif was_single and minigame_active:
+				# The touch began in the main game but the mini-game started
+				# before release; consume the release rather than forwarding it.
+				pass
 			elif was_single and not dragging and not multi_touch_gesture:
 				var tap_pos := one_finger_start if touch_started_on_hud and one_finger_start.distance_to(pos) <= 36.0 else pos
 				_handle_tap(tap_pos)
 		if touches.is_empty():
+			touch_began_in_minigame = false
 			multi_touch_gesture = false
 			touch_started_on_hud = false
 		if touches.size() == 1:
