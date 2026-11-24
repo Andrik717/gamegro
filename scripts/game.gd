@@ -345,8 +345,7 @@ func _draw_hud(view: Vector2) -> void:
 			continue
 		var x := 20.0 + slot * slot_width
 		var card := Rect2(x + 3.0, bar.position.y + 34.0, slot_width - 6.0, 100.0)
-		draw_rect(card, Color("#173d5d"), true)
-		draw_rect(card, Color("#bd8c48"), false, 2.0)
+		_draw_rounded_panel(card, Color("#173d5d"), Color("#bd8c48"), 2.0, 18.0)
 		draw_texture_rect(item_textures[id], Rect2(x + slot_width * 0.5 - 22.0, bar.position.y + 39.0, 44.0, 42.0), false)
 		var lines := _wrap_two_lines(str(ITEM_DATA[id].name), slot_width - 12.0, 13)
 		if lines.size() == 1:
@@ -363,9 +362,30 @@ func _draw_hud(view: Vector2) -> void:
 	_draw_text(_time_text(), Vector2(210.0, top + 38.0), 22, CREAM, HORIZONTAL_ALIGNMENT_LEFT, 100.0)
 	_draw_text("%d%%" % int(zoom * 100.0), Vector2(view.x * 0.5, top + 36.0), 16, CREAM, HORIZONTAL_ALIGNMENT_CENTER, 90.0)
 
+func _draw_rounded_panel(rect: Rect2, fill: Color, border := Color.TRANSPARENT, border_width := 0.0, radius := 18.0) -> void:
+	# Shared premium panel treatment: softly rounded corners, a restrained shadow,
+	# and a warm metallic outline instead of harsh square frames.
+	var style := StyleBoxFlat.new()
+	style.bg_color = fill
+	var corner := int(round(minf(radius, minf(rect.size.x, rect.size.y) * 0.5)))
+	style.corner_radius_top_left = corner
+	style.corner_radius_top_right = corner
+	style.corner_radius_bottom_left = corner
+	style.corner_radius_bottom_right = corner
+	style.border_color = border
+	var line_width := int(round(border_width))
+	style.border_width_left = line_width
+	style.border_width_top = line_width
+	style.border_width_right = line_width
+	style.border_width_bottom = line_width
+	style.anti_aliasing = true
+	style.shadow_color = Color(0.0, 0.0, 0.0, 0.28)
+	style.shadow_size = 7 if line_width > 0 else 3
+	style.shadow_offset = Vector2(0.0, 3.0)
+	draw_style_box(style, rect)
+
 func _draw_button(rect: Rect2, label: String, font_size := 16) -> void:
-	draw_rect(rect, BLUE, true)
-	draw_rect(rect, GOLD, false, 2.0)
+	_draw_rounded_panel(rect, BLUE, GOLD, 2.0, 16.0)
 	_draw_text(label, rect.position + Vector2(rect.size.x * 0.5, rect.size.y * 0.5 + float(font_size) * 0.34), font_size, CREAM, HORIZONTAL_ALIGNMENT_CENTER, rect.size.x - 8.0)
 
 func _draw_text(value: String, baseline: Vector2, font_size: int, color: Color, alignment := HORIZONTAL_ALIGNMENT_LEFT, width := -1.0) -> void:
@@ -427,8 +447,7 @@ func _pause_map_rect(view: Vector2) -> Rect2:
 func _draw_pause(view: Vector2) -> void:
 	draw_rect(Rect2(Vector2.ZERO, view), Color(0.0, 0.0, 0.0, 0.72), true)
 	var panel := Rect2(view.x * 0.5 - 250.0, view.y * 0.5 - 105.0, 500.0, 220.0)
-	draw_rect(panel, PANEL, true)
-	draw_rect(panel, GOLD, false, 3.0)
+	_draw_rounded_panel(panel, PANEL, GOLD, 3.0, 28.0)
 	_draw_text("ИГРА ПРИОСТАНОВЛЕНА", Vector2(view.x * 0.5, view.y * 0.5 - 38.0), 27, GOLD, HORIZONTAL_ALIGNMENT_CENTER, 460.0)
 	_draw_button(_pause_resume_rect(view), "ПРОДОЛЖИТЬ", 15)
 	_draw_button(_pause_map_rect(view), "КАРТА УРОВНЕЙ", 14)
@@ -464,8 +483,7 @@ func _draw_map(view: Vector2) -> void:
 			fill = Color("#604b2a")
 			border = GOLD
 			status = "ТЕКУЩАЯ"
-		draw_rect(card, fill, true)
-		draw_rect(card, border, false, 3.0 if is_current else 2.0)
+		_draw_rounded_panel(card, fill, border, 3.0 if is_current else 2.0, 20.0)
 		var number_center := Vector2(card.position.x + 42.0, card.position.y + card.size.y * 0.5)
 		draw_circle(number_center, minf(27.0, card.size.y * 0.28), Color("#092d43"))
 		_draw_text("%02d" % (i + 1), number_center + Vector2(0.0, 7.0), 20, GOLD, HORIZONTAL_ALIGNMENT_CENTER, 54.0)
