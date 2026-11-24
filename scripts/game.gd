@@ -28,6 +28,7 @@ var pinch_center := Vector2.ZERO
 var one_finger_start := Vector2.ZERO
 var one_finger_last := Vector2.ZERO
 var dragging := false
+var touch_started_on_hud := false
 var multi_touch_gesture := false
 var sound_enabled := true
 var hint_id := -1
@@ -266,6 +267,7 @@ func _touch_event(index: int, pos: Vector2, pressed: bool) -> void:
 			one_finger_start = pos
 			one_finger_last = pos
 			dragging = false
+			touch_started_on_hud = _is_hud_button(pos, get_viewport_rect().size)
 		elif touches.size() == 2:
 			multi_touch_gesture = true
 			var points: Array = touches.values()
@@ -278,14 +280,22 @@ func _touch_event(index: int, pos: Vector2, pressed: bool) -> void:
 			var start := one_finger_start
 			touches.erase(index)
 			if was_single and not dragging and not multi_touch_gesture:
-				_handle_tap(pos)
+				var tap_pos := one_finger_start if touch_started_on_hud and one_finger_start.distance_to(pos) <= 36.0 else pos
+				_handle_tap(tap_pos)
 		if touches.is_empty():
 			multi_touch_gesture = false
+			touch_started_on_hud = false
 		if touches.size() == 1:
 			var remaining: Vector2 = touches.values()[0]
 			one_finger_start = remaining
 			one_finger_last = remaining
 			dragging = false
+			touch_started_on_hud = _is_hud_button(remaining, get_viewport_rect().size)
+
+func _is_hud_button(point: Vector2, view: Vector2) -> bool:
+	return Rect2(14, 12, 64, 56).has_point(point) \
+		or Rect2(view.x - 82, 12, 68, 56).has_point(point) \
+		or Rect2(view.x - 158, 12, 64, 56).has_point(point)
 
 func _drag_event(index: int, pos: Vector2, relative: Vector2) -> void:
 	if not touches.has(index):
@@ -302,7 +312,7 @@ func _drag_event(index: int, pos: Vector2, relative: Vector2) -> void:
 			pinch_center = center
 	elif touches.size() == 1:
 		# Ignore tiny finger drift so an ordinary tap is not mistaken for a pan.
-		if zoom > 1.02 and one_finger_start.distance_to(pos) > TOUCH_TAP_SLOP:
+		if zoom > 1.02 and not touch_started_on_hud and one_finger_start.distance_to(pos) > TOUCH_TAP_SLOP:
 			if not dragging:
 				dragging = true
 				camera_offset += pos - one_finger_start
@@ -348,20 +358,19 @@ func _handle_tap(point: Vector2) -> void:
 		return
 	if point.y > view.y-BAR_HEIGHT:
 		return
-	if point.y < 76.0:
-		if point.x < 86.0:
-			paused = true
-			return
-		if point.x > view.x-86.0:
-			_use_hint()
-			return
-		if point.x > view.x-166.0:
-			sound_enabled = not sound_enabled
-			if sound_enabled:
-				audio_surf.play()
-			else:
-				audio_surf.stop()
-			return
+	if Rect2(14, 12, 64, 56).has_point(point):
+		paused = true
+		return
+	if Rect2(view.x - 82, 12, 68, 56).has_point(point):
+		_use_hint()
+		return
+	if Rect2(view.x - 158, 12, 64, 56).has_point(point):
+		sound_enabled = not sound_enabled
+		if sound_enabled:
+			audio_surf.play()
+		else:
+			audio_surf.stop()
+		return
 	var layout := _viewport_layout()
 	var world_pos: Vector2 = (point-layout.origin)/layout.scale
 	for item in ITEM_DATA:
