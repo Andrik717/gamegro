@@ -244,13 +244,13 @@ def enhance_game(root):
     if len(levels)!=10 or any(len(x.get("items",[]))!=45 for x in levels): raise SystemExit("Expected 45 items in every one of the 10 locations")
     # Preserve and verify the original first-island PNG before touching other assets.
     first_path=levels[0]["background_path"].replace("res://","")
-    if not first_path.lower().endswith(".png"):
+    if not first_path.lower().endswith((".png", ".jpg", ".jpeg")):
         raise SystemExit("Original first-island background must remain a PNG")
     if not (root/first_path).is_file():
         # The packaged original scene uses tropical_cove.png, while the
         # repository preview asset has a different filename. Keep the
         # existing packaged artwork and point story data to that exact file.
-        fallback="assets/backgrounds/tropical_cove.png"
+        fallback="assets/backgrounds/tropical_cove.jpg"
         if (root/fallback).is_file():
             levels[0]["background_path"]="res://"+fallback
         else:
@@ -258,12 +258,12 @@ def enhance_game(root):
     for p in (root/"assets").rglob("*.svg"): p.unlink()
     backgrounds=root/"assets/backgrounds"; backgrounds.mkdir(parents=True,exist_ok=True)
     items_dir=root/"assets/items"; items_dir.mkdir(parents=True,exist_ok=True)
-    # Preserve the supplied numbered PNG artwork for chapters 2-5.
+    # Preserve the supplied numbered raster artwork for chapters 2-5.
     numbered_backgrounds={
-        "jungle_ruins":"bg_02.png",
+        "jungle_ruins":"bg_02.jpg",
         "waterfall_cave":"bg_03.png",
-        "pirate_cove":"bg_04.png",
-        "sunken_lagoon":"bg_05.png",
+        "pirate_cove":"bg_04.jpg",
+        "sunken_lagoon":"bg_05.jpg",
     }
     source_map={
         "sky_observatory":"source_wizardtower.png",
